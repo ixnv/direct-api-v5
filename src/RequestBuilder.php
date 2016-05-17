@@ -3,17 +3,15 @@
 
 namespace eLama\DirectApiV5;
 
-use eLama\DirectApiV5\Dto\General\GetRequestGeneral;
-use GuzzleHttp\Psr7\Request;
+use eLama\DirectApiV5\RequestResponse\GeneralRequest;
+use GuzzleHttp\Message\Request;
+use GuzzleHttp\Stream\Stream;
 use JMS\Serializer\SerializerInterface;
 
 class RequestBuilder
 {
 
-    //3fe13d8bd818458c89624f678f365051
-    //ra-trinet-add-dev-01
-
-    /** @var GetRequestGeneral */
+    /** @var GeneralRequest */
     private $request = [];
 
     /** @var string[] */
@@ -42,13 +40,25 @@ class RequestBuilder
         return $this;
     }
 
+
     /**
-     * @param GetRequestGeneral $getRequest
+     * @param string $token
      * @return RequestBuilder
      */
-    public function setRequestDto(GetRequestGeneral $getRequest)
+    public function setToken($token)
     {
-        $this->request = $getRequest;
+        $this->addHeader('Authorization', 'Bearer ' . $token);
+
+        return $this;
+    }
+
+    /**
+     * @param GeneralRequest $request
+     * @return RequestBuilder
+     */
+    public function setRequestDto(GeneralRequest $request)
+    {
+        $this->request = $request;
 
         return $this;
     }
@@ -62,9 +72,9 @@ class RequestBuilder
 
         return new Request(
             'POST',
-            $this->request->resource(),
+            'https://api-sandbox.direct.yandex.com/json/v5/' . $this->request->resource(),
             array_merge($this->headers, self::defaultHeaders()),
-            $jsonBody
+            Stream::factory($jsonBody)
         );
     }
 
@@ -82,12 +92,9 @@ class RequestBuilder
     /**
      * @param string $header
      * @param string $value
-     * @return RequestBuilder
      */
     private function addHeader($header, $value)
     {
         $this->headers[$header] = $value;
-
-        return $this;
     }
 }

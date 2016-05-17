@@ -3,7 +3,6 @@
 
 namespace eLama\DirectApiV5;
 
-use eLama\Advisor\Application\DirectDriver as DirectDriverInterface;
 use GuzzleHttp\Client;
 use JMS\Serializer\Serializer;
 
@@ -25,8 +24,8 @@ class DirectDriverFactory
         $this->client = $client;
     }
 
-    public function driverForLogin($login)
+    public function driver($token, $login)
     {
-        return new DirectDriver($this->serializer, $this->client, $login);
+        return new DirectDriver($this->serializer, $this->client, $token, $login);
     }
 }

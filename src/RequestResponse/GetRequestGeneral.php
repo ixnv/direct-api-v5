@@ -3,6 +3,7 @@
 
 namespace eLama\DirectApiV5\RequestResponse;
 
+use eLama\DirectApiV5\Dto\General\LimitOffset;
 use JMS\Serializer\Annotation as JMS;
 
 /**
