@@ -9,9 +9,6 @@ use JMS\Serializer\Annotation as JMS;
  */
 abstract class GeneralRequest
 {
-    const KEY_METHOD = 'method';
-    const KEY_PARAMS = 'params';
-
     /**
      * @return string
      */
@@ -28,8 +25,8 @@ abstract class GeneralRequest
     public function getBody()
     {
         return [
-            self::KEY_METHOD => $this->method(),
-            self::KEY_PARAMS => $this->params()
+            'method' => $this->method(),
+            'params' => $this->params()
         ];
     }
 
