@@ -1,0 +1,48 @@
+<?php
+
+namespace eLama\DirectApiV5\Dto\Keyword;
+
+use eLama\DirectApiV5\Dto\General\GetResponseGeneral;
+use JMS\Serializer\Annotation as JMS;
+
+
+/**
+ * @JMS\AccessType("public_method")
+ */
+class GetResponse extends GetResponseGeneral
+{
+
+    /**
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\Keyword\KeywordGetItem>")
+     *
+     * @var KeywordGetItem[] $Keywords
+     */
+    private $Keywords;
+
+    /**
+     * @param KeywordGetItem[] $Keywords
+     */
+    public function __construct(array $Keywords = null)
+    {
+      $this->Keywords = $Keywords;
+    }
+
+    /**
+     * @return KeywordGetItem[]
+     */
+    public function getKeywords()
+    {
+        return $this->Keywords ?? [];
+    }
+
+    /**
+     * @param KeywordGetItem[] $Keywords
+     * @return \eLama\DirectApiV5\Dto\Keyword\GetResponse
+     */
+    public function setKeywords(array $Keywords)
+    {
+      $this->Keywords = $Keywords;
+      return $this;
+    }
+
+}
