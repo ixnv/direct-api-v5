@@ -5,7 +5,6 @@ namespace eLama\DirectApiV5;
 
 use eLama\DirectApiV5\RequestResponse\GeneralRequest;
 use GuzzleHttp\Client;
-use GuzzleHttp\Message\Request;
 use GuzzleHttp\Stream\Stream;
 use JMS\Serializer\SerializerInterface;
 
@@ -65,7 +64,7 @@ class RequestBuilder
     }
 
     /**
-     * @return Request
+     * @return \GuzzleHttp\Message\Request|\GuzzleHttp\Psr7\Request Depending on guzzle version
      */
     public function getRequest()
     {
