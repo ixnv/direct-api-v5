@@ -14,7 +14,7 @@
     },
     "require": {
         "php": ">=5.5",
-        "guzzlehttp/guzzle": "~5.2.0",
+        "guzzlehttp/guzzle": ">=5.2",
         "guzzlehttp/promises": "*",
         "jms/serializer": "^1.0"
     },
@@ -24,4 +24,3 @@
         "phake/phake": "~2.2.1"
     }
 }
-

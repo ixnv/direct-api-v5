@@ -4,6 +4,7 @@
 namespace eLama\DirectApiV5;
 
 use eLama\DirectApiV5\RequestResponse\GeneralRequest;
+use GuzzleHttp\Client;
 use GuzzleHttp\Message\Request;
 use GuzzleHttp\Stream\Stream;
 use JMS\Serializer\SerializerInterface;
@@ -70,7 +71,10 @@ class RequestBuilder
     {
         $jsonBody = $this->serializer->serialize($this->request->getBody(), 'json');
 
-        return new Request(
+        $majorVersion = explode('.', Client::VERSION)[0];
+        $requestClass = $majorVersion == 5 ? '\GuzzleHttp\Message\Request' : '\GuzzleHttp\Psr7\Request';
+
+        return new $requestClass(
             'POST',
             'https://api-sandbox.direct.yandex.com/json/v5/' . $this->request->resource(),
             array_merge($this->headers, self::defaultHeaders()),

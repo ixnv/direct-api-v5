@@ -9,8 +9,10 @@ use eLama\DirectApiV5\RequestResponse\GeneralRequest;
 use eLama\DirectApiV5\RequestResponse\GetCampaignsRequest;
 use eLama\DirectApiV5\RequestResponse\GetRequestGeneral;
 use GuzzleHttp\Client;
+use GuzzleHttp\Message\Request;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Promise\Promise;
+use GuzzleHttp\Promise\PromiseInterface;
 use JMS\Serializer\Serializer;
 
 class DirectDriver
@@ -56,30 +58,10 @@ class DirectDriver
             ->setRequestDto($request)
             ->getRequest();
 
-        $guzzleRequest->getConfig()->set('future', true);
-
-        $futureResponse = $this->client->send($guzzleRequest);
-
-        $promise = new Promise(
-            function () use ($futureResponse) {
-                $futureResponse->wait();
-            },
-            function () use ($futureResponse) {
-                $futureResponse->cancel();
-            }
-        );
-
-        $futureResponse->then(
-            function ($result) use ($promise) {
-                $promise->resolve($result);
-            },
-            function ($reason) use ($promise) {
-                $promise->reject($reason);
-            }
-        );
+        $promise = $this->callAsync($guzzleRequest);
 
         return $promise->then(
-            function (Response $value) use ($request) {
+            function ($value) use ($request) {
                 $contents = $value->getBody()->getContents();
 
                 return $this->serializer->deserialize($contents, $request->resultClass(), 'json');
@@ -90,5 +72,43 @@ class DirectDriver
     private function createRequestBuilder()
     {
         return new RequestBuilder($this->serializer);
+    }
+
+    /**
+     * @param \GuzzleHttp\Message\Request|\GuzzleHttp\Psr7\Request $guzzleRequest
+     * @return PromiseInterface
+     */
+    private function callAsync($guzzleRequest)
+    {
+        $majorVersion = explode('.', Client::VERSION)[0];
+
+        if ($majorVersion == 5) {
+            $guzzleRequest->getConfig()->set('future', true);
+
+            $futureResponse = $this->client->send($guzzleRequest);
+
+            $promise = new Promise(
+                function () use ($futureResponse) {
+                    $futureResponse->wait();
+                },
+                function () use ($futureResponse) {
+                    $futureResponse->cancel();
+                }
+            );
+
+            $futureResponse->then(
+                function ($result) use ($promise) {
+                    $promise->resolve($result);
+                },
+                function ($reason) use ($promise) {
+                    $promise->reject($reason);
+                }
+            );
+        } else {
+            $promise = $this->client->sendAsync($guzzleRequest);
+        }
+
+
+        return $promise;
     }
 }
