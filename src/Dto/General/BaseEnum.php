@@ -19,9 +19,9 @@ class BaseEnum
         $reflection = new ReflectionClass(get_called_class());
         $constants = $reflection->getConstants();
 
-        $constants = array_filter($constants, function($key) {
-            return strpos($key, '__') === false;
-        }, ARRAY_FILTER_USE_KEY);
+        $constants = array_filter(array_keys($constants), function($constantName) {
+            return strpos($constantName, '__') === false;
+        });
 
         return array_values($constants);
     }
