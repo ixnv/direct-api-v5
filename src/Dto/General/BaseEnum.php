@@ -8,8 +8,6 @@ use ReflectionClass;
 
 class BaseEnum
 {
-    const __ERROR_CODE_UNKNOWN_ENUM_VALUE = 1;
-
     /**
      * Метод возвращает все константы Enum'ов, кроме тех,
      * что начинаются с двойного подчеркивания.
@@ -39,8 +37,7 @@ class BaseEnum
     {
         if (!static::inEnum($value)) {
             throw new InvalidArgumentException(
-                'Запрашиваемой константы не существует',
-                self::__ERROR_CODE_UNKNOWN_ENUM_VALUE
+                'Запрашиваемой константы не существует: ' . $value
             );
         }
     }
