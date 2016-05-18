@@ -12,7 +12,7 @@ class Guzzle5ClientAdapter extends ClientAdapter
      * @param \GuzzleHttp\Message\Request $guzzleRequest
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    protected function sendAsync(\GuzzleHttp\Message\Request $guzzleRequest)
+    protected function sendAsync($guzzleRequest)
     {
         $guzzleRequest->getConfig()->set('future', true);
 
