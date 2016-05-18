@@ -2,14 +2,11 @@
 
 namespace eLama\DirectApiV5\Test\Integration;
 
-use Doctrine\Common\Annotations\AnnotationRegistry;
 use eLama\DirectApiV5\DirectDriver;
 use eLama\DirectApiV5\Dto\Campaign\CampaignGetItem;
 use eLama\DirectApiV5\Dto\Campaign\GetOperationResponse;
+use eLama\DirectApiV5\JmsFactory;
 use GuzzleHttp\Client;
-use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
-use JMS\Serializer\Naming\SerializedNameAnnotationStrategy;
-use JMS\Serializer\SerializerBuilder;
 use PHPUnit_Framework_TestCase;
 
 class GeneralTest extends PHPUnit_Framework_TestCase
@@ -22,14 +19,7 @@ class GeneralTest extends PHPUnit_Framework_TestCase
      */
     public function canGetCampaigns()
     {
-        $loader = require __DIR__ . '/../../vendor/autoload.php';
-        AnnotationRegistry::registerLoader(function ($class) use ($loader) {
-            return $loader->loadClass($class);
-        });
-
-        $serializer = SerializerBuilder::create()
-            ->setPropertyNamingStrategy(new SerializedNameAnnotationStrategy(new IdenticalPropertyNamingStrategy()))
-            ->build();
+        $serializer = JmsFactory::create()->serializer();
         $client = new Client();
         $directDriver = new DirectDriver($serializer, $client, self::TOKEN, self::LOGIN);
 
