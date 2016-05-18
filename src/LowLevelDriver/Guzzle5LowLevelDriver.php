@@ -1,6 +1,6 @@
 <?php
 
-namespace eLama\DirectApiV5\ClientAdapter;
+namespace eLama\DirectApiV5\LowLevelDriver;
 
 use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Stream\Stream;

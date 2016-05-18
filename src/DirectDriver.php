@@ -2,7 +2,7 @@
 
 namespace eLama\DirectApiV5;
 
-use eLama\DirectApiV5\ClientAdapter\LowLevelDriver;
+use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\Dto;
 use eLama\DirectApiV5\Dto\Campaign;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;

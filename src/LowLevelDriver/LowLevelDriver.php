@@ -1,6 +1,6 @@
 <?php
 
-namespace eLama\DirectApiV5\ClientAdapter;
+namespace eLama\DirectApiV5\LowLevelDriver;
 
 use eLama\DirectApiV5\Request;
 use eLama\DirectApiV5\Serializer\Serializer;

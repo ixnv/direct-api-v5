@@ -1,6 +1,6 @@
 <?php
 
-namespace eLama\DirectApiV5\ClientAdapter;
+namespace eLama\DirectApiV5\LowLevelDriver;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
