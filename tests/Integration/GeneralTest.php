@@ -25,7 +25,7 @@ class GeneralTest extends PHPUnit_Framework_TestCase
      */
     public function canGetCampaigns()
     {
-        $directDriver = $this->createDriver(self::TOKEN);
+        $directDriver = $this->createDriver();
 
         /** @var GetOperationResponse $campaigns */
         $campaigns = $directDriver->getCampaigns()->wait();
@@ -54,7 +54,7 @@ class GeneralTest extends PHPUnit_Framework_TestCase
         shuffle($existingCampaigns);
         $campaignId = $existingCampaigns[0];
 
-        $directDriver = $this->createDriver(self::TOKEN);
+        $directDriver = $this->createDriver();
 
         /** @var CampaignGetItem $campaign */
         $campaign = $directDriver->getCampaign($campaignId)->wait();
