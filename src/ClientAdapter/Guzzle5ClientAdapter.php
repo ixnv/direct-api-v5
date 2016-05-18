@@ -2,7 +2,6 @@
 
 namespace eLama\DirectApiV5\ClientAdapter;
 
-use eLama\DirectApiV5\Stream;
 use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Stream\Stream;
 
