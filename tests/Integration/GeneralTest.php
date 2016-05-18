@@ -17,6 +17,11 @@ class GeneralTest extends PHPUnit_Framework_TestCase
 
     /**
      * @test
+     *
+     * Чтобы тест работал, в аккаунте должны быть тестовые данные.
+     * Их можно автоматом сгенерить в управлении песочницей в Директе.
+     *
+     * @return int[] Массив ID существующих кампаний
      */
     public function canGetCampaigns()
     {
@@ -31,17 +36,28 @@ class GeneralTest extends PHPUnit_Framework_TestCase
             both(arrayWithSize(greaterThan(0)))
               ->andAlso(everyItem(anInstanceOf(CampaignGetItem::class)))
         );
+
+        return array_map(
+            function (CampaignGetItem $campaignGetItem) {
+                return $campaignGetItem->getId();
+            },
+            $campaigns->getResult()->getCampaigns()
+        );
     }
 
     /**
      * @test
+     * @depends canGetCampaigns
      */
-    public function canGetCampaign()
+    public function canGetCampaign(array $existingCampaigns)
     {
+        shuffle($existingCampaigns);
+        $campaignId = $existingCampaigns[0];
+
         $directDriver = $this->createDriver(self::TOKEN);
 
         /** @var CampaignGetItem $campaign */
-        $campaignId = 134589;
+
         $campaign = $directDriver->getCampaign($campaignId)->wait();
 
         assertThat($campaign, is(anInstanceOf(CampaignGetItem::class)));
