@@ -3,6 +3,7 @@
 namespace eLama\DirectApiV5\LowLevelDriver;
 
 use eLama\DirectApiV5\Request;
+use eLama\DirectApiV5\Response;
 use eLama\DirectApiV5\Serializer\Serializer;
 use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
@@ -32,14 +33,10 @@ abstract class LowLevelDriver
      */
     public function execute(Request $request, Serializer $serializer)
     {
-
         $body = [
             'method' => $request->getMethod(),
             'params' => $request->getParams()
         ];
-
-        $jsonBody = $serializer->serialize($body);
-
 
         $headers = [
             'Authorization' => 'Bearer ' . $request->getToken()
@@ -50,12 +47,14 @@ abstract class LowLevelDriver
         }
         $service = $request->getService();
 
-        $guzzleRequest = $this->createGuzzleRequest($service, $headers, $jsonBody);
+        $guzzleRequest = $this->createGuzzleRequest($service, $headers, $serializer->serialize($body));
 
         return $this->sendAsync($guzzleRequest)->then(function ($value) use ($serializer) {
             $contents = $value->getBody()->getContents();
 
-            return $serializer->deserialize($contents);
+            $deserializedBody = $serializer->deserialize($contents);
+
+            return new Response($deserializedBody);
         });
     }
 

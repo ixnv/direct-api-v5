@@ -5,6 +5,7 @@ namespace eLama\DirectApiV5\Test\Integration;
 use eLama\DirectApiV5\DirectDriver;
 use eLama\DirectApiV5\Dto\Campaign\CampaignGetItem;
 use eLama\DirectApiV5\Dto\Campaign\GetOperationResponse;
+use eLama\DirectApiV5\ErrorException;
 use eLama\DirectApiV5\JmsFactory;
 use GuzzleHttp\Client;
 use PHPUnit_Framework_TestCase;
@@ -19,9 +20,7 @@ class GeneralTest extends PHPUnit_Framework_TestCase
      */
     public function canGetCampaigns()
     {
-        $serializer = JmsFactory::create()->serializer();
-        $client = new Client();
-        $directDriver = new DirectDriver($serializer, $client, self::TOKEN, self::LOGIN);
+        $directDriver = $this->createDriver(self::TOKEN);
 
         /** @var GetOperationResponse $campaigns */
         $campaigns = $directDriver->getCampaigns()->wait();
@@ -32,6 +31,30 @@ class GeneralTest extends PHPUnit_Framework_TestCase
             both(arrayWithSize(greaterThan(0)))
               ->andAlso(everyItem(anInstanceOf(CampaignGetItem::class)))
         );
+    }
+
+    /**
+     * @test
+     */
+    public function invalidToken_ThrowsException()
+    {
+        $directDriver = $this->createDriver('invalid token');
+
+        /** @var GetOperationResponse $campaigns */
+        $this->setExpectedException(ErrorException::class);
+        $directDriver->getCampaigns()->wait();
+    }
+
+    /**
+     * @param string $token
+     * @return DirectDriver
+     */
+    private function createDriver($token = self::TOKEN)
+    {
+        $serializer = JmsFactory::create()->serializer();
+        $client = new Client();
+
+        return new DirectDriver($serializer, $client, $token, self::LOGIN);
     }
 
 }

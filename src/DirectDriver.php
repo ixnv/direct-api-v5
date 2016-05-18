@@ -2,10 +2,10 @@
 
 namespace eLama\DirectApiV5;
 
-use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\Dto;
 use eLama\DirectApiV5\Dto\Campaign;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
+use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\Params\GetCampaignsParams;
 use eLama\DirectApiV5\Params\Params;
 use eLama\DirectApiV5\Serializer\JmsSerializer;
@@ -44,7 +44,10 @@ class DirectDriver
 
         $getCampaignsRequest = new GetCampaignsParams($criteria);
 
-        return $this->call($getCampaignsRequest);
+        return $this->call($getCampaignsRequest)
+            ->then(function (Response $response) {
+                return $response->getResult();
+            });
     }
 
     private function call(Params $request)
@@ -60,6 +63,15 @@ class DirectDriver
         $serializer = new JmsSerializer($this->serializer, $request->resultClass());
 
         return LowLevelDriver::createAdapterForClient($this->client)
-            ->execute($directRequest, $serializer);
+            ->execute($directRequest, $serializer)
+            ->then(function (Response $response) use ($directRequest) {
+                /** @var Campaign\GetOperationResponse $result */
+                $result = $response->getResult();
+                if ($result->getError()) {
+                    ErrorException::throwFromError($result->getError(), $directRequest, $response);
+                }
+
+                return $response;
+            });
     }
 }
