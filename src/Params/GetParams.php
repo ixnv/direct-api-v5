@@ -1,7 +1,6 @@
 <?php
 
-
-namespace eLama\DirectApiV5\RequestResponse;
+namespace eLama\DirectApiV5\Params;
 
 use eLama\DirectApiV5\Dto\General\LimitOffset;
 use JMS\Serializer\Annotation as JMS;
@@ -9,7 +8,7 @@ use JMS\Serializer\Annotation as JMS;
 /**
  * @JMS\AccessType("public_method")
  */
-abstract class GetRequestGeneral extends GeneralRequest
+abstract class GetParams extends Params
 {
 
     /**

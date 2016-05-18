@@ -1,14 +1,14 @@
 <?php
 
 
-namespace eLama\DirectApiV5\RequestResponse;
+namespace eLama\DirectApiV5\Result;
 
 use JMS\Serializer\Annotation as JMS;
 
 /**
  * @JMS\AccessType("public_method")
  */
-class GetResponseGeneral
+class GetResult
 {
 
     //TODO Add units info

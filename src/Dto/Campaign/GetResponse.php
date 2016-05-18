@@ -2,13 +2,14 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use eLama\DirectApiV5\RequestResponse\GetResponseGeneral;
+use eLama\DirectApiV5\Result\GetResult as GetResultGeneral;
+
 use JMS\Serializer\Annotation as JMS;
 
 /**
  * @JMS\AccessType("public_method")
  */
-class GetResponse extends GetResponseGeneral
+class GetResponse extends GetResultGeneral
 {
 
     /**
@@ -36,7 +37,7 @@ class GetResponse extends GetResponseGeneral
 
     /**
      * @param CampaignGetItem[] $Campaigns
-     * @return \eLama\DirectApiV5\Dto\Campaign\GetResponse
+     * @return \eLama\DirectApiV5\Dto\Campaign\GetResult
      */
     public function setCampaigns(array $Campaigns)
     {

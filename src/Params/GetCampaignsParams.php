@@ -1,7 +1,7 @@
 <?php
 
 
-namespace eLama\DirectApiV5\RequestResponse;
+namespace eLama\DirectApiV5\Params;
 
 use eLama\DirectApiV5\Dto\Campaign\CampaignFieldEnum;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
@@ -9,7 +9,7 @@ use eLama\DirectApiV5\Dto\Campaign\GetOperationResponse;
 use eLama\DirectApiV5\Dto\Campaign\GetRequest;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignFieldEnum;
 
-class GetCampaignsRequest extends GetRequestGeneral
+class GetCampaignsParams extends GetParams
 {
     /** @var GetRequest */
     protected $request;

@@ -5,9 +5,8 @@ namespace eLama\DirectApiV5;
 use eLama\DirectApiV5\Dto;
 use eLama\DirectApiV5\Dto\Campaign;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
-use eLama\DirectApiV5\RequestResponse\GeneralRequest;
-use eLama\DirectApiV5\RequestResponse\GetCampaignsRequest;
-use eLama\DirectApiV5\RequestResponse\GetRequestGeneral;
+use eLama\DirectApiV5\Params\GetCampaignsParams;
+use eLama\DirectApiV5\Params\Params;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
@@ -44,12 +43,12 @@ class DirectDriver
     {
         $criteria = new CampaignsSelectionCriteria();
 
-        $getCampaignsRequest = new GetCampaignsRequest($criteria);
+        $getCampaignsRequest = new GetCampaignsParams($criteria);
 
         return $this->call($getCampaignsRequest);
     }
 
-    private function call(GeneralRequest $request)
+    private function call(Params $request)
     {
 
         $directRequest = new Request(

@@ -16,7 +16,7 @@ class Response
     private $date;
 
     /** @var mixed */
-    private $body;
+    private $result;
 
     /**
      * @param mixed $body
@@ -26,7 +26,7 @@ class Response
      */
     public function __construct($body, $requestId = null, DateTimeImmutable $date = null, UnitsInfo $units = null)
     {
-        $this->body = $body;
+        $this->result = $body;
         $this->requestId = $requestId;
         $this->date = $date;
         $this->units = $units;
@@ -59,8 +59,8 @@ class Response
     /**
      * @return mixed
      */
-    public function getBody()
+    public function getResult()
     {
-        return $this->body;
+        return $this->result;
     }
 }
