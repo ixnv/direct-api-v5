@@ -2,15 +2,14 @@
 
 namespace eLama\DirectApiV5;
 
+use eLama\DirectApiV5\ClientAdapter\ClientAdapter;
 use eLama\DirectApiV5\Dto;
 use eLama\DirectApiV5\Dto\Campaign;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
 use eLama\DirectApiV5\Params\GetCampaignsParams;
 use eLama\DirectApiV5\Params\Params;
+use eLama\DirectApiV5\Serializer\JmsSerializer;
 use GuzzleHttp\Client;
-use GuzzleHttp\Promise\Promise;
-use GuzzleHttp\Promise\PromiseInterface;
-use GuzzleHttp\Stream\Stream;
 use JMS\Serializer\Serializer;
 
 class DirectDriver
@@ -50,7 +49,6 @@ class DirectDriver
 
     private function call(Params $request)
     {
-
         $directRequest = new Request(
             $this->token,
             $request->resource(),
@@ -59,90 +57,9 @@ class DirectDriver
             $this->login
         );
 
-        $promise = $this->callAsync($directRequest);
+        $serializer = new JmsSerializer($this->serializer, $request->resultClass());
 
-        return $promise->then(
-            function ($value) use ($request) {
-                $contents = $value->getBody()->getContents();
-
-                return $this->serializer->deserialize($contents, $request->resultClass(), 'json');
-            }
-        );
-    }
-
-
-
-    /**
-     * @param Request $request
-     * @return PromiseInterface
-     */
-    private function callAsync(Request $request)
-    {
-        $body = [
-            'method' => $request->getMethod(),
-            'params' => $request->getParams()
-        ];
-
-        $jsonBody = $this->serializer->serialize($body, 'json');
-
-        $majorVersion = explode('.', Client::VERSION)[0];
-        $requestClass = $majorVersion == 5 ? '\GuzzleHttp\Message\Request' : '\GuzzleHttp\Psr7\Request';
-
-        $headers = [
-            'Authorization' => 'Bearer ' . $request->getToken()
-        ];
-
-        if ($request->getClientLogin()) {
-            $headers['Client-Login'] = $request->getClientLogin();
-        }
-
-        $guzzleRequest = new $requestClass(
-            'POST',
-            'https://api-sandbox.direct.yandex.com/json/v5/' . $request->getService(),
-            array_merge(self::defaultHeaders(), $headers),
-            Stream::factory($jsonBody)
-        );
-
-        $majorVersion = explode('.', Client::VERSION)[0];
-
-        if ($majorVersion == 5) {
-            $guzzleRequest->getConfig()->set('future', true);
-
-            $futureResponse = $this->client->send($guzzleRequest);
-
-            $promise = new Promise(
-                function () use ($futureResponse) {
-                    $futureResponse->wait();
-                },
-                function () use ($futureResponse) {
-                    $futureResponse->cancel();
-                }
-            );
-
-            $futureResponse->then(
-                function ($result) use ($promise) {
-                    $promise->resolve($result);
-                },
-                function ($reason) use ($promise) {
-                    $promise->reject($reason);
-                }
-            );
-        } else {
-            $promise = $this->client->sendAsync($guzzleRequest);
-        }
-
-
-        return $promise;
-    }
-
-    /**
-     * @return array
-     */
-    private static function defaultHeaders()
-    {
-        return [
-            'Accept-Language' => 'ru',
-            'Content-Type' => 'application/json; charset=utf-8'
-        ];
+        return ClientAdapter::createAdapterForClient($this->client)
+            ->execute($directRequest, $serializer);
     }
 }
