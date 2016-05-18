@@ -19,17 +19,17 @@ class Guzzle6LowLevelDriver extends LowLevelDriver
     }
 
     /**
-     * @param $service
+     * @param $url
      * @param $headers
      * @param $jsonBody
      * @return GuzzleRequest
      */
-    protected function createGuzzleRequest($service, $headers, $jsonBody)
+    protected function createGuzzleRequest($url, $headers, $jsonBody)
     {
         return new GuzzleRequest(
             'POST',
-            'https://api-sandbox.direct.yandex.com/json/v5/' . $service,
-            array_merge(self::defaultHeaders(), $headers),
+            $url,
+            $headers,
             Stream::factory($jsonBody)
         );
     }

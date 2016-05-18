@@ -10,8 +10,12 @@ use GuzzleHttp\Promise\PromiseInterface;
 
 abstract class LowLevelDriver
 {
+    const URL_SANDBOX = 'https://api-sandbox.direct.yandex.com/json/v5';
+    const URL_DIRECT = 'https://api.direct.yandex.com/json/v5';
     /** @var  \GuzzleHttp\Client; */
     protected $client;
+
+    private $urlBase = self::URL_SANDBOX;
 
     public static function createAdapterForClient(\GuzzleHttp\Client $client)
     {
@@ -38,16 +42,11 @@ abstract class LowLevelDriver
             'params' => $request->getParams()
         ];
 
-        $headers = [
-            'Authorization' => 'Bearer ' . $request->getToken()
-        ];
+        $headers = $this->createHeaders($request->getToken(), $request->getClientLogin());
 
-        if ($request->getClientLogin()) {
-            $headers['Client-Login'] = $request->getClientLogin();
-        }
-        $service = $request->getService();
+        $url = $this->urlBase . '/' . $request->getService();
 
-        $guzzleRequest = $this->createGuzzleRequest($service, $headers, $serializer->serialize($body));
+        $guzzleRequest = $this->createGuzzleRequest($url, $headers, $serializer->serialize($body));
 
         return $this->sendAsync($guzzleRequest)->then(function ($value) use ($serializer) {
             $contents = $value->getBody()->getContents();
@@ -65,22 +64,29 @@ abstract class LowLevelDriver
     abstract protected function sendAsync($guzzleRequest);
 
     /**
-     * @param $service
+     * @param $url
      * @param $headers
      * @param $jsonBody
      * @return mixed
      */
-    abstract protected function createGuzzleRequest($service, $headers, $jsonBody);
+    abstract protected function createGuzzleRequest($url, $headers, $jsonBody);
 
 
     /**
      * @return array
      */
-    protected static function defaultHeaders()
+    private function createHeaders($token, $clientLogin = null)
     {
-        return [
+        $headers = [
             'Accept-Language' => 'ru',
-            'Content-Type' => 'application/json; charset=utf-8'
+            'Content-Type' => 'application/json; charset=utf-8',
+            'Authorization' => 'Bearer ' . $token
         ];
+
+        if ($clientLogin) {
+            $headers['Client-Login'] = $clientLogin;
+        }
+
+        return $headers;
     }
 }
