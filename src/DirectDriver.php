@@ -9,10 +9,9 @@ use eLama\DirectApiV5\RequestResponse\GeneralRequest;
 use eLama\DirectApiV5\RequestResponse\GetCampaignsRequest;
 use eLama\DirectApiV5\RequestResponse\GetRequestGeneral;
 use GuzzleHttp\Client;
-use GuzzleHttp\Message\Request;
-use GuzzleHttp\Message\Response;
 use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
+use GuzzleHttp\Stream\Stream;
 use JMS\Serializer\Serializer;
 
 class DirectDriver
@@ -52,13 +51,16 @@ class DirectDriver
 
     private function call(GeneralRequest $request)
     {
-        $guzzleRequest = $this->createRequestBuilder()
-            ->setLogin($this->login)
-            ->setToken($this->token)
-            ->setRequestDto($request)
-            ->getRequest();
 
-        $promise = $this->callAsync($guzzleRequest);
+        $directRequest = new Request(
+            $this->token,
+            $request->resource(),
+            $request->method(),
+            $request->params(),
+            $this->login
+        );
+
+        $promise = $this->callAsync($directRequest);
 
         return $promise->then(
             function ($value) use ($request) {
@@ -69,17 +71,39 @@ class DirectDriver
         );
     }
 
-    private function createRequestBuilder()
-    {
-        return new RequestBuilder($this->serializer);
-    }
+
 
     /**
-     * @param \GuzzleHttp\Message\Request|\GuzzleHttp\Psr7\Request $guzzleRequest
+     * @param Request $request
      * @return PromiseInterface
      */
-    private function callAsync($guzzleRequest)
+    private function callAsync(Request $request)
     {
+        $body = [
+            'method' => $request->getMethod(),
+            'params' => $request->getParams()
+        ];
+
+        $jsonBody = $this->serializer->serialize($body, 'json');
+
+        $majorVersion = explode('.', Client::VERSION)[0];
+        $requestClass = $majorVersion == 5 ? '\GuzzleHttp\Message\Request' : '\GuzzleHttp\Psr7\Request';
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $request->getToken()
+        ];
+
+        if ($request->getClientLogin()) {
+            $headers['Client-Login'] = $request->getClientLogin();
+        }
+
+        $guzzleRequest = new $requestClass(
+            'POST',
+            'https://api-sandbox.direct.yandex.com/json/v5/' . $request->getService(),
+            array_merge(self::defaultHeaders(), $headers),
+            Stream::factory($jsonBody)
+        );
+
         $majorVersion = explode('.', Client::VERSION)[0];
 
         if ($majorVersion == 5) {
@@ -110,5 +134,16 @@ class DirectDriver
 
 
         return $promise;
+    }
+
+    /**
+     * @return array
+     */
+    private static function defaultHeaders()
+    {
+        return [
+            'Accept-Language' => 'ru',
+            'Content-Type' => 'application/json; charset=utf-8'
+        ];
     }
 }

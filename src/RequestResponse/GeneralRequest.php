@@ -33,10 +33,10 @@ abstract class GeneralRequest
     /**
      * @return mixed
      */
-    abstract protected function params();
+    abstract public function params();
 
     /**
      * @return string
      */
-    abstract protected function method();
+    abstract public function method();
 }

@@ -28,7 +28,7 @@ class GetAdGroupsRequest extends GetRequestGeneral
     /**
      * @return GetRequest
      */
-    protected function params()
+    public function params()
     {
         return $this->request;
     }

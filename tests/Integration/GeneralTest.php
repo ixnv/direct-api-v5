@@ -8,6 +8,7 @@ use eLama\DirectApiV5\Dto\Campaign\CampaignGetItem;
 use eLama\DirectApiV5\Dto\Campaign\GetOperationResponse;
 use GuzzleHttp\Client;
 use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
+use JMS\Serializer\Naming\SerializedNameAnnotationStrategy;
 use JMS\Serializer\SerializerBuilder;
 use PHPUnit_Framework_TestCase;
 
@@ -27,7 +28,7 @@ class GeneralTest extends PHPUnit_Framework_TestCase
         });
 
         $serializer = SerializerBuilder::create()
-            ->setPropertyNamingStrategy(new IdenticalPropertyNamingStrategy())
+            ->setPropertyNamingStrategy(new SerializedNameAnnotationStrategy(new IdenticalPropertyNamingStrategy()))
             ->build();
         $client = new Client();
         $directDriver = new DirectDriver($serializer, $client, self::TOKEN, self::LOGIN);

@@ -33,7 +33,7 @@ abstract class GetRequestGeneral extends GeneralRequest
       return $this;
     }
 
-    protected function method()
+    public function method()
     {
         return 'get';
     }

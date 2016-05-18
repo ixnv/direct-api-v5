@@ -11,6 +11,8 @@ use JMS\Serializer\Annotation as JMS;
 class GetResponseGeneral
 {
 
+    //TODO Add units info
+
     /**
      * @JMS\Type("integer")
      *

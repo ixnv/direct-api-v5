@@ -3,6 +3,8 @@
 
 namespace eLama\DirectApiV5\Dto\General;
 
+use eLama\DirectApiV5\RequestResponse\GetResponseGeneral;
+
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -42,7 +44,7 @@ abstract class OperationResponse
      */
     public function setError(Error $error)
     {
-        throw $error;
+        $this->error = $error;
     }
 
     public function getError()

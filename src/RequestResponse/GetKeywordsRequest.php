@@ -26,7 +26,7 @@ class GetKeywordsRequest extends GetRequestGeneral
         return 'keywords';
     }
 
-    protected function params()
+    public function params()
     {
         return $this->request;
     }

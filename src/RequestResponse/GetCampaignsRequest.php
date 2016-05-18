@@ -29,7 +29,7 @@ class GetCampaignsRequest extends GetRequestGeneral
         return 'campaigns';
     }
 
-    protected function params()
+    public function params()
     {
         return $this->request;
     }
