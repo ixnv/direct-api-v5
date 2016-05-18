@@ -10,6 +10,7 @@ use eLama\DirectApiV5\Params\GetCampaignsParams;
 use eLama\DirectApiV5\Params\Params;
 use eLama\DirectApiV5\Serializer\JmsSerializer;
 use GuzzleHttp\Client;
+use GuzzleHttp\Promise\PromiseInterface;
 use JMS\Serializer\Serializer;
 
 class DirectDriver
@@ -38,6 +39,9 @@ class DirectDriver
         $this->token = $token;
     }
 
+    /**
+     * @return PromiseInterface
+     */
     public function getCampaigns()
     {
         $criteria = new CampaignsSelectionCriteria();
@@ -47,6 +51,24 @@ class DirectDriver
         return $this->call($getCampaignsRequest)
             ->then(function (Response $response) {
                 return $response->getResult();
+            });
+    }
+
+    /**
+     * @param $id
+     * @return PromiseInterface on \eLama\DirectApiV5\Dto\Campaign\CampaignGetItem
+     * @see \eLama\DirectApiV5\Dto\Campaign\CampaignGetItem
+     */
+    public function getCampaign($id)
+    {
+        $criteria = new CampaignsSelectionCriteria();
+        $criteria->setIds([$id]);
+
+        $getCampaignsRequest = new GetCampaignsParams($criteria);
+
+        return $this->call($getCampaignsRequest)
+            ->then(function (Response $response) {
+                return $response->getResult()->getResult()->getCampaigns()[0];
             });
     }
 

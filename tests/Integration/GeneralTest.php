@@ -36,6 +36,21 @@ class GeneralTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function canGetCampaign()
+    {
+        $directDriver = $this->createDriver(self::TOKEN);
+
+        /** @var CampaignGetItem $campaign */
+        $campaignId = 134589;
+        $campaign = $directDriver->getCampaign($campaignId)->wait();
+
+        assertThat($campaign, is(anInstanceOf(CampaignGetItem::class)));
+        assertThat($campaign->getId(), is(equalTo($campaignId)));
+    }
+
+    /**
+     * @test
+     */
     public function invalidToken_ThrowsException()
     {
         $directDriver = $this->createDriver('invalid token');
