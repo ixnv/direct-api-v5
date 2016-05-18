@@ -19,6 +19,8 @@ class JmsFactory
      */
     public function serializer()
     {
+        //TODO Настроить файловый кеш
+
         return SerializerBuilder::create()
             ->setPropertyNamingStrategy(new SerializedNameAnnotationStrategy(new IdenticalPropertyNamingStrategy()))
             ->build();
