@@ -5,7 +5,7 @@ namespace eLama\DirectApiV5\ClientAdapter;
 use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Stream\Stream;
 
-class Guzzle5ClientAdapter extends ClientAdapter
+class Guzzle5LowLevelDriver extends LowLevelDriver
 {
 
     /**

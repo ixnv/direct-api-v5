@@ -7,7 +7,7 @@ use eLama\DirectApiV5\Serializer\Serializer;
 use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
 
-abstract class ClientAdapter
+abstract class LowLevelDriver
 {
     /** @var  \GuzzleHttp\Client; */
     protected $client;
@@ -15,9 +15,9 @@ abstract class ClientAdapter
     public static function createAdapterForClient(\GuzzleHttp\Client $client)
     {
         if (version_compare($client::VERSION, '6', 'ge')) {
-            return new Guzzle6ClientAdapter($client);
+            return new Guzzle6LowLevelDriver($client);
         } else {
-            return new Guzzle5ClientAdapter($client);
+            return new Guzzle5LowLevelDriver($client);
         }
     }
 

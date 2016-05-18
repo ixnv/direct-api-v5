@@ -2,7 +2,7 @@
 
 namespace eLama\DirectApiV5;
 
-use eLama\DirectApiV5\ClientAdapter\ClientAdapter;
+use eLama\DirectApiV5\ClientAdapter\LowLevelDriver;
 use eLama\DirectApiV5\Dto;
 use eLama\DirectApiV5\Dto\Campaign;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
@@ -59,7 +59,7 @@ class DirectDriver
 
         $serializer = new JmsSerializer($this->serializer, $request->resultClass());
 
-        return ClientAdapter::createAdapterForClient($this->client)
+        return LowLevelDriver::createAdapterForClient($this->client)
             ->execute($directRequest, $serializer);
     }
 }

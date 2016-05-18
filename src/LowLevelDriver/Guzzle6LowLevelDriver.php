@@ -6,7 +6,7 @@ use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 use GuzzleHttp\Stream\Stream;
 
-class Guzzle6ClientAdapter extends ClientAdapter
+class Guzzle6LowLevelDriver extends LowLevelDriver
 {
 
     /**
