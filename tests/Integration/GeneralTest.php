@@ -57,7 +57,6 @@ class GeneralTest extends PHPUnit_Framework_TestCase
         $directDriver = $this->createDriver(self::TOKEN);
 
         /** @var CampaignGetItem $campaign */
-
         $campaign = $directDriver->getCampaign($campaignId)->wait();
 
         assertThat($campaign, is(anInstanceOf(CampaignGetItem::class)));
