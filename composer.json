@@ -15,7 +15,7 @@
     "require": {
         "php": ">=5.5",
         "guzzlehttp/guzzle": ">=5.2",
-        "guzzlehttp/promises": "*",
+        "guzzlehttp/promises": "1.*",
         "jms/serializer": "1.*"
     },
     "require-dev": {
