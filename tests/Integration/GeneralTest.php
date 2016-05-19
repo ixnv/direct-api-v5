@@ -85,7 +85,13 @@ class GeneralTest extends PHPUnit_Framework_TestCase
         $serializer = JmsFactory::create()->serializer();
         $client = new Client();
 
-        return (new DirectDriverFactory($serializer, $client, LowLevelDriver::URL_SANDBOX))->driver($token, self::LOGIN);
+        $tokenResolver = function () use ($token) {
+            return $token;
+        };
+
+        $factory = new DirectDriverFactory($serializer, $client, $tokenResolver, LowLevelDriver::URL_SANDBOX);
+
+        return $factory->driverForClient(self::LOGIN);
     }
 
 }
