@@ -16,10 +16,10 @@
         "php": ">=5.5",
         "guzzlehttp/guzzle": ">=5.2",
         "guzzlehttp/promises": "*",
-        "jms/serializer": "^1.0"
+        "jms/serializer": "1.*"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.0",
+        "phpunit/phpunit": "4.*",
         "hamcrest/hamcrest-php": "~2.0.0",
         "phake/phake": "~2.2.1"
     }
