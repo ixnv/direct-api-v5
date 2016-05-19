@@ -3,6 +3,7 @@
 namespace eLama\DirectApiV5\Test\Integration;
 
 use eLama\DirectApiV5\DirectDriver;
+use eLama\DirectApiV5\DirectDriverFactory;
 use eLama\DirectApiV5\Dto\Campaign\CampaignGetItem;
 use eLama\DirectApiV5\Dto\Campaign\GetOperationResponse;
 use eLama\DirectApiV5\ErrorException;
@@ -84,7 +85,7 @@ class GeneralTest extends PHPUnit_Framework_TestCase
         $serializer = JmsFactory::create()->serializer();
         $client = new Client();
 
-        return new DirectDriver($serializer, $client, LowLevelDriver::URL_SANDBOX, $token, self::LOGIN);
+        return (new DirectDriverFactory($serializer, $client, LowLevelDriver::URL_SANDBOX))->driver($token, self::LOGIN);
     }
 
 }
