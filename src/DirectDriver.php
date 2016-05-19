@@ -24,19 +24,19 @@ class DirectDriver
     /** @var Serializer */
     private $serializer;
 
-    /** @var Client */
-    private $client;
+    /** @var LowLevelDriver  */
+    private $driver;
 
     /**
      * @param Serializer $jmsSerializer
      * @param Client $client
      */
-    public function __construct(Serializer $jmsSerializer, Client $client, $token, $login)
+    public function __construct(Serializer $jmsSerializer, Client $client, $baseUrl, $token, $login)
     {
         $this->serializer = $jmsSerializer;
-        $this->client = $client;
         $this->login = $login;
         $this->token = $token;
+        $this->driver = LowLevelDriver::createAdapterForClient($client, $baseUrl);
     }
 
     /**
@@ -84,7 +84,7 @@ class DirectDriver
 
         $serializer = new JmsSerializer($this->serializer, $request->resultClass());
 
-        return LowLevelDriver::createAdapterForClient($this->client)
+        return $this->driver
             ->execute($directRequest, $serializer)
             ->then(function (Response $response) use ($directRequest) {
                 /** @var Campaign\GetOperationResponse $result */

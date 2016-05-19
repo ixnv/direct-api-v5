@@ -7,6 +7,7 @@ use eLama\DirectApiV5\Dto\Campaign\CampaignGetItem;
 use eLama\DirectApiV5\Dto\Campaign\GetOperationResponse;
 use eLama\DirectApiV5\ErrorException;
 use eLama\DirectApiV5\JmsFactory;
+use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use GuzzleHttp\Client;
 use PHPUnit_Framework_TestCase;
 
@@ -83,7 +84,7 @@ class GeneralTest extends PHPUnit_Framework_TestCase
         $serializer = JmsFactory::create()->serializer();
         $client = new Client();
 
-        return new DirectDriver($serializer, $client, $token, self::LOGIN);
+        return new DirectDriver($serializer, $client, LowLevelDriver::URL_SANDBOX, $token, self::LOGIN);
     }
 
 }
