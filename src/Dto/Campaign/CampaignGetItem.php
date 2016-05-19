@@ -239,7 +239,8 @@ class CampaignGetItem extends CampaignBase
     }
 
     /**
-     * @return CampaignStatusGetEnum
+     * @return string
+     * @see CampaignStatusGetEnum
      */
     public function getStatus()
     {
