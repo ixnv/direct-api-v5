@@ -5,6 +5,7 @@ namespace eLama\DirectApiV5;
 use eLama\DirectApiV5\Dto;
 use eLama\DirectApiV5\Dto\Campaign;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
+use eLama\DirectApiV5\Dto\Campaign\CampaignStateEnum;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\Params\GetCampaignsParams;
 use eLama\DirectApiV5\Params\Params;
@@ -40,7 +41,8 @@ class DirectDriver
     }
 
     /**
-     * @return PromiseInterface promise of \eLama\DirectApiV5\Dto\Campaign\GetResponse
+     * @return PromiseInterface promise of \eLama\DirectApiV5\Dto\General\OperationResponse
+     * @deprecated 
      */
     public function getCampaigns()
     {
@@ -51,7 +53,29 @@ class DirectDriver
         //TODO Проблема с лимитом кампаний в 1000 штук - клиенту придется разбираться самому
         return $this->call($getCampaignsRequest)
             ->then(function (Response $response) {
-                return $response->getResult();
+                return $response->getUnserializedBody();
+            });
+    }
+
+    /**
+     * @return PromiseInterface promise of \eLama\DirectApiV5\Dto\Campaign\CampaignGetItem[]
+     */
+    public function getPotentiallyActiveCampaigns()
+    {
+        $criteria = new CampaignsSelectionCriteria();
+        $criteria->setStates(
+            [CampaignStateEnum::ON, CampaignStateEnum::ENDED, CampaignStateEnum::SUSPENDED]
+        );
+
+        $getCampaignsRequest = new GetCampaignsParams($criteria);
+
+        //TODO Проблема с лимитом кампаний в 1000 штук - клиенту придется разбираться самому
+        return $this->call($getCampaignsRequest)
+            ->then(function (Response $response) {
+                /** @var Campaign\GetResponse $result */
+                $result = $response->getUnserializedBody()->getResult();
+
+                return $result->getCampaigns();
             });
     }
 
@@ -69,7 +93,7 @@ class DirectDriver
 
         return $this->call($getCampaignsRequest)
             ->then(function (Response $response) {
-                return $response->getResult()->getResult()->getCampaigns()[0];
+                return $response->getUnserializedBody()->getResult()->getCampaigns()[0];
             });
     }
 
@@ -89,7 +113,7 @@ class DirectDriver
             ->execute($directRequest, $serializer)
             ->then(function (Response $response) use ($directRequest) {
                 /** @var Campaign\GetOperationResponse $result */
-                $result = $response->getResult();
+                $result = $response->getUnserializedBody();
                 if ($result->getError()) {
                     ErrorException::throwFromError($result->getError(), $directRequest, $response);
                 }

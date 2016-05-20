@@ -16,7 +16,7 @@ class Response
     private $date;
 
     /** @var mixed */
-    private $result;
+    private $unserializedBody;
 
     /**
      * @param mixed $body
@@ -26,7 +26,7 @@ class Response
      */
     public function __construct($body, $requestId = null, DateTimeImmutable $date = null, UnitsInfo $units = null)
     {
-        $this->result = $body;
+        $this->unserializedBody = $body;
         $this->requestId = $requestId;
         $this->date = $date;
         $this->units = $units;
@@ -57,10 +57,10 @@ class Response
     }
 
     /**
-     * @return mixed
+     * @return \eLama\DirectApiV5\Dto\General\OperationResponse|mixed
      */
-    public function getResult()
+    public function getUnserializedBody()
     {
-        return $this->result;
+        return $this->unserializedBody;
     }
 }
