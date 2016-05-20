@@ -47,9 +47,7 @@ abstract class LowLevelDriver
 
         $url = $this->baseUrl . '/' . $request->getService();
 
-        $guzzleRequest = $this->createGuzzleRequest($url, $headers, $serializer->serialize($body));
-
-        return $this->sendAsync($guzzleRequest)->then(function ($value) use ($serializer) {
+        return $this->sendAsync($url, $headers, $serializer->serialize($body))->then(function ($value) use ($serializer) {
             $contents = $value->getBody()->getContents();
 
             $deserializedBody = $serializer->deserialize($contents);
@@ -62,16 +60,7 @@ abstract class LowLevelDriver
      * @param mixed $guzzleRequest
      * @return PromiseInterface
      */
-    abstract protected function sendAsync($guzzleRequest);
-
-    /**
-     * @param $url
-     * @param $headers
-     * @param $jsonBody
-     * @return mixed
-     */
-    abstract protected function createGuzzleRequest($url, $headers, $jsonBody);
-
+    abstract protected function sendAsync($url, $headers, $jsonBody);
 
     /**
      * @return array

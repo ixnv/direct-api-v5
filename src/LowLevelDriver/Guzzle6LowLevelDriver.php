@@ -10,12 +10,14 @@ class Guzzle6LowLevelDriver extends LowLevelDriver
 {
 
     /**
-     * @param GuzzleRequest $guzzleRequest
+     * @param $url
+     * @param $headers
+     * @param $jsonBody
      * @return PromiseInterface
      */
-    protected function sendAsync($guzzleRequest)
+    protected function sendAsync($url, $headers, $jsonBody)
     {
-        return $this->client->sendAsync($guzzleRequest);
+        return $this->client->sendAsync($this->createGuzzleRequest($url, $headers, $jsonBody));
     }
 
     /**

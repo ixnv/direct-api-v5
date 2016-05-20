@@ -9,11 +9,20 @@ class Guzzle5LowLevelDriver extends LowLevelDriver
 {
 
     /**
-     * @param \GuzzleHttp\Message\Request $guzzleRequest
+     * @param $url
+     * @param $headers
+     * @param $jsonBody
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    protected function sendAsync($guzzleRequest)
+    protected function sendAsync($url, $headers, $jsonBody)
     {
+        $guzzleRequest = new \GuzzleHttp\Message\Request(
+            'POST',
+            $url,
+            $headers,
+            Stream::factory($jsonBody)
+        );
+
         $guzzleRequest->getConfig()->set('future', true);
 
         $futureResponse = $this->client->send($guzzleRequest);
@@ -37,21 +46,5 @@ class Guzzle5LowLevelDriver extends LowLevelDriver
         );
 
         return $promise;
-    }
-
-    /**
-     * @param $url
-     * @param $headers
-     * @param $jsonBody
-     * @return \GuzzleHttp\Message\Request
-     */
-    protected function createGuzzleRequest($url, $headers, $jsonBody)
-    {
-        return new \GuzzleHttp\Message\Request(
-            'POST',
-            $url,
-            $headers,
-            Stream::factory($jsonBody)
-        );
     }
 }
