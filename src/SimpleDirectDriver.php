@@ -14,7 +14,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Promise\PromiseInterface;
 use JMS\Serializer\Serializer;
 
-class DirectDriver
+class SimpleDirectDriver
 {
     /** @var string */
     private $login;

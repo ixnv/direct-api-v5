@@ -2,7 +2,7 @@
 
 namespace eLama\DirectApiV5\Test\Unit;
 
-class DirectDriverFactoryTest extends \PHPUnit_Framework_TestCase
+class SimpleDirectDriverFactoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
@@ -11,7 +11,7 @@ class DirectDriverFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $tokenResolver = function () { return ''; };
 
-        $directDriverFactory = new \eLama\DirectApiV5\DirectDriverFactory(
+        $directDriverFactory = new \eLama\DirectApiV5\SimpleDirectDriverFactory(
             \eLama\DirectApiV5\JmsFactory::create()->serializer(),
             new \GuzzleHttp\Client(),
             $tokenResolver
@@ -28,7 +28,7 @@ class DirectDriverFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $tokenResolver = function () { return 'a'; };
 
-        $directDriverFactory = new \eLama\DirectApiV5\DirectDriverFactory(
+        $directDriverFactory = new \eLama\DirectApiV5\SimpleDirectDriverFactory(
             \eLama\DirectApiV5\JmsFactory::create()->serializer(),
             new \GuzzleHttp\Client(),
             $tokenResolver

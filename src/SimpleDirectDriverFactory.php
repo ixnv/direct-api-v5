@@ -6,7 +6,7 @@ use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use GuzzleHttp\Client;
 use JMS\Serializer\Serializer;
 
-class DirectDriverFactory
+class SimpleDirectDriverFactory
 {
     /** @var Serializer */
     private $serializer;
@@ -40,7 +40,7 @@ class DirectDriverFactory
 
     public function driver($token, $login)
     {
-        return new DirectDriver($this->serializer, $this->client, $this->baseUrl, $token, $login);
+        return new SimpleDirectDriver($this->serializer, $this->client, $this->baseUrl, $token, $login);
     }
 
     public function driverForClient($login)
@@ -52,6 +52,6 @@ class DirectDriverFactory
             throw new \RuntimeException('Token returned by token resolver is empty');
         }
 
-        return new DirectDriver($this->serializer, $this->client, $this->baseUrl, $token, $login);
+        return new SimpleDirectDriver($this->serializer, $this->client, $this->baseUrl, $token, $login);
     }
 }
