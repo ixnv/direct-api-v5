@@ -46,10 +46,38 @@ class GeneralTest extends PHPUnit_Framework_TestCase
             $campaigns->getResult()->getCampaigns()
         );
     }
+    /**
+     * @test
+     *
+     * Чтобы тест работал, в аккаунте должны быть тестовые данные.
+     * Их можно автоматом сгенерить в управлении песочницей в Директе.
+     *
+     * @return int[] Массив ID существующих кампаний
+     */
+    public function canGetPotentiallyActiveCampaigns()
+    {
+        $directDriver = $this->createDriver();
+
+        /** @var CampaignGetItem[] $campaigns */
+        $campaigns = $directDriver->getPotentiallyActiveCampaigns()->wait();
+
+        assertThat(
+            $campaigns,
+            both(arrayWithSize(greaterThan(0)))
+              ->andAlso(everyItem(anInstanceOf(CampaignGetItem::class)))
+        );
+
+        return array_map(
+            function (CampaignGetItem $campaignGetItem) {
+                return $campaignGetItem->getId();
+            },
+            $campaigns
+        );
+    }
 
     /**
      * @test
-     * @depends canGetCampaigns
+     * @depends canGetPotentiallyActiveCampaigns
      */
     public function canGetCampaign(array $existingCampaigns)
     {
