@@ -42,7 +42,7 @@ class DirectDriver
 
     /**
      * @return PromiseInterface promise of \eLama\DirectApiV5\Dto\General\OperationResponse
-     * @deprecated 
+     * @deprecated
      */
     public function getCampaigns()
     {
@@ -69,7 +69,7 @@ class DirectDriver
 
         $getCampaignsRequest = new GetCampaignsParams($criteria);
 
-        //TODO Проблема с лимитом кампаний в 1000 штук - клиенту придется разбираться самому
+        //TODO Проблема с лимитом кампаний в 1000 штук - нужно будет решить
         return $this->call($getCampaignsRequest)
             ->then(function (Response $response) {
                 /** @var Campaign\GetResponse $result */
