@@ -23,5 +23,8 @@
         "phpunit/phpunit": "4.*",
         "hamcrest/hamcrest-php": "~2.0.0",
         "phake/phake": "~2.2.1"
+    },
+    "suggest": {
+        "elama/common-api": "Не то что бы советую ставить, но есть адаптер для получения токенов используя ExternalSystemAccount"
     }
 }
