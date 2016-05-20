@@ -6,7 +6,6 @@ use eLama\DirectApiV5\Dto;
 use eLama\DirectApiV5\Dto\Campaign;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Campaign\CampaignStateEnum;
-use eLama\DirectApiV5\Dto\Campaign\CampaignStatusEnum;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\Params\GetCampaignsParams;
 use eLama\DirectApiV5\Params\Params;
@@ -66,11 +65,6 @@ class SimpleDirectDriver
         $criteria = new CampaignsSelectionCriteria();
         $criteria->setStates(
             [CampaignStateEnum::ON, CampaignStateEnum::ENDED, CampaignStateEnum::SUSPENDED, CampaignStateEnum::OFF]
-        );
-
-        //TODO: Черновик - интересен ли нашим пользователям
-        $criteria->setStatuses(
-            [CampaignStatusEnum::ACCEPTED, CampaignStatusEnum::MODERATION, CampaignStatusEnum::REJECTED]
         );
 
         $getCampaignsRequest = new GetCampaignsParams($criteria);
