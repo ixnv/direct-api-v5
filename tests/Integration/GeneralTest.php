@@ -59,7 +59,7 @@ class GeneralTest extends PHPUnit_Framework_TestCase
         $directDriver = $this->createDriver();
 
         /** @var CampaignGetItem[] $campaigns */
-        $campaigns = $directDriver->getPotentiallyActiveCampaigns()->wait();
+        $campaigns = $directDriver->getNonArchivedCampaigns()->wait();
 
         assertThat(
             $campaigns,

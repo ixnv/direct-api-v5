@@ -60,7 +60,7 @@ class SimpleDirectDriver
     /**
      * @return PromiseInterface promise of \eLama\DirectApiV5\Dto\Campaign\CampaignGetItem[]
      */
-    public function getPotentiallyActiveCampaigns()
+    public function getNonArchivedCampaigns()
     {
         $criteria = new CampaignsSelectionCriteria();
         $criteria->setStates(
