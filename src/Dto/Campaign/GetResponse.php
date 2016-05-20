@@ -3,7 +3,6 @@
 namespace eLama\DirectApiV5\Dto\Campaign;
 
 use eLama\DirectApiV5\Result\GetResult as GetResultGeneral;
-
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -20,11 +19,11 @@ class GetResponse extends GetResultGeneral
     private $Campaigns;
 
     /**
-     * @param CampaignGetItem $Campaigns
+     * @param CampaignGetItem[] $Campaigns
      */
-    public function __construct(CampaignGetItem $Campaigns = null)
+    public function __construct(array $Campaigns = null)
     {
-      $this->Campaigns = $Campaigns;
+        $this->Campaigns = $Campaigns;
     }
 
     /**
@@ -32,17 +31,22 @@ class GetResponse extends GetResultGeneral
      */
     public function getCampaigns()
     {
-      return $this->Campaigns;
+        if ($this->Campaigns === null) {
+            return [];
+        }
+
+        return $this->Campaigns;
     }
 
     /**
      * @param CampaignGetItem[] $Campaigns
-     * @return \eLama\DirectApiV5\Dto\Campaign\GetResult
+     * @return GetResponse
      */
     public function setCampaigns(array $Campaigns)
     {
-      $this->Campaigns = $Campaigns;
-      return $this;
+        $this->Campaigns = $Campaigns;
+
+        return $this;
     }
 
 }
