@@ -14,10 +14,6 @@ use Psr\Log\NullLogger;
 
 class LowLevelDriverTest extends PHPUnit_Framework_TestCase
 {
-    const SOME_TOKEN = 'some token';
-    /** @var LoggerInterface|\Phake_IMock */
-    private $logger;
-
     /** @var  ArraySerializer */
     private $serializer;
 
@@ -62,40 +58,6 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
         assertThat($unitsInfo->getLeft(), is(numericValue()));
         assertThat($unitsInfo->getDailyLimit(), is(numericValue()));
     }
-//    }
-//
-//    /**
-//     * @test
-//     */
-//    public function doRequest_LogsRequestWithStrippedToken()
-//    {
-//        $this->driver->execute(
-//            $this->createRequest($token = '1234567890'),
-//            $this->serializer
-//        )->wait();
-//
-//        Phake::verify($this->logger)->info(
-//            containsStringIgnoringCase('request'),
-//            hasKeyValuePair('token', '1234...7890')
-//        );
-//    }
-//
-//    /**
-//     * @test
-//     */
-//    public function doRequest_ResponseSuccessfullyDeserialized_LogsResponseBody()
-//    {
-//        $this->driver->setResponse([], json_encode(['result' => 1]));
-//
-//        $this->driver->execute(
-//            $this->createRequest(),
-//            $this->serializer
-//        )->wait();
-//
-//        Phake::verify($this->logger)->info(containsStringIgnoringCase('response'), allOf(
-//            hasKeyValuePair('response_body', hasKeyValuePair('result', 1))
-//        ));
-//    }
 
     /**
      * @param $token

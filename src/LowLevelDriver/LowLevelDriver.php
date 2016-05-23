@@ -108,7 +108,7 @@ abstract class LowLevelDriver
      */
     private function getHeaderValue($request, $headerName)
     {
-        $requestIds = $request->getHeader($headerName);
+        $requestIds = (array)$request->getHeader($headerName);
 
         return array_pop($requestIds);
     }
