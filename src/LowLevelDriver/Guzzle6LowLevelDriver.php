@@ -4,7 +4,6 @@ namespace eLama\DirectApiV5\LowLevelDriver;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
-use GuzzleHttp\Stream\Stream;
 
 class Guzzle6LowLevelDriver extends LowLevelDriver
 {
@@ -32,7 +31,7 @@ class Guzzle6LowLevelDriver extends LowLevelDriver
             'POST',
             $url,
             $headers,
-            Stream::factory($jsonBody)
+            \GuzzleHttp\Psr7\stream_for($jsonBody)
         );
     }
 }
