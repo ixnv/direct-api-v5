@@ -1,6 +1,6 @@
 <?php
 
-namespace eLama\DirectApiV5\Test\Unit\LowLevelDriver;
+namespace eLama\DirectApiV5\Test\Integration\LowLevelDriver;
 
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\Request;
@@ -8,13 +8,8 @@ use eLama\DirectApiV5\Response;
 use eLama\DirectApiV5\Serializer\ArraySerializer;
 use eLama\DirectApiV5\Test\Integration\GeneralTest;
 use GuzzleHttp\Client;
-use GuzzleHttp\Promise\PromiseInterface;
-use GuzzleHttp\Stream\Stream;
-use Phake;
 use PHPUnit_Framework_TestCase;
 use Psr\Log\LoggerInterface;
-use GuzzleHttp\Psr7\Response as Guzzle6Response;
-use GuzzleHttp\Message\Response as Guzzle5Response;
 use Psr\Log\NullLogger;
 
 class LowLevelDriverTest extends PHPUnit_Framework_TestCase
