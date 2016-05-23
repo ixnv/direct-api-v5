@@ -5,6 +5,7 @@ namespace eLama\DirectApiV5;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use GuzzleHttp\Client;
 use JMS\Serializer\Serializer;
+use Psr\Log\LoggerInterface;
 
 class SimpleDirectDriverFactory
 {
@@ -20,6 +21,9 @@ class SimpleDirectDriverFactory
     /** @var callable */
     private $tokenResolver;
 
+    /** @var LoggerInterface */
+    private $logger;
+
     /**
      * @param Serializer $serializer
      * @param Client $client
@@ -29,18 +33,20 @@ class SimpleDirectDriverFactory
     public function __construct(
         Serializer $serializer,
         Client $client,
+    LoggerInterface $logger,
         callable $tokenResolver,
         $baseUrl = LowLevelDriver::URL_PRODUCTION
     ) {
         $this->serializer = $serializer;
         $this->client = $client;
+        $this->logger = $logger;
         $this->baseUrl = $baseUrl;
         $this->tokenResolver = $tokenResolver;
     }
 
     public function driver($token, $login)
     {
-        return new SimpleDirectDriver($this->serializer, $this->client, $this->baseUrl, $token, $login);
+        return new SimpleDirectDriver($this->serializer, $this->client, $this->logger, $this->baseUrl, $token, $login);
     }
 
     public function driverForClient($login)
@@ -52,6 +58,6 @@ class SimpleDirectDriverFactory
             throw new \RuntimeException('Token returned by token resolver is empty');
         }
 
-        return new SimpleDirectDriver($this->serializer, $this->client, $this->baseUrl, $token, $login);
+        return new SimpleDirectDriver($this->serializer, $this->client, $this->logger, $this->baseUrl, $token, $login);
     }
 }

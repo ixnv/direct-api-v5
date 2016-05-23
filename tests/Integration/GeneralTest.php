@@ -11,6 +11,7 @@ use eLama\DirectApiV5\JmsFactory;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use GuzzleHttp\Client;
 use PHPUnit_Framework_TestCase;
+use Psr\Log\NullLogger;
 
 class GeneralTest extends PHPUnit_Framework_TestCase
 {
@@ -117,7 +118,7 @@ class GeneralTest extends PHPUnit_Framework_TestCase
             return $token;
         };
 
-        $factory = new SimpleDirectDriverFactory($serializer, $client, $tokenResolver, LowLevelDriver::URL_SANDBOX);
+        $factory = new SimpleDirectDriverFactory($serializer, $client, new NullLogger(), $tokenResolver, LowLevelDriver::URL_SANDBOX);
 
         return $factory->driverForClient(self::LOGIN);
     }

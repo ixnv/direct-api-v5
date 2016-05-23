@@ -13,6 +13,7 @@ use eLama\DirectApiV5\Serializer\JmsSerializer;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise\PromiseInterface;
 use JMS\Serializer\Serializer;
+use Psr\Log\LoggerInterface;
 
 class SimpleDirectDriver
 {
@@ -32,12 +33,12 @@ class SimpleDirectDriver
      * @param Serializer $jmsSerializer
      * @param Client $client
      */
-    public function __construct(Serializer $jmsSerializer, Client $client, $baseUrl, $token, $login)
+    public function __construct(Serializer $jmsSerializer, Client $client, LoggerInterface $logger, $baseUrl, $token, $login)
     {
         $this->serializer = $jmsSerializer;
         $this->login = $login;
         $this->token = $token;
-        $this->driver = LowLevelDriver::createAdapterForClient($client, $baseUrl);
+        $this->driver = LowLevelDriver::createAdapterForClient($client, $logger, $baseUrl);
     }
 
     /**
