@@ -48,7 +48,7 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
         )->wait();
 
         Phake::verify($this->logger)->info(containsStringIgnoringCase('request'), allOf(
-            hasKeyValuePair('uniqId', nonEmptyString()),
+            hasKeyValuePair('callUniqId', nonEmptyString()),
             hasKeyValuePair('clientLogin', $request->getClientLogin()),
             hasKeyValuePair('service', $request->getService()),
             hasKeyValuePair('method', $request->getMethod()),

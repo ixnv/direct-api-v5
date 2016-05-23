@@ -33,13 +33,13 @@ class SimpleDirectDriverFactory
     public function __construct(
         Serializer $serializer,
         Client $client,
-    LoggerInterface $logger,
+        LoggerFactory $loggerFactory,
         callable $tokenResolver,
         $baseUrl = LowLevelDriver::URL_PRODUCTION
     ) {
         $this->serializer = $serializer;
         $this->client = $client;
-        $this->logger = $logger;
+        $this->logger = $loggerFactory->create();
         $this->baseUrl = $baseUrl;
         $this->tokenResolver = $tokenResolver;
     }

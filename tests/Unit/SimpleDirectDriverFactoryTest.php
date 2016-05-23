@@ -2,6 +2,7 @@
 
 namespace eLama\DirectApiV5\Test\Unit;
 
+use eLama\DirectApiV5\LoggerFactory;
 use Psr\Log\NullLogger;
 
 class SimpleDirectDriverFactoryTest extends \PHPUnit_Framework_TestCase
@@ -16,7 +17,7 @@ class SimpleDirectDriverFactoryTest extends \PHPUnit_Framework_TestCase
         $directDriverFactory = new \eLama\DirectApiV5\SimpleDirectDriverFactory(
             \eLama\DirectApiV5\JmsFactory::create()->serializer(),
             new \GuzzleHttp\Client(),
-            new NullLogger(),
+            new LoggerFactory([]),
             $tokenResolver
         );
 
@@ -34,7 +35,7 @@ class SimpleDirectDriverFactoryTest extends \PHPUnit_Framework_TestCase
         $directDriverFactory = new \eLama\DirectApiV5\SimpleDirectDriverFactory(
             \eLama\DirectApiV5\JmsFactory::create()->serializer(),
             new \GuzzleHttp\Client(),
-            new NullLogger(),
+            new LoggerFactory([]),
             $tokenResolver
         );
 

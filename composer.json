@@ -17,6 +17,7 @@
         "guzzlehttp/guzzle": ">=5.2",
         "guzzlehttp/promises": "1.*",
         "jms/serializer": "1.*",
+        "monolog/monolog": ">=1.12",
         "psr/log": "*",
 
         "phpoption/phpoption": ">=1.1.0"

@@ -2,6 +2,7 @@
 
 namespace eLama\DirectApiV5\Test\Integration;
 
+use eLama\DirectApiV5\LoggerFactory;
 use eLama\DirectApiV5\SimpleDirectDriver;
 use eLama\DirectApiV5\SimpleDirectDriverFactory;
 use eLama\DirectApiV5\Dto\Campaign\CampaignGetItem;
@@ -89,7 +90,7 @@ class GeneralTest extends PHPUnit_Framework_TestCase
             return $token;
         };
 
-        $factory = new SimpleDirectDriverFactory($serializer, $client, new NullLogger(), $tokenResolver, LowLevelDriver::URL_SANDBOX);
+        $factory = new SimpleDirectDriverFactory($serializer, $client, new LoggerFactory([]), $tokenResolver, LowLevelDriver::URL_SANDBOX);
 
         return $factory->driverForClient(self::LOGIN);
     }
