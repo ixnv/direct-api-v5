@@ -31,7 +31,7 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function execute_ParsesRequestIdFromHeaders()
+    public function execute_ParsesRequestIdFromHeader()
     {
         /** @var Response $response */
         $response = $this->driver->execute(
@@ -45,7 +45,7 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function execute_ParsesUnitsFromHeaders()
+    public function execute_ParsesUnitsFromHeader()
     {
         /** @var Response $response */
         $response = $this->driver->execute(
@@ -57,6 +57,20 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
         assertThat($unitsInfo->getTaken(), is(numericValue()));
         assertThat($unitsInfo->getLeft(), is(numericValue()));
         assertThat($unitsInfo->getDailyLimit(), is(numericValue()));
+    }
+
+    /**
+     * @test
+     */
+    public function execute_ParsesDateFromHeader()
+    {
+        /** @var Response $response */
+        $response = $this->driver->execute(
+            $this->createRequest(),
+            $this->serializer
+        )->wait();
+
+        assertThat($response->getDate(), is(anInstanceOf(\DateTimeImmutable::class)));
     }
 
     /**

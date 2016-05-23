@@ -66,19 +66,14 @@ abstract class LowLevelDriver
                 $contents = $response->getBody()->getContents();
                 $endTime = microtime(true);
 
-                $requestId = $this->getHeaderValue($response, 'requestId');
-                $unitsValue = $this->getHeaderValue($response, 'units');
-                if ($unitsValue) {
-                    list($took, $left, $dailyLimit) = explode('/', $unitsValue);
-                    $unitsInfo = new UnitsInfo($took, $left, $dailyLimit);
-                } else {
-                    $unitsInfo = null;
-                }
-
-
                 $deserializedBody = $serializer->deserialize($contents);
 
-                return new Response($deserializedBody, $requestId, null, $unitsInfo);
+                return new Response(
+                    $deserializedBody,
+                    $this->getHeaderValue($response, 'requestId'),
+                    $this->parseDateHeader($response),
+                    $this->parseUnitsHeader($response)
+                );
             })
             ->then(function (Response $response) use ($uniqId, $request, $startTime, $endTime) {
 
@@ -104,13 +99,34 @@ abstract class LowLevelDriver
     /**
      * @param $request
      * @param $headerName
-     * @return mixed
+     * @return string|null
      */
     private function getHeaderValue($request, $headerName)
     {
         $requestIds = (array)$request->getHeader($headerName);
 
         return array_pop($requestIds);
+    }
+
+    private function parseDateHeader($response)
+    {
+        $dateHeaderValue = $this->getHeaderValue($response, 'date');
+        if (!$dateHeaderValue) {
+            return null;
+        }
+
+        return new \DateTimeImmutable($dateHeaderValue);
+    }
+
+    private function parseUnitsHeader($response)
+    {
+        $unitsValue = $this->getHeaderValue($response, 'units');
+        if (!$unitsValue) {
+            return null;
+        }
+
+        list($took, $left, $dailyLimit) = explode('/', $unitsValue);
+        return new UnitsInfo($took, $left, $dailyLimit);
     }
 
     /**
