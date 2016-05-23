@@ -75,4 +75,13 @@ class Request
     {
         return $this->params;
     }
+
+    public function withSanitizedToken()
+    {
+        $request = clone $this;
+
+        $request->token = substr($this->token, 0, 4) . '...' . substr($this->token, -4, 4) ;
+
+        return $request;
+    }
 }

@@ -7,6 +7,7 @@ use eLama\DirectApiV5\Response;
 use eLama\DirectApiV5\Serializer\Serializer;
 use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
+use Psr\Log\LoggerInterface;
 
 abstract class LowLevelDriver
 {
@@ -17,18 +18,22 @@ abstract class LowLevelDriver
 
     private $baseUrl = self::URL_SANDBOX;
 
-    public static function createAdapterForClient(\GuzzleHttp\Client $client, $baseUrl = self::URL_PRODUCTION)
+    /** @var LoggerInterface */
+    private $logger;
+
+    public static function createAdapterForClient(\GuzzleHttp\Client $client, LoggerInterface $logger, $baseUrl = self::URL_PRODUCTION)
     {
         if (version_compare($client::VERSION, '6', 'ge')) {
-            return new Guzzle6LowLevelDriver($client, $baseUrl);
+            return new Guzzle6LowLevelDriver($client, $logger, $baseUrl);
         } else {
-            return new Guzzle5LowLevelDriver($client, $baseUrl);
+            return new Guzzle5LowLevelDriver($client, $logger, $baseUrl);
         }
     }
 
-    public function __construct(\GuzzleHttp\Client $client, $baseUrl = self::URL_PRODUCTION)
+    public function __construct(\GuzzleHttp\Client $client, LoggerInterface $logger, $baseUrl = self::URL_PRODUCTION)
     {
         $this->client = $client;
+        $this->logger = $logger;
         $this->baseUrl = $baseUrl;
     }
 
@@ -42,6 +47,9 @@ abstract class LowLevelDriver
             'method' => $request->getMethod(),
             'params' => $request->getParams()
         ];
+        $uniqId = uniqid('', false);
+
+        $this->logRequest($uniqId, $request->withSanitizedToken());
 
         $headers = $this->createHeaders($request->getToken(), $request->getClientLogin());
 
@@ -78,5 +86,24 @@ abstract class LowLevelDriver
         }
 
         return $headers;
+    }
+
+    /**
+     * @param string $uniqId
+     * @param Request $request
+     */
+    private function logRequest($uniqId, Request $request)
+    {
+        $this->logger->info(
+            "Going to send request",
+            [
+                'uniqId' => $uniqId,
+                'clientLogin' => $request->getClientLogin(),
+                'method' => $request->getMethod(),
+                'service' => $request->getService(),
+                'params' => $request->getParams(),
+                'token' => $request->getToken(),
+            ]
+        );
     }
 }
