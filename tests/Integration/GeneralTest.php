@@ -26,36 +26,7 @@ class GeneralTest extends PHPUnit_Framework_TestCase
      *
      * @return int[] Массив ID существующих кампаний
      */
-    public function canGetCampaigns()
-    {
-        $directDriver = $this->createDriver();
-
-        /** @var GetOperationResponse $campaigns */
-        $campaigns = $directDriver->getCampaigns()->wait();
-
-        assertThat($campaigns, is(anInstanceOf(GetOperationResponse::class)));
-        assertThat(
-            $campaigns->getResult()->getCampaigns(),
-            both(arrayWithSize(greaterThan(0)))
-              ->andAlso(everyItem(anInstanceOf(CampaignGetItem::class)))
-        );
-
-        return array_map(
-            function (CampaignGetItem $campaignGetItem) {
-                return $campaignGetItem->getId();
-            },
-            $campaigns->getResult()->getCampaigns()
-        );
-    }
-    /**
-     * @test
-     *
-     * Чтобы тест работал, в аккаунте должны быть тестовые данные.
-     * Их можно автоматом сгенерить в управлении песочницей в Директе.
-     *
-     * @return int[] Массив ID существующих кампаний
-     */
-    public function canGetPotentiallyActiveCampaigns()
+    public function canGetNonArchivedCampaigns()
     {
         $directDriver = $this->createDriver();
 
@@ -78,7 +49,7 @@ class GeneralTest extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @depends canGetPotentiallyActiveCampaigns
+     * @depends canGetNonArchivedCampaigns
      */
     public function canGetCampaign(array $existingCampaigns)
     {
@@ -102,7 +73,7 @@ class GeneralTest extends PHPUnit_Framework_TestCase
 
         /** @var GetOperationResponse $campaigns */
         $this->setExpectedException(ErrorException::class);
-        $directDriver->getCampaigns()->wait();
+        $directDriver->getNonArchivedCampaigns()->wait();
     }
 
     /**

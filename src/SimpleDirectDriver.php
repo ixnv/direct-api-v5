@@ -42,23 +42,6 @@ class SimpleDirectDriver
     }
 
     /**
-     * @return PromiseInterface promise of \eLama\DirectApiV5\Dto\General\OperationResponse
-     * @deprecated
-     */
-    public function getCampaigns()
-    {
-        $criteria = new CampaignsSelectionCriteria();
-
-        $getCampaignsRequest = new GetCampaignsParams($criteria);
-
-        //TODO Проблема с лимитом кампаний в 1000 штук - клиенту придется разбираться самому
-        return $this->call($getCampaignsRequest)
-            ->then(function (Response $response) {
-                return $response->getUnserializedBody();
-            });
-    }
-
-    /**
      * @return PromiseInterface promise of \eLama\DirectApiV5\Dto\Campaign\CampaignGetItem[]
      */
     public function getNonArchivedCampaigns()
