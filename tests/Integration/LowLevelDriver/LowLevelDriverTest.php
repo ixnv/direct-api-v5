@@ -21,7 +21,7 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
     /** @var  ArraySerializer */
     private $serializer;
 
-    /** @var TestLowLevelDriver */
+    /** @var LowLevelDriver */
     private $driver;
 
     protected function setUp()
