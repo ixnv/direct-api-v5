@@ -90,6 +90,25 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
+     */
+    public function doRequest_UnitsHeaderIsSet_LogsUnitsInfo()
+    {
+        $this->driver->setResponse(['units' => '1/2/3']);
+
+        $this->driver->execute(
+            $this->createRequest(),
+            $this->serializer
+        )->wait();
+
+        Phake::verify($this->logger)->info(containsStringIgnoringCase('response'), allOf(
+            hasKeyValuePair('units_taken', equalTo(1)),
+            hasKeyValuePair('units_left', equalTo(2)),
+            hasKeyValuePair('units_dailyLimit', equalTo(3))
+        ));
+    }
+
+    /**
      * @param $token
      * @return Request
      */
@@ -119,10 +138,10 @@ class TestLowLevelDriver extends LowLevelDriver
     {
         parent::__construct($client, $logger, $baseUrl);
 
-        $this->result = $this->createResponse();
+        $this->setResponse();
     }
 
-    public function setResponse(array $headers = [], $body = '')
+    public function setResponse(array $headers = [], $body = '{}')
     {
         $this->result = $this->createResponse($headers, $body);
     }
@@ -132,7 +151,7 @@ class TestLowLevelDriver extends LowLevelDriver
      * @param string $body
      * @return Guzzle5Response|Guzzle6Response
      */
-    private function createResponse(array $headers = [], $body = '')
+    private function createResponse(array $headers, $body)
     {
         return version_compare(Client::VERSION, 6, 'ge') ?
             new Guzzle6Response(200, $headers, $body)

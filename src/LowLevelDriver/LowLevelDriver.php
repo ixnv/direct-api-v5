@@ -81,15 +81,16 @@ abstract class LowLevelDriver
                 $responseContext = [
                     'response_requestId' => $response->getRequestId(),
                     'response_date' => $response->getDate(),
-                    'response_units' => $response->getUnits(),
                     'response_body' => $response->getUnserializedBody(),
                 ];
+
+                $unitsContext = $this->createUnitsContext($response);
 
                 $responseContext['tookInMs'] = (int)(($endTime - $startTime) * 1000);
 
                 $this->logger->info(
                     'Received response',
-                    array_merge($request, $responseContext)
+                    array_merge($request, $responseContext, $unitsContext)
                 );
 
                 return $response;
@@ -172,5 +173,23 @@ abstract class LowLevelDriver
         ];
 
         return $context;
+    }
+
+    /**
+     * @param Response $response
+     * @return array
+     */
+    private function createUnitsContext(Response $response)
+    {
+        $unitsInfo = $response->getUnits();
+        if (!$unitsInfo) {
+            return [];
+        }
+
+        return [
+            'units_taken' => $unitsInfo->getTaken(),
+            'units_left' => $unitsInfo->getLeft(),
+            'units_dailyLimit' => $unitsInfo->getDailyLimit()
+        ];
     }
 }
