@@ -27,6 +27,7 @@ class SimpleDirectDriverFactory
     /**
      * @param Serializer $serializer
      * @param Client $client
+     * @param LoggerFactory $loggerFactory
      * @param callable $tokenResolver Получает на вход логин, возвращает токен
      * @param string $baseUrl
      */
