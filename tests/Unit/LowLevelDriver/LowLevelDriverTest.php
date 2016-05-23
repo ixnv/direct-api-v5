@@ -7,10 +7,12 @@ use eLama\DirectApiV5\Request;
 use eLama\DirectApiV5\Serializer\ArraySerializer;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise\PromiseInterface;
+use GuzzleHttp\Stream\Stream;
 use Phake;
 use PHPUnit_Framework_TestCase;
 use Psr\Log\LoggerInterface;
-use GuzzleHttp\Psr7\Response as GuzzleResponse;
+use GuzzleHttp\Psr7\Response as Guzzle6Response;
+use GuzzleHttp\Message\Response as Guzzle5Response;
 
 class LowLevelDriverTest extends PHPUnit_Framework_TestCase
 {
@@ -35,8 +37,6 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
     {
         $testLowLevelDriver = new TestLowLevelDriver(new Client(), $this->logger);
 
-        $testLowLevelDriver->result = new GuzzleResponse();
-
         $request = $this->createRequest('some token');
 
 
@@ -60,8 +60,6 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
     {
 
         $testLowLevelDriver = new TestLowLevelDriver(new Client(), $this->logger);
-
-        $testLowLevelDriver->result = new GuzzleResponse();
 
         $request = $this->createRequest($token = '1234567890');
 
@@ -98,6 +96,23 @@ class TestLowLevelDriver extends LowLevelDriver
      * @var mixed
      */
     public $result;
+
+    public function __construct(\GuzzleHttp\Client $client, LoggerInterface $logger, $baseUrl = self::URL_PRODUCTION)
+    {
+        parent::__construct($client, $logger, $baseUrl);
+
+        $this->result = self::createResponse();
+    }
+
+    /**
+     * @return Guzzle5Response|Guzzle6Response
+     */
+    public static function createResponse()
+    {
+        return version_compare(Client::VERSION, 6, 'ge') ?
+            new Guzzle6Response()
+            : new Guzzle5Response(200, [], Stream::factory(''));
+    }
 
     /**
      * @param mixed $guzzleRequest
