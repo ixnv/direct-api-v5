@@ -4,13 +4,13 @@ namespace eLama\DirectApiV5;
 
 class UnitsInfo
 {
-    /** @var int израсходовано при выполнении запроса */
+    /** @var string|int израсходовано при выполнении запроса */
     private $taken;
 
-    /** @var int доступный остаток суточного лимита */
+    /** @var string|int доступный остаток суточного лимита */
     private $left;
 
-    /** @var int суточный лимит */
+    /** @var string|int суточный лимит */
     private $dailyLimit;
 
     /**
@@ -25,4 +25,27 @@ class UnitsInfo
         $this->dailyLimit = $dailyLimit;
     }
 
+    /**
+     * @return int
+     */
+    public function getTaken()
+    {
+        return $this->taken;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLeft()
+    {
+        return $this->left;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDailyLimit()
+    {
+        return $this->dailyLimit;
+    }
 }

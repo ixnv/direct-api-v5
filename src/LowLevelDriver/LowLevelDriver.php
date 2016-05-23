@@ -5,6 +5,7 @@ namespace eLama\DirectApiV5\LowLevelDriver;
 use eLama\DirectApiV5\Request;
 use eLama\DirectApiV5\Response;
 use eLama\DirectApiV5\Serializer\Serializer;
+use eLama\DirectApiV5\UnitsInfo;
 use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Log\LoggerInterface;
@@ -61,13 +62,23 @@ abstract class LowLevelDriver
         $endTime = null;
 
         return $this->sendAsync($url, $headers, $jsonBody)
-            ->then(function ($value) use ($serializer, &$endTime) {
-                $contents = $value->getBody()->getContents();
+            ->then(function ($response) use ($serializer, &$endTime) {
+                $contents = $response->getBody()->getContents();
                 $endTime = microtime(true);
+
+                $requestId = $this->getHeaderValue($response, 'requestId');
+                $unitsValue = $this->getHeaderValue($response, 'units');
+                if ($unitsValue) {
+                    list($took, $left, $dailyLimit) = explode('/', $unitsValue);
+                    $unitsInfo = new UnitsInfo($took, $left, $dailyLimit);
+                } else {
+                    $unitsInfo = null;
+                }
+
 
                 $deserializedBody = $serializer->deserialize($contents);
 
-                return new Response($deserializedBody);
+                return new Response($deserializedBody, $requestId, null, $unitsInfo);
             })
             ->then(function (Response $response) use ($uniqId, $request, $startTime, $endTime) {
 
@@ -88,6 +99,18 @@ abstract class LowLevelDriver
 
                 return $response;
             });
+    }
+
+    /**
+     * @param $request
+     * @param $headerName
+     * @return mixed
+     */
+    private function getHeaderValue($request, $headerName)
+    {
+        $requestIds = $request->getHeader($headerName);
+
+        return array_pop($requestIds);
     }
 
     /**
