@@ -16,11 +16,15 @@ use GuzzleHttp\Message\Response as Guzzle5Response;
 
 class LowLevelDriverTest extends PHPUnit_Framework_TestCase
 {
+    const SOME_TOKEN = 'some token';
     /** @var LoggerInterface|\Phake_IMock */
     private $logger;
 
     /** @var  ArraySerializer */
     private $serializer;
+
+    /** @var TestLowLevelDriver */
+    private $driver;
 
     protected function setUp()
     {
@@ -28,6 +32,7 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
 
         $this->logger = Phake::mock(LoggerInterface::class);
         $this->serializer = new ArraySerializer($jms);
+        $this->driver = new TestLowLevelDriver(new Client(), $this->logger);
     }
 
     /**
@@ -35,17 +40,14 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
      */
     public function doRequest_LogsRequest()
     {
-        $testLowLevelDriver = new TestLowLevelDriver(new Client(), $this->logger);
+        $request = $this->createRequest();
 
-        $request = $this->createRequest('some token');
-
-
-        $testLowLevelDriver->execute(
+        $this->driver->execute(
             $request,
             $this->serializer
         )->wait();
 
-        Phake::verify($this->logger)->info(stringValue(), allOf(
+        Phake::verify($this->logger)->info(containsStringIgnoringCase('request'), allOf(
             hasKeyValuePair('uniqId', nonEmptyString()),
             hasKeyValuePair('clientLogin', $request->getClientLogin()),
             hasKeyValuePair('service', $request->getService()),
@@ -53,29 +55,45 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
             hasKeyValuePair('params', $request->getParams())
         ));
     }
+
     /**
      * @test
      */
     public function doRequest_LogsRequestWithStrippedToken()
     {
-
-        $testLowLevelDriver = new TestLowLevelDriver(new Client(), $this->logger);
-
-        $request = $this->createRequest($token = '1234567890');
-
-        $testLowLevelDriver->execute(
-            $request,
+        $this->driver->execute(
+            $this->createRequest($token = '1234567890'),
             $this->serializer
         )->wait();
 
-        Phake::verify($this->logger)->info(stringValue(), hasKeyValuePair('token', '1234...7890'));
+        Phake::verify($this->logger)->info(
+            containsStringIgnoringCase('request'),
+            hasKeyValuePair('token', '1234...7890')
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function doRequest_ResponseSuccessfullyDeserialized_LogsResponseBody()
+    {
+        $this->driver->setResponse([], json_encode(['result' => 1]));
+
+        $this->driver->execute(
+            $this->createRequest(),
+            $this->serializer
+        )->wait();
+
+        Phake::verify($this->logger)->info(containsStringIgnoringCase('response'), allOf(
+            hasKeyValuePair('response_body', hasKeyValuePair('result', 1))
+        ));
     }
 
     /**
      * @param $token
      * @return Request
      */
-    private function createRequest($token)
+    private function createRequest($token = self::SOME_TOKEN)
     {
         $request = new Request(
             $token,
@@ -101,17 +119,24 @@ class TestLowLevelDriver extends LowLevelDriver
     {
         parent::__construct($client, $logger, $baseUrl);
 
-        $this->result = self::createResponse();
+        $this->result = $this->createResponse();
+    }
+
+    public function setResponse(array $headers = [], $body = '')
+    {
+        $this->result = $this->createResponse($headers, $body);
     }
 
     /**
+     * @param array $headers
+     * @param string $body
      * @return Guzzle5Response|Guzzle6Response
      */
-    public static function createResponse()
+    private function createResponse(array $headers = [], $body = '')
     {
         return version_compare(Client::VERSION, 6, 'ge') ?
-            new Guzzle6Response()
-            : new Guzzle5Response(200, [], Stream::factory(''));
+            new Guzzle6Response(200, $headers, $body)
+            : new Guzzle5Response(200, $headers, Stream::factory($body));
     }
 
     /**

@@ -49,19 +49,45 @@ abstract class LowLevelDriver
         ];
         $uniqId = uniqid('', false);
 
-        $this->logRequest($uniqId, $request->withSanitizedToken());
+        $this->logger->info("Going to send request", $this->createLogContext($uniqId, $request));
 
         $headers = $this->createHeaders($request->getToken(), $request->getClientLogin());
 
         $url = $this->baseUrl . '/' . $request->getService();
 
-        return $this->sendAsync($url, $headers, $serializer->serialize($body))->then(function ($value) use ($serializer) {
-            $contents = $value->getBody()->getContents();
 
-            $deserializedBody = $serializer->deserialize($contents);
+        $jsonBody = $serializer->serialize($body);
+        $startTime = microtime(true);
+        $endTime = null;
 
-            return new Response($deserializedBody);
-        });
+        return $this->sendAsync($url, $headers, $jsonBody)
+            ->then(function ($value) use ($serializer, &$endTime) {
+                $contents = $value->getBody()->getContents();
+                $endTime = microtime(true);
+
+                $deserializedBody = $serializer->deserialize($contents);
+
+                return new Response($deserializedBody);
+            })
+            ->then(function (Response $response) use ($uniqId, $request, $startTime, $endTime) {
+
+                $request = $this->createLogContext($uniqId, $request);
+                $responseContext = [
+                    'response_requestId' => $response->getRequestId(),
+                    'response_date' => $response->getDate(),
+                    'response_units' => $response->getUnits(),
+                    'response_body' => $response->getUnserializedBody(),
+                ];
+
+                $responseContext['tookInMs'] = (int)(($endTime - $startTime) * 1000);
+
+                $this->logger->info(
+                    'Received response',
+                    array_merge($request, $responseContext)
+                );
+
+                return $response;
+            });
     }
 
     /**
@@ -91,19 +117,21 @@ abstract class LowLevelDriver
     /**
      * @param string $uniqId
      * @param Request $request
+     * @return array
      */
-    private function logRequest($uniqId, Request $request)
+    private function createLogContext($uniqId, Request $request)
     {
-        $this->logger->info(
-            "Going to send request",
-            [
-                'uniqId' => $uniqId,
-                'clientLogin' => $request->getClientLogin(),
-                'method' => $request->getMethod(),
-                'service' => $request->getService(),
-                'params' => $request->getParams(),
-                'token' => $request->getToken(),
-            ]
-        );
+        $request = $request->withSanitizedToken();
+
+        $context = [
+            'uniqId' => $uniqId,
+            'clientLogin' => $request->getClientLogin(),
+            'method' => $request->getMethod(),
+            'service' => $request->getService(),
+            'params' => $request->getParams(),
+            'token' => $request->getToken(),
+        ];
+
+        return $context;
     }
 }
