@@ -3,7 +3,7 @@
 
 namespace eLama\DirectApiV5\Dto\General;
 
-use eLama\DirectApiV5\Result\GetResult;
+use eLama\DirectApiV5\Result\GetResultGeneral;
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -21,7 +21,7 @@ abstract class OperationResponse
     protected $error;
 
     /**
-     * @return GetResult
+     * @return GetResultGeneral
      * @throws \Exception
      */
     public function getResult()

@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as JMS;
 /**
  * @JMS\AccessType("public_method")
  */
-class GetResult
+class GetResultGeneral
 {
 
     //TODO Add units info

@@ -2,14 +2,14 @@
 
 namespace eLama\DirectApiV5\Dto\Keyword;
 
-use eLama\DirectApiV5\Dto\General\GetResponseGeneral;
+use eLama\DirectApiV5\Result\GetResultGeneral;
 use JMS\Serializer\Annotation as JMS;
 
 
 /**
  * @JMS\AccessType("public_method")
  */
-class GetResponse extends GetResponseGeneral
+class GetResponse extends GetResultGeneral
 {
 
     /**
@@ -32,12 +32,12 @@ class GetResponse extends GetResponseGeneral
      */
     public function getKeywords()
     {
-        return $this->Keywords ?? [];
+        return $this->Keywords ?: [];
     }
 
     /**
      * @param KeywordGetItem[] $Keywords
-     * @return \eLama\DirectApiV5\Dto\Keyword\GetResponse
+     * @return \eLama\DirectApiV5\Dto\Keyword\GetResponseGeneral
      */
     public function setKeywords(array $Keywords)
     {

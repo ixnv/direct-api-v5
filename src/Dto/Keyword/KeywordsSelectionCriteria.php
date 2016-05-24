@@ -94,7 +94,7 @@ class KeywordsSelectionCriteria extends SelectionCriteria
     }
 
     /**
-     * @see StateEnum
+     * @see KeywordStateEnum
      * @param string[] $States
      * @return \eLama\DirectApiV5\Dto\Keyword\KeywordsSelectionCriteria
      */

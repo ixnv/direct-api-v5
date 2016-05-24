@@ -7,10 +7,13 @@ use eLama\DirectApiV5\Dto\Campaign;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Campaign\CampaignStateEnum;
 use eLama\DirectApiV5\Dto\Ad;
+use eLama\DirectApiV5\Dto\Keyword;
 use eLama\DirectApiV5\Dto\General\StateEnum;
+use eLama\DirectApiV5\Dto\Keyword\KeywordStateEnum;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\Params\GetAdsParams;
 use eLama\DirectApiV5\Params\GetCampaignsParams;
+use eLama\DirectApiV5\Params\GetKeywordsParams;
 use eLama\DirectApiV5\Params\Params;
 use eLama\DirectApiV5\Serializer\JmsSerializer;
 use GuzzleHttp\Client;
@@ -59,7 +62,7 @@ class SimpleDirectDriver
         //TODO Проблема с лимитом кампаний в 1000 штук - нужно будет решить
         return $this->call($getCampaignsRequest)
             ->then(function (Response $response) {
-                /** @var Campaign\GetResponse $result */
+                /** @var Campaign\GetResponseGeneral $result */
                 $result = $response->getUnserializedBody()->getResult();
 
                 return $result->getCampaigns();
@@ -103,12 +106,35 @@ class SimpleDirectDriver
         //TODO Пагинация!
         return $this->call($getAdsParams)
             ->then(function (Response $response) {
-                /** @var Ad\GetResponse $result */
+                /** @var Ad\GetResponseGeneral $result */
                 $result = $response->getUnserializedBody()->getResult();
 
                 return $result->getAds();
             });
 
+    }
+
+    public function getNonArchivedKeywords(array $campaignIds)
+    {
+//        Проблема API - не удается получить все ключевики не передавая ID кампании
+//        \Assert\that($campaignIds)->notEmpty();
+
+        $criteria = new Dto\Keyword\KeywordsSelectionCriteria();
+        $criteria->setCampaignIds($campaignIds);
+        $criteria->setStates(
+            [KeywordStateEnum::ON, KeywordStateEnum::SUSPENDED, KeywordStateEnum::OFF]
+        );
+
+        $getAdsParams = new GetKeywordsParams($criteria);
+
+        //TODO Пагинация!
+        return $this->call($getAdsParams)
+            ->then(function (Response $response) {
+                /** @var Keyword\GetResponseGeneral $result */
+                $result = $response->getUnserializedBody()->getResult();
+
+                return $result->getKeywords();
+            });
     }
 
     private function call(Params $request)

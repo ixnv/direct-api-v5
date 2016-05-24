@@ -3,13 +3,13 @@
 
 namespace eLama\DirectApiV5\Params;
 
+use eLama\DirectApiV5\Dto\General\LimitOffset;
 use eLama\DirectApiV5\Dto\Keyword\GetOperationResponse;
 use eLama\DirectApiV5\Dto\Keyword\GetRequest;
 use eLama\DirectApiV5\Dto\Keyword\KeywordFieldEnum;
 use eLama\DirectApiV5\Dto\Keyword\KeywordsSelectionCriteria;
-use eLama\DirectApiV5\Result\LimitOffset;
 
-class GetKeywordsRequest extends GetParams
+class GetKeywordsParams extends GetParams
 {
     /** @var GetRequest */
     private $request;

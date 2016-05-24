@@ -37,7 +37,7 @@ class KeywordProductivity
      * @param float $Value
      * @return \eLama\DirectApiV5\Dto\Keyword\KeywordProductivity
      */
-    public function setValue(float $Value = null)
+    public function setValue($Value = null)
     {
       $this->Value = $Value;
       return $this;

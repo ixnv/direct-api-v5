@@ -3,6 +3,7 @@
 namespace eLama\DirectApiV5\Test\Integration;
 
 use eLama\DirectApiV5\Dto\Ad\AdGetItem;
+use eLama\DirectApiV5\Dto\Keyword\KeywordGetItem;
 use eLama\DirectApiV5\LoggerFactory;
 use eLama\DirectApiV5\SimpleDirectDriver;
 use eLama\DirectApiV5\SimpleDirectDriverFactory;
@@ -13,7 +14,6 @@ use eLama\DirectApiV5\JmsFactory;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use GuzzleHttp\Client;
 use PHPUnit_Framework_TestCase;
-use Psr\Log\NullLogger;
 
 class GeneralTest extends PHPUnit_Framework_TestCase
 {
@@ -108,6 +108,22 @@ class GeneralTest extends PHPUnit_Framework_TestCase
         $directDriver->getNonArchivedCampaigns()->wait();
     }
 
+
+    /**
+     * @test
+     * @depends canGetNonArchivedCampaigns
+     */
+    public function canGetNonArchivedKeywords()
+    {
+        /** @var AdGetItem[] $ads */
+        $ads = $this->createDriver()->getNonArchivedKeywords([self::$existingCampaigns[0]])->wait();
+
+        assertThat(
+            $ads,
+            both(arrayWithSize(greaterThan(0)))
+                ->andAlso(everyItem(anInstanceOf(KeywordGetItem::class)))
+        );
+    }
     /**
      * @param string $token
      * @return SimpleDirectDriver
