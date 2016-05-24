@@ -75,7 +75,7 @@ abstract class LowLevelDriver
                     $this->parseUnitsHeader($response)
                 );
             })
-            ->then(function (Response $response) use ($uniqId, $request, $startTime, $endTime) {
+            ->then(function (Response $response) use ($uniqId, $request, $startTime, &$endTime) {
 
                 $request = $this->createLogContext($uniqId, $request);
                 $responseContext = [

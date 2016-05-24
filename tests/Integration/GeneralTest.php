@@ -2,6 +2,7 @@
 
 namespace eLama\DirectApiV5\Test\Integration;
 
+use eLama\DirectApiV5\Dto\Ad\AdGetItem;
 use eLama\DirectApiV5\LoggerFactory;
 use eLama\DirectApiV5\SimpleDirectDriver;
 use eLama\DirectApiV5\SimpleDirectDriverFactory;
@@ -18,6 +19,9 @@ class GeneralTest extends PHPUnit_Framework_TestCase
 {
     const LOGIN = 'ra-trinet-add-dev-01';
     const TOKEN = '3fe13d8bd818458c89624f678f365051';
+
+    /** @var int[] */
+    private static $existingCampaigns;
 
     /**
      * @test
@@ -40,7 +44,7 @@ class GeneralTest extends PHPUnit_Framework_TestCase
               ->andAlso(everyItem(anInstanceOf(CampaignGetItem::class)))
         );
 
-        return array_map(
+       self::$existingCampaigns = array_map(
             function (CampaignGetItem $campaignGetItem) {
                 return $campaignGetItem->getId();
             },
@@ -52,10 +56,9 @@ class GeneralTest extends PHPUnit_Framework_TestCase
      * @test
      * @depends canGetNonArchivedCampaigns
      */
-    public function canGetCampaign(array $existingCampaigns)
+    public function canGetCampaign()
     {
-        shuffle($existingCampaigns);
-        $campaignId = $existingCampaigns[0];
+        $campaignId = self::$existingCampaigns[0];
 
         $directDriver = $this->createDriver();
 
@@ -63,6 +66,34 @@ class GeneralTest extends PHPUnit_Framework_TestCase
         $campaign = $directDriver->getCampaign($campaignId)->wait();
 
         assertThat($campaign->getId(), is(equalTo($campaignId)));
+    }
+
+
+    /**
+     * @test
+     * @depends canGetNonArchivedCampaigns
+     */
+    public function canGetNonArchivedAds()
+    {
+        /** @var AdGetItem[] $ads */
+        $ads = $this->createDriver()->getNonArchivedAds(self::$existingCampaigns)->wait();
+
+        assertThat(
+            $ads,
+            both(arrayWithSize(greaterThan(0)))
+                ->andAlso(everyItem(anInstanceOf(AdGetItem::class)))
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getNonArchivedAds_EmptyCampaignList_ThrowsInvalidArgumentException()
+    {
+        $driver = $this->createDriver();
+
+        $this->setExpectedException(\InvalidArgumentException::class);
+        $driver->getNonArchivedAds([]);
     }
 
     /**

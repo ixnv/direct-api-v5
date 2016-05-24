@@ -6,7 +6,10 @@ use eLama\DirectApiV5\Dto;
 use eLama\DirectApiV5\Dto\Campaign;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Campaign\CampaignStateEnum;
+use eLama\DirectApiV5\Dto\Ad;
+use eLama\DirectApiV5\Dto\General\StateEnum;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
+use eLama\DirectApiV5\Params\GetAdsParams;
 use eLama\DirectApiV5\Params\GetCampaignsParams;
 use eLama\DirectApiV5\Params\Params;
 use eLama\DirectApiV5\Serializer\JmsSerializer;
@@ -79,6 +82,33 @@ class SimpleDirectDriver
             ->then(function (Response $response) {
                 return $response->getUnserializedBody()->getResult()->getCampaigns()[0];
             });
+    }
+
+    /**
+     * @return PromiseInterface
+     */
+    public function getNonArchivedAds(array $campaignIds)
+    {
+        //Проблема API - не удается получить все объявления не передавая ID кампании
+        \Assert\that($campaignIds)->notEmpty();
+
+        $criteria = new Dto\Ad\AdsSelectionCriteria();
+        $criteria->setCampaignIds($campaignIds);
+        $criteria->setStates(
+            [StateEnum::ON, StateEnum::OFF_BY_MONITORING, StateEnum::SUSPENDED, StateEnum::OFF]
+        );
+
+        $getAdsParams = new GetAdsParams($criteria);
+
+        //TODO Пагинация!
+        return $this->call($getAdsParams)
+            ->then(function (Response $response) {
+                /** @var Ad\GetResponse $result */
+                $result = $response->getUnserializedBody()->getResult();
+
+                return $result->getAds();
+            });
+
     }
 
     private function call(Params $request)

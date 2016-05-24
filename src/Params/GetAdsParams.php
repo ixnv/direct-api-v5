@@ -9,7 +9,7 @@ use eLama\DirectApiV5\Dto\Ad\GetOperationResponse;
 use eLama\DirectApiV5\Dto\Ad\GetRequest;
 use eLama\DirectApiV5\Dto\Ad\TextAdFieldEnum;
 
-class GetAdsRequest extends GetParams
+class GetAdsParams extends GetParams
 {
     /** @var GetRequest */
     private $request;

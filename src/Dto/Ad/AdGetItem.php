@@ -313,27 +313,4 @@ class AdGetItem
       $this->MobileAppAd = $MobileAppAd;
       return $this;
     }
-
-    public function toDomain()
-    {
-        $isImageExistsAndModerated =
-            $this->getTextAd()->getAdImageHash() &&
-            $this->getTextAd()->getAdImageModeration()->getStatus() != StatusEnum::DRAFT &&
-            $this->getTextAd()->getAdImageModeration()->getStatus() != StatusEnum::REJECTED;
-
-        $uri = $this->getTextAd()->getHref();
-        $media = new AdMedia(
-            $this->getTextAd()->getTitle(),
-            $this->getTextAd()->getSiteLinkAdInfo(),
-            $isImageExistsAndModerated,
-            $this->getTextAd()->getVCardInfo(),
-            $uri ? Http::createFromString($uri)
-        );
-
-        return new Ad(
-            $this->getId(),
-            $this->getAdGroupId(),
-            $media
-        );
-    }
 }

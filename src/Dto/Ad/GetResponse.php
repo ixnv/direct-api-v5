@@ -3,12 +3,13 @@
 namespace eLama\DirectApiV5\Dto\Ad;
 
 use eLama\DirectApiV5\Dto\General\GetResponseGeneral;
+use eLama\DirectApiV5\Result\GetResult as GetResultGeneral;
 use JMS\Serializer\Annotation as JMS;
 
 /**
  * @JMS\AccessType("public_method")
  */
-class GetResponse extends GetResponseGeneral
+class GetResponse extends GetResultGeneral
 {
 
     /**
@@ -31,6 +32,10 @@ class GetResponse extends GetResponseGeneral
      */
     public function getAds()
     {
+        if ($this->Ads === null) {
+            return [];
+        }
+
         return $this->Ads;
     }
 

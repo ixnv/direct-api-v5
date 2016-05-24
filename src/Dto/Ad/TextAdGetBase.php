@@ -2,8 +2,6 @@
 
 namespace eLama\DirectApiV5\Dto\Ad;
 
-use eLama\Advisor\Domain\Direct\Ad\SiteLinkAdInfo;
-use eLama\Advisor\Domain\Direct\Ad\VCardInfo;
 use eLama\DirectApiV5\Dto\General\StatusEnum;
 use JMS\Serializer\Annotation as JMS;
 
@@ -133,38 +131,6 @@ class TextAdGetBase
     public function getSitelinksModeration()
     {
       return $this->SitelinksModeration;
-    }
-
-    public function getSiteLinkAdInfo()
-    {
-        $statusMap = [
-            StatusEnum::ACCEPTED => SiteLinkAdInfo::ACTIVE,
-            StatusEnum::MODERATION => SiteLinkAdInfo::BEING_MODERATED,
-        ];
-        if ($this->getSitelinkSetId()) {
-            $siteLinkStatus = $this->getSitelinksModeration()->getStatus();
-            $domainStatus = $statusMap[$siteLinkStatus] ?? $siteLinkStatus;
-
-            return SiteLinkAdInfo::withStatus($domainStatus);
-        } else {
-            return SiteLinkAdInfo::noSiteLink();
-        }
-    }
-
-    public function getVCardInfo()
-    {
-        $statusMap = [
-            StatusEnum::ACCEPTED => VCardInfo::ACTIVE,
-            StatusEnum::MODERATION => VCardInfo::BEING_MODERATED,
-        ];
-        if ($this->getVCardId()) {
-            $vCardStatus = $this->getVCardModeration()->getStatus();
-            $domainStatus = $statusMap[$vCardStatus] ?? $vCardStatus;
-
-            return VCardInfo::withStatus($domainStatus);
-        } else {
-            return VCardInfo::noVCard();
-        }
     }
 
     /**
