@@ -108,7 +108,6 @@ class GeneralTest extends PHPUnit_Framework_TestCase
         $directDriver->getNonArchivedCampaigns()->wait();
     }
 
-
     /**
      * @test
      * @depends canGetNonArchivedCampaigns
@@ -124,6 +123,19 @@ class GeneralTest extends PHPUnit_Framework_TestCase
                 ->andAlso(everyItem(anInstanceOf(KeywordGetItem::class)))
         );
     }
+
+    /**
+     * @test
+     */
+    public function getNonArchivedKeywords_EmptyCampaignList_ThrowsInvalidArgumentException()
+    {
+        $driver = $this->createDriver();
+
+        $this->setExpectedException(\InvalidArgumentException::class);
+        $driver->getNonArchivedKeywords([]);
+    }
+
+
     /**
      * @param string $token
      * @return SimpleDirectDriver

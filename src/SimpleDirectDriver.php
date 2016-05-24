@@ -62,7 +62,7 @@ class SimpleDirectDriver
         //TODO Проблема с лимитом кампаний в 1000 штук - нужно будет решить
         return $this->call($getCampaignsRequest)
             ->then(function (Response $response) {
-                /** @var Campaign\GetResponseGeneral $result */
+                /** @var Campaign\GetResponse $result */
                 $result = $response->getUnserializedBody()->getResult();
 
                 return $result->getCampaigns();
@@ -106,7 +106,7 @@ class SimpleDirectDriver
         //TODO Пагинация!
         return $this->call($getAdsParams)
             ->then(function (Response $response) {
-                /** @var Ad\GetResponseGeneral $result */
+                /** @var Ad\GetResponse $result */
                 $result = $response->getUnserializedBody()->getResult();
 
                 return $result->getAds();
@@ -116,8 +116,8 @@ class SimpleDirectDriver
 
     public function getNonArchivedKeywords(array $campaignIds)
     {
-//        Проблема API - не удается получить все ключевики не передавая ID кампании
-//        \Assert\that($campaignIds)->notEmpty();
+        // Проблема API - не удается получить все ключевики не передавая ID кампании
+        \Assert\that($campaignIds)->notEmpty();
 
         $criteria = new Dto\Keyword\KeywordsSelectionCriteria();
         $criteria->setCampaignIds($campaignIds);
@@ -130,7 +130,7 @@ class SimpleDirectDriver
         //TODO Пагинация!
         return $this->call($getAdsParams)
             ->then(function (Response $response) {
-                /** @var Keyword\GetResponseGeneral $result */
+                /** @var Keyword\GetResponse $result */
                 $result = $response->getUnserializedBody()->getResult();
 
                 return $result->getKeywords();
