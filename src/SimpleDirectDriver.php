@@ -65,6 +65,7 @@ class SimpleDirectDriver
 
     /**
      * @return PromiseInterface promise of \eLama\DirectApiV5\Dto\Campaign\CampaignGetItem[]
+     * @see \eLama\DirectApiV5\Dto\Campaign\CampaignGetItem
      */
     public function getNonArchivedCampaigns()
     {
