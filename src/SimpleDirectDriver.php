@@ -54,7 +54,7 @@ class SimpleDirectDriver
         $baseUrl,
         $token,
         $login,
-        $pageLimit = null //TODO Тест на постраничную выборку
+        $pageLimit = null
     ) {
         $this->serializer = $jmsSerializer;
         $this->login = $login;
