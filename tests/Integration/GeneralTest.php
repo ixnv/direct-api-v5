@@ -13,9 +13,7 @@ use eLama\DirectApiV5\ErrorException;
 use eLama\DirectApiV5\JmsFactory;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use GuzzleHttp\Client;
-use Monolog\Logger;
 use PHPUnit_Framework_TestCase;
-use Psr\Log\NullLogger;
 
 class GeneralTest extends PHPUnit_Framework_TestCase
 {

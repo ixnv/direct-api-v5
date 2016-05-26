@@ -93,7 +93,7 @@ class SimpleDirectDriver
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return PromiseInterface on \eLama\DirectApiV5\Dto\Campaign\CampaignGetItem
      * @see \eLama\DirectApiV5\Dto\Campaign\CampaignGetItem
      */
@@ -112,6 +112,7 @@ class SimpleDirectDriver
 
     /**
      * @return PromiseInterface
+     * @see \eLama\DirectApiV5\Dto\Ad\AdGetItem
      */
     public function getNonArchivedAds(array $campaignIds)
     {
@@ -126,17 +127,28 @@ class SimpleDirectDriver
 
         $getAdsParams = new GetAdsParams($criteria);
 
-        //TODO Пагинация!
-        return $this->call($getAdsParams)
-            ->then(function (Response $response) {
-                /** @var Ad\GetResponse $result */
-                $result = $response->getUnserializedBody()->getResult();
+        return $this->callGet($getAdsParams)
+            ->then(function (array $responses) {
+                /** @var Response[] $responses */
+                $return = [];
+                foreach ($responses as $response) {
+                    /** @var Ad\GetResponse $result */
+                    $result = $response->getUnserializedBody()->getResult();
+                    foreach ($result->getAds() as $ads) {
+                        $return[] = $ads;
+                    }
+                }
 
-                return $result->getAds();
+                return $return;
             });
 
     }
 
+    /**
+     * @param int[] $campaignIds
+     * @return PromiseInterface
+     * @see \eLama\DirectApiV5\Dto\Keyword\KeywordGetItem
+     */
     public function getNonArchivedKeywords(array $campaignIds)
     {
         // Проблема API - не удается получить все ключевики не передавая ID кампании
@@ -150,13 +162,19 @@ class SimpleDirectDriver
 
         $getAdsParams = new GetKeywordsParams($criteria);
 
-        //TODO Пагинация!
-        return $this->call($getAdsParams)
-            ->then(function (Response $response) {
-                /** @var Keyword\GetResponse $result */
-                $result = $response->getUnserializedBody()->getResult();
+        return $this->callGet($getAdsParams)
+            ->then(function (array $responses) {
+                /** @var Response[] $responses */
+                $return = [];
+                foreach ($responses as $response) {
+                    /** @var Keyword\GetResponse $result */
+                    $result = $response->getUnserializedBody()->getResult();
+                    foreach ($result->getKeywords() as $keywords) {
+                        $return[] = $keywords;
+                    }
+                }
 
-                return $result->getKeywords();
+                return $return;
             });
     }
 
