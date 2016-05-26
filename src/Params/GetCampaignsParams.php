@@ -8,20 +8,21 @@ use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Campaign\GetOperationResponse;
 use eLama\DirectApiV5\Dto\Campaign\GetRequest;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignFieldEnum;
+use eLama\DirectApiV5\Dto\General\LimitOffset;
 
 class GetCampaignsParams extends GetParams
 {
-    /** @var GetRequest */
-    protected $request;
-
     public function __construct(
-        CampaignsSelectionCriteria $selectionCriteria
+        CampaignsSelectionCriteria $selectionCriteria,
+        LimitOffset $limitOffset = null
     ) {
         $this->request = new GetRequest(
             $selectionCriteria,
             CampaignFieldEnum::values(),
             TextCampaignFieldEnum::values()
         );
+
+        $this->request->setPage($limitOffset);
     }
 
     public function resource()

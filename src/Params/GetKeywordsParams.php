@@ -11,9 +11,6 @@ use eLama\DirectApiV5\Dto\Keyword\KeywordsSelectionCriteria;
 
 class GetKeywordsParams extends GetParams
 {
-    /** @var GetRequest */
-    private $request;
-
     public function __construct(KeywordsSelectionCriteria $selectionCriteria, LimitOffset $page = null) {
         $this->request = new GetRequest(
             $selectionCriteria,

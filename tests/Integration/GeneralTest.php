@@ -13,7 +13,9 @@ use eLama\DirectApiV5\ErrorException;
 use eLama\DirectApiV5\JmsFactory;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use GuzzleHttp\Client;
+use Monolog\Logger;
 use PHPUnit_Framework_TestCase;
+use Psr\Log\NullLogger;
 
 class GeneralTest extends PHPUnit_Framework_TestCase
 {
@@ -40,7 +42,7 @@ class GeneralTest extends PHPUnit_Framework_TestCase
 
         assertThat(
             $campaigns,
-            both(arrayWithSize(greaterThan(0)))
+            both(arrayWithSize(greaterThan(2)))
               ->andAlso(everyItem(anInstanceOf(CampaignGetItem::class)))
         );
 
@@ -49,6 +51,25 @@ class GeneralTest extends PHPUnit_Framework_TestCase
                 return $campaignGetItem->getId();
             },
             $campaigns
+        );
+    }
+
+
+    /**
+     * @test
+     * @depends canGetNonArchivedCampaigns
+     */
+    public function getNonArchivedCampaigns_PageLimitIsSetToOnePerRequest_FetchesAllCampaigns()
+    {
+        $directDriver = $this->createDriverWithPageLimit($pageLimit = 1);
+
+        /** @var CampaignGetItem[] $campaigns */
+        $campaigns = $directDriver->getNonArchivedCampaigns()->wait();
+
+        assertThat(
+            $campaigns,
+            both(arrayWithSize(count(self::$existingCampaigns)))
+              ->andAlso(everyItem(anInstanceOf(CampaignGetItem::class)))
         );
     }
 
@@ -152,6 +173,23 @@ class GeneralTest extends PHPUnit_Framework_TestCase
         $factory = new SimpleDirectDriverFactory($serializer, $client, new LoggerFactory([]), $tokenResolver, LowLevelDriver::URL_SANDBOX);
 
         return $factory->driverForClient(self::LOGIN);
+    }
+
+    /**
+     * @param $pageLimit
+     * @return SimpleDirectDriver
+     */
+    private function createDriverWithPageLimit($pageLimit)
+    {
+        return $directDriver = new SimpleDirectDriver(
+            JmsFactory::create()->serializer(),
+            new Client(),
+            (new LoggerFactory([]))->create(),
+            LowLevelDriver::URL_SANDBOX,
+            self::TOKEN,
+            self::LOGIN,
+            $pageLimit
+        );
     }
 
 }

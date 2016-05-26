@@ -7,6 +7,7 @@ use eLama\DirectApiV5\Dto\Campaign;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Campaign\CampaignStateEnum;
 use eLama\DirectApiV5\Dto\Ad;
+use eLama\DirectApiV5\Dto\General\LimitOffset;
 use eLama\DirectApiV5\Dto\Keyword;
 use eLama\DirectApiV5\Dto\General\StateEnum;
 use eLama\DirectApiV5\Dto\Keyword\KeywordStateEnum;
@@ -14,13 +15,17 @@ use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\Params\GetAdsParams;
 use eLama\DirectApiV5\Params\GetCampaignsParams;
 use eLama\DirectApiV5\Params\GetKeywordsParams;
+use eLama\DirectApiV5\Params\GetParams;
 use eLama\DirectApiV5\Params\Params;
+use eLama\DirectApiV5\Result\GetResultGeneral;
 use eLama\DirectApiV5\Serializer\JmsSerializer;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise\PromiseInterface;
 use JMS\Serializer\Serializer;
 use Psr\Log\LoggerInterface;
 
+
+//TODO Получать только текстовые кампании, объявления, ключевики
 class SimpleDirectDriver
 {
     /** @var string */
@@ -34,17 +39,29 @@ class SimpleDirectDriver
 
     /** @var LowLevelDriver  */
     private $driver;
+    /**
+     * @var null
+     */
+    private $pageLimit;
 
     /**
      * @param Serializer $jmsSerializer
      * @param Client $client
      */
-    public function __construct(Serializer $jmsSerializer, Client $client, LoggerInterface $logger, $baseUrl, $token, $login)
-    {
+    public function __construct(
+        Serializer $jmsSerializer,
+        Client $client,
+        LoggerInterface $logger,
+        $baseUrl,
+        $token,
+        $login,
+        $pageLimit = null //TODO Тест на постраничную выборку
+    ) {
         $this->serializer = $jmsSerializer;
         $this->login = $login;
         $this->token = $token;
         $this->driver = LowLevelDriver::createAdapterForClient($client, $logger, $baseUrl);
+        $this->pageLimit = $pageLimit;
     }
 
     /**
@@ -59,13 +76,19 @@ class SimpleDirectDriver
 
         $getCampaignsRequest = new GetCampaignsParams($criteria);
 
-        //TODO Проблема с лимитом кампаний в 1000 штук - нужно будет решить
-        return $this->call($getCampaignsRequest)
-            ->then(function (Response $response) {
-                /** @var Campaign\GetResponse $result */
-                $result = $response->getUnserializedBody()->getResult();
+        return $this->callGet($getCampaignsRequest)
+            ->then(function (array $responses){
+                /** @var Response[] $responses */
+                $return = [];
+                foreach ($responses as $response) {
+                    /** @var Campaign\GetResponse $result */
+                    $result = $response->getUnserializedBody()->getResult();
+                    foreach ($result->getCampaigns() as $campaign) {
+                        $return[] = $campaign;
+                    }
+                }
 
-                return $result->getCampaigns();
+                return $return;
             });
     }
 
@@ -160,5 +183,29 @@ class SimpleDirectDriver
 
                 return $response;
             });
+    }
+
+    private function callGet(GetParams $params)
+    {
+        if ($this->pageLimit) {
+            $params->setLimit($this->pageLimit);
+        }
+
+        return $this->call($params)->then(function (Response $response) use ($params) {
+            /** @var GetResultGeneral $result */
+            $result = $response->getUnserializedBody()->getResult();
+
+            if ($result->getLimitedBy()) {
+                return $this->callGet($params->paramsForNextPage($result))
+                    ->then(function (array $responses) use ($response) {
+                        /** @var Response[] $responses */
+                        array_unshift($responses, $response);
+
+                        return $responses;
+                    });
+            } else {
+                return [$response];
+            }
+        });
     }
 }

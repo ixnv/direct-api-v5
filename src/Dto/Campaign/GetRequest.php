@@ -2,12 +2,13 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
+use eLama\DirectApiV5\Dto\General\GeneralGetRequest;
 use JMS\Serializer\Annotation as JMS;
 
 /**
  * @JMS\AccessType("public_method")
  */
-class GetRequest
+class GetRequest extends GeneralGetRequest
 {
 
     /**

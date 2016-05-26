@@ -11,8 +11,6 @@ use eLama\DirectApiV5\Dto\Ad\TextAdFieldEnum;
 
 class GetAdsParams extends GetParams
 {
-    /** @var GetRequest */
-    private $request;
 
     public function __construct(AdsSelectionCriteria $selectionCriteria) {
         $this->request = new GetRequest(
