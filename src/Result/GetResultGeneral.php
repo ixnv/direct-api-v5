@@ -8,11 +8,8 @@ use JMS\Serializer\Annotation as JMS;
 /**
  * @JMS\AccessType("public_method")
  */
-class GetResultGeneral
+abstract class GetResultGeneral
 {
-
-    //TODO Add units info
-
     /**
      * @JMS\Type("integer")
      *
@@ -39,4 +36,8 @@ class GetResultGeneral
       return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    abstract public function getItems();
 }

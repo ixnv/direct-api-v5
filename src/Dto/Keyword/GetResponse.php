@@ -45,4 +45,11 @@ class GetResponse extends GetResultGeneral
       return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getItems()
+    {
+        return $this->getKeywords();
+    }
 }

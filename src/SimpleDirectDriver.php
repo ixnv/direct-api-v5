@@ -7,7 +7,6 @@ use eLama\DirectApiV5\Dto\Campaign;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Campaign\CampaignStateEnum;
 use eLama\DirectApiV5\Dto\Ad;
-use eLama\DirectApiV5\Dto\General\LimitOffset;
 use eLama\DirectApiV5\Dto\Keyword;
 use eLama\DirectApiV5\Dto\General\StateEnum;
 use eLama\DirectApiV5\Dto\Keyword\KeywordStateEnum;
@@ -76,20 +75,7 @@ class SimpleDirectDriver
 
         $getCampaignsRequest = new GetCampaignsParams($criteria);
 
-        return $this->callGet($getCampaignsRequest)
-            ->then(function (array $responses){
-                /** @var Response[] $responses */
-                $return = [];
-                foreach ($responses as $response) {
-                    /** @var Campaign\GetResponse $result */
-                    $result = $response->getUnserializedBody()->getResult();
-                    foreach ($result->getCampaigns() as $campaign) {
-                        $return[] = $campaign;
-                    }
-                }
-
-                return $return;
-            });
+        return $this->callGetCollectingItems($getCampaignsRequest);
     }
 
     /**
@@ -127,21 +113,7 @@ class SimpleDirectDriver
 
         $getAdsParams = new GetAdsParams($criteria);
 
-        return $this->callGet($getAdsParams)
-            ->then(function (array $responses) {
-                /** @var Response[] $responses */
-                $return = [];
-                foreach ($responses as $response) {
-                    /** @var Ad\GetResponse $result */
-                    $result = $response->getUnserializedBody()->getResult();
-                    foreach ($result->getAds() as $ads) {
-                        $return[] = $ads;
-                    }
-                }
-
-                return $return;
-            });
-
+        return $this->callGetCollectingItems($getAdsParams);
     }
 
     /**
@@ -162,20 +134,7 @@ class SimpleDirectDriver
 
         $getAdsParams = new GetKeywordsParams($criteria);
 
-        return $this->callGet($getAdsParams)
-            ->then(function (array $responses) {
-                /** @var Response[] $responses */
-                $return = [];
-                foreach ($responses as $response) {
-                    /** @var Keyword\GetResponse $result */
-                    $result = $response->getUnserializedBody()->getResult();
-                    foreach ($result->getKeywords() as $keywords) {
-                        $return[] = $keywords;
-                    }
-                }
-
-                return $return;
-            });
+        return $this->callGetCollectingItems($getAdsParams);
     }
 
     private function call(Params $request)
@@ -209,21 +168,40 @@ class SimpleDirectDriver
             $params->setLimit($this->pageLimit);
         }
 
-        return $this->call($params)->then(function (Response $response) use ($params) {
-            /** @var GetResultGeneral $result */
-            $result = $response->getUnserializedBody()->getResult();
+        return $this->call($params)
+            ->then(function (Response $response) use ($params) {
+                /** @var GetResultGeneral $result */
+                $result = $response->getUnserializedBody()->getResult();
 
-            if ($result->getLimitedBy()) {
-                return $this->callGet($params->paramsForNextPage($result))
-                    ->then(function (array $responses) use ($response) {
-                        /** @var Response[] $responses */
-                        array_unshift($responses, $response);
+                if ($result->getLimitedBy()) {
+                    return $this->callGet($params->paramsForNextPage($result))
+                        ->then(function (array $responses) use ($response) {
+                            /** @var Response[] $responses */
+                            array_unshift($responses, $response);
 
-                        return $responses;
-                    });
-            } else {
-                return [$response];
-            }
-        });
+                            return $responses;
+                        });
+                } else {
+                    return [$response];
+                }
+            });
+    }
+
+    private function callGetCollectingItems(GetParams $params)
+    {
+        return $this->callGet($params)
+            ->then(function (array $responses) {
+                /** @var Response[] $responses */
+                $return = [];
+                foreach ($responses as $response) {
+                    /** @var GetResultGeneral $result */
+                    $result = $response->getUnserializedBody()->getResult();
+                    foreach ($result->getItems() as $item) {
+                        $return[] = $item;
+                    }
+                }
+
+                return $return;
+            });
     }
 }
