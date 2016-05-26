@@ -2,13 +2,13 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use eLama\DirectApiV5\Dto\General\GeneralGetRequest;
+use eLama\DirectApiV5\Dto\General\GetRequestGeneral;
 use JMS\Serializer\Annotation as JMS;
 
 /**
  * @JMS\AccessType("public_method")
  */
-class GetRequest extends GeneralGetRequest
+class GetRequest extends GetRequestGeneral
 {
 
     /**
@@ -81,7 +81,7 @@ class GetRequest extends GeneralGetRequest
 
     /**
      * @param CampaignsSelectionCriteria $SelectionCriteria
-     * @return \eLama\DirectApiV5\Dto\Campaign\GetRequest
+     * @return \eLama\DirectApiV5\Dto\Campaign\GetRequestGeneral
      */
     public function setSelectionCriteria(CampaignsSelectionCriteria $SelectionCriteria)
     {
@@ -99,7 +99,7 @@ class GetRequest extends GeneralGetRequest
 
     /**
      * @param CampaignFieldEnum $FieldNames
-     * @return \eLama\DirectApiV5\Dto\Campaign\GetRequest
+     * @return \eLama\DirectApiV5\Dto\Campaign\GetRequestGeneral
      */
     public function setFieldNames($FieldNames)
     {
@@ -117,7 +117,7 @@ class GetRequest extends GeneralGetRequest
 
     /**
      * @param TextCampaignFieldEnum $TextCampaignFieldNames
-     * @return \eLama\DirectApiV5\Dto\Campaign\GetRequest
+     * @return \eLama\DirectApiV5\Dto\Campaign\GetRequestGeneral
      */
     public function setTextCampaignFieldNames($TextCampaignFieldNames)
     {
@@ -135,7 +135,7 @@ class GetRequest extends GeneralGetRequest
 
     /**
      * @param MobileAppCampaignFieldEnum $MobileAppCampaignFieldNames
-     * @return \eLama\DirectApiV5\Dto\Campaign\GetRequest
+     * @return \eLama\DirectApiV5\Dto\Campaign\GetRequestGeneral
      */
     public function setMobileAppCampaignFieldNames($MobileAppCampaignFieldNames)
     {
@@ -153,7 +153,7 @@ class GetRequest extends GeneralGetRequest
 
     /**
      * @param DynamicTextCampaignFieldEnum $DynamicTextCampaignFieldNames
-     * @return \eLama\DirectApiV5\Dto\Campaign\GetRequest
+     * @return \eLama\DirectApiV5\Dto\Campaign\GetRequestGeneral
      */
     public function setDynamicTextCampaignFieldNames($DynamicTextCampaignFieldNames)
     {

@@ -7,7 +7,7 @@ use JMS\Serializer\Annotation as JMS;
 /**
  * @JMS\AccessType("public_method")
  */
-abstract class GeneralGetRequest
+abstract class GetRequestGeneral
 {
 
     /**
@@ -32,7 +32,7 @@ abstract class GeneralGetRequest
     }
 
     /**
-     * @return GeneralGetRequest
+     * @return GetRequestGeneral
      */
     public function requestForNextPage(GetResultGeneral $result)
     {

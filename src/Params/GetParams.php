@@ -2,7 +2,7 @@
 
 namespace eLama\DirectApiV5\Params;
 
-use eLama\DirectApiV5\Dto\General\GeneralGetRequest;
+use eLama\DirectApiV5\Dto\General\GetRequestGeneral;
 use eLama\DirectApiV5\Dto\General\GetResultGeneral;
 use eLama\DirectApiV5\Dto\General\LimitOffset;
 use JMS\Serializer\Annotation as JMS;
@@ -12,7 +12,7 @@ use JMS\Serializer\Annotation as JMS;
  */
 abstract class GetParams extends Params
 {
-    /** @var GeneralGetRequest */
+    /** @var GetRequestGeneral */
     protected $request;
 
     public function method()
