@@ -3,8 +3,8 @@
 namespace eLama\DirectApiV5\Params;
 
 use eLama\DirectApiV5\Dto\General\GeneralGetRequest;
+use eLama\DirectApiV5\Dto\General\GetResultGeneral;
 use eLama\DirectApiV5\Dto\General\LimitOffset;
-use eLama\DirectApiV5\Result\GetResultGeneral;
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -30,7 +30,7 @@ abstract class GetParams extends Params
     }
 
     /**
-     * @param GetResultGeneral $getResult
+     * @param \eLama\DirectApiV5\Dto\General\GetResultGeneral $getResult
      * @return GetParams
      */
     public function paramsForNextPage(GetResultGeneral $getResult)

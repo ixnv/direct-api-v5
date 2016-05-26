@@ -3,7 +3,6 @@
 
 namespace eLama\DirectApiV5\Dto\General;
 
-use eLama\DirectApiV5\Result\GetResultGeneral;
 use JMS\Serializer\Annotation as JMS;
 
 /**

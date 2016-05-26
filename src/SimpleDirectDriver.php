@@ -3,13 +3,14 @@
 namespace eLama\DirectApiV5;
 
 use eLama\DirectApiV5\Dto;
+use eLama\DirectApiV5\Dto\Ad;
 use eLama\DirectApiV5\Dto\Campaign;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Campaign\CampaignStateEnum;
-use eLama\DirectApiV5\Dto\Ad;
 use eLama\DirectApiV5\Dto\Campaign\CampaignTypeEnum;
-use eLama\DirectApiV5\Dto\Keyword;
+use eLama\DirectApiV5\Dto\General\GetResultGeneral;
 use eLama\DirectApiV5\Dto\General\StateEnum;
+use eLama\DirectApiV5\Dto\Keyword;
 use eLama\DirectApiV5\Dto\Keyword\KeywordStateEnum;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\Params\GetAdsParams;
@@ -17,7 +18,6 @@ use eLama\DirectApiV5\Params\GetCampaignsParams;
 use eLama\DirectApiV5\Params\GetKeywordsParams;
 use eLama\DirectApiV5\Params\GetParams;
 use eLama\DirectApiV5\Params\Params;
-use eLama\DirectApiV5\Result\GetResultGeneral;
 use eLama\DirectApiV5\Serializer\JmsSerializer;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise\PromiseInterface;

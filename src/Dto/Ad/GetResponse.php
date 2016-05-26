@@ -2,7 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\Ad;
 
-use eLama\DirectApiV5\Result\GetResultGeneral;
+use eLama\DirectApiV5\Dto\General\GetResultGeneral;
 use JMS\Serializer\Annotation as JMS;
 
 /**
