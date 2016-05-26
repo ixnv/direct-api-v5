@@ -29,6 +29,7 @@ class LoggerFactory
             new WebProcessor(),
             new UidProcessor(),
             new ProcessIdProcessor(),
+            $this->createConsoleProcessor()
         ];
     }
 
@@ -38,6 +39,17 @@ class LoggerFactory
     public function create()
     {
         return new Logger('DirectApiV5', $this->handlers, $this->processors);
+    }
+
+    private function createConsoleProcessor()
+    {
+        return function (array $record) {
+            if (!empty($_SERVER['argv'])) {
+                $record['extra']['argv'] = implode(' ', $_SERVER['argv']);
+            }
+
+            return $record;
+        };
     }
 
 }
