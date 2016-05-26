@@ -7,6 +7,7 @@ use eLama\DirectApiV5\Dto\Campaign;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Campaign\CampaignStateEnum;
 use eLama\DirectApiV5\Dto\Ad;
+use eLama\DirectApiV5\Dto\Campaign\CampaignTypeEnum;
 use eLama\DirectApiV5\Dto\Keyword;
 use eLama\DirectApiV5\Dto\General\StateEnum;
 use eLama\DirectApiV5\Dto\Keyword\KeywordStateEnum;
@@ -64,6 +65,7 @@ class SimpleDirectDriver
     }
 
     /**
+     * Получить незаархивированные текстовые кампании
      * @return PromiseInterface promise of \eLama\DirectApiV5\Dto\Campaign\CampaignGetItem[]
      * @see \eLama\DirectApiV5\Dto\Campaign\CampaignGetItem
      */
@@ -73,6 +75,7 @@ class SimpleDirectDriver
         $criteria->setStates(
             [CampaignStateEnum::ON, CampaignStateEnum::ENDED, CampaignStateEnum::SUSPENDED, CampaignStateEnum::OFF]
         );
+        $criteria->setTypes([CampaignTypeEnum::TEXT_CAMPAIGN]);
 
         $getCampaignsRequest = new GetCampaignsParams($criteria);
 
@@ -98,6 +101,7 @@ class SimpleDirectDriver
     }
 
     /**
+     * Получить незаархивированные текстовые объявления
      * @return PromiseInterface
      * @see \eLama\DirectApiV5\Dto\Ad\AdGetItem
      */
@@ -111,6 +115,7 @@ class SimpleDirectDriver
         $criteria->setStates(
             [StateEnum::ON, StateEnum::OFF_BY_MONITORING, StateEnum::SUSPENDED, StateEnum::OFF]
         );
+        $criteria->setTypes([Ad\AdTypeEnum::TEXT_AD]);
 
         $getAdsParams = new GetAdsParams($criteria);
 
