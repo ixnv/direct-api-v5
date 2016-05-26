@@ -24,8 +24,6 @@ use GuzzleHttp\Promise\PromiseInterface;
 use JMS\Serializer\Serializer;
 use Psr\Log\LoggerInterface;
 
-
-//TODO Получать только текстовые кампании, объявления, ключевики
 class SimpleDirectDriver
 {
     /** @var string */
