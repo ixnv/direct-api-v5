@@ -22,6 +22,7 @@ class LoggerFactory
      */
     public function __construct(array $handlers)
     {
+        //TODO Добавить обязательный параметр "Название инструмента использующего драйвер"
         $this->handlers = $handlers;
 
         $this->processors = [
