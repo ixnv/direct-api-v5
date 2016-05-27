@@ -38,7 +38,8 @@ abstract class GetRequestGeneral
     {
         $newRequest = clone $this;
 
-        $newRequest->setPage(new LimitOffset($this->Page->getLimit(), $result->getLimitedBy()));
+        $limit = $this->Page ? $this->Page->getLimit() : null;
+        $newRequest->setPage(new LimitOffset($limit, $result->getLimitedBy()));
 
         return $newRequest;
     }
