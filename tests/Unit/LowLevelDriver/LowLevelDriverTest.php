@@ -52,7 +52,7 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
             hasKeyValuePair('clientLogin', $request->getClientLogin()),
             hasKeyValuePair('service', $request->getService()),
             hasKeyValuePair('method', $request->getMethod()),
-            hasKeyValuePair('params', containsString(json_encode($request->getParams())))
+            hasKeyValuePair('request_body', containsString(json_encode($request->getParams())))
         ));
     }
 
