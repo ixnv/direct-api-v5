@@ -185,6 +185,8 @@ abstract class LowLevelDriver
             return [];
         }
 
+        //TODO Логгировать процент оставшихся баллов
+
         return [
             'response_units_taken' => $unitsInfo->getTaken(),
             'response_units_left' => $unitsInfo->getLeft(),
