@@ -52,7 +52,7 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
             hasKeyValuePair('clientLogin', $request->getClientLogin()),
             hasKeyValuePair('service', $request->getService()),
             hasKeyValuePair('method', $request->getMethod()),
-            hasKeyValuePair('params', $request->getParams())
+            hasKeyValuePair('params', containsString(json_encode($request->getParams())))
         ));
     }
 
@@ -77,7 +77,8 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
      */
     public function doRequest_ResponseSuccessfullyDeserialized_LogsResponseBody()
     {
-        $this->driver->setResponse([], json_encode(['result' => 1]));
+        $responseBody = json_encode(['result' => 1]);
+        $this->driver->setResponse([], $responseBody);
 
         $this->driver->execute(
             $this->createRequest(),
@@ -85,7 +86,7 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
         )->wait();
 
         Phake::verify($this->logger)->info(containsStringIgnoringCase('response'), allOf(
-            hasKeyValuePair('response_body', hasKeyValuePair('result', 1))
+            hasKeyValuePair('response_body', containsString($responseBody))
         ));
     }
 
@@ -102,9 +103,9 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
         )->wait();
 
         Phake::verify($this->logger)->info(containsStringIgnoringCase('response'), allOf(
-            hasKeyValuePair('units_taken', equalTo(1)),
-            hasKeyValuePair('units_left', equalTo(2)),
-            hasKeyValuePair('units_dailyLimit', equalTo(3))
+            hasKeyValuePair('response_units_taken', equalTo(1)),
+            hasKeyValuePair('response_units_left', equalTo(2)),
+            hasKeyValuePair('response_units_dailyLimit', equalTo(3))
         ));
     }
 

@@ -50,44 +50,38 @@ abstract class LowLevelDriver
         ];
         $uniqId = uniqid('', false);
 
-        //TODO Логгировать после сериализации
-        $this->logger->info("Going to send request", $this->createLogContext($uniqId, $request));
+        $requestBodyInJson = $serializer->serialize($body);
 
-        $headers = $this->createHeaders($request->getToken(), $request->getClientLogin());
+        $this->logger->info("Going to send request", $this->createLogContext($uniqId, $request, $requestBodyInJson));
 
         $url = $this->baseUrl . '/' . $request->getService();
+        $headers = $this->createHeaders($request->getToken(), $request->getClientLogin());
 
-
-        $jsonBody = $serializer->serialize($body);
         $startTime = microtime(true);
-        $endTime = null;
-
-        return $this->sendAsync($url, $headers, $jsonBody)
-            ->then(function ($response) use ($serializer, &$endTime) {
+        return $this->sendAsync($url, $headers, $requestBodyInJson)
+            ->then(function ($response) use ($serializer, $uniqId, $request, $requestBodyInJson, $startTime) {
                 $contents = $response->getBody()->getContents();
                 $endTime = microtime(true);
 
                 $deserializedBody = $serializer->deserialize($contents);
 
-                return new Response(
+                $directResponse = new Response(
                     $deserializedBody,
                     $this->getHeaderValue($response, 'requestId'),
                     $this->parseDateHeader($response),
                     $this->parseUnitsHeader($response)
                 );
-            })
-            ->then(function (Response $response) use ($uniqId, $request, $startTime, &$endTime) {
 
-                //TODO Логгировать до сериализации
-                $request = $this->createLogContext($uniqId, $request);
+                $request = $this->createLogContext($uniqId, $request, $requestBodyInJson);
                 $responseContext = [
-                    'response_requestId' => $response->getRequestId(),
-                    'response_date' => $response->getDate(),
-                    'response_body' => $response->getUnserializedBody(),
+                    'response_requestId' => $directResponse->getRequestId(),
+                    'response_date' => $directResponse->getDate(),
+                    'response_body' => $contents,
                 ];
 
-                $unitsContext = $this->createUnitsContext($response);
+                $unitsContext = $this->createUnitsContext($directResponse);
 
+                //TODO Посмотреть, как это инфу получить из Guzzle
                 $responseContext['tookInMs'] = (int)(($endTime - $startTime) * 1000);
 
                 $this->logger->info(
@@ -95,7 +89,7 @@ abstract class LowLevelDriver
                     array_merge($request, $responseContext, $unitsContext)
                 );
 
-                return $response;
+                return $directResponse;
             });
     }
 
@@ -159,9 +153,10 @@ abstract class LowLevelDriver
     /**
      * @param string $uniqId
      * @param Request $request
+     * @param string $requestBodyInJson
      * @return array
      */
-    private function createLogContext($uniqId, Request $request)
+    private function createLogContext($uniqId, Request $request, $requestBodyInJson)
     {
         $request = $request->withSanitizedToken();
 
@@ -170,7 +165,7 @@ abstract class LowLevelDriver
             'clientLogin' => $request->getClientLogin(),
             'method' => $request->getMethod(),
             'service' => $request->getService(),
-            'params' => $request->getParams(),
+            'params' => $requestBodyInJson,
             'token' => $request->getToken(),
         ];
 
@@ -189,9 +184,9 @@ abstract class LowLevelDriver
         }
 
         return [
-            'units_taken' => $unitsInfo->getTaken(),
-            'units_left' => $unitsInfo->getLeft(),
-            'units_dailyLimit' => $unitsInfo->getDailyLimit()
+            'response_units_taken' => $unitsInfo->getTaken(),
+            'response_units_left' => $unitsInfo->getLeft(),
+            'response_units_dailyLimit' => $unitsInfo->getDailyLimit()
         ];
     }
 }

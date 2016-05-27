@@ -20,9 +20,9 @@ class UnitsInfo
      */
     public function __construct($taken, $left, $dailyLimit)
     {
-        $this->taken = $taken;
-        $this->left = $left;
-        $this->dailyLimit = $dailyLimit;
+        $this->taken = (int)$taken;
+        $this->left = (int)$left;
+        $this->dailyLimit = (int)$dailyLimit;
     }
 
     /**
