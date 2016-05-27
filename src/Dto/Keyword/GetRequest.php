@@ -27,13 +27,6 @@ class GetRequest extends GetRequestGeneral
     private $FieldNames;
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\General\LimitOffset")
-     *
-     * @var LimitOffset
-     */
-    private $Page;
-
-    /**
      * @param KeywordsSelectionCriteria|null $SelectionCriteria
      * @param LimitOffset|null $page
      * @param KeywordFieldEnum[]|null $FieldNames
@@ -41,8 +34,9 @@ class GetRequest extends GetRequestGeneral
     public function __construct(KeywordsSelectionCriteria $SelectionCriteria = null, LimitOffset $page = null, array $FieldNames = null)
     {
         $this->SelectionCriteria = $SelectionCriteria;
-        $this->Page = $page;
         $this->FieldNames = $FieldNames;
+
+        $this->setPage($page);
     }
 
     /**
@@ -62,24 +56,7 @@ class GetRequest extends GetRequestGeneral
         $this->SelectionCriteria = $SelectionCriteria;
         return $this;
     }
-
-    /**
-     * @return LimitOffset
-     */
-    public function getPage()
-    {
-        return $this->Page;
-    }
-
-    /**
-     * @param LimitOffset $Page
-     */
-    public function setPage($Page)
-    {
-        $this->Page = $Page;
-    }
     
-
     /**
      * @return KeywordFieldEnum
      */

@@ -133,12 +133,41 @@ class GeneralTest extends PHPUnit_Framework_TestCase
      */
     public function canGetNonArchivedKeywords()
     {
-        /** @var AdGetItem[] $ads */
-        $ads = $this->createDriver()->getNonArchivedKeywords([self::$existingCampaigns[0]])->wait();
+        /** @var AdGetItem[] $keywords */
+        $campaignId = self::$existingCampaigns[0];
+        $keywords = $this->createDriver()->getNonArchivedKeywords([$campaignId])->wait();
 
         assertThat(
-            $ads,
+            $keywords,
             both(arrayWithSize(greaterThan(0)))
+                ->andAlso(everyItem(anInstanceOf(KeywordGetItem::class)))
+        );
+
+        return [
+            'campaignId' => $campaignId,
+            'keywordCount' => count($keywords)
+        ];
+    }
+
+
+
+    /**
+     * @test
+     * @depends canGetNonArchivedKeywords
+     */
+    public function getNonArchivedKeywords_PageLimitIsSet_FetchesAllKeywords(array $data)
+    {
+        $campaignId = $data['campaignId'];
+        $keywordCount = $data['keywordCount'];
+        $pageSize = ceil($keywordCount / 2);
+        $directDriver = $this->createDriverWithPageLimit($pageSize);
+
+        /** @var CampaignGetItem[] $keywords */
+        $keywords = $directDriver->getNonArchivedKeywords([$campaignId])->wait();
+
+        assertThat(
+            $keywords,
+            both(arrayWithSize($keywordCount))
                 ->andAlso(everyItem(anInstanceOf(KeywordGetItem::class)))
         );
     }

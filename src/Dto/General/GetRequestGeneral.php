@@ -20,12 +20,12 @@ abstract class GetRequestGeneral
     /**
      * @return LimitOffset
      */
-    public function getPage()
+    final public function getPage()
     {
         return $this->Page;
     }
 
-    public function setPage(LimitOffset $Page = null)
+    final public function setPage(LimitOffset $Page = null)
     {
         $this->Page = $Page;
         return $this;
@@ -34,7 +34,7 @@ abstract class GetRequestGeneral
     /**
      * @return GetRequestGeneral
      */
-    public function requestForNextPage(GetResultGeneral $result)
+    final public function requestForNextPage(GetResultGeneral $result)
     {
         $newRequest = clone $this;
 
