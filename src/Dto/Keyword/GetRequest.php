@@ -2,13 +2,14 @@
 
 namespace eLama\DirectApiV5\Dto\Keyword;
 
+use eLama\DirectApiV5\Dto\General\GetRequestGeneral;
 use eLama\DirectApiV5\Dto\General\LimitOffset;
 use JMS\Serializer\Annotation as JMS;
 
 /**
  * @JMS\AccessType("public_method")
  */
-class GetRequest
+class GetRequest extends GetRequestGeneral
 {
 
     /**

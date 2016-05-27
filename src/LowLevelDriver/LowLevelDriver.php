@@ -50,6 +50,7 @@ abstract class LowLevelDriver
         ];
         $uniqId = uniqid('', false);
 
+        //TODO Логгировать после сериализации
         $this->logger->info("Going to send request", $this->createLogContext($uniqId, $request));
 
         $headers = $this->createHeaders($request->getToken(), $request->getClientLogin());
@@ -77,6 +78,7 @@ abstract class LowLevelDriver
             })
             ->then(function (Response $response) use ($uniqId, $request, $startTime, &$endTime) {
 
+                //TODO Логгировать до сериализации
                 $request = $this->createLogContext($uniqId, $request);
                 $responseContext = [
                     'response_requestId' => $response->getRequestId(),
