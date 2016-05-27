@@ -44,7 +44,7 @@ class LoggerFactory
         $processors = $this->processors;
 
         $processors[] = function (array $record) use ($toolName) {
-            $record['extra']['clientToolName'] = $toolName;
+            $record['extra']['toolName'] = $toolName;
 
             return $record;
         };
