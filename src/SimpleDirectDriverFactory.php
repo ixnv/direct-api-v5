@@ -21,8 +21,8 @@ class SimpleDirectDriverFactory
     /** @var callable */
     private $tokenResolver;
 
-    /** @var LoggerInterface */
-    private $logger;
+    /** @var LoggerFactory */
+    private $loggerFactory;
 
     /**
      * @param Serializer $serializer
@@ -40,17 +40,35 @@ class SimpleDirectDriverFactory
     ) {
         $this->serializer = $serializer;
         $this->client = $client;
-        $this->logger = $loggerFactory->create();
+        $this->loggerFactory = $loggerFactory;
         $this->baseUrl = $baseUrl;
         $this->tokenResolver = $tokenResolver;
     }
 
-    public function driver($token, $login)
+    /**
+     * @param string  $token
+     * @param string $login
+     * @param string $toolName Строковый код инструмента использующего драйвер
+     * @return SimpleDirectDriver
+     */
+    public function driver($token, $login, $toolName)
     {
-        return new SimpleDirectDriver($this->serializer, $this->client, $this->logger, $this->baseUrl, $token, $login);
+        return new SimpleDirectDriver(
+            $this->serializer,
+            $this->client,
+            $this->loggerFactory->create($toolName),
+            $this->baseUrl,
+            $token,
+            $login
+        );
     }
 
-    public function driverForClient($login)
+    /**
+     * @param string $login
+     * @param string $toolName Строковый код инструмента использующего драйвер
+     * @return SimpleDirectDriver
+     */
+    public function driverForClient($login, $toolName)
     {
         $tokenResolver = $this->tokenResolver;
         $token = $tokenResolver($login);
@@ -59,6 +77,6 @@ class SimpleDirectDriverFactory
             throw new \RuntimeException('Token returned by token resolver is empty');
         }
 
-        return new SimpleDirectDriver($this->serializer, $this->client, $this->logger, $this->baseUrl, $token, $login);
+        return $this->driver($token, $login, $toolName);
     }
 }

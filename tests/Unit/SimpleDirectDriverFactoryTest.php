@@ -22,7 +22,7 @@ class SimpleDirectDriverFactoryTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->setExpectedException(\RuntimeException::class);
-        $directDriverFactory->driverForClient('some-login');
+        $directDriverFactory->driverForClient('some-login', self::class);
     }
 
     /**
@@ -39,7 +39,7 @@ class SimpleDirectDriverFactoryTest extends \PHPUnit_Framework_TestCase
             $tokenResolver
         );
 
-        $directDriverFactory->driverForClient('some-login');
+        $directDriverFactory->driverForClient('some-login', self::class);
     }
 
 }

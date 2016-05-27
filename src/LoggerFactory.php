@@ -34,11 +34,22 @@ class LoggerFactory
     }
 
     /**
+     * @param string $toolName Строковый код инструмента использующего драйвер
      * @return LoggerInterface
      */
-    public function create()
+    public function create($toolName)
     {
-        return new Logger('DirectApiV5', $this->handlers, $this->processors);
+        \Assert\that($toolName)->notEmpty();
+
+        $processors = $this->processors;
+
+        $processors[] = function (array $record) use ($toolName) {
+            $record['extra']['clientToolName'] = $toolName;
+
+            return $record;
+        };
+
+        return new Logger('DirectApiV5', $this->handlers, $processors);
     }
 
     private function createConsoleProcessor()
