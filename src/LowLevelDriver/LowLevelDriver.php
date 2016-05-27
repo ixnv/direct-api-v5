@@ -81,7 +81,9 @@ abstract class LowLevelDriver
 
                 $unitsContext = $this->createUnitsContext($directResponse);
 
-                //TODO Посмотреть, как это инфу получить из Guzzle
+                /* Данный способ измерения времени крайне ненадежный
+                 * в случае выполнения нескольких запросов в параллели,
+                 * но лучше варианта не нашел */
                 $responseContext['tookInMs'] = (int)(($endTime - $startTime) * 1000);
 
                 $this->logger->info(
