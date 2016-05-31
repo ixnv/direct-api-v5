@@ -12,9 +12,9 @@ class CheckCampaignsResponse
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Changes\CampaignChangesItem")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\Changes\CampaignChangesItem>")
      *
-     * @var CampaignChangesItem $Campaigns
+     * @var CampaignChangesItem[] $Campaigns
      */
     private $Campaigns;
 
@@ -26,17 +26,17 @@ class CheckCampaignsResponse
     private $Timestamp;
 
     /**
-     * @param CampaignChangesItem $Campaigns
+     * @param CampaignChangesItem[] $Campaigns
      * @param string $Timestamp
      */
-    public function __construct(CampaignChangesItem $Campaigns = null, $Timestamp = null)
+    public function __construct(array $Campaigns = null, $Timestamp = null)
     {
       $this->Campaigns = $Campaigns;
       $this->Timestamp = $Timestamp;
     }
 
     /**
-     * @return CampaignChangesItem
+     * @return CampaignChangesItem[]
      */
     public function getCampaigns()
     {
@@ -44,10 +44,10 @@ class CheckCampaignsResponse
     }
 
     /**
-     * @param CampaignChangesItem $Campaigns
+     * @param CampaignChangesItem[] $Campaigns
      * @return \eLama\DirectApiV5\Dto\Changes\CheckCampaignsResponse
      */
-    public function setCampaigns(CampaignChangesItem $Campaigns)
+    public function setCampaigns(array $Campaigns)
     {
       $this->Campaigns = $Campaigns;
       return $this;

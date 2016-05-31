@@ -4,7 +4,6 @@ namespace eLama\DirectApiV5\Dto\Changes;
 
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
@@ -12,23 +11,23 @@ class CheckResponse
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Changes\CheckResponseModified")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\Changes\CheckResponseModified>")
      *
-     * @var CheckResponseModified $Modified
+     * @var CheckResponseModified[] $Modified
      */
     private $Modified;
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Changes\CheckResponseIds")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\Changes\CheckResponseIds>")
      *
-     * @var CheckResponseIds $NotFound
+     * @var CheckResponseIds[] $NotFound
      */
     private $NotFound;
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Changes\CheckResponseIds")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\Changes\CheckResponseIds>")
      *
-     * @var CheckResponseIds $Unprocessed
+     * @var CheckResponseIds[] $Unprocessed
      */
     private $Unprocessed;
 
@@ -40,71 +39,78 @@ class CheckResponse
     private $Timestamp;
 
     /**
-     * @param CheckResponseModified $Modified
-     * @param CheckResponseIds $NotFound
-     * @param CheckResponseIds $Unprocessed
+     * @param CheckResponseModified[] $Modified
+     * @param CheckResponseIds[] $NotFound
+     * @param CheckResponseIds[] $Unprocessed
      * @param string $Timestamp
      */
-    public function __construct(CheckResponseModified $Modified = null, CheckResponseIds $NotFound = null, CheckResponseIds $Unprocessed = null, $Timestamp = null)
-    {
-      $this->Modified = $Modified;
-      $this->NotFound = $NotFound;
-      $this->Unprocessed = $Unprocessed;
-      $this->Timestamp = $Timestamp;
+    public function __construct(
+        array $Modified = null,
+        array $NotFound = null,
+        array $Unprocessed = null,
+        $Timestamp = null
+    ) {
+        $this->Modified = $Modified;
+        $this->NotFound = $NotFound;
+        $this->Unprocessed = $Unprocessed;
+        $this->Timestamp = $Timestamp;
     }
 
     /**
-     * @return CheckResponseModified
+     * @return CheckResponseModified[]
      */
     public function getModified()
     {
-      return $this->Modified;
+        return $this->Modified;
     }
 
     /**
-     * @param CheckResponseModified $Modified
+     * @param CheckResponseModified[] $Modified
      * @return \eLama\DirectApiV5\Dto\Changes\CheckResponse
      */
-    public function setModified(CheckResponseModified $Modified)
+    public function setModified(array $Modified)
     {
-      $this->Modified = $Modified;
-      return $this;
+        $this->Modified = $Modified;
+
+        return $this;
     }
 
     /**
-     * @return CheckResponseIds
+     * @return CheckResponseIds[]
      */
     public function getNotFound()
     {
-      return $this->NotFound;
+        return $this->NotFound;
     }
 
     /**
-     * @param CheckResponseIds $NotFound
+     * @param CheckResponseIds[] $NotFound
      * @return \eLama\DirectApiV5\Dto\Changes\CheckResponse
      */
-    public function setNotFound(CheckResponseIds $NotFound)
+    public function setNotFound(array $NotFound)
     {
-      $this->NotFound = $NotFound;
-      return $this;
+        $this->NotFound = $NotFound;
+
+        return $this;
     }
 
     /**
-     * @return CheckResponseIds
+     * @return CheckResponseIds[]
      */
     public function getUnprocessed()
     {
-      return $this->Unprocessed;
+        return $this->Unprocessed;
     }
 
     /**
-     * @param CheckResponseIds $Unprocessed
+     * @param CheckResponseIds[] $Unprocessed
      * @return \eLama\DirectApiV5\Dto\Changes\CheckResponse
      */
-    public function setUnprocessed(CheckResponseIds $Unprocessed)
+    public function setUnprocessed(array $Unprocessed)
     {
-      $this->Unprocessed = $Unprocessed;
-      return $this;
+        $this->Unprocessed = $Unprocessed;
+
+        return $this;
     }
 
     /**
@@ -112,7 +118,7 @@ class CheckResponse
      */
     public function getTimestamp()
     {
-      return $this->Timestamp;
+        return $this->Timestamp;
     }
 
     /**
@@ -121,8 +127,9 @@ class CheckResponse
      */
     public function setTimestamp($Timestamp)
     {
-      $this->Timestamp = $Timestamp;
-      return $this;
+        $this->Timestamp = $Timestamp;
+
+        return $this;
     }
 
 }
