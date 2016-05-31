@@ -8,6 +8,7 @@ use eLama\DirectApiV5\Response;
 use eLama\DirectApiV5\Serializer\ArraySerializer;
 use eLama\DirectApiV5\Test\Integration\GeneralTest;
 use GuzzleHttp\Client;
+use Phake;
 use PHPUnit_Framework_TestCase;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -74,13 +75,34 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
+     */
+    public function execute_DirectErrorHappens_ToggsThatErrorAsError()
+    {
+        $logger = Phake::mock(LoggerInterface::class);
+        $lowLevelDriver = LowLevelDriver::createAdapterForClient(new Client(), $logger, LowLevelDriver::URL_SANDBOX);
+
+        $lowLevelDriver->execute($this->createRequest('invalid token'), $this->serializer)->wait();
+
+        Phake::verify($logger)->warning(
+            typeOf('string'),
+            allOf(
+                hasKeyValuePair('response_error_code', typeOf('integer')),
+                hasKeyValuePair('response_error_string', typeOf('string')),
+                hasKeyValuePair('response_error_detail', typeOf('string')),
+                hasKeyValuePair('response_error_request_id', typeOf('string'))
+            )
+        );
+    }
+
+    /**
      * @param $token
      * @return Request
      */
-    private function createRequest()
+    private function createRequest($token = GeneralTest::TOKEN)
     {
         return new Request(
-            GeneralTest::TOKEN,
+            $token,
             'campaigns',
             'get',
             [],

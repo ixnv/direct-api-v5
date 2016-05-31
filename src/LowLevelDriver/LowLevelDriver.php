@@ -63,6 +63,11 @@ abstract class LowLevelDriver
                 $contents = $response->getBody()->getContents();
                 $endTime = microtime(true);
 
+                $errorContext = [];
+                if ($this->isErrorResponse($contents)) {
+                    $errorContext = $this->createErrorContext($contents);
+                }
+
                 $deserializedBody = $serializer->deserialize($contents);
 
                 $directResponse = new Response(
@@ -72,7 +77,7 @@ abstract class LowLevelDriver
                     $this->parseUnitsHeader($response)
                 );
 
-                $request = $this->createLogContext($uniqId, $request, $requestBodyInJson);
+                $requestContext = $this->createLogContext($uniqId, $request, $requestBodyInJson);
                 $responseContext = [
                     'response_requestId' => $directResponse->getRequestId(),
                     'response_date' => $directResponse->getDate(),
@@ -86,10 +91,18 @@ abstract class LowLevelDriver
                  * но лучше варианта не нашел */
                 $responseContext['tookInMs'] = (int)(($endTime - $startTime) * 1000);
 
-                $this->logger->info(
-                    'Received response',
-                    array_merge($request, $responseContext, $unitsContext)
-                );
+                $context = array_merge($requestContext, $responseContext, $unitsContext, $errorContext);
+                if (count($errorContext) !== 0) {
+                    $this->logger->warning(
+                        'Received error response',
+                        $context
+                    );
+                } else {
+                    $this->logger->info(
+                        'Received response',
+                        $context
+                    );
+                }
 
                 return $directResponse;
             });
@@ -191,5 +204,29 @@ abstract class LowLevelDriver
             'response_units_dailyLimit' => $unitsInfo->getDailyLimit(),
             'response_units_percentLeft' => round($unitsInfo->getLeft()/$unitsInfo->getDailyLimit() * 100, 1)
         ];
+    }
+
+    private function isErrorResponse($contents)
+    {
+        return strpos($contents, '"error"') !== false && strpos($contents, '"error_code"') !== false;
+    }
+
+    /**
+     * @param $requestBodyInJson
+     * @return array
+     */
+    private function createErrorContext($requestBodyInJson)
+    {
+        $errorContext = [];
+        $decodedResponse = json_decode($requestBodyInJson, true);
+        foreach ($decodedResponse['error'] as $key => $value) {
+            if ($key === 'error_code') {
+                $value = (int)$value;
+            }
+            $key = preg_replace('/^error_/', '', $key);
+            $errorContext['response_error_' . $key] = $value;
+        }
+
+        return $errorContext;
     }
 }
