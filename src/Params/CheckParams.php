@@ -2,14 +2,14 @@
 
 namespace eLama\DirectApiV5\Params;
 
+use eLama\DirectApiV5\Dto\Changes\CheckOperationResponse;
 use eLama\DirectApiV5\Dto\Changes\CheckRequest;
-use eLama\DirectApiV5\Dto\Changes\CheckResponse;
 
 class CheckParams extends Params
 {
     /** @var  CheckRequest */
     private $request;
-    
+
     public function __construct(CheckRequest $request)
     {
         $this->request = $request;
@@ -28,7 +28,7 @@ class CheckParams extends Params
      */
     public function resultClass()
     {
-        return CheckResponse::class;
+        return CheckOperationResponse::class;
     }
 
     /**

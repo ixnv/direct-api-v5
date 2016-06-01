@@ -11,23 +11,23 @@ class CheckResponse
 {
 
     /**
-     * @JMS\Type("array<eLama\DirectApiV5\Dto\Changes\CheckResponseModified>")
+     * @JMS\Type("eLama\DirectApiV5\Dto\Changes\CheckResponseModified")
      *
-     * @var CheckResponseModified[] $Modified
+     * @var CheckResponseModified $Modified
      */
     private $Modified;
 
     /**
-     * @JMS\Type("array<eLama\DirectApiV5\Dto\Changes\CheckResponseIds>")
+     * @JMS\Type("Lama\DirectApiV5\Dto\Changes\CheckResponseIds")
      *
-     * @var CheckResponseIds[] $NotFound
+     * @var CheckResponseIds $NotFound
      */
     private $NotFound;
 
     /**
-     * @JMS\Type("array<eLama\DirectApiV5\Dto\Changes\CheckResponseIds>")
+     * @JMS\Type("eLama\DirectApiV5\Dto\Changes\CheckResponseIds")
      *
-     * @var CheckResponseIds[] $Unprocessed
+     * @var CheckResponseIds $Unprocessed
      */
     private $Unprocessed;
 
@@ -39,15 +39,15 @@ class CheckResponse
     private $Timestamp;
 
     /**
-     * @param CheckResponseModified[] $Modified
-     * @param CheckResponseIds[] $NotFound
-     * @param CheckResponseIds[] $Unprocessed
+     * @param CheckResponseModified $Modified
+     * @param CheckResponseIds $NotFound
+     * @param CheckResponseIds $Unprocessed
      * @param string $Timestamp
      */
     public function __construct(
-        array $Modified = null,
-        array $NotFound = null,
-        array $Unprocessed = null,
+        CheckResponseModified $Modified = null,
+        CheckResponseIds $NotFound = null,
+        CheckResponseIds $Unprocessed = null,
         $Timestamp = null
     ) {
         $this->Modified = $Modified;
@@ -57,7 +57,7 @@ class CheckResponse
     }
 
     /**
-     * @return CheckResponseModified[]
+     * @return CheckResponseModified
      */
     public function getModified()
     {
@@ -65,10 +65,10 @@ class CheckResponse
     }
 
     /**
-     * @param CheckResponseModified[] $Modified
+     * @param CheckResponseModified $Modified
      * @return \eLama\DirectApiV5\Dto\Changes\CheckResponse
      */
-    public function setModified(array $Modified)
+    public function setModified(CheckResponseModified $Modified)
     {
         $this->Modified = $Modified;
 
@@ -76,7 +76,7 @@ class CheckResponse
     }
 
     /**
-     * @return CheckResponseIds[]
+     * @return CheckResponseIds
      */
     public function getNotFound()
     {
@@ -84,10 +84,10 @@ class CheckResponse
     }
 
     /**
-     * @param CheckResponseIds[] $NotFound
+     * @param CheckResponseIds $NotFound
      * @return \eLama\DirectApiV5\Dto\Changes\CheckResponse
      */
-    public function setNotFound(array $NotFound)
+    public function setNotFound(CheckResponseIds $NotFound)
     {
         $this->NotFound = $NotFound;
 
@@ -95,7 +95,7 @@ class CheckResponse
     }
 
     /**
-     * @return CheckResponseIds[]
+     * @return CheckResponseIds
      */
     public function getUnprocessed()
     {
@@ -103,10 +103,10 @@ class CheckResponse
     }
 
     /**
-     * @param CheckResponseIds[] $Unprocessed
+     * @param CheckResponseIds $Unprocessed
      * @return \eLama\DirectApiV5\Dto\Changes\CheckResponse
      */
-    public function setUnprocessed(array $Unprocessed)
+    public function setUnprocessed(CheckResponseIds $Unprocessed)
     {
         $this->Unprocessed = $Unprocessed;
 

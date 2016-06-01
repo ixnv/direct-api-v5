@@ -12,21 +12,21 @@ class CheckRequest
 {
 
     /**
-     * @JMS\Type("integer")
+     * @JMS\Type("array<integer>")
      *
      * @var int $CampaignIds
      */
     private $CampaignIds;
 
     /**
-     * @JMS\Type("integer")
+     * @JMS\Type("array<integer>")
      *
      * @var int $AdGroupIds
      */
     private $AdGroupIds;
 
     /**
-     * @JMS\Type("integer")
+     * @JMS\Type("array<integer>")
      *
      * @var int $AdIds
      */
@@ -40,7 +40,7 @@ class CheckRequest
     private $Timestamp;
 
     /**
-     * @JMS\Type("string")
+     * @JMS\Type("array<string>")
      *
      * @var CheckFieldEnum $FieldNames
      */
@@ -59,7 +59,13 @@ class CheckRequest
       $this->AdGroupIds = $AdGroupIds;
       $this->AdIds = $AdIds;
       $this->Timestamp = $Timestamp;
-      $this->FieldNames = $FieldNames;
+      $this->FieldNames = $FieldNames ?:
+          [
+              CheckFieldEnum::CampaignIds,
+              CheckFieldEnum::CampaignsStat,
+              CheckFieldEnum::AdGroupIds,
+              CheckFieldEnum::AdIds
+          ];
     }
 
     /**
