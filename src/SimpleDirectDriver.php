@@ -28,16 +28,7 @@ use Psr\Log\LoggerInterface;
 
 class SimpleDirectDriver
 {
-    /** @var string */
-    private $login;
-
-    /** @var string */
-    private $token;
-
-    /** @var Serializer */
-    private $serializer;
-
-    /** @var LowLevelDriver  */
+    /** @var DtoAwareDirectDriver  */
     private $driver;
     /**
      * @var null
@@ -57,10 +48,8 @@ class SimpleDirectDriver
         $login,
         $pageLimit = null
     ) {
-        $this->serializer = $jmsSerializer;
-        $this->login = $login;
-        $this->token = $token;
-        $this->driver = LowLevelDriver::createAdapterForClient($client, $logger, $baseUrl);
+        $lowLevelDriver = LowLevelDriver::createAdapterForClient($client, $logger, $baseUrl);
+        $this->driver = new DtoAwareDirectDriver($jmsSerializer, $lowLevelDriver, $token, $login);
         $this->pageLimit = $pageLimit;
     }
 
@@ -94,7 +83,7 @@ class SimpleDirectDriver
 
         $getCampaignsRequest = new GetCampaignsParams($criteria);
 
-        return $this->call($getCampaignsRequest)
+        return $this->driver->call($getCampaignsRequest)
             ->then(function (Response $response) {
                 return $response->getUnserializedBody()->getResult()->getCampaigns()[0];
             });
@@ -164,30 +153,6 @@ class SimpleDirectDriver
         return $this->callGetCollectingItems($getAdsParams);
     }
 
-    private function call(Params $request)
-    {
-        $directRequest = new Request(
-            $this->token,
-            $request->resource(),
-            $request->method(),
-            $request->params(),
-            $this->login
-        );
-
-        $serializer = new JmsSerializer($this->serializer, $request->resultClass());
-
-        return $this->driver
-            ->execute($directRequest, $serializer)
-            ->then(function (Response $response) use ($directRequest) {
-                /** @var Campaign\GetOperationResponse $result */
-                $result = $response->getUnserializedBody();
-                if ($result->getError()) {
-                    ErrorException::throwFromError($result->getError(), $directRequest, $response);
-                }
-
-                return $response;
-            });
-    }
 
     private function callGet(GetParams $params)
     {
@@ -195,7 +160,7 @@ class SimpleDirectDriver
             $params->setLimit($this->pageLimit);
         }
 
-        return $this->call($params)
+        return $this->driver->call($params)
             ->then(function (Response $response) use ($params) {
                 /** @var GetResultGeneral $result */
                 $result = $response->getUnserializedBody()->getResult();

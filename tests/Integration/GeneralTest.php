@@ -215,7 +215,7 @@ class GeneralTest extends PHPUnit_Framework_TestCase
         };
 
         $factory = new SimpleDirectDriverFactory($serializer, $client, new LoggerFactory([]), $tokenResolver, LowLevelDriver::URL_SANDBOX);
-
+        
         return $factory->driverForClient(self::LOGIN, self::class);
     }
 
