@@ -3,6 +3,7 @@
 namespace eLama\DirectApiV5\Test\Integration;
 
 use eLama\DirectApiV5\Dto\Ad\AdGetItem;
+use eLama\DirectApiV5\Dto\AdGroup\AdGroupGetItem;
 use eLama\DirectApiV5\Dto\Keyword\KeywordGetItem;
 use eLama\DirectApiV5\LoggerFactory;
 use eLama\DirectApiV5\SimpleDirectDriver;
@@ -101,6 +102,22 @@ class GeneralTest extends PHPUnit_Framework_TestCase
             $ads,
             both(arrayWithSize(greaterThan(0)))
                 ->andAlso(everyItem(anInstanceOf(AdGetItem::class)))
+        );
+    }
+
+    /**
+     * @test
+     * @depends canGetNonArchivedCampaigns
+     */
+    public function canGetAllTextAdGroups()
+    {
+        /** @var AdGetItem[] $ads */
+        $ads = $this->createDriver()->getAllTextAdGroups(self::$existingCampaigns)->wait();
+
+        assertThat(
+            $ads,
+            both(arrayWithSize(greaterThan(0)))
+                ->andAlso(everyItem(anInstanceOf(AdGroupGetItem::class)))
         );
     }
 

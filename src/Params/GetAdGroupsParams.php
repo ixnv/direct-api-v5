@@ -8,7 +8,7 @@ use eLama\DirectApiV5\Dto\AdGroup\AdGroupsSelectionCriteria;
 use eLama\DirectApiV5\Dto\AdGroup\GetOperationResponse;
 use eLama\DirectApiV5\Dto\AdGroup\GetRequest;
 
-class GetAdGroupsRequest extends GetParams
+class GetAdGroupsParams extends GetParams
 {
     /** @var GetRequest */
     protected $request;

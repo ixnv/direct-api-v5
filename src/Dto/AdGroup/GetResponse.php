@@ -2,13 +2,13 @@
 
 namespace eLama\DirectApiV5\Dto\AdGroup;
 
-use eLama\DirectApiV5\Dto\General\GetResponseGeneral;
+use eLama\DirectApiV5\Dto\General\GetResultGeneral;
 use JMS\Serializer\Annotation as JMS;
 
 /**
  * @JMS\AccessType("public_method")
  */
-class GetResponse extends GetResponseGeneral
+class GetResponse extends GetResultGeneral
 {
 
     /**
@@ -35,7 +35,7 @@ class GetResponse extends GetResponseGeneral
      */
     public function getAdGroups()
     {
-      return $this->AdGroups;
+      return $this->AdGroups ?: [];
     }
 
     /**
@@ -46,5 +46,13 @@ class GetResponse extends GetResponseGeneral
     {
       $this->AdGroups = $AdGroups;
       return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getItems()
+    {
+        return $this->getAdGroups();
     }
 }

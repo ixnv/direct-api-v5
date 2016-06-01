@@ -4,6 +4,7 @@ namespace eLama\DirectApiV5;
 
 use eLama\DirectApiV5\Dto;
 use eLama\DirectApiV5\Dto\Ad;
+use eLama\DirectApiV5\Dto\AdGroup\AdGroupTypesEnum;
 use eLama\DirectApiV5\Dto\Campaign;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Campaign\CampaignStateEnum;
@@ -13,6 +14,7 @@ use eLama\DirectApiV5\Dto\General\StateEnum;
 use eLama\DirectApiV5\Dto\Keyword;
 use eLama\DirectApiV5\Dto\Keyword\KeywordStateEnum;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
+use eLama\DirectApiV5\Params\GetAdGroupsParams;
 use eLama\DirectApiV5\Params\GetAdsParams;
 use eLama\DirectApiV5\Params\GetCampaignsParams;
 use eLama\DirectApiV5\Params\GetKeywordsParams;
@@ -116,6 +118,27 @@ class SimpleDirectDriver
         $criteria->setTypes([Ad\AdTypeEnum::TEXT_AD]);
 
         $getAdsParams = new GetAdsParams($criteria);
+
+        return $this->callGetCollectingItems($getAdsParams);
+    }
+
+    /**
+     * Получить незаархивированные текстовые объявления
+     *
+     * @param int[] $campaignIds
+     * @return PromiseInterface
+     * @see \eLama\DirectApiV5\Dto\Ad\AdGetItem
+     */
+    public function getAllTextAdGroups(array $campaignIds)
+    {
+        //Проблема API - не удается получить все объявления не передавая ID кампании
+        \Assert\that($campaignIds)->notEmpty()->all()->min(1);
+
+        $criteria = new Dto\AdGroup\AdGroupsSelectionCriteria();
+        $criteria->setCampaignIds($campaignIds);
+        $criteria->setTypes([AdGroupTypesEnum::TEXT_AD_GROUP]);
+
+        $getAdsParams = new GetAdGroupsParams($criteria);
 
         return $this->callGetCollectingItems($getAdsParams);
     }
