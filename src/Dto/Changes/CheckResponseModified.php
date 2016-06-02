@@ -44,7 +44,7 @@ class CheckResponseModified
      */
     public function getCampaignIds()
     {
-      return $this->CampaignIds;
+      return $this->CampaignIds ?: [];
     }
 
     /**
@@ -62,7 +62,7 @@ class CheckResponseModified
      */
     public function getAdGroupIds()
     {
-      return $this->AdGroupIds;
+      return $this->AdGroupIds ?: [];
     }
 
     /**
@@ -80,7 +80,7 @@ class CheckResponseModified
      */
     public function getAdIds()
     {
-      return $this->AdIds;
+      return $this->AdIds ?: [];
     }
 
     /**
@@ -98,7 +98,7 @@ class CheckResponseModified
      */
     public function getCampaignsStat()
     {
-      return $this->CampaignsStat;
+      return $this->CampaignsStat ?: [];
     }
 
     /**

@@ -80,7 +80,7 @@ class CheckResponse
      */
     public function getNotFound()
     {
-        return $this->NotFound;
+        return $this->NotFound ?: CheckResponseIds::createEmpty();
     }
 
     /**

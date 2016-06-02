@@ -16,21 +16,26 @@ class CheckResponseIds
      *
      * @var int[] $CampaignIds
      */
-    private $CampaignIds;
+    private $CampaignIds = [];
 
     /**
      * @JMS\Type("array<integer>")
      *
      * @var int[] $AdGroupIds
      */
-    private $AdGroupIds;
+    private $AdGroupIds = [];
 
     /**
      * @JMS\Type("array<integer>")
      *
      * @var int[] $AdIds
      */
-    private $AdIds;
+    private $AdIds = [];
+
+    public static function createEmpty()
+    {
+        return new self();
+    }
 
     /**
      * @return int[]

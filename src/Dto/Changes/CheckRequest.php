@@ -131,13 +131,17 @@ class CheckRequest
     }
 
     /**
-     * @param string $Timestamp
+     * @param string|\DateTimeImmutable $Timestamp
      * @return \eLama\DirectApiV5\Dto\Changes\CheckRequest
      */
     public function setTimestamp($Timestamp)
     {
-      $this->Timestamp = $Timestamp;
-      return $this;
+        if ($Timestamp instanceof \DateTimeImmutable) {
+            $Timestamp = $Timestamp->setTimezone(new \DateTimeZone('UTC'))->format('Y-m-d\TH:i:s\Z');
+        }
+        
+        $this->Timestamp = $Timestamp;
+        return $this;
     }
 
     /**
