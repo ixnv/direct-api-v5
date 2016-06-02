@@ -60,7 +60,7 @@ class CheckResponseIds
      */
     public function getAdGroupIds()
     {
-      return $this->AdGroupIds;
+      return $this->AdGroupIds ?: [];
     }
 
     /**
@@ -78,7 +78,7 @@ class CheckResponseIds
      */
     public function getAdIds()
     {
-      return $this->AdIds;
+      return $this->AdIds ?: [];
     }
 
     /**
