@@ -48,6 +48,10 @@ class DtoAwareDirectDriver
         $this->driver = $driver;
     }
 
+    /**
+     * @param Params $request
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
     public function call(Params $request)
     {
         $directRequest = new Request(
@@ -73,6 +77,10 @@ class DtoAwareDirectDriver
             });
     }
 
+    /**
+     * @param GetParams $request
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
     public function callGetCollectingItems(GetParams $params)
     {
         return $this->callGet($params)
