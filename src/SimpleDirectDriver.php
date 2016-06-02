@@ -153,47 +153,12 @@ class SimpleDirectDriver
         return $this->callGetCollectingItems($getAdsParams);
     }
 
-
-    private function callGet(GetParams $params)
+    private function callGetCollectingItems(GetParams $params)
     {
         if ($this->pageLimit) {
             $params->setLimit($this->pageLimit);
         }
 
-        return $this->driver->call($params)
-            ->then(function (Response $response) use ($params) {
-                /** @var GetResultGeneral $result */
-                $result = $response->getUnserializedBody()->getResult();
-
-                if ($result->getLimitedBy()) {
-                    return $this->callGet($params->paramsForNextPage($result))
-                        ->then(function (array $responses) use ($response) {
-                            /** @var Response[] $responses */
-                            array_unshift($responses, $response);
-
-                            return $responses;
-                        });
-                } else {
-                    return [$response];
-                }
-            });
-    }
-
-    private function callGetCollectingItems(GetParams $params)
-    {
-        return $this->callGet($params)
-            ->then(function (array $responses) {
-                /** @var Response[] $responses */
-                $return = [];
-                foreach ($responses as $response) {
-                    /** @var GetResultGeneral $result */
-                    $result = $response->getUnserializedBody()->getResult();
-                    foreach ($result->getItems() as $item) {
-                        $return[] = $item;
-                    }
-                }
-
-                return $return;
-            });
+        return $this->driver->callGetCollectingItems($params);
     }
 }

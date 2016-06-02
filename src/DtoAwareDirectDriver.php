@@ -6,9 +6,11 @@ namespace eLama\DirectApiV5;
 use eLama\DirectApiV5\Dto;
 use eLama\DirectApiV5\Dto\Ad;
 use eLama\DirectApiV5\Dto\Campaign;
+use eLama\DirectApiV5\Dto\General\GetResultGeneral;
 use eLama\DirectApiV5\Dto\General\OperationResponse;
 use eLama\DirectApiV5\Dto\Keyword;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
+use eLama\DirectApiV5\Params\GetParams;
 use eLama\DirectApiV5\Params\Params;
 use eLama\DirectApiV5\Serializer\JmsSerializer;
 use JMS\Serializer\Serializer;
@@ -68,6 +70,49 @@ class DtoAwareDirectDriver
                 }
 
                 return $response;
+            });
+    }
+
+    public function callGetCollectingItems(GetParams $params)
+    {
+        return $this->callGet($params)
+            ->then(function (array $responses) {
+                /** @var Response[] $responses */
+                $return = [];
+                foreach ($responses as $response) {
+                    /** @var GetResultGeneral $result */
+                    $result = $response->getUnserializedBody()->getResult();
+                    foreach ($result->getItems() as $item) {
+                        $return[] = $item;
+                    }
+                }
+
+                return $return;
+            });
+    }
+
+    /**
+     * @param GetParams $params
+     * @return mixed
+     */
+    private function callGet(GetParams $params)
+    {
+        return $this->call($params)
+            ->then(function (Response $response) use ($params) {
+                /** @var GetResultGeneral $result */
+                $result = $response->getUnserializedBody()->getResult();
+
+                if ($result->getLimitedBy()) {
+                    return $this->callGet($params->paramsForNextPage($result))
+                        ->then(function (array $responses) use ($response) {
+                            /** @var Response[] $responses */
+                            array_unshift($responses, $response);
+
+                            return $responses;
+                        });
+                } else {
+                    return [$response];
+                }
             });
     }
 
