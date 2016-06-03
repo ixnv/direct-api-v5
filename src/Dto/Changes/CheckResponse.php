@@ -18,7 +18,7 @@ class CheckResponse
     private $Modified;
 
     /**
-     * @JMS\Type("Lama\DirectApiV5\Dto\Changes\CheckResponseIds")
+     * @JMS\Type("eLama\DirectApiV5\Dto\Changes\CheckResponseIds")
      *
      * @var CheckResponseIds $NotFound
      */
