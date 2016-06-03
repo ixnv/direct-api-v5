@@ -4,7 +4,6 @@ namespace eLama\DirectApiV5\Dto\Changes;
 
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
@@ -55,17 +54,17 @@ class CheckRequest
      */
     public function __construct($CampaignIds = null, $AdGroupIds = null, $AdIds = null, $Timestamp = null, $FieldNames = null)
     {
-      $this->CampaignIds = $CampaignIds;
-      $this->AdGroupIds = $AdGroupIds;
-      $this->AdIds = $AdIds;
-      $this->Timestamp = $Timestamp;
-      $this->FieldNames = $FieldNames ?:
-          [
-              CheckFieldEnum::CampaignIds,
-              CheckFieldEnum::CampaignsStat,
-              CheckFieldEnum::AdGroupIds,
-              CheckFieldEnum::AdIds
-          ];
+        $this->CampaignIds = $CampaignIds;
+        $this->AdGroupIds = $AdGroupIds;
+        $this->AdIds = $AdIds;
+        $this->setTimestamp($Timestamp);
+        $this->FieldNames = $FieldNames ?:
+            [
+                CheckFieldEnum::CampaignIds,
+                CheckFieldEnum::CampaignsStat,
+                CheckFieldEnum::AdGroupIds,
+                CheckFieldEnum::AdIds
+            ];
     }
 
     /**
@@ -139,7 +138,7 @@ class CheckRequest
         if ($Timestamp instanceof \DateTimeImmutable) {
             $Timestamp = $Timestamp->setTimezone(new \DateTimeZone('UTC'))->format('Y-m-d\TH:i:s\Z');
         }
-        
+
         $this->Timestamp = $Timestamp;
         return $this;
     }
