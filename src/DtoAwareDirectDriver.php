@@ -10,8 +10,8 @@ use eLama\DirectApiV5\Dto\General\GetResultGeneral;
 use eLama\DirectApiV5\Dto\General\OperationResponse;
 use eLama\DirectApiV5\Dto\Keyword;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
-use eLama\DirectApiV5\Params\GetParams;
-use eLama\DirectApiV5\Params\Params;
+use eLama\DirectApiV5\RequestBody\GetRequestBody;
+use eLama\DirectApiV5\RequestBody\RequestBody;
 use eLama\DirectApiV5\Serializer\JmsSerializer;
 use JMS\Serializer\Serializer;
 
@@ -49,10 +49,10 @@ class DtoAwareDirectDriver
     }
 
     /**
-     * @param Params $request
+     * @param RequestBody $request
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function call(Params $request)
+    public function call(RequestBody $request)
     {
         $directRequest = new Request(
             $this->token,
@@ -78,10 +78,10 @@ class DtoAwareDirectDriver
     }
 
     /**
-     * @param GetParams $request
+     * @param GetRequestBody $request
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function callGetCollectingItems(GetParams $params)
+    public function callGetCollectingItems(GetRequestBody $params)
     {
         return $this->callGet($params)
             ->then(function (array $responses) {
@@ -100,10 +100,10 @@ class DtoAwareDirectDriver
     }
 
     /**
-     * @param GetParams $params
+     * @param GetRequestBody $params
      * @return mixed
      */
-    private function callGet(GetParams $params)
+    private function callGet(GetRequestBody $params)
     {
         return $this->call($params)
             ->then(function (Response $response) use ($params) {

@@ -14,12 +14,12 @@ use eLama\DirectApiV5\Dto\General\StateEnum;
 use eLama\DirectApiV5\Dto\Keyword;
 use eLama\DirectApiV5\Dto\Keyword\KeywordStateEnum;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
-use eLama\DirectApiV5\Params\GetAdGroupsParams;
-use eLama\DirectApiV5\Params\GetAdsParams;
-use eLama\DirectApiV5\Params\GetCampaignsParams;
-use eLama\DirectApiV5\Params\GetKeywordsParams;
-use eLama\DirectApiV5\Params\GetParams;
-use eLama\DirectApiV5\Params\Params;
+use eLama\DirectApiV5\RequestBody\GetAdGroupsRequestBody;
+use eLama\DirectApiV5\RequestBody\GetAdsRequestBody;
+use eLama\DirectApiV5\RequestBody\GetCampaignsRequestBody;
+use eLama\DirectApiV5\RequestBody\GetKeywordsRequestBody;
+use eLama\DirectApiV5\RequestBody\GetRequestBody;
+use eLama\DirectApiV5\RequestBody\RequestBody;
 use eLama\DirectApiV5\Serializer\JmsSerializer;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise\PromiseInterface;
@@ -66,7 +66,7 @@ class SimpleDirectDriver
         );
         $criteria->setTypes([CampaignTypeEnum::TEXT_CAMPAIGN]);
 
-        $getCampaignsRequest = new GetCampaignsParams($criteria);
+        $getCampaignsRequest = new GetCampaignsRequestBody($criteria);
 
         return $this->callGetCollectingItems($getCampaignsRequest);
     }
@@ -81,7 +81,7 @@ class SimpleDirectDriver
         $criteria = new CampaignsSelectionCriteria();
         $criteria->setIds([$id]);
 
-        $getCampaignsRequest = new GetCampaignsParams($criteria);
+        $getCampaignsRequest = new GetCampaignsRequestBody($criteria);
 
         return $this->driver->call($getCampaignsRequest)
             ->then(function (Response $response) {
@@ -106,7 +106,7 @@ class SimpleDirectDriver
         );
         $criteria->setTypes([Ad\AdTypeEnum::TEXT_AD]);
 
-        $getAdsParams = new GetAdsParams($criteria);
+        $getAdsParams = new GetAdsRequestBody($criteria);
 
         return $this->callGetCollectingItems($getAdsParams);
     }
@@ -127,7 +127,7 @@ class SimpleDirectDriver
         $criteria->setCampaignIds($campaignIds);
         $criteria->setTypes([AdGroupTypesEnum::TEXT_AD_GROUP]);
 
-        $getAdsParams = new GetAdGroupsParams($criteria);
+        $getAdsParams = new GetAdGroupsRequestBody($criteria);
 
         return $this->callGetCollectingItems($getAdsParams);
     }
@@ -148,12 +148,12 @@ class SimpleDirectDriver
             [KeywordStateEnum::ON, KeywordStateEnum::SUSPENDED, KeywordStateEnum::OFF]
         );
 
-        $getAdsParams = new GetKeywordsParams($criteria);
+        $getAdsParams = new GetKeywordsRequestBody($criteria);
 
         return $this->callGetCollectingItems($getAdsParams);
     }
 
-    private function callGetCollectingItems(GetParams $params)
+    private function callGetCollectingItems(GetRequestBody $params)
     {
         if ($this->pageLimit) {
             $params->setLimit($this->pageLimit);

@@ -1,16 +1,17 @@
 <?php
 
-namespace eLama\DirectApiV5\Params;
+namespace eLama\DirectApiV5\RequestBody;
 
-use eLama\DirectApiV5\Dto\Changes\CheckOperationResponse;
-use eLama\DirectApiV5\Dto\Changes\CheckRequest;
+use eLama\DirectApiV5\Dto\Changes\CheckCampaignsRequest;
+use eLama\DirectApiV5\Dto\Changes\CheckCampaignsResponse;
 
-class CheckParams extends Params
+class CheckCampaignsRequestBody extends RequestBody
 {
-    /** @var  CheckRequest */
+
+    /** @var  CheckCampaignsRequest */
     private $request;
 
-    public function __construct(CheckRequest $request)
+    public function __construct(CheckCampaignsRequest $request)
     {
         $this->request = $request;
     }
@@ -28,11 +29,11 @@ class CheckParams extends Params
      */
     public function resultClass()
     {
-        return CheckOperationResponse::class;
+        return CheckCampaignsResponse::class;
     }
 
     /**
-     * @return CheckRequest
+     * @return CheckCampaignsRequest
      */
     public function params()
     {
@@ -44,6 +45,6 @@ class CheckParams extends Params
      */
     public function method()
     {
-        return 'check';
+        return 'checkCampaigns';
     }
 }

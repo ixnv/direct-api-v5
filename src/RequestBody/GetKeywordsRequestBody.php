@@ -1,7 +1,7 @@
 <?php
 
 
-namespace eLama\DirectApiV5\Params;
+namespace eLama\DirectApiV5\RequestBody;
 
 use eLama\DirectApiV5\Dto\General\LimitOffset;
 use eLama\DirectApiV5\Dto\Keyword\GetOperationResponse;
@@ -9,7 +9,7 @@ use eLama\DirectApiV5\Dto\Keyword\GetRequest;
 use eLama\DirectApiV5\Dto\Keyword\KeywordFieldEnum;
 use eLama\DirectApiV5\Dto\Keyword\KeywordsSelectionCriteria;
 
-class GetKeywordsParams extends GetParams
+class GetKeywordsRequestBody extends GetRequestBody
 {
     public function __construct(KeywordsSelectionCriteria $selectionCriteria, LimitOffset $page = null) {
         $this->request = new GetRequest(

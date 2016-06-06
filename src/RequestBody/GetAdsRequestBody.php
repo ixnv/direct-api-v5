@@ -1,7 +1,7 @@
 <?php
 
 
-namespace eLama\DirectApiV5\Params;
+namespace eLama\DirectApiV5\RequestBody;
 
 use eLama\DirectApiV5\Dto\Ad\AdFieldEnum;
 use eLama\DirectApiV5\Dto\Ad\AdsSelectionCriteria;
@@ -9,7 +9,7 @@ use eLama\DirectApiV5\Dto\Ad\GetOperationResponse;
 use eLama\DirectApiV5\Dto\Ad\GetRequest;
 use eLama\DirectApiV5\Dto\Ad\TextAdFieldEnum;
 
-class GetAdsParams extends GetParams
+class GetAdsRequestBody extends GetRequestBody
 {
 
     public function __construct(AdsSelectionCriteria $selectionCriteria) {

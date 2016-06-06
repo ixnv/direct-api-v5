@@ -1,6 +1,6 @@
 <?php
 
-namespace eLama\DirectApiV5\Params;
+namespace eLama\DirectApiV5\RequestBody;
 
 use eLama\DirectApiV5\Dto\General\GetRequestGeneral;
 use eLama\DirectApiV5\Dto\General\GetResultGeneral;
@@ -10,7 +10,7 @@ use JMS\Serializer\Annotation as JMS;
 /**
  * @JMS\AccessType("public_method")
  */
-abstract class GetParams extends Params
+abstract class GetRequestBody extends RequestBody
 {
     /** @var GetRequestGeneral */
     protected $request;
@@ -31,7 +31,7 @@ abstract class GetParams extends Params
 
     /**
      * @param \eLama\DirectApiV5\Dto\General\GetResultGeneral $getResult
-     * @return GetParams
+     * @return GetRequestBody
      */
     public function paramsForNextPage(GetResultGeneral $getResult)
     {

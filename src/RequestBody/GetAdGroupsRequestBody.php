@@ -1,14 +1,14 @@
 <?php
 
 
-namespace eLama\DirectApiV5\Params;
+namespace eLama\DirectApiV5\RequestBody;
 
 use eLama\DirectApiV5\Dto\AdGroup\AdGroupFieldEnum;
 use eLama\DirectApiV5\Dto\AdGroup\AdGroupsSelectionCriteria;
 use eLama\DirectApiV5\Dto\AdGroup\GetOperationResponse;
 use eLama\DirectApiV5\Dto\AdGroup\GetRequest;
 
-class GetAdGroupsParams extends GetParams
+class GetAdGroupsRequestBody extends GetRequestBody
 {
     /** @var GetRequest */
     protected $request;

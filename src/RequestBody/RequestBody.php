@@ -1,13 +1,13 @@
 <?php
 
-namespace eLama\DirectApiV5\Params;
+namespace eLama\DirectApiV5\RequestBody;
 
 use JMS\Serializer\Annotation as JMS;
 
 /**
  * @JMS\AccessType("public_method")
  */
-abstract class Params
+abstract class RequestBody
 {
     /**
      * @return string

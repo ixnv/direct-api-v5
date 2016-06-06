@@ -1,7 +1,7 @@
 <?php
 
 
-namespace eLama\DirectApiV5\Params;
+namespace eLama\DirectApiV5\RequestBody;
 
 use eLama\DirectApiV5\Dto\Campaign\CampaignFieldEnum;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
@@ -10,7 +10,7 @@ use eLama\DirectApiV5\Dto\Campaign\GetRequest;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignFieldEnum;
 use eLama\DirectApiV5\Dto\General\LimitOffset;
 
-class GetCampaignsParams extends GetParams
+class GetCampaignsRequestBody extends GetRequestBody
 {
     public function __construct(
         CampaignsSelectionCriteria $selectionCriteria,
