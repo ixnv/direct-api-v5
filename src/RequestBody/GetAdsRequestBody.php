@@ -5,7 +5,7 @@ namespace eLama\DirectApiV5\RequestBody;
 
 use eLama\DirectApiV5\Dto\Ad\AdFieldEnum;
 use eLama\DirectApiV5\Dto\Ad\AdsSelectionCriteria;
-use eLama\DirectApiV5\Dto\Ad\GetOperationResponse;
+use eLama\DirectApiV5\Dto\Ad\GetResponseBody;
 use eLama\DirectApiV5\Dto\Ad\GetRequest;
 use eLama\DirectApiV5\Dto\Ad\TextAdFieldEnum;
 
@@ -35,6 +35,6 @@ class GetAdsRequestBody extends GetRequestBody
 
     public function resultClass()
     {
-        return GetOperationResponse::class;
+        return GetResponseBody::class;
     }
 }

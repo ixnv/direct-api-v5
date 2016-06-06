@@ -9,7 +9,7 @@ use eLama\DirectApiV5\LoggerFactory;
 use eLama\DirectApiV5\SimpleDirectDriver;
 use eLama\DirectApiV5\SimpleDirectDriverFactory;
 use eLama\DirectApiV5\Dto\Campaign\CampaignGetItem;
-use eLama\DirectApiV5\Dto\Campaign\GetOperationResponse;
+use eLama\DirectApiV5\Dto\Campaign\GetResponseBody;
 use eLama\DirectApiV5\ErrorException;
 use eLama\DirectApiV5\JmsFactory;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
@@ -139,7 +139,7 @@ class GeneralTest extends PHPUnit_Framework_TestCase
     {
         $directDriver = $this->createDriver('invalid token');
 
-        /** @var GetOperationResponse $campaigns */
+        /** @var GetResponseBody $campaigns */
         $this->setExpectedException(ErrorException::class);
         $directDriver->getNonArchivedCampaigns()->wait();
     }

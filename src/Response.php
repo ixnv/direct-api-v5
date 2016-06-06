@@ -57,7 +57,7 @@ class Response
     }
 
     /**
-     * @return \eLama\DirectApiV5\Dto\General\OperationResponse|mixed
+     * @return \eLama\DirectApiV5\Dto\General\ResponseBody|mixed
      */
     public function getUnserializedBody()
     {

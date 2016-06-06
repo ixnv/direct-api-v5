@@ -7,7 +7,7 @@ use eLama\DirectApiV5\Dto;
 use eLama\DirectApiV5\Dto\Ad;
 use eLama\DirectApiV5\Dto\Campaign;
 use eLama\DirectApiV5\Dto\General\GetResultGeneral;
-use eLama\DirectApiV5\Dto\General\OperationResponse;
+use eLama\DirectApiV5\Dto\General\ResponseBody;
 use eLama\DirectApiV5\Dto\Keyword;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\RequestBody\GetRequestBody;
@@ -67,7 +67,7 @@ class DtoAwareDirectDriver
         return $this->driver
             ->execute($directRequest, $serializer)
             ->then(function (Response $response) use ($directRequest) {
-                /** @var OperationResponse $result */
+                /** @var ResponseBody $result */
                 $result = $response->getUnserializedBody();
                 if ($result->getError()) {
                     ErrorException::throwFromError($result->getError(), $directRequest, $response);

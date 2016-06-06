@@ -5,7 +5,7 @@ namespace eLama\DirectApiV5\RequestBody;
 
 use eLama\DirectApiV5\Dto\AdGroup\AdGroupFieldEnum;
 use eLama\DirectApiV5\Dto\AdGroup\AdGroupsSelectionCriteria;
-use eLama\DirectApiV5\Dto\AdGroup\GetOperationResponse;
+use eLama\DirectApiV5\Dto\AdGroup\GetResponseBody;
 use eLama\DirectApiV5\Dto\AdGroup\GetRequest;
 
 class GetAdGroupsRequestBody extends GetRequestBody
@@ -35,6 +35,6 @@ class GetAdGroupsRequestBody extends GetRequestBody
 
     public function resultClass()
     {
-        return GetOperationResponse::class;
+        return GetResponseBody::class;
     }
 }

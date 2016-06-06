@@ -2,7 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\Changes;
 
-use eLama\DirectApiV5\Dto\General\OperationResponse;
+use eLama\DirectApiV5\Dto\General\ResponseBody;
 
 use JMS\Serializer\Annotation as JMS;
 
@@ -10,7 +10,7 @@ use JMS\Serializer\Annotation as JMS;
  * @JMS\AccessType("property")
  * @method CheckResponse getResult()
  */
-class CheckOperationResponse extends OperationResponse
+class CheckResponseBody extends ResponseBody
 {
     /**
      * @JMS\Type("eLama\DirectApiV5\Dto\Changes\CheckResponse")

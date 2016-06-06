@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as JMS;
 /**
  * @JMS\AccessType("public_method")
  */
-abstract class OperationResponse
+abstract class ResponseBody
 {
     protected $result;
 

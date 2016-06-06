@@ -2,7 +2,7 @@
 
 namespace eLama\DirectApiV5\RequestBody;
 
-use eLama\DirectApiV5\Dto\Changes\CheckOperationResponse;
+use eLama\DirectApiV5\Dto\Changes\CheckResponseBody;
 use eLama\DirectApiV5\Dto\Changes\CheckRequest;
 
 class CheckRequestBody extends RequestBody
@@ -28,7 +28,7 @@ class CheckRequestBody extends RequestBody
      */
     public function resultClass()
     {
-        return CheckOperationResponse::class;
+        return CheckResponseBody::class;
     }
 
     /**
