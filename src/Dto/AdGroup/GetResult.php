@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as JMS;
 /**
  * @JMS\AccessType("public_method")
  */
-class GetResponse extends GetResultGeneral
+class GetResult extends GetResultGeneral
 {
 
     /**

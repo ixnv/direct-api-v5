@@ -7,7 +7,7 @@ use JMS\Serializer\Annotation as JMS;
 /**
  * @JMS\AccessType("public_method")
  */
-class CheckResponse
+class CheckResult
 {
 
     /**
@@ -66,7 +66,7 @@ class CheckResponse
 
     /**
      * @param CheckResponseModified $Modified
-     * @return \eLama\DirectApiV5\Dto\Changes\CheckResponse
+     * @return \eLama\DirectApiV5\Dto\Changes\CheckResult
      */
     public function setModified(CheckResponseModified $Modified)
     {
@@ -85,7 +85,7 @@ class CheckResponse
 
     /**
      * @param CheckResponseIds $NotFound
-     * @return \eLama\DirectApiV5\Dto\Changes\CheckResponse
+     * @return \eLama\DirectApiV5\Dto\Changes\CheckResult
      */
     public function setNotFound(CheckResponseIds $NotFound)
     {
@@ -104,7 +104,7 @@ class CheckResponse
 
     /**
      * @param CheckResponseIds $Unprocessed
-     * @return \eLama\DirectApiV5\Dto\Changes\CheckResponse
+     * @return \eLama\DirectApiV5\Dto\Changes\CheckResult
      */
     public function setUnprocessed(CheckResponseIds $Unprocessed)
     {
@@ -123,7 +123,7 @@ class CheckResponse
 
     /**
      * @param string $Timestamp
-     * @return \eLama\DirectApiV5\Dto\Changes\CheckResponse
+     * @return \eLama\DirectApiV5\Dto\Changes\CheckResult
      */
     public function setTimestamp($Timestamp)
     {

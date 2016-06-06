@@ -13,7 +13,7 @@ use JMS\Serializer\Annotation as JMS;
 class GetResponseBody extends ResponseBody
 {
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Campaign\GetResponse")
+     * @JMS\Type("eLama\DirectApiV5\Dto\Campaign\GetResult")
      *
      * @var GetResponseGeneral
      */

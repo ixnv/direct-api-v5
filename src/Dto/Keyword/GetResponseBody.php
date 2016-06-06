@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as JMS;
 class GetResponseBody extends ResponseBody
 {
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Keyword\GetResponse")
+     * @JMS\Type("eLama\DirectApiV5\Dto\Keyword\GetResult")
      *
      * @var GetResponseGeneral
      */
