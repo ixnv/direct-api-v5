@@ -14,6 +14,7 @@ abstract class LowLevelDriver
 {
     const URL_SANDBOX = 'https://api-sandbox.direct.yandex.com/json/v5';
     const URL_PRODUCTION = 'https://api.direct.yandex.com/json/v5';
+    const HEADER_CLIENT_LOGIN = 'Client-Login';
     /** @var  \GuzzleHttp\Client; */
     protected $client;
 
@@ -159,7 +160,7 @@ abstract class LowLevelDriver
         ];
 
         if ($clientLogin) {
-            $headers['Client-Login'] = $clientLogin;
+            $headers[self::HEADER_CLIENT_LOGIN] = $clientLogin;
         }
 
         return $headers;
