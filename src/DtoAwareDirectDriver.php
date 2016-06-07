@@ -51,6 +51,7 @@ class DtoAwareDirectDriver
     /**
      * @param RequestBody $request
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @see Response
      */
     public function call(RequestBody $request)
     {
