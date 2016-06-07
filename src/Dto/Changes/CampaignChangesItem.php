@@ -21,7 +21,8 @@ class CampaignChangesItem
     /**
      * @JMS\Type("array<string>")
      *
-     * @var CampaignChangesInEnum[] $ChangesIn
+     * @var string[] $ChangesIn
+     * @see CampaignChangesInEnum
      */
     private $ChangesIn;
 

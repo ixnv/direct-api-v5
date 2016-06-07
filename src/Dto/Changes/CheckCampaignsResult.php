@@ -4,11 +4,10 @@ namespace eLama\DirectApiV5\Dto\Changes;
 
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
-class CheckCampaignsResponse
+class CheckCampaignsResult
 {
 
     /**
@@ -31,8 +30,8 @@ class CheckCampaignsResponse
      */
     public function __construct(array $Campaigns = null, $Timestamp = null)
     {
-      $this->Campaigns = $Campaigns;
-      $this->Timestamp = $Timestamp;
+        $this->Campaigns = $Campaigns;
+        $this->Timestamp = $Timestamp;
     }
 
     /**
@@ -40,17 +39,18 @@ class CheckCampaignsResponse
      */
     public function getCampaigns()
     {
-      return $this->Campaigns;
+        return $this->Campaigns ?: [];
     }
 
     /**
      * @param CampaignChangesItem[] $Campaigns
-     * @return \eLama\DirectApiV5\Dto\Changes\CheckCampaignsResponse
+     * @return \eLama\DirectApiV5\Dto\Changes\CheckCampaignsResult
      */
     public function setCampaigns(array $Campaigns)
     {
-      $this->Campaigns = $Campaigns;
-      return $this;
+        $this->Campaigns = $Campaigns;
+
+        return $this;
     }
 
     /**
@@ -58,17 +58,18 @@ class CheckCampaignsResponse
      */
     public function getTimestamp()
     {
-      return $this->Timestamp;
+        return $this->Timestamp;
     }
 
     /**
      * @param string $Timestamp
-     * @return \eLama\DirectApiV5\Dto\Changes\CheckCampaignsResponse
+     * @return \eLama\DirectApiV5\Dto\Changes\CheckCampaignsResult
      */
     public function setTimestamp($Timestamp)
     {
-      $this->Timestamp = $Timestamp;
-      return $this;
+        $this->Timestamp = $Timestamp;
+
+        return $this;
     }
 
 }

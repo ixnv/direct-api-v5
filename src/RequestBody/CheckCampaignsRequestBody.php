@@ -3,7 +3,7 @@
 namespace eLama\DirectApiV5\RequestBody;
 
 use eLama\DirectApiV5\Dto\Changes\CheckCampaignsRequest;
-use eLama\DirectApiV5\Dto\Changes\CheckCampaignsResponse;
+use eLama\DirectApiV5\Dto\Changes\CheckCampaignsResponseBody;
 
 class CheckCampaignsRequestBody extends RequestBody
 {
@@ -29,7 +29,7 @@ class CheckCampaignsRequestBody extends RequestBody
      */
     public function resultClass()
     {
-        return CheckCampaignsResponse::class;
+        return CheckCampaignsResponseBody::class;
     }
 
     /**
