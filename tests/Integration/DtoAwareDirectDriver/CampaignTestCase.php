@@ -19,6 +19,7 @@ use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\Dto\General\UpdateResponseBody;
 use eLama\DirectApiV5\DtoAwareDirectDriver;
+use eLama\DirectApiV5\ErrorCode;
 use eLama\DirectApiV5\JmsFactory;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\RequestBody\AddCampaignRequestBody;
@@ -152,6 +153,12 @@ class CampaignTestCase extends \PHPUnit_Framework_TestCase
      */
     public function getDeletedCampaign($id)
     {
-        $this->markTestIncomplete('todo');
+        $request = new GetCampaignsRequestBody(
+            (new CampaignsSelectionCriteria())->setIds([$id])
+        );
+        /** @var GetResponseBody $responseBody */
+        $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
+
+        assertThat($responseBody->getResult()->getCampaigns(), emptyArray());
     }
 }
