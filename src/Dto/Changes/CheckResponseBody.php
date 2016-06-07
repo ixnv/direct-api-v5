@@ -13,7 +13,7 @@ use JMS\Serializer\Annotation as JMS;
 class CheckResponseBody extends ResponseBody
 {
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Changes\CheckResponse")
+     * @JMS\Type("eLama\DirectApiV5\Dto\Changes\CheckResult")
      *
      * @var CheckResult
      */
