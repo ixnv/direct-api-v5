@@ -112,8 +112,15 @@ class CampaignTestCase extends \PHPUnit_Framework_TestCase
      */
     public function getModifiedCampaign($id)
     {
-        $this->markTestIncomplete('todo');
-//        return $id;
+        $request = new GetCampaignsRequestBody(
+            (new CampaignsSelectionCriteria())->setIds([$id])
+        );
+        /** @var GetResponseBody $responseBody */
+        $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
+        $name = $responseBody->getResult()->getCampaigns()[0]->getName();
+        assertThat($name, is(equalTo(self::CHANGED_NAME)));
+
+        return $id;
     }
 
     /**
