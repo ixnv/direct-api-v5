@@ -1,9 +1,10 @@
 <?php
 namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
 
-
 use eLama\DirectApiV5\Dto\Campaign\AddRequest;
 use eLama\DirectApiV5\Dto\Campaign\CampaignAddItem;
+use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
+use eLama\DirectApiV5\Dto\Campaign\GetResponseBody;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignAddItem;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignNetworkStrategyAdd;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignNetworkStrategyTypeEnum;
@@ -15,7 +16,7 @@ use eLama\DirectApiV5\DtoAwareDirectDriver;
 use eLama\DirectApiV5\JmsFactory;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\RequestBody\AddCampaignRequestBody;
-use eLama\DirectApiV5\Response;
+use eLama\DirectApiV5\RequestBody\GetCampaignsRequestBody;
 use GuzzleHttp\Client;
 use Monolog\Logger;
 
@@ -23,6 +24,7 @@ class CampaignTestCase extends \PHPUnit_Framework_TestCase
 {
     const LOGIN = 'ra-trinet-add-dev-01';
     const TOKEN = '3fe13d8bd818458c89624f678f365051';
+    const NAME = 'тестовая кампания';
 
     /**
      * @var DtoAwareDirectDriver
@@ -33,7 +35,7 @@ class CampaignTestCase extends \PHPUnit_Framework_TestCase
     {
         $serializer = JmsFactory::create()->serializer();
         $lo = LowLevelDriver::createAdapterForClient(new Client(), new Logger('Test'), LowLevelDriver::URL_SANDBOX);
-        $this->driver  = new DtoAwareDirectDriver($serializer, $lo, self::TOKEN, self::LOGIN);
+        $this->driver = new DtoAwareDirectDriver($serializer, $lo, self::TOKEN, self::LOGIN);
     }
 
 
@@ -42,7 +44,7 @@ class CampaignTestCase extends \PHPUnit_Framework_TestCase
      */
     public function addCampaign()
     {
-        $campaignAddItem = new CampaignAddItem('тестовая кампания', (new \DateTime())->format('Y-m-d'));
+        $campaignAddItem = new CampaignAddItem(self::NAME, (new \DateTime())->format('Y-m-d'));
         $campaignAddItem->setTextCampaign(
             new TextCampaignAddItem(
                 new TextCampaignStrategyAdd(
@@ -53,13 +55,11 @@ class CampaignTestCase extends \PHPUnit_Framework_TestCase
         );
         $request = new AddCampaignRequestBody(
             new AddRequest([
-                $campaignAddItem
+                $campaignAddItem,
             ])
         );
-        /** @var Response $result */
-        $result = $this->driver->call($request)->wait();
         /** @var AddResponseBody $responseBody */
-        $responseBody = $result->getUnserializedBody();
+        $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
 
         $id = $responseBody->getResult()->getAddResults()[0]->getId();
         assertThat($id, is(typeOf('integer')));
@@ -73,7 +73,15 @@ class CampaignTestCase extends \PHPUnit_Framework_TestCase
      */
     public function getCampaign($id)
     {
-        $this->markTestIncomplete('todo');
+        $request = new GetCampaignsRequestBody(
+            (new CampaignsSelectionCriteria())->setIds([$id])
+        );
+        /** @var GetResponseBody $responseBody */
+        $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
+        $name = $responseBody->getResult()->getCampaigns()[0]->getName();
+        assertThat($name, is(equalTo(self::NAME)));
+
+        return $id;
     }
 
     /**
