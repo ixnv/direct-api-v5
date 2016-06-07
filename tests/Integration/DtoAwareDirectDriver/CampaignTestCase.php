@@ -5,6 +5,7 @@ use eLama\DirectApiV5\Dto\Campaign\AddRequest;
 use eLama\DirectApiV5\Dto\Campaign\CampaignAddItem;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Campaign\CampaignUpdateItem;
+use eLama\DirectApiV5\Dto\Campaign\DeleteRequest;
 use eLama\DirectApiV5\Dto\Campaign\GetResponseBody;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignAddItem;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignNetworkStrategyAdd;
@@ -14,11 +15,14 @@ use eLama\DirectApiV5\Dto\Campaign\TextCampaignSearchStrategyTypeEnum;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignStrategyAdd;
 use eLama\DirectApiV5\Dto\Campaign\UpdateRequest;
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
+use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
+use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\Dto\General\UpdateResponseBody;
 use eLama\DirectApiV5\DtoAwareDirectDriver;
 use eLama\DirectApiV5\JmsFactory;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\RequestBody\AddCampaignRequestBody;
+use eLama\DirectApiV5\RequestBody\DeleteCampaignRequestBody;
 use eLama\DirectApiV5\RequestBody\GetCampaignsRequestBody;
 use eLama\DirectApiV5\RequestBody\UpdateCampaignRequestBody;
 use GuzzleHttp\Client;
@@ -129,7 +133,16 @@ class CampaignTestCase extends \PHPUnit_Framework_TestCase
      */
     public function deleteCampaign($id)
     {
-        $this->markTestIncomplete('todo');
+        $request = new DeleteCampaignRequestBody(new DeleteRequest(
+            new IdsCriteria([$id])
+        ));
+        /** @var DeleteResponseBody $responseBody */
+        $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
+        $deletedId = $responseBody->getResult()->getDeleteResults()[0]->getId();
+
+        assertThat($id, is(equalTo($deletedId)));
+
+        return $id;
     }
 
 

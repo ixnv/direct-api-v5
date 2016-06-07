@@ -21,7 +21,7 @@ class IdsCriteria
     /**
      * @param int[] $Ids
      */
-    public function __construct(array $Ids = null)
+    public function __construct(array $Ids)
     {
       $this->Ids = $Ids;
     }
