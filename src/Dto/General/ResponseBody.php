@@ -1,6 +1,5 @@
 <?php
 
-
 namespace eLama\DirectApiV5\Dto\General;
 
 use JMS\Serializer\Annotation as JMS;
@@ -20,7 +19,7 @@ abstract class ResponseBody
     protected $error;
 
     /**
-     * @return GetResultGeneral
+     * @return mixed
      * @throws \Exception
      */
     public function getResult()

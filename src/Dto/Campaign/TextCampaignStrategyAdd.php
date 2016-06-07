@@ -28,7 +28,7 @@ class TextCampaignStrategyAdd
      * @param TextCampaignSearchStrategyAdd $Search
      * @param TextCampaignNetworkStrategyAdd $Network
      */
-    public function __construct(TextCampaignSearchStrategyAdd $Search = null, TextCampaignNetworkStrategyAdd $Network = null)
+    public function __construct(TextCampaignSearchStrategyAdd $Search, TextCampaignNetworkStrategyAdd $Network)
     {
       $this->Search = $Search;
       $this->Network = $Network;

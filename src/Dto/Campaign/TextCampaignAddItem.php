@@ -43,7 +43,7 @@ class TextCampaignAddItem
     /**
      * @param TextCampaignStrategyAdd $BiddingStrategy
      */
-    public function __construct(TextCampaignStrategyAdd $BiddingStrategy = null)
+    public function __construct(TextCampaignStrategyAdd $BiddingStrategy)
     {
       $this->BiddingStrategy = $BiddingStrategy;
     }

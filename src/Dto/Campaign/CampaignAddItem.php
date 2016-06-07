@@ -93,9 +93,8 @@ class CampaignAddItem extends CampaignBase
      * @param string $Name
      * @param string $StartDate
      */
-    public function __construct($Name = null, $StartDate = null)
+    public function __construct($Name, $StartDate)
     {
-      parent::__construct();
       $this->Name = $Name;
       $this->StartDate = $StartDate;
     }

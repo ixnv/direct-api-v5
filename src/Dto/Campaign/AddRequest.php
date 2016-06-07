@@ -11,33 +11,33 @@ class AddRequest
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Campaign\CampaignAddItem")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\Campaign\CampaignAddItem>")
      *
-     * @var CampaignAddItem $Campaigns
+     * @var CampaignAddItem[] $Campaigns
      */
     private $Campaigns;
 
     /**
-     * @param CampaignAddItem $Campaigns
+     * @param CampaignAddItem[] $Campaigns
      */
-    public function __construct(CampaignAddItem $Campaigns = null)
+    public function __construct(array $Campaigns = null)
     {
       $this->Campaigns = $Campaigns;
     }
 
     /**
-     * @return CampaignAddItem
+     * @return CampaignAddItem[]
      */
     public function getCampaigns()
     {
-      return $this->Campaigns;
+      return $this->Campaigns ?: [];
     }
 
     /**
-     * @param CampaignAddItem $Campaigns
+     * @param CampaignAddItem[] $Campaigns
      * @return \eLama\DirectApiV5\Dto\Campaign\AddRequest
      */
-    public function setCampaigns(CampaignAddItem $Campaigns)
+    public function setCampaigns(array $Campaigns)
     {
       $this->Campaigns = $Campaigns;
       return $this;

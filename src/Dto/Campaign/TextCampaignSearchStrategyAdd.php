@@ -18,11 +18,11 @@ class TextCampaignSearchStrategyAdd extends TextCampaignStrategyAddBase
     private $BiddingStrategyType;
 
     /**
-     * @param TextCampaignSearchStrategyTypeEnum $BiddingStrategyType
+     * @param string $BiddingStrategyType
+     * @see TextCampaignSearchStrategyTypeEnum
      */
-    public function __construct($BiddingStrategyType = null)
+    public function __construct($BiddingStrategyType)
     {
-      parent::__construct();
       $this->BiddingStrategyType = $BiddingStrategyType;
     }
 
