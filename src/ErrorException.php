@@ -27,4 +27,20 @@ class ErrorException extends \Exception
         $result->response = $response;
         throw $result;
     }
+
+    /**
+     * @return string
+     */
+    public function getRequestId()
+    {
+        return $this->requestId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDetail()
+    {
+        return $this->detail;
+    }
 }
