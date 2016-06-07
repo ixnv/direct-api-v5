@@ -9,38 +9,38 @@ use JMS\Serializer\Annotation as JMS;
  */
 class UpdateRequest
 {
-
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Campaign\CampaignUpdateItem")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\Campaign\CampaignUpdateItem>")
      *
-     * @var CampaignUpdateItem $Campaigns
+     * @var CampaignUpdateItem[] $Campaigns
      */
     private $Campaigns;
 
     /**
-     * @param CampaignUpdateItem $Campaigns
+     * @param CampaignUpdateItem[] $Campaigns
      */
-    public function __construct(CampaignUpdateItem $Campaigns = null)
+    public function __construct(array $Campaigns)
     {
-      $this->Campaigns = $Campaigns;
+        $this->Campaigns = $Campaigns;
     }
 
     /**
-     * @return CampaignUpdateItem
+     * @return CampaignUpdateItem[]
      */
     public function getCampaigns()
     {
-      return $this->Campaigns;
+        return $this->Campaigns ?: [];
     }
 
     /**
-     * @param CampaignUpdateItem $Campaigns
+     * @param CampaignUpdateItem[] $Campaigns
      * @return \eLama\DirectApiV5\Dto\Campaign\UpdateRequest
      */
-    public function setCampaigns(CampaignUpdateItem $Campaigns)
+    public function setCampaigns(array $Campaigns)
     {
-      $this->Campaigns = $Campaigns;
-      return $this;
+        $this->Campaigns = $Campaigns;
+
+        return $this;
     }
 
 }

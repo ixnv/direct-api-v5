@@ -35,7 +35,7 @@ class AddResult
 
     /**
      * @param ActionResult[] $AddResults
-     * @return \eLama\DirectApiV5\Dto\Ad\AddResponse
+     * @return $this
      */
     public function setAddResults(array $AddResults)
     {

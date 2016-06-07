@@ -4,6 +4,7 @@ namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
 use eLama\DirectApiV5\Dto\Campaign\AddRequest;
 use eLama\DirectApiV5\Dto\Campaign\CampaignAddItem;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
+use eLama\DirectApiV5\Dto\Campaign\CampaignUpdateItem;
 use eLama\DirectApiV5\Dto\Campaign\GetResponseBody;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignAddItem;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignNetworkStrategyAdd;
@@ -11,12 +12,15 @@ use eLama\DirectApiV5\Dto\Campaign\TextCampaignNetworkStrategyTypeEnum;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignSearchStrategyAdd;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignSearchStrategyTypeEnum;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignStrategyAdd;
+use eLama\DirectApiV5\Dto\Campaign\UpdateRequest;
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
+use eLama\DirectApiV5\Dto\General\UpdateResponseBody;
 use eLama\DirectApiV5\DtoAwareDirectDriver;
 use eLama\DirectApiV5\JmsFactory;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\RequestBody\AddCampaignRequestBody;
 use eLama\DirectApiV5\RequestBody\GetCampaignsRequestBody;
+use eLama\DirectApiV5\RequestBody\UpdateCampaignRequestBody;
 use GuzzleHttp\Client;
 use Monolog\Logger;
 
@@ -25,6 +29,7 @@ class CampaignTestCase extends \PHPUnit_Framework_TestCase
     const LOGIN = 'ra-trinet-add-dev-01';
     const TOKEN = '3fe13d8bd818458c89624f678f365051';
     const NAME = 'тестовая кампания';
+    const CHANGED_NAME = 'Измененное имя кампании';
 
     /**
      * @var DtoAwareDirectDriver
@@ -90,7 +95,15 @@ class CampaignTestCase extends \PHPUnit_Framework_TestCase
      */
     public function modifyCampaign($id)
     {
-        $this->markTestIncomplete('todo');
+        $request = new UpdateCampaignRequestBody(new UpdateRequest(
+            [(new CampaignUpdateItem($id))->setName(self::CHANGED_NAME)]
+        ));
+        /** @var UpdateResponseBody $responseBody */
+        $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
+        $changedId = $responseBody->getResult()->getUpdateResults()[0]->getId();
+        assertThat($id, is(equalTo($changedId)));
+
+        return $id;
     }
 
     /**

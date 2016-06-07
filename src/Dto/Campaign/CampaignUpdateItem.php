@@ -99,9 +99,8 @@ class CampaignUpdateItem extends CampaignBase
     /**
      * @param int $Id
      */
-    public function __construct($Id = null)
+    public function __construct($Id)
     {
-      parent::__construct();
       $this->Id = $Id;
     }
 
