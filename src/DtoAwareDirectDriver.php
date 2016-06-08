@@ -2,14 +2,13 @@
 
 namespace eLama\DirectApiV5;
 
-
 use eLama\DirectApiV5\Dto;
 use eLama\DirectApiV5\Dto\Ad;
 use eLama\DirectApiV5\Dto\Campaign;
 use eLama\DirectApiV5\Dto\General\GetResultGeneral;
 use eLama\DirectApiV5\Dto\General\ResponseBody;
 use eLama\DirectApiV5\Dto\Keyword;
-use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
+use eLama\DirectApiV5\LowLevelDriver\LowLevelDriverInterface;
 use eLama\DirectApiV5\RequestBody\GetRequestBody;
 use eLama\DirectApiV5\RequestBody\RequestBody;
 use eLama\DirectApiV5\Serializer\JmsSerializer;
@@ -27,18 +26,18 @@ class DtoAwareDirectDriver
     /** @var Serializer */
     private $serializer;
 
-    /** @var LowLevelDriver  */
+    /** @var LowLevelDriverInterface  */
     private $driver;
 
     /**
      * @param Serializer $jmsSerializer
-     * @param LowLevelDriver $driver
+     * @param LowLevelDriverInterface $driver
      * @param $token
      * @param $login
      */
     public function __construct(
         Serializer $jmsSerializer,
-        LowLevelDriver $driver,
+        LowLevelDriverInterface $driver,
         $token,
         $login
     ) {

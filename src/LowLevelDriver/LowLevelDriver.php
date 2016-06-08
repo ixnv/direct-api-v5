@@ -10,7 +10,7 @@ use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Log\LoggerInterface;
 
-abstract class LowLevelDriver
+abstract class LowLevelDriver implements LowLevelDriverInterface
 {
     const URL_SANDBOX = 'https://api-sandbox.direct.yandex.com/json/v5';
     const URL_PRODUCTION = 'https://api.direct.yandex.com/json/v5';
@@ -40,8 +40,8 @@ abstract class LowLevelDriver
     }
 
     /**
-     * @param Request $request
-     * @return Promise on \eLama\DirectApiV5\Response
+     * @inheritdoc
+     * @see \eLama\DirectApiV5\Response
      */
     public function execute(Request $request, Serializer $serializer)
     {
