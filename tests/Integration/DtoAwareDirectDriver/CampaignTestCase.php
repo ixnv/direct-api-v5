@@ -39,7 +39,7 @@ class CampaignTestCase extends \PHPUnit_Framework_TestCase
     /**
      * @var DtoAwareDirectDriver
      */
-    private $driver;
+    protected $driver;
 
     public function setUp()
     {
