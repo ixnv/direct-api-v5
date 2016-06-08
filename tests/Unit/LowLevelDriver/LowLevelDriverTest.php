@@ -2,6 +2,7 @@
 
 namespace eLama\DirectApiV5\Test\Unit\LowLevelDriver;
 
+use eLama\DirectApiV5\LowLevelDriver\GuzzleAdapter;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\Request;
 use eLama\DirectApiV5\Serializer\ArraySerializer;
@@ -23,8 +24,11 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
     /** @var  ArraySerializer */
     private $serializer;
 
-    /** @var TestLowLevelDriver */
+    /** @var LowLevelDriver */
     private $driver;
+
+    /** @var  GuzzleAdapter */
+    private $guzzleAdapter;
 
     protected function setUp()
     {
@@ -32,7 +36,8 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
 
         $this->logger = Phake::mock(LoggerInterface::class);
         $this->serializer = new ArraySerializer($jms);
-        $this->driver = new TestLowLevelDriver(new Client(), $this->logger);
+        $this->guzzleAdapter = new TestGuzzleAdapter();
+        $this->driver = new LowLevelDriver($this->guzzleAdapter, $this->logger);
     }
 
     /**
@@ -78,7 +83,7 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
     public function doRequest_ResponseSuccessfullyDeserialized_LogsResponseBody()
     {
         $responseBody = json_encode(['result' => 1]);
-        $this->driver->setResponse([], $responseBody);
+        $this->guzzleAdapter->setResponse([], $responseBody);
 
         $this->driver->execute(
             $this->createRequest(),
@@ -95,7 +100,7 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
      */
     public function doRequest_UnitsHeaderIsSet_LogsUnitsInfo()
     {
-        $this->driver->setResponse(['units' => '1/2/3']);
+        $this->guzzleAdapter->setResponse(['units' => '1/2/3']);
 
         $this->driver->execute(
             $this->createRequest(),
@@ -128,17 +133,15 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
 
 }
 
-class TestLowLevelDriver extends LowLevelDriver
+class TestGuzzleAdapter implements GuzzleAdapter
 {
     /**
      * @var mixed
      */
     public $result;
 
-    public function __construct(\GuzzleHttp\Client $client, LoggerInterface $logger, $baseUrl = self::URL_PRODUCTION)
+    public function __construct()
     {
-        parent::__construct($client, $logger, $baseUrl);
-
         $this->setResponse();
     }
 
@@ -163,7 +166,7 @@ class TestLowLevelDriver extends LowLevelDriver
      * @param mixed $guzzleRequest
      * @return PromiseInterface
      */
-    protected function sendAsync($url, $headers, $jsonBody)
+    public function sendAsync($url, $headers, $jsonBody)
     {
         return \GuzzleHttp\Promise\promise_for($this->result);
     }

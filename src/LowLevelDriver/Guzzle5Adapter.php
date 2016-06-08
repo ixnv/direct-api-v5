@@ -2,11 +2,21 @@
 
 namespace eLama\DirectApiV5\LowLevelDriver;
 
+use GuzzleHttp\Client;
 use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Stream\Stream;
 
-class Guzzle5LowLevelDriver extends LowLevelDriver
+class Guzzle5Adapter implements GuzzleAdapter
 {
+    /**
+     * @var Client
+     */
+    private $client;
+
+    public function __construct(Client $client)
+    {
+        $this->client = $client;
+    }
 
     /**
      * @param $url
@@ -14,7 +24,7 @@ class Guzzle5LowLevelDriver extends LowLevelDriver
      * @param $jsonBody
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    protected function sendAsync($url, $headers, $jsonBody)
+    public function sendAsync($url, $headers, $jsonBody)
     {
         $guzzleRequest = new \GuzzleHttp\Message\Request(
             'POST',

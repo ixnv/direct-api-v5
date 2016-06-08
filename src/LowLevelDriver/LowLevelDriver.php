@@ -6,16 +6,15 @@ use eLama\DirectApiV5\Request;
 use eLama\DirectApiV5\Response;
 use eLama\DirectApiV5\Serializer\Serializer;
 use eLama\DirectApiV5\UnitsInfo;
-use GuzzleHttp\Promise\Promise;
-use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Log\LoggerInterface;
 
-abstract class LowLevelDriver implements LowLevelDriverInterface
+class LowLevelDriver implements LowLevelDriverInterface
 {
     const URL_SANDBOX = 'https://api-sandbox.direct.yandex.com/json/v5';
     const URL_PRODUCTION = 'https://api.direct.yandex.com/json/v5';
     const HEADER_CLIENT_LOGIN = 'Client-Login';
-    /** @var  \GuzzleHttp\Client; */
+
+    /** @var  GuzzleAdapter; */
     protected $client;
 
     private $baseUrl = self::URL_SANDBOX;
@@ -26,15 +25,15 @@ abstract class LowLevelDriver implements LowLevelDriverInterface
     public static function createAdapterForClient(\GuzzleHttp\Client $client, LoggerInterface $logger, $baseUrl = self::URL_PRODUCTION)
     {
         if (version_compare($client::VERSION, '6', 'ge')) {
-            return new Guzzle6LowLevelDriver($client, $logger, $baseUrl);
+            return new static(new Guzzle6Adapter($client), $logger, $baseUrl);
         } else {
-            return new Guzzle5LowLevelDriver($client, $logger, $baseUrl);
+            return new static(new Guzzle5Adapter($client), $logger, $baseUrl);
         }
     }
 
-    public function __construct(\GuzzleHttp\Client $client, LoggerInterface $logger, $baseUrl = self::URL_PRODUCTION)
+    public function __construct(GuzzleAdapter $guzzleWrapper, LoggerInterface $logger, $baseUrl = self::URL_PRODUCTION)
     {
-        $this->client = $client;
+        $this->client = $guzzleWrapper;
         $this->logger = $logger;
         $this->baseUrl = $baseUrl;
     }
@@ -59,7 +58,7 @@ abstract class LowLevelDriver implements LowLevelDriverInterface
         $headers = $this->createHeaders($request->getToken(), $request->getClientLogin());
 
         $startTime = microtime(true);
-        return $this->sendAsync($url, $headers, $requestBodyInJson)
+        return $this->client->sendAsync($url, $headers, $requestBodyInJson)
             ->then(function ($response) use ($serializer, $uniqId, $request, $requestBodyInJson, $startTime) {
                 $contents = $response->getBody()->getContents();
                 $endTime = microtime(true);
@@ -141,12 +140,6 @@ abstract class LowLevelDriver implements LowLevelDriverInterface
         list($took, $left, $dailyLimit) = explode('/', $unitsValue);
         return new UnitsInfo($took, $left, $dailyLimit);
     }
-
-    /**
-     * @param mixed $guzzleRequest
-     * @return PromiseInterface
-     */
-    abstract protected function sendAsync($url, $headers, $jsonBody);
 
     /**
      * @return array
