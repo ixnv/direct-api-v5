@@ -39,7 +39,7 @@ class DtoAwareDirectDriver
         Serializer $jmsSerializer,
         LowLevelDriverInterface $driver,
         $token,
-        $login
+        $login = null
     ) {
         $this->serializer = $jmsSerializer;
         $this->login = $login;
