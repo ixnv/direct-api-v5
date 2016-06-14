@@ -16,13 +16,19 @@ class ProxyDriver implements LowLevelDriverInterface
 
     const HEADER_CLIENT_LOGIN = 'Client-Login';
 
+    /** @var int */
+    private $cacheControlMaxAge;
+
     /**
      * @param GuzzleAdapter $guzzleAdapter
+     * @param string $baseUrl
+     * @param int $cacheControlMaxAge
      */
-    public function __construct(GuzzleAdapter $guzzleAdapter, $baseUrl)
+    public function __construct(GuzzleAdapter $guzzleAdapter, $baseUrl, $cacheControlMaxAge = 300)
     {
         $this->guzzleAdapter = $guzzleAdapter;
         $this->baseUrl = $baseUrl;
+        $this->cacheControlMaxAge = $cacheControlMaxAge;
     }
 
 
@@ -41,11 +47,7 @@ class ProxyDriver implements LowLevelDriverInterface
 
 
         $url = $this->baseUrl . '/' . $request->getService() . '/' . $request->getMethod();
-        $headers = $this->createHeaders(
-            $request->getToken(),
-            $request->getClientLogin(),
-            $request->getCacheControlMaxAge()
-        );
+        $headers = $this->createHeaders($request->getToken(), $request->getClientLogin());
 
         return $this->guzzleAdapter->sendAsync($url, $headers, $requestBodyInJson)
             ->then(function ($response) use ($serializer) {
@@ -74,16 +76,15 @@ class ProxyDriver implements LowLevelDriverInterface
     /**
      * @param string $token
      * @param null|string $clientLogin
-     * @param int $maxAge
      * @return array
      */
-    private function createHeaders($token, $clientLogin = null, $maxAge)
+    private function createHeaders($token, $clientLogin = null)
     {
         $headers = [
             'Accept-Language' => 'ru',
             'Content-Type' => 'application/json; charset=utf-8',
             'Authorization' => 'Bearer ' . $token,
-            'Cache-Control' => 'max-age=' . $maxAge
+            'Cache-Control' => 'max-age=' . $this->cacheControlMaxAge
         ];
 
         if ($clientLogin) {

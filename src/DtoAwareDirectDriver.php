@@ -62,10 +62,6 @@ class DtoAwareDirectDriver
             $this->login
         );
 
-        if ($request instanceof GetRequestBody) {
-            $directRequest->setCacheControlMaxAge($request->getCacheControlMaxAge());
-        }
-
         $serializer = new JmsSerializer($this->serializer, $request->resultClass());
 
         return $this->driver

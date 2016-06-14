@@ -19,9 +19,6 @@ class Request
     /** @var mixed */
     private $params;
 
-    /** @var int */
-    private $cacheControlMaxAge = 300;
-
     /**
      * Request constructor.
      *
@@ -87,21 +84,5 @@ class Request
         $request->token = substr($this->token, 0, 4) . '...' . substr($this->token, -4, 4) ;
 
         return $request;
-    }
-
-    /**
-     * @param int $seconds
-     */
-    public function setCacheControlMaxAge($seconds)
-    {
-        $this->cacheControlMaxAge = $seconds;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCacheControlMaxAge()
-    {
-        return $this->cacheControlMaxAge;
     }
 }
