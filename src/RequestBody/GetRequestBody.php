@@ -12,6 +12,9 @@ use JMS\Serializer\Annotation as JMS;
  */
 abstract class GetRequestBody extends RequestBody
 {
+    /** @var int */
+    protected $cacheControlMaxAge = 300;
+
     /** @var GetRequestGeneral */
     protected $request;
 
@@ -46,4 +49,19 @@ abstract class GetRequestBody extends RequestBody
         $this->request = clone $this->request;
     }
 
+    /**
+     * @param int $seconds
+     */
+    public function setCacheControlMaxAge($seconds)
+    {
+        $this->cacheControlMaxAge = $seconds;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCacheControlMaxAge()
+    {
+        return $this->cacheControlMaxAge;
+    }
 }

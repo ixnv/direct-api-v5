@@ -19,7 +19,6 @@ use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\Dto\General\UpdateResponseBody;
 use eLama\DirectApiV5\DtoAwareDirectDriver;
-use eLama\DirectApiV5\ErrorCode;
 use eLama\DirectApiV5\JmsFactory;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\RequestBody\AddCampaignRequestBody;
