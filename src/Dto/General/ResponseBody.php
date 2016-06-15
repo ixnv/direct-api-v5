@@ -28,9 +28,9 @@ abstract class ResponseBody
     }
 
     /**
-     * @param array $result
+     * @param mixed $result
      */
-    public function setResult(array $result)
+    public function setResult($result)
     {
         $this->result = $result;
     }
