@@ -1,9 +1,7 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Campaign;
+namespace eLama\DirectApiV5\Dto\General;
 
-use eLama\DirectApiV5\Dto\General\ResponseBody;
-use eLama\DirectApiV5\Dto\General\SuspendResult;
 use JMS\Serializer\Annotation as JMS;
 
 /**

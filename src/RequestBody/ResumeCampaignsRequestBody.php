@@ -2,20 +2,17 @@
 
 namespace eLama\DirectApiV5\RequestBody;
 
-use eLama\DirectApiV5\Dto\Campaign\SuspendRequest;
-use eLama\DirectApiV5\Dto\General\SuspendResponseBody;
+use eLama\DirectApiV5\Dto\Campaign\ResumeRequest;
+use eLama\DirectApiV5\Dto\General\ResumeResponseBody;
 
-class SuspendCampaignsRequestBody extends RequestBody
+class ResumeCampaignsRequestBody extends RequestBody
 {
     /**
-     * @var SuspendRequest
+     * @var ResumeRequest
      */
     private $request;
 
-    /**
-     * @param SuspendRequest $request
-     */
-    public function __construct(SuspendRequest $request)
+    public function __construct(ResumeRequest $request)
     {
         $this->request = $request;
     }
@@ -33,7 +30,7 @@ class SuspendCampaignsRequestBody extends RequestBody
      */
     public function resultClass()
     {
-        return SuspendResponseBody::class;
+        return ResumeResponseBody::class;
     }
 
     /**
@@ -49,6 +46,6 @@ class SuspendCampaignsRequestBody extends RequestBody
      */
     public function method()
     {
-        return 'suspend';
+        return 'resume';
     }
 }
