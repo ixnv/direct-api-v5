@@ -12,7 +12,7 @@ class ResumeRequest
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Campaign\IdsCriteria")
+     * @JMS\Type("eLama\DirectApiV5\Dto\General\IdsCriteria")
      *
      * @var IdsCriteria $SelectionCriteria
      */
@@ -21,7 +21,7 @@ class ResumeRequest
     /**
      * @param IdsCriteria $SelectionCriteria
      */
-    public function __construct(IdsCriteria $SelectionCriteria = null)
+    public function __construct(IdsCriteria $SelectionCriteria)
     {
       $this->SelectionCriteria = $SelectionCriteria;
     }
