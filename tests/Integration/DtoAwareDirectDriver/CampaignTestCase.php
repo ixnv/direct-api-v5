@@ -7,6 +7,8 @@ use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Campaign\CampaignUpdateItem;
 use eLama\DirectApiV5\Dto\Campaign\DeleteRequest;
 use eLama\DirectApiV5\Dto\Campaign\GetResponseBody;
+use eLama\DirectApiV5\Dto\Campaign\SuspendRequest;
+use eLama\DirectApiV5\Dto\Campaign\SuspendResponseBody;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignAddItem;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignNetworkStrategyAdd;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignNetworkStrategyTypeEnum;
@@ -24,6 +26,7 @@ use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\RequestBody\AddCampaignRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteCampaignRequestBody;
 use eLama\DirectApiV5\RequestBody\GetCampaignsRequestBody;
+use eLama\DirectApiV5\RequestBody\SuspendCampaignsRequestBody;
 use eLama\DirectApiV5\RequestBody\UpdateCampaignRequestBody;
 use GuzzleHttp\Client;
 use Monolog\Logger;
@@ -46,7 +49,6 @@ class CampaignTestCase extends \PHPUnit_Framework_TestCase
         $lo = LowLevelDriver::createAdapterForClient(new Client(), new Logger('Test'), LowLevelDriver::URL_SANDBOX);
         $this->driver = new DtoAwareDirectDriver($serializer, $lo, self::TOKEN, self::LOGIN);
     }
-
 
     /**
      * @test
@@ -131,6 +133,24 @@ class CampaignTestCase extends \PHPUnit_Framework_TestCase
      * @test
      * @depends getModifiedCampaign
      */
+    public function suspendCampaign($id)
+    {
+        $request = new SuspendCampaignsRequestBody(new SuspendRequest(
+            new IdsCriteria([$id])
+        ));
+        /** @var SuspendResponseBody $responseBody */
+        $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
+        $suspendedId = $responseBody->getResult()->getSuspendResults()[0]->getId();
+
+        assertThat($suspendedId, is(equalTo($id)));
+
+        return $id;
+    }
+
+    /**
+     * @test
+     * @depends suspendCampaign
+     */
     public function deleteCampaign($id)
     {
         $request = new DeleteCampaignRequestBody(new DeleteRequest(
@@ -144,7 +164,6 @@ class CampaignTestCase extends \PHPUnit_Framework_TestCase
 
         return $id;
     }
-
 
     /**
      * @test
