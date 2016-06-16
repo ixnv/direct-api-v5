@@ -21,7 +21,7 @@ class SuspendRequest
     /**
      * @param IdsCriteria $SelectionCriteria
      */
-    public function __construct(IdsCriteria $SelectionCriteria = null)
+    public function __construct(IdsCriteria $SelectionCriteria)
     {
       $this->SelectionCriteria = $SelectionCriteria;
     }
