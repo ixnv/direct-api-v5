@@ -9,7 +9,6 @@ use eLama\DirectApiV5\Dto\Campaign\DeleteRequest;
 use eLama\DirectApiV5\Dto\Campaign\GetResponseBody;
 use eLama\DirectApiV5\Dto\Campaign\ResumeRequest;
 use eLama\DirectApiV5\Dto\Campaign\SuspendRequest;
-use eLama\DirectApiV5\Dto\General\SuspendResponseBody;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignAddItem;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignNetworkStrategyAdd;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignNetworkStrategyTypeEnum;
@@ -34,7 +33,7 @@ use eLama\DirectApiV5\RequestBody\UpdateCampaignRequestBody;
 use GuzzleHttp\Client;
 use Monolog\Logger;
 
-class CampaignTestCase extends \PHPUnit_Framework_TestCase
+class CampaignTest extends \PHPUnit_Framework_TestCase
 {
     const LOGIN = 'ra-trinet-add-dev-01';
     const TOKEN = '3fe13d8bd818458c89624f678f365051';
