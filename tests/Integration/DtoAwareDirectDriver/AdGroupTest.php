@@ -75,6 +75,23 @@ class AdGroupTest extends \PHPUnit_Framework_TestCase
      * @test
      * @depends addAdGroup
      */
+    public function getAdGroup($id)
+    {
+        $request = new GetAdGroupsRequestBody(
+            (new AdGroupsSelectionCriteria())->setIds([$id])
+        );
+        /** @var GetResponseBody $responseBody */
+        $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
+
+        assertThat($responseBody->getResult()->getAdGroups()[0]->getName(), is(equalTo(self::AD_GROUP_NAME)));
+
+        return $id;
+    }
+
+    /**
+     * @test
+     * @depends getAdGroup
+     */
     public function deleteAdGroup($id)
     {
         $request = new DeleteAdGroupRequestBody(
