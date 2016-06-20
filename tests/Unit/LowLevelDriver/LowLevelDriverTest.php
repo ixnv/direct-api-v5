@@ -115,17 +115,55 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param $token
+     * @test
+     */
+    public function doRequest_UseAgencyUnits_LogsMark()
+    {
+        $this->driver->execute(
+            $this->createRequest(self::SOME_TOKEN, true),
+            $this->serializer
+        )->wait();
+
+        Phake::verify($this->logger)->info(containsStringIgnoringCase('request'), allOf(
+            hasKeyValuePair('agencyUnitsUsed', equalTo(true))
+        ));
+    }
+
+    /**
+     * @test
+     */
+    public function doRequest_UseAgencyUnits_LogsUnitsInfo()
+    {
+        $this->guzzleAdapter->setResponse(['units' => '1/2/3']);
+
+        $this->driver->execute(
+            $this->createRequest(self::SOME_TOKEN, true),
+            $this->serializer
+        )->wait();
+
+        Phake::verify($this->logger)->info(containsStringIgnoringCase('response'), allOf(
+            hasKeyValuePair('response_agency_units_taken', equalTo(1)),
+            hasKeyValuePair('response_agency_units_left', equalTo(2)),
+            hasKeyValuePair('response_agency_units_dailyLimit', equalTo(3)),
+            hasKeyValuePair('response_agency_units_percentLeft', equalTo(round(2 / 3 * 100, 1)))
+        ));
+    }
+
+    /**
+     * @param string $token
+     * @param bool $useAgencyUnits
+     *
      * @return Request
      */
-    private function createRequest($token = self::SOME_TOKEN)
+    private function createRequest($token = self::SOME_TOKEN, $useAgencyUnits = false)
     {
         $request = new Request(
             $token,
             'service value',
             'method value',
             ['some key' => 'some parameter'],
-            'client login'
+            'client login',
+            $useAgencyUnits
         );
 
         return $request;
