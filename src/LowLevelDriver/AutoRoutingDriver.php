@@ -36,7 +36,7 @@ class AutoRoutingDriver implements LowLevelDriverInterface
             return $this->proxyDriver
                 ->execute($request, $serializer)
                 ->otherwise(function ($reason) use ($request, $serializer) {
-                    if (!$reason instanceof ErrorException) {
+                    if ($reason instanceof ErrorException) {
                         return \GuzzleHttp\Promise\rejection_for($reason);
                     }
 
