@@ -117,10 +117,28 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function doRequest_UseAgencyUnits_LogsMark()
+    public function doRequest_UseAgencyUnits_RequestHasHeader()
+    {
+        $adapter = Phake::partialMock(TestGuzzleAdapter::class);
+        $driver = new LowLevelDriver($adapter, $this->logger);
+        $driver->execute(
+            $this->createRequest(self::SOME_TOKEN, $useAgencyUnits = true),
+            $this->serializer
+        )->wait();
+
+        Phake::verify($adapter)->sendAsync(
+            stringValue(),
+            hasKeyValuePair(equalTo('Use-Operator-Units'), equalTo('true')),
+            stringValue()
+        );
+    }
+    /**
+     * @test
+     */
+    public function doRequest_UseAgencyUnits_RequestLogsMark()
     {
         $this->driver->execute(
-            $this->createRequest(self::SOME_TOKEN, true),
+            $this->createRequest(self::SOME_TOKEN, $useAgencyUnits = true),
             $this->serializer
         )->wait();
 
@@ -132,12 +150,12 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function doRequest_UseAgencyUnits_LogsUnitsInfo()
+    public function doRequest_UseAgencyUnits_ResponseLogsUnitsInfo()
     {
         $this->guzzleAdapter->setResponse(['units' => '1/2/3']);
 
         $this->driver->execute(
-            $this->createRequest(self::SOME_TOKEN, true),
+            $this->createRequest(self::SOME_TOKEN, $useAgencyUnits = true),
             $this->serializer
         )->wait();
 
@@ -145,7 +163,7 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
             hasKeyValuePair('response_agency_units_taken', equalTo(1)),
             hasKeyValuePair('response_agency_units_left', equalTo(2)),
             hasKeyValuePair('response_agency_units_dailyLimit', equalTo(3)),
-            hasKeyValuePair('response_agency_units_percentLeft', equalTo(round(2 / 3 * 100, 1)))
+            hasKeyValuePair('response_agency_units_percentLeft', equalTo(66.7))
         ));
     }
 

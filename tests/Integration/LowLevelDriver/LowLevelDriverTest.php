@@ -98,12 +98,12 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function execute_UseAgencyUnits()
+    public function execute_UseAgencyUnits_LogsHasKeys()
     {
         $logger = Phake::mock(LoggerInterface::class);
         $lowLevelDriver = LowLevelDriver::createAdapterForClient(new Client(), $logger, LowLevelDriver::URL_SANDBOX);
 
-        $lowLevelDriver->execute($this->createRequest(GeneralTest::TOKEN, true), $this->serializer)->wait();
+        $lowLevelDriver->execute($this->createRequest(GeneralTest::TOKEN, $useAgencyUnits = true), $this->serializer)->wait();
 
         Phake::verify($logger)->info(
             containsStringIgnoringCase('request'),
