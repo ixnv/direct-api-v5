@@ -65,7 +65,7 @@ class AdGroupAddItem
      * @param int $CampaignId
      * @param int[] $RegionIds
      */
-    public function __construct($Name = null, $CampaignId = null, array $RegionIds = null)
+    public function __construct($Name, $CampaignId, array $RegionIds)
     {
       $this->Name = $Name;
       $this->CampaignId = $CampaignId;

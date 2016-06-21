@@ -44,9 +44,8 @@ class TextAdAdd extends TextAdAddBase
      * @param string $Title
      * @param YesNoEnum $Mobile
      */
-    public function __construct($Text = null, $Title = null, $Mobile = null)
+    public function __construct($Text, $Title, $Mobile = null)
     {
-      parent::__construct();
       $this->Text = $Text;
       $this->Title = $Title;
       $this->Mobile = $Mobile;
@@ -100,7 +99,7 @@ class TextAdAdd extends TextAdAddBase
      * @param string $Href
      * @return \eLama\DirectApiV5\Dto\Ad\TextAdAdd
      */
-    public function setHref($Href = null)
+    public function setHref($Href)
     {
       $this->Href = $Href;
       return $this;

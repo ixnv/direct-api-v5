@@ -12,16 +12,16 @@ class AddRequest
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Keyword\KeywordAddItem")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\Keyword\KeywordAddItem>")
      *
      * @var KeywordAddItem $Keywords
      */
     private $Keywords;
 
     /**
-     * @param KeywordAddItem $Keywords
+     * @param KeywordAddItem[] $Keywords
      */
-    public function __construct(KeywordAddItem $Keywords = null)
+    public function __construct(array $Keywords)
     {
       $this->Keywords = $Keywords;
     }
@@ -35,10 +35,10 @@ class AddRequest
     }
 
     /**
-     * @param KeywordAddItem $Keywords
+     * @param KeywordAddItem[] $Keywords
      * @return \eLama\DirectApiV5\Dto\Keyword\AddRequest
      */
-    public function setKeywords(KeywordAddItem $Keywords)
+    public function setKeywords(array $Keywords)
     {
       $this->Keywords = $Keywords;
       return $this;
