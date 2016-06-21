@@ -11,22 +11,22 @@ class AddRequest
 {
 
     /**
-     * @JMS\Type("array<eLama\DirectApiV5\Dto\AdGroup\AdGroupAddItem>")
+     * @JMS\Type("eLama\DirectApiV5\Dto\AdGroup\AdGroupAddItem")
      *
      * @var AdGroupAddItem $AdGroups
      */
     private $AdGroups;
 
     /**
-     * @param AdGroupAddItem[] $AdGroups
+     * @param AdGroupAddItem $AdGroups
      */
-    public function __construct(array $AdGroups = null)
+    public function __construct(AdGroupAddItem $AdGroups = null)
     {
       $this->AdGroups = $AdGroups;
     }
 
     /**
-     * @return AdGroupAddItem[]
+     * @return AdGroupAddItem
      */
     public function getAdGroups()
     {
@@ -34,10 +34,10 @@ class AddRequest
     }
 
     /**
-     * @param AdGroupAddItem[] $AdGroups
-     * @return AddRequest
+     * @param AdGroupAddItem $AdGroups
+     * @return \eLama\DirectApiV5\Dto\AdGroup\AddRequest
      */
-    public function setAdGroups(array $AdGroups)
+    public function setAdGroups(AdGroupAddItem $AdGroups)
     {
       $this->AdGroups = $AdGroups;
       return $this;

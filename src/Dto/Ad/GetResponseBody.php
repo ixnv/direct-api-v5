@@ -8,14 +8,14 @@ use JMS\Serializer\Annotation as JMS;
 
 /**
  * @JMS\AccessType("property")
- * @method GetResult getResult()
+ * @method GetResponseGeneral getResult()
  */
 class GetResponseBody extends ResponseBody
 {
     /**
      * @JMS\Type("eLama\DirectApiV5\Dto\Ad\GetResult")
      *
-     * @var GetResult
+     * @var GetResponseGeneral
      */
     protected $result;
 }

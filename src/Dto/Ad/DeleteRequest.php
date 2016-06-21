@@ -13,7 +13,7 @@ class DeleteRequest
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\General\IdsCriteria")
+     * @JMS\Type("eLama\DirectApiV5\Dto\Ad\IdsCriteria")
      *
      * @var IdsCriteria $SelectionCriteria
      */
@@ -22,7 +22,7 @@ class DeleteRequest
     /**
      * @param IdsCriteria $SelectionCriteria
      */
-    public function __construct(IdsCriteria $SelectionCriteria)
+    public function __construct(IdsCriteria $SelectionCriteria = null)
     {
       $this->SelectionCriteria = $SelectionCriteria;
     }

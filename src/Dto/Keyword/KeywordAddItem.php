@@ -64,7 +64,7 @@ class KeywordAddItem
      * @param string $Keyword
      * @param int $AdGroupId
      */
-    public function __construct($Keyword, $AdGroupId)
+    public function __construct($Keyword = null, $AdGroupId = null)
     {
       $this->Keyword = $Keyword;
       $this->AdGroupId = $AdGroupId;
@@ -118,7 +118,7 @@ class KeywordAddItem
      * @param int $Bid
      * @return \eLama\DirectApiV5\Dto\Keyword\KeywordAddItem
      */
-    public function setBid($Bid)
+    public function setBid($Bid = null)
     {
       $this->Bid = $Bid;
       return $this;
@@ -136,7 +136,7 @@ class KeywordAddItem
      * @param int $ContextBid
      * @return \eLama\DirectApiV5\Dto\Keyword\KeywordAddItem
      */
-    public function setContextBid($ContextBid)
+    public function setContextBid($ContextBid = null)
     {
       $this->ContextBid = $ContextBid;
       return $this;
@@ -154,7 +154,7 @@ class KeywordAddItem
      * @param PriorityEnum $StrategyPriority
      * @return \eLama\DirectApiV5\Dto\Keyword\KeywordAddItem
      */
-    public function setStrategyPriority($StrategyPriority)
+    public function setStrategyPriority($StrategyPriority = null)
     {
       $this->StrategyPriority = $StrategyPriority;
       return $this;
@@ -172,7 +172,7 @@ class KeywordAddItem
      * @param string $UserParam1
      * @return \eLama\DirectApiV5\Dto\Keyword\KeywordAddItem
      */
-    public function setUserParam1($UserParam1)
+    public function setUserParam1($UserParam1 = null)
     {
       $this->UserParam1 = $UserParam1;
       return $this;
@@ -190,7 +190,7 @@ class KeywordAddItem
      * @param string $UserParam2
      * @return \eLama\DirectApiV5\Dto\Keyword\KeywordAddItem
      */
-    public function setUserParam2($UserParam2)
+    public function setUserParam2($UserParam2 = null)
     {
       $this->UserParam2 = $UserParam2;
       return $this;
