@@ -6,7 +6,6 @@ use eLama\DirectApiV5\LowLevelDriver\AutoRoutingDriver;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\LowLevelDriver\ProxyDriver;
 use eLama\DirectApiV5\Request;
-use eLama\DirectApiV5\Serializer\ArraySerializer;
 use PHPUnit_Framework_TestCase;
 
 class AutoRoutingDriverTest extends PHPUnit_Framework_TestCase
@@ -33,6 +32,9 @@ class AutoRoutingDriverTest extends PHPUnit_Framework_TestCase
     public function execute_ProxyDriverCanHandleRequest_SendsRequestToProxy()
     {
         \Phake::when($this->proxyDriver)->canHandleRequest(\Phake::anyParameters())->thenReturn(true);
+        \Phake::when($this->proxyDriver)->execute(\Phake::anyParameters())->thenReturn(
+            \GuzzleHttp\Promise\promise_for('response')
+        );
 
         $request = new Request('token', 'service', 'method', 'params', 'login');
         $serializer = new DummySerializer();
@@ -55,6 +57,24 @@ class AutoRoutingDriverTest extends PHPUnit_Framework_TestCase
 
         \Phake::verify($this->directDriver)->execute($request, $serializer);
         \Phake::verify($this->proxyDriver, \Phake::never())->execute($request, $serializer);
+    }
+
+    /**
+     * @test
+     */
+    public function execute_ProxyServerIsNotAvailable_SendsRequestToDirect()
+    {
+        \Phake::when($this->proxyDriver)->canHandleRequest(\Phake::anyParameters())->thenReturn(true);
+        \Phake::when($this->proxyDriver)->execute(\Phake::anyParameters())->thenReturn(
+            \GuzzleHttp\Promise\rejection_for(new \Exception())
+        );
+
+        $request = new Request('token', 'service', 'method', 'params', 'login');
+        $serializer = new DummySerializer();
+        $this->autoRoutingDriver->execute($request, $serializer)->wait();
+
+        \Phake::verify($this->proxyDriver)->execute($request, $serializer);
+        \Phake::verify($this->directDriver)->execute($request, $serializer);
     }
 
 }

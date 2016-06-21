@@ -2,6 +2,7 @@
 
 namespace eLama\DirectApiV5\LowLevelDriver;
 
+use eLama\DirectApiV5\ErrorException;
 use eLama\DirectApiV5\Request;
 use eLama\DirectApiV5\Serializer\Serializer;
 use GuzzleHttp\Promise\Promise;
@@ -32,7 +33,15 @@ class AutoRoutingDriver implements LowLevelDriverInterface
     public function execute(Request $request, Serializer $serializer)
     {
         if ($this->proxyDriver->canHandleRequest($request)) {
-            return $this->proxyDriver->execute($request, $serializer);
+            return $this->proxyDriver
+                ->execute($request, $serializer)
+                ->otherwise(function ($reason) use ($request, $serializer) {
+                    if ($reason instanceof ErrorException) {
+                        return \GuzzleHttp\Promise\rejection_for($reason);
+                    }
+
+                    return $this->directDriver->execute($request, $serializer);
+                });
         }
 
         return $this->directDriver->execute($request, $serializer);
