@@ -15,10 +15,9 @@ use eLama\DirectApiV5\RequestBody\AddKeywordRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteKeywordRequestBody;
 use eLama\DirectApiV5\RequestBody\GetKeywordsRequestBody;
 
-class KeywordTest extends DirectCampaignExistenceDependantTestCase
+class KeywordTest extends AdGroupExistenceDependantTestCase
 {
     const PHRASE = 'тестовая фраза';
-    use AdGroupCarrier;
 
     /**
      * @var DtoAwareDirectDriver
@@ -100,19 +99,5 @@ class KeywordTest extends DirectCampaignExistenceDependantTestCase
         $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
 
         assertThat($responseBody->getResult()->getKeywords(), is(emptyArray()));
-    }
-
-    public static function setUpBeforeClass()
-    {
-        parent::setUpBeforeClass();
-
-        self::createAdGroup();
-    }
-
-    public static function tearDownAfterClass()
-    {
-        self::removeAdGroup();
-
-        parent::tearDownAfterClass();
     }
 }

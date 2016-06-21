@@ -11,8 +11,11 @@ use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\RequestBody\AddAdGroupRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteAdGroupRequestBody;
 
-trait AdGroupCarrier
+class AdGroupExistenceDependantTestCase extends DirectCampaignExistenceDependantTestCase
 {
+    /**
+     * @var int
+     */
     protected static $adGroupId;
 
     protected static function createAdGroup()
@@ -37,5 +40,19 @@ trait AdGroupCarrier
 
         /** @var DeleteResponseBody $responseBody */
         static::createDtoAwareDirectDriver()->call($request);
+    }
+
+    public static function setUpBeforeClass()
+    {
+        parent::setUpBeforeClass();
+
+        self::createAdGroup();
+    }
+
+    public static function tearDownAfterClass()
+    {
+        self::removeAdGroup();
+
+        parent::tearDownAfterClass();
     }
 }

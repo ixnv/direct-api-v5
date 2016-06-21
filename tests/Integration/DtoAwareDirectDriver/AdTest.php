@@ -17,14 +17,12 @@ use eLama\DirectApiV5\RequestBody\AddAdRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteAdRequestBody;
 use eLama\DirectApiV5\RequestBody\GetAdsRequestBody;
 
-class AdTest extends DirectCampaignExistenceDependantTestCase
+class AdTest extends AdGroupExistenceDependantTestCase
 {
 
     const TITLE = 'некий заголовок';
     const TEXT = 'Некоторый текст';
     const HREF = 'http://example.com';
-
-    use AdGroupCarrier;
 
     /**
      * @var DtoAwareDirectDriver
@@ -110,19 +108,5 @@ class AdTest extends DirectCampaignExistenceDependantTestCase
         $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
 
         assertThat($responseBody->getResult()->getAds(), is(emptyArray()));
-    }
-
-    public static function setUpBeforeClass()
-    {
-        parent::setUpBeforeClass();
-
-        self::createAdGroup();
-    }
-
-    public static function tearDownAfterClass()
-    {
-        self::removeAdGroup();
-
-        parent::tearDownAfterClass();
     }
 }
