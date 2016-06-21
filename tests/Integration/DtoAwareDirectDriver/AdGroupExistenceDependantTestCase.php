@@ -39,7 +39,7 @@ class AdGroupExistenceDependantTestCase extends DirectCampaignExistenceDependant
         );
 
         /** @var DeleteResponseBody $responseBody */
-        static::createDtoAwareDirectDriver()->call($request);
+        static::createDtoAwareDirectDriver()->call($request)->wait();
     }
 
     public static function setUpBeforeClass()

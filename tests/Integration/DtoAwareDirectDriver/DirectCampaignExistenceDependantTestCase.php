@@ -50,7 +50,7 @@ abstract class DirectCampaignExistenceDependantTestCase extends \PHPUnit_Framewo
                 new IdsCriteria([static::$campaignId])
             ));
 
-            $driver->call($request);
+            $driver->call($request)->wait();
         }
     }
 
