@@ -13,6 +13,7 @@ class LowLevelDriver implements LowLevelDriverInterface
     const URL_SANDBOX = 'https://api-sandbox.direct.yandex.com/json/v5';
     const URL_PRODUCTION = 'https://api.direct.yandex.com/json/v5';
     const HEADER_CLIENT_LOGIN = 'Client-Login';
+    const HEADER_AGENCY_UNITS = 'Use-Operator-Units';
 
     /** @var  GuzzleAdapter; */
     protected $client;
@@ -55,7 +56,7 @@ class LowLevelDriver implements LowLevelDriverInterface
         $this->logger->info("Going to send request", $this->createLogContext($uniqId, $request, $requestBodyInJson));
 
         $url = $this->baseUrl . '/' . $request->getService();
-        $headers = $this->createHeaders($request->getToken(), $request->getClientLogin());
+        $headers = $this->createHeaders($request);
 
         $startTime = microtime(true);
         return $this->client->sendAsync($url, $headers, $requestBodyInJson)
@@ -84,11 +85,17 @@ class LowLevelDriver implements LowLevelDriverInterface
                     'response_body' => $contents,
                 ];
 
-                $unitsContext = $this->createUnitsContext($directResponse);
+                $unitsContext = $this->createUnitsContext($directResponse, $request->usesAgencyUnits());
 
-                /* Данный способ измерения времени крайне ненадежный
+                /**
+                 * Данный способ измерения времени крайне ненадежный
                  * в случае выполнения нескольких запросов в параллели,
-                 * но лучше варианта не нашел */
+                 * но лучше варианта не нашел
+                 *
+                 * TODO dice4x4 Можно использовать массив для сохранения контекста
+                 * и уникальный идентификатор запроса либо Symfony Stopwatch
+                 *
+                 */
                 $responseContext['tookInMs'] = (int)(($endTime - $startTime) * 1000);
 
                 $context = array_merge($requestContext, $responseContext, $unitsContext, $errorContext);
@@ -142,18 +149,24 @@ class LowLevelDriver implements LowLevelDriverInterface
     }
 
     /**
+     * @param Request $request
+     *
      * @return array
      */
-    private function createHeaders($token, $clientLogin = null)
+    private function createHeaders(Request $request)
     {
         $headers = [
             'Accept-Language' => 'ru',
             'Content-Type' => 'application/json; charset=utf-8',
-            'Authorization' => 'Bearer ' . $token
+            'Authorization' => 'Bearer ' . $request->getToken(),
         ];
 
-        if ($clientLogin) {
-            $headers[self::HEADER_CLIENT_LOGIN] = $clientLogin;
+        if ($request->getClientLogin()) {
+            $headers[self::HEADER_CLIENT_LOGIN] = $request->getClientLogin();
+        }
+
+        if($request->usesAgencyUnits()) {
+            $headers[self::HEADER_AGENCY_UNITS] = 'true';
         }
 
         return $headers;
@@ -176,6 +189,7 @@ class LowLevelDriver implements LowLevelDriverInterface
             'service' => $request->getService(),
             'request_body' => $requestBodyInJson,
             'token' => $request->getToken(),
+            'agencyUnitsUsed' => $request->usesAgencyUnits()
         ];
 
         return $context;
@@ -183,20 +197,22 @@ class LowLevelDriver implements LowLevelDriverInterface
 
     /**
      * @param Response $response
+     * @param bool $isUseAgencyUnits
+     *
      * @return array
      */
-    private function createUnitsContext(Response $response)
+    private function createUnitsContext(Response $response, $isUseAgencyUnits = false)
     {
         $unitsInfo = $response->getUnits();
         if (!$unitsInfo) {
             return [];
         }
-
+        $prefix = $isUseAgencyUnits ? 'agency_' : '';
         return [
-            'response_units_taken' => $unitsInfo->getTaken(),
-            'response_units_left' => $unitsInfo->getLeft(),
-            'response_units_dailyLimit' => $unitsInfo->getDailyLimit(),
-            'response_units_percentLeft' => round($unitsInfo->getLeft()/$unitsInfo->getDailyLimit() * 100, 1)
+            "response_${prefix}units_taken" => $unitsInfo->getTaken(),
+            "response_${prefix}units_left" => $unitsInfo->getLeft(),
+            "response_${prefix}units_dailyLimit" => $unitsInfo->getDailyLimit(),
+            "response_${prefix}units_percentLeft" => round($unitsInfo->getLeft()/$unitsInfo->getDailyLimit() * 100, 1)
         ];
     }
 

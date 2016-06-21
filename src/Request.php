@@ -19,6 +19,9 @@ class Request
     /** @var mixed */
     private $params;
 
+    /** @var boolean */
+    private $useAgencyUnits;
+
     /**
      * Request constructor.
      *
@@ -27,14 +30,16 @@ class Request
      * @param string $method
      * @param mixed $params
      * @param string $clientLogin
+     * @param boolean $useAgencyUnits
      */
-    public function __construct($token, $service, $method, $params, $clientLogin = null)
+    public function __construct($token, $service, $method, $params, $clientLogin = null, $useAgencyUnits = false)
     {
         $this->token = $token;
         $this->service = $service;
         $this->method = $method;
         $this->params = $params;
         $this->clientLogin = $clientLogin;
+        $this->useAgencyUnits = (bool) $useAgencyUnits;
     }
 
     /**
@@ -84,5 +89,13 @@ class Request
         $request->token = substr($this->token, 0, 4) . '...' . substr($this->token, -4, 4) ;
 
         return $request;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function usesAgencyUnits()
+    {
+        return $this->useAgencyUnits;
     }
 }

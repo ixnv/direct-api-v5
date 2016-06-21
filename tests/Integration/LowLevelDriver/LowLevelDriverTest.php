@@ -96,17 +96,45 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param $token
+     * @test
+     */
+    public function execute_UseAgencyUnits_LogsHasKeys()
+    {
+        $logger = Phake::mock(LoggerInterface::class);
+        $lowLevelDriver = LowLevelDriver::createAdapterForClient(new Client(), $logger, LowLevelDriver::URL_SANDBOX);
+
+        $lowLevelDriver->execute($this->createRequest(GeneralTest::TOKEN, $useAgencyUnits = true), $this->serializer)->wait();
+
+        Phake::verify($logger)->info(
+            containsStringIgnoringCase('request'),
+            hasKeyValuePair('agencyUnitsUsed', equalTo(true))
+        );
+        Phake::verify($logger)->warning(
+            containsStringIgnoringCase('response'),
+            allOf(
+                hasKeyValuePair('response_agency_units_taken', typeOf('integer')),
+                hasKeyValuePair('response_agency_units_left', typeOf('integer')),
+                hasKeyValuePair('response_agency_units_dailyLimit', typeOf('integer')),
+                hasKeyValuePair('response_agency_units_percentLeft', typeOf('double'))
+            )
+        );
+    }
+
+    /**
+     * @param string $token
+     * @param bool $useAgencyUnits
+     *
      * @return Request
      */
-    private function createRequest($token = GeneralTest::TOKEN)
+    private function createRequest($token = GeneralTest::TOKEN, $useAgencyUnits = false)
     {
         return new Request(
             $token,
             'campaigns',
             'get',
             [],
-            GeneralTest::LOGIN
+            GeneralTest::LOGIN,
+            $useAgencyUnits
         );
     }
 

@@ -115,17 +115,73 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param $token
+     * @test
+     */
+    public function doRequest_UseAgencyUnits_RequestHasHeader()
+    {
+        $adapter = Phake::partialMock(TestGuzzleAdapter::class);
+        $driver = new LowLevelDriver($adapter, $this->logger);
+        $driver->execute(
+            $this->createRequest(self::SOME_TOKEN, $useAgencyUnits = true),
+            $this->serializer
+        )->wait();
+
+        Phake::verify($adapter)->sendAsync(
+            stringValue(),
+            hasKeyValuePair(equalTo('Use-Operator-Units'), equalTo('true')),
+            stringValue()
+        );
+    }
+    /**
+     * @test
+     */
+    public function doRequest_UseAgencyUnits_RequestLogsMark()
+    {
+        $this->driver->execute(
+            $this->createRequest(self::SOME_TOKEN, $useAgencyUnits = true),
+            $this->serializer
+        )->wait();
+
+        Phake::verify($this->logger)->info(containsStringIgnoringCase('request'), allOf(
+            hasKeyValuePair('agencyUnitsUsed', equalTo(true))
+        ));
+    }
+
+    /**
+     * @test
+     */
+    public function doRequest_UseAgencyUnits_ResponseLogsUnitsInfo()
+    {
+        $this->guzzleAdapter->setResponse(['units' => '1/2/3']);
+
+        $this->driver->execute(
+            $this->createRequest(self::SOME_TOKEN, $useAgencyUnits = true),
+            $this->serializer
+        )->wait();
+
+        Phake::verify($this->logger)->info(containsStringIgnoringCase('response'), allOf(
+            hasKeyValuePair('response_agency_units_taken', equalTo(1)),
+            hasKeyValuePair('response_agency_units_left', equalTo(2)),
+            hasKeyValuePair('response_agency_units_dailyLimit', equalTo(3)),
+            hasKeyValuePair('response_agency_units_percentLeft', equalTo(66.7))
+        ));
+    }
+
+    /**
+     * @param string $token
+     * @param bool $useAgencyUnits
+     *
      * @return Request
      */
-    private function createRequest($token = self::SOME_TOKEN)
+    private function createRequest($token = self::SOME_TOKEN, $useAgencyUnits = false)
     {
         $request = new Request(
             $token,
             'service value',
             'method value',
             ['some key' => 'some parameter'],
-            'client login'
+            'client login',
+            $useAgencyUnits
         );
 
         return $request;
