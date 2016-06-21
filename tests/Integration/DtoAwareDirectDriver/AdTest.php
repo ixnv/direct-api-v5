@@ -4,7 +4,9 @@ namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
 
 use eLama\DirectApiV5\Dto\Ad\AdAddItem;
 use eLama\DirectApiV5\Dto\Ad\AddRequest;
+use eLama\DirectApiV5\Dto\Ad\AdsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Ad\DeleteRequest;
+use eLama\DirectApiV5\Dto\Ad\GetResponseBody;
 use eLama\DirectApiV5\Dto\Ad\TextAdAdd;
 use eLama\DirectApiV5\Dto\Ad\YesNoEnum;
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
@@ -13,10 +15,14 @@ use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\DtoAwareDirectDriver;
 use eLama\DirectApiV5\RequestBody\AddAdRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteAdRequestBody;
+use eLama\DirectApiV5\RequestBody\GetAdsRequestBody;
 
 class AdTest extends DirectCampaignExistenceDependantTestCase
 {
 
+    const TITLE = 'некий заголовок';
+    const TEXT = 'Некоторый текст';
+    const HREF = 'http://example.com';
     use AdGroupCarrier;
 
     /**
@@ -35,8 +41,8 @@ class AdTest extends DirectCampaignExistenceDependantTestCase
     public function addAd()
     {
         $adAddItem = new AdAddItem(self::$adGroupId);
-        $textAd = new TextAdAdd('Некоторый текст', 'некий заголовок', YesNoEnum::NO);
-        $textAd->setHref('http://example.com');
+        $textAd = new TextAdAdd(self::TEXT, self::TITLE, YesNoEnum::NO);
+        $textAd->setHref(self::HREF);
         $adAddItem->setTextAd($textAd);
 
         $requestBody = new AddAdRequestBody(new AddRequest([$adAddItem]));
@@ -54,6 +60,26 @@ class AdTest extends DirectCampaignExistenceDependantTestCase
      * @test
      * @depends addAd
      */
+    public function getAd($id)
+    {
+        $requestBody = new GetAdsRequestBody(
+            (new AdsSelectionCriteria())->setIds([$id])
+        );
+
+        /** @var GetResponseBody $responseBody */
+        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
+
+        assertThat($responseBody->getResult()->getAds()[0]->getTextAd()->getTitle(), is(equalTo(self::TITLE)));
+        assertThat($responseBody->getResult()->getAds()[0]->getTextAd()->getText(), is(equalTo(self::TEXT)));
+        assertThat($responseBody->getResult()->getAds()[0]->getTextAd()->getHref(), is(equalTo(self::HREF)));
+
+        return $id;
+    }
+
+    /**
+     * @test
+     * @depends getAd
+     */
     public function deleteAd($id)
     {
         $request = new DeleteAdRequestBody(
@@ -67,6 +93,22 @@ class AdTest extends DirectCampaignExistenceDependantTestCase
         assertThat($id, is(equalTo($deletedId)));
 
         return $id;
+    }
+
+    /**
+     * @test
+     * @depends deleteAd
+     */
+    public function getDeletedAd($id)
+    {
+        $requestBody = new GetAdsRequestBody(
+            (new AdsSelectionCriteria())->setIds([$id])
+        );
+
+        /** @var GetResponseBody $responseBody */
+        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
+
+        assertThat($responseBody->getResult()->getAds(), is(emptyArray()));
     }
 
     public static function setUpBeforeClass()
