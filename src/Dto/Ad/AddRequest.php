@@ -12,16 +12,16 @@ class AddRequest
 {
 
     /**
-     * @JMS\Type("array<eLama\DirectApiV5\Dto\Ad\AdAddItem>")
+     * @JMS\Type("eLama\DirectApiV5\Dto\Ad\AdAddItem")
      *
-     * @var AdAddItem[] $Ads
+     * @var AdAddItem $Ads
      */
     private $Ads;
 
     /**
-     * @param AdAddItem[] $Ads
+     * @param AdAddItem $Ads
      */
-    public function __construct(array $Ads)
+    public function __construct(AdAddItem $Ads = null)
     {
       $this->Ads = $Ads;
     }
@@ -35,10 +35,10 @@ class AddRequest
     }
 
     /**
-     * @param AdAddItem[] $Ads
+     * @param AdAddItem $Ads
      * @return \eLama\DirectApiV5\Dto\Ad\AddRequest
      */
-    public function setAds(array $Ads)
+    public function setAds(AdAddItem $Ads)
     {
       $this->Ads = $Ads;
       return $this;
