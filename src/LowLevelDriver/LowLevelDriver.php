@@ -85,7 +85,7 @@ class LowLevelDriver implements LowLevelDriverInterface
                     'response_body' => $contents,
                 ];
 
-                $unitsContext = $this->createUnitsContext($directResponse, $request->isUseAgencyUnits());
+                $unitsContext = $this->createUnitsContext($directResponse, $request->usesAgencyUnits());
 
                 /**
                  * Данный способ измерения времени крайне ненадежный
@@ -165,7 +165,7 @@ class LowLevelDriver implements LowLevelDriverInterface
             $headers[self::HEADER_CLIENT_LOGIN] = $request->getClientLogin();
         }
 
-        if($request->isUseAgencyUnits()) {
+        if($request->usesAgencyUnits()) {
             $headers[self::HEADER_AGENCY_UNITS] = 'true';
         }
 
@@ -189,7 +189,7 @@ class LowLevelDriver implements LowLevelDriverInterface
             'service' => $request->getService(),
             'request_body' => $requestBodyInJson,
             'token' => $request->getToken(),
-            'agencyUnitsUsed' => $request->isUseAgencyUnits()
+            'agencyUnitsUsed' => $request->usesAgencyUnits()
         ];
 
         return $context;

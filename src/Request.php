@@ -94,7 +94,7 @@ class Request
     /**
      * @return boolean
      */
-    public function isUseAgencyUnits()
+    public function usesAgencyUnits()
     {
         return $this->useAgencyUnits;
     }
