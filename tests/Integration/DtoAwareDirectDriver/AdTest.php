@@ -23,6 +23,7 @@ class AdTest extends DirectCampaignExistenceDependantTestCase
     const TITLE = 'некий заголовок';
     const TEXT = 'Некоторый текст';
     const HREF = 'http://example.com';
+
     use AdGroupCarrier;
 
     /**
