@@ -13,7 +13,7 @@ class DeleteRequest
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Keyword\IdsCriteria")
+     * @JMS\Type("eLama\DirectApiV5\Dto\General\IdsCriteria")
      *
      * @var IdsCriteria $SelectionCriteria
      */
