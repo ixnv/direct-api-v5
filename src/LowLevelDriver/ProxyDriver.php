@@ -5,6 +5,7 @@ namespace eLama\DirectApiV5\LowLevelDriver;
 use eLama\DirectApiV5\Request;
 use eLama\DirectApiV5\Response;
 use eLama\DirectApiV5\Serializer\Serializer;
+use GuzzleHttp\Client;
 
 class ProxyDriver implements ProxyDriverInterface
 {
@@ -20,6 +21,21 @@ class ProxyDriver implements ProxyDriverInterface
     private $cacheControlMaxAge;
 
     /**
+     * @param Client $client
+     * @param string $baseUrl
+     * @param int $cacheControlMaxAge
+     * @return ProxyDriver
+     */
+    public static function createAdapterForClient(Client $client, $baseUrl, $cacheControlMaxAge)
+    {
+        if (version_compare($client::VERSION, '6', 'ge')) {
+            return new static(new Guzzle6Adapter($client), $baseUrl, $cacheControlMaxAge);
+        } else {
+            return new static(new Guzzle5Adapter($client), $baseUrl, $cacheControlMaxAge);
+        }
+    }
+
+    /**
      * @param GuzzleAdapter $guzzleAdapter
      * @param string $baseUrl
      * @param int $cacheControlMaxAge
@@ -30,7 +46,6 @@ class ProxyDriver implements ProxyDriverInterface
         $this->baseUrl = $baseUrl;
         $this->cacheControlMaxAge = $cacheControlMaxAge;
     }
-
 
     /**
      * @inheritdoc

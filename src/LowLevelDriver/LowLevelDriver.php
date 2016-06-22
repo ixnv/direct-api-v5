@@ -6,6 +6,7 @@ use eLama\DirectApiV5\Request;
 use eLama\DirectApiV5\Response;
 use eLama\DirectApiV5\Serializer\Serializer;
 use eLama\DirectApiV5\UnitsInfo;
+use GuzzleHttp\Client;
 use Psr\Log\LoggerInterface;
 
 class LowLevelDriver implements LowLevelDriverInterface
@@ -23,7 +24,7 @@ class LowLevelDriver implements LowLevelDriverInterface
     /** @var LoggerInterface */
     private $logger;
 
-    public static function createAdapterForClient(\GuzzleHttp\Client $client, LoggerInterface $logger, $baseUrl = self::URL_PRODUCTION)
+    public static function createAdapterForClient(Client $client, LoggerInterface $logger, $baseUrl = self::URL_PRODUCTION)
     {
         if (version_compare($client::VERSION, '6', 'ge')) {
             return new static(new Guzzle6Adapter($client), $logger, $baseUrl);
