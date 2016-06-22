@@ -4,6 +4,7 @@ namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
 
 use eLama\DirectApiV5\Dto\Ad\AdAddItem;
 use eLama\DirectApiV5\Dto\Ad\AddRequest;
+use eLama\DirectApiV5\Dto\Ad\AdGetItem;
 use eLama\DirectApiV5\Dto\Ad\AdsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Ad\DeleteRequest;
 use eLama\DirectApiV5\Dto\Ad\GetResponseBody;
@@ -27,7 +28,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
     /**
      * @var DtoAwareDirectDriver
      */
-    private $driver;
+    protected $driver;
 
     protected function setUp()
     {
@@ -59,20 +60,15 @@ class AdTest extends AdGroupExistenceDependantTestCase
      * @test
      * @depends addAd
      */
-    public function getAd($id)
+    public function getAd($adId)
     {
-        $requestBody = new GetAdsRequestBody(
-            (new AdsSelectionCriteria())->setIds([$id])
-        );
+        $ad = $this->getAdInCampaignWithId(self::$campaignId, $adId);
 
-        /** @var GetResponseBody $responseBody */
-        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
+        assertThat($ad->getTextAd()->getTitle(), is(equalTo(self::TITLE)));
+        assertThat($ad->getTextAd()->getText(), is(equalTo(self::TEXT)));
+        assertThat($ad->getTextAd()->getHref(), is(equalTo(self::HREF)));
 
-        assertThat($responseBody->getResult()->getAds()[0]->getTextAd()->getTitle(), is(equalTo(self::TITLE)));
-        assertThat($responseBody->getResult()->getAds()[0]->getTextAd()->getText(), is(equalTo(self::TEXT)));
-        assertThat($responseBody->getResult()->getAds()[0]->getTextAd()->getHref(), is(equalTo(self::HREF)));
-
-        return $id;
+        return $adId;
     }
 
     /**
@@ -100,13 +96,35 @@ class AdTest extends AdGroupExistenceDependantTestCase
      */
     public function getDeletedAd($id)
     {
+        $ad = $this->getAdInCampaignWithId(self::$campaignId, $id);
+
+        assertThat($ad, is(nullValue()));
+    }
+
+    /**
+     * @param $campaignId
+     * @param $adId
+     * @return array|mixed
+     */
+    private function getAdInCampaignWithId($campaignId, $adId)
+    {
         $requestBody = new GetAdsRequestBody(
-            (new AdsSelectionCriteria())->setIds([$id])
+            (new AdsSelectionCriteria())->setCampaignIds([$campaignId])
         );
 
         /** @var GetResponseBody $responseBody */
         $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
 
-        assertThat($responseBody->getResult()->getAds(), is(emptyArray()));
+        $adGetItems = $responseBody->getResult()->getAds();
+
+        $targetAd = array_filter(
+            $adGetItems,
+            function (AdGetItem $ad) use ($adId) {
+                return $ad->getId() == $adId;
+            }
+        );
+        $targetAd = array_pop($targetAd);
+
+        return $targetAd;
     }
 }

@@ -26,6 +26,8 @@ class SelectionCriteria
         }
 
         $this->CampaignIds[] = $campaignId;
+
+        return $this;
     }
 
     /**
@@ -38,6 +40,8 @@ class SelectionCriteria
         }
 
         $this->CampaignIds = $campaignIds;
+
+        return $this;
     }
 
     /**
