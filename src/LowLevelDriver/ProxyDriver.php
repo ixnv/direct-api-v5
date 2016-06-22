@@ -6,7 +6,7 @@ use eLama\DirectApiV5\Request;
 use eLama\DirectApiV5\Response;
 use eLama\DirectApiV5\Serializer\Serializer;
 
-class ProxyDriver implements LowLevelDriverInterface
+class ProxyDriver implements ProxyDriverInterface
 {
     /** @var  GuzzleAdapter */
     private $guzzleAdapter;
@@ -70,7 +70,7 @@ class ProxyDriver implements LowLevelDriverInterface
      */
     public function canHandleRequest(Request $request)
     {
-        return $request->getMethod() === 'get' && $request->getService() === 'campaigns';
+        return $request->getMethod() === 'get' && in_array($request->getService(), ['campaigns', 'ads'], true);
     }
 
     /**
