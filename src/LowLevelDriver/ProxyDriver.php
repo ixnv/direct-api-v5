@@ -19,6 +19,10 @@ class ProxyDriver implements ProxyDriverInterface
 
     /** @var int */
     private $cacheControlMaxAge;
+    /**
+     * @var array
+     */
+    private $servicesToProxy;
 
     /**
      * @param Client $client
@@ -40,11 +44,21 @@ class ProxyDriver implements ProxyDriverInterface
      * @param string $baseUrl
      * @param int $cacheControlMaxAge
      */
-    public function __construct(GuzzleAdapter $guzzleAdapter, $baseUrl, $cacheControlMaxAge = 300)
-    {
+    public function __construct(
+        GuzzleAdapter $guzzleAdapter,
+        $baseUrl,
+        $cacheControlMaxAge = 300,
+        array $servicesToProxy = null
+    ) {
         $this->guzzleAdapter = $guzzleAdapter;
         $this->baseUrl = $baseUrl;
         $this->cacheControlMaxAge = $cacheControlMaxAge;
+
+        if ($servicesToProxy === null) {
+            $servicesToProxy = ['campaigns'];
+        }
+
+        $this->servicesToProxy = $servicesToProxy;
     }
 
     /**
@@ -85,7 +99,7 @@ class ProxyDriver implements ProxyDriverInterface
      */
     public function canHandleRequest(Request $request)
     {
-        return $request->getMethod() === 'get' && in_array($request->getService(), ['campaigns', 'ads'], true);
+        return $request->getMethod() === 'get' && in_array($request->getService(), $this->servicesToProxy, true);
     }
 
     /**
