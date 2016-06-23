@@ -99,7 +99,7 @@ class EnsureSuccessDriverTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function execute_NotEnoughUnitsDisallowedMethod_NotLogsAgencyUnitUsed()
+    public function execute_NotEnoughUnitsDisallowedMethod_LogsAgencyUnitNotUsed()
     {
         $this->setResponse();
         $this->driver->execute(
@@ -144,27 +144,6 @@ class EnsureSuccessDriverTest extends \PHPUnit_Framework_TestCase
             $method,
             [],
             'client login'
-        );
-    }
-}
-
-class NotEnoughUnitsDriver implements LowLevelDriverInterface
-{
-
-    public function execute(Request $request, Serializer $serializer)
-    {
-        return new Response(
-            [
-                'error' => [
-                    "request_id" => "123456",
-                    "error_code" => ErrorCode::NOT_ENOUGH_YANDEX_UNITS,
-                    "error_string" => "Test error",
-                    "error_detail" => "Test error detail"
-                ]
-            ],
-            '123456',
-            new \DateTimeImmutable(),
-            new UnitsInfo(0, 0, 65000)
         );
     }
 }
