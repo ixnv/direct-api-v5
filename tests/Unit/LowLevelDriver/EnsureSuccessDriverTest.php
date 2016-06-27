@@ -15,22 +15,22 @@ class EnsureSuccessDriverTest extends \PHPUnit_Framework_TestCase
 {
     const SOME_TOKEN = 'some token';
     /**
-     * @type EnsureSuccessDriver
+     * @var EnsureSuccessDriver
      */
     private $driver;
 
     /**
-     * @type LoggerInterface|\Phake_IMock
+     * @var LoggerInterface|\Phake_IMock
      */
     private $logger;
 
     /**
-     * @type ArraySerializer
+     * @var ArraySerializer
      */
     private $serializer;
 
     /**
-     * @type TestGuzzleAdapter
+     * @var TestGuzzleAdapter
      */
     private $guzzleAdapter;
 
