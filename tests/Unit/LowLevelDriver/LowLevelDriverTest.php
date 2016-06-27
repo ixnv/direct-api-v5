@@ -2,18 +2,13 @@
 
 namespace eLama\DirectApiV5\Test\Unit\LowLevelDriver;
 
-use eLama\DirectApiV5\LowLevelDriver\GuzzleAdapter;
+use eLama\DirectApiV5\JmsFactory;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\Request;
 use eLama\DirectApiV5\Serializer\ArraySerializer;
-use GuzzleHttp\Client;
-use GuzzleHttp\Promise\PromiseInterface;
-use GuzzleHttp\Stream\Stream;
 use Phake;
 use PHPUnit_Framework_TestCase;
 use Psr\Log\LoggerInterface;
-use GuzzleHttp\Psr7\Response as Guzzle6Response;
-use GuzzleHttp\Message\Response as Guzzle5Response;
 
 class LowLevelDriverTest extends PHPUnit_Framework_TestCase
 {
@@ -27,12 +22,12 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
     /** @var LowLevelDriver */
     private $driver;
 
-    /** @var  GuzzleAdapter */
+    /** @var  TestGuzzleAdapter */
     private $guzzleAdapter;
 
     protected function setUp()
     {
-        $jms = \eLama\DirectApiV5\JmsFactory::create()->serializer();
+        $jms = JmsFactory::create()->serializer();
 
         $this->logger = Phake::mock(LoggerInterface::class);
         $this->serializer = new ArraySerializer($jms);
@@ -187,43 +182,4 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
         return $request;
     }
 
-}
-
-class TestGuzzleAdapter implements GuzzleAdapter
-{
-    /**
-     * @var mixed
-     */
-    public $result;
-
-    public function __construct()
-    {
-        $this->setResponse();
-    }
-
-    public function setResponse(array $headers = [], $body = '{}')
-    {
-        $this->result = $this->createResponse($headers, $body);
-    }
-
-    /**
-     * @param array $headers
-     * @param string $body
-     * @return Guzzle5Response|Guzzle6Response
-     */
-    private function createResponse(array $headers, $body)
-    {
-        return version_compare(Client::VERSION, 6, 'ge') ?
-            new Guzzle6Response(200, $headers, $body)
-            : new Guzzle5Response(200, $headers, Stream::factory($body));
-    }
-
-    /**
-     * @param mixed $guzzleRequest
-     * @return PromiseInterface
-     */
-    public function sendAsync($url, $headers, $jsonBody)
-    {
-        return \GuzzleHttp\Promise\promise_for($this->result);
-    }
 }

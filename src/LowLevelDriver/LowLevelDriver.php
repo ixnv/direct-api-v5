@@ -92,10 +92,6 @@ class LowLevelDriver implements LowLevelDriverInterface
                  * Данный способ измерения времени крайне ненадежный
                  * в случае выполнения нескольких запросов в параллели,
                  * но лучше варианта не нашел
-                 *
-                 * TODO dice4x4 Можно использовать массив для сохранения контекста
-                 * и уникальный идентификатор запроса либо Symfony Stopwatch
-                 *
                  */
                 $responseContext['tookInMs'] = (int)(($endTime - $startTime) * 1000);
 
