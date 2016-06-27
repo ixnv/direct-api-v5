@@ -108,7 +108,7 @@ class EnsureSuccessDriverTest extends \PHPUnit_Framework_TestCase
         ));
     }
 
-    public function setResponse($units = '0/0/3', $body = false)
+    private function setResponse($units = '0/0/3', $body = false)
     {
         if(!$body) {
             $body = [
@@ -129,7 +129,7 @@ class EnsureSuccessDriverTest extends \PHPUnit_Framework_TestCase
      *
      * @return Request
      */
-    public function createRequest($service = 'campaign', $method = 'resume')
+    private function createRequest($service = 'campaign', $method = 'resume')
     {
         return new Request(
             self::SOME_TOKEN,
