@@ -6,13 +6,8 @@ use eLama\DirectApiV5\ErrorCode;
 use eLama\DirectApiV5\JmsFactory;
 use eLama\DirectApiV5\LowLevelDriver\EnsureSuccessDriver;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
-use eLama\DirectApiV5\LowLevelDriver\LowLevelDriverInterface;
 use eLama\DirectApiV5\Request;
-use eLama\DirectApiV5\Response;
 use eLama\DirectApiV5\Serializer\ArraySerializer;
-use eLama\DirectApiV5\Serializer\Serializer;
-use eLama\DirectApiV5\UnitsInfo;
-use GuzzleHttp\Promise\Promise;
 use Phake;
 use Psr\Log\LoggerInterface;
 

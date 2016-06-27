@@ -1,7 +1,5 @@
 <?php
-/**
- * @author: Ilya Cherepanov <i.cherepanov@elama.ru>
- */
+
 namespace eLama\DirectApiV5\Test\Unit\LowLevelDriver;
 
 use eLama\DirectApiV5\LowLevelDriver\GuzzleAdapter;
