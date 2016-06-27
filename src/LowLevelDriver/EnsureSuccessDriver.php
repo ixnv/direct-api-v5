@@ -1,7 +1,4 @@
 <?php
-/**
- * @author: Ilya Cherepanov <i.cherepanov@elama.ru>
- */
 
 namespace eLama\DirectApiV5\LowLevelDriver;
 
@@ -26,14 +23,16 @@ class EnsureSuccessDriver implements LowLevelDriverInterface
             'resume'
         ]
     ];
+
     public function __construct(LowLevelDriverInterface $driver)
     {
         $this->driver = $driver;
     }
+
     public function execute(Request $request, Serializer $serializer)
     {
         return $this->driver->execute($request, $serializer)->then(
-            function(Response $response) use($request, $serializer) {
+            function(Response $response) use ($request, $serializer) {
                 $body = $response->getUnserializedBody();
 
                 if (isset($body['error']['error_code']) && $body['error']['error_code'] == ErrorCode::NOT_ENOUGH_YANDEX_UNITS) {
