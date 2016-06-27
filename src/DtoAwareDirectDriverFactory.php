@@ -60,7 +60,7 @@ class DtoAwareDirectDriverFactory
      * @param int $cacheMaxAge in seconds
      * @return DtoAwareDirectDriver
      */
-    public function createThroughProxyDriverWithFallback($token, $login, $cacheMaxAge)
+    public function createProxyDriverWithFallback($token, $login, $cacheMaxAge)
     {
         $lowLevelDriver = new LowLevelDriver(
             $this->createGuzzleAdapter(),
