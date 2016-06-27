@@ -29,7 +29,6 @@ class MobileAppCampaignNetworkStrategy extends MobileAppCampaignStrategyBase
      */
     public function __construct($BiddingStrategyType = null)
     {
-      parent::__construct();
       $this->BiddingStrategyType = $BiddingStrategyType;
     }
 

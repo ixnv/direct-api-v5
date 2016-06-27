@@ -22,7 +22,6 @@ class DynamicTextCampaignSearchStrategy extends DynamicTextCampaignStrategyBase
      */
     public function __construct($BiddingStrategyType = null)
     {
-      parent::__construct();
       $this->BiddingStrategyType = $BiddingStrategyType;
     }
 
