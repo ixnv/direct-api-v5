@@ -14,6 +14,7 @@ use Psr\Log\LoggerInterface;
 class EnsureSuccessDriverTest extends \PHPUnit_Framework_TestCase
 {
     const SOME_TOKEN = 'some token';
+
     /**
      * @var EnsureSuccessDriver
      */

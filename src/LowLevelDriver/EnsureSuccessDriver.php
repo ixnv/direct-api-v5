@@ -33,22 +33,19 @@ class EnsureSuccessDriver implements LowLevelDriverInterface
     {
         return $this->driver->execute($request, $serializer)->then(
             function(Response $response) use ($request, $serializer) {
-                $body = $response->getUnserializedBody();
-
-                if (isset($body['error']['error_code']) && $body['error']['error_code'] == ErrorCode::NOT_ENOUGH_YANDEX_UNITS) {
-                    if ($this->isMethodAllowed($request->getService(), $request->getMethod())) {
-                        $response = $this->driver->execute(
-                            new Request(
-                                $request->getToken(),
-                                $request->getService(),
-                                $request->getMethod(),
-                                $request->getParams(),
-                                $request->getClientLogin(),
-                                $useAgencyUnits = true
-                            ),
-                            $serializer
-                        );
-                    }
+                if ($this->isResponseHasError($response, ErrorCode::NOT_ENOUGH_YANDEX_UNITS) &&
+                    $this->isMethodAllowed($request->getService(), $request->getMethod())) {
+                    $response = $this->driver->execute(
+                        new Request(
+                            $request->getToken(),
+                            $request->getService(),
+                            $request->getMethod(),
+                            $request->getParams(),
+                            $request->getClientLogin(),
+                            $useAgencyUnits = true
+                        ),
+                        $serializer
+                    );
                 }
 
                 return $response;
@@ -56,6 +53,11 @@ class EnsureSuccessDriver implements LowLevelDriverInterface
         );
     }
 
+    protected function isResponseHasError(Response $response, $error)
+    {
+        $body = $response->getUnserializedBody();
+        return isset($body['error']['error_code']) && $body['error']['error_code'] == $error;
+    }
     protected function isMethodAllowed($service, $method)
     {
         return isset($this->allowedMethods[$service]) && in_array($method, $this->allowedMethods[$service]);
