@@ -61,7 +61,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
     /**
      * @test
      */
-    public function addSeveralAds()
+    public function addAdsByQuantity()
     {
         $adItems = $this->generateAdAddItems(self::ADS_QUANTITY);
 
@@ -83,7 +83,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
 
     /**
      * @test
-     * @depends addSeveralAds
+     * @depends addAdsByQuantity
      */
     public function getAdsByIdsWithPagination($adsIds)
     {
