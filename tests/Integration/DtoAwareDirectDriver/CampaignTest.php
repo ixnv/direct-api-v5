@@ -32,6 +32,8 @@ use eLama\DirectApiV5\RequestBody\SuspendCampaignsRequestBody;
 use eLama\DirectApiV5\RequestBody\UpdateCampaignRequestBody;
 use GuzzleHttp\Client;
 use Monolog\Logger;
+use eLama\DirectApiV5\Dto\General\ArrayOfString;
+use eLama\DirectApiV5\Dto\Campaign\Notification;
 
 class CampaignTest extends \PHPUnit_Framework_TestCase
 {
@@ -59,18 +61,17 @@ class CampaignTest extends \PHPUnit_Framework_TestCase
     {
         $campaignAddItem = new CampaignAddItem(self::NAME, (new \DateTime())->format('Y-m-d'));
         $campaignAddItem->setTextCampaign(
-            new TextCampaignAddItem(
-                new TextCampaignStrategyAdd(
-                    new TextCampaignSearchStrategyAdd(TextCampaignSearchStrategyTypeEnum::HIGHEST_POSITION),
-                    new TextCampaignNetworkStrategyAdd(TextCampaignNetworkStrategyTypeEnum::MAXIMUM_COVERAGE)
-                )
-            )
+            $this->instanceTextCampaignAddItem()
         );
+
         $request = new AddCampaignRequestBody(
             new AddRequest([
                 $campaignAddItem,
             ])
         );
+
+        $this->addAdditionalParamsToCampaign($campaignAddItem);
+
         /** @var AddResponseBody $responseBody */
         $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
 
@@ -78,6 +79,32 @@ class CampaignTest extends \PHPUnit_Framework_TestCase
         assertThat($id, is(typeOf('integer')));
 
         return $id;
+    }
+
+    /**
+     * @param CampaignAddItem $campaignAddItem
+     */
+    private function addAdditionalParamsToCampaign(CampaignAddItem $campaignAddItem)
+    {
+        $campaignAddItem->setBlockedIps(new ArrayOfString(['5.255.255.77', '87.245.198.29']));
+        $campaignAddItem->setExcludedSites(new ArrayOfString(['bubububu.ru', 'lalala.ru']));
+        $campaignAddItem->setClientInfo('Очень Смешной Петросян');
+
+        /*$campaignAddItem->setNotification(
+            new Notification()
+        );*/
+    }
+
+    private function instanceTextCampaignAddItem()
+    {
+        $textCampaignAddItem = new TextCampaignAddItem(
+            new TextCampaignStrategyAdd(
+                new TextCampaignSearchStrategyAdd(TextCampaignSearchStrategyTypeEnum::HIGHEST_POSITION),
+                new TextCampaignNetworkStrategyAdd(TextCampaignNetworkStrategyTypeEnum::MAXIMUM_COVERAGE)
+            )
+        );
+
+        return $textCampaignAddItem;
     }
 
     /**
