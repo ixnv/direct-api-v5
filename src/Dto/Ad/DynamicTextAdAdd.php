@@ -23,7 +23,6 @@ class DynamicTextAdAdd extends TextAdAddBase
      */
     public function __construct($Text = null)
     {
-      parent::__construct();
       $this->Text = $Text;
     }
 

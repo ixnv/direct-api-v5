@@ -1,6 +1,6 @@
 <?php
 
-namespace eLama\DirectApiV5Api\Keyword;
+namespace eLama\DirectApiV5\Dto\Keyword;
 
 use eLama\DirectApiV5\Dto\General\BaseEnum;
 

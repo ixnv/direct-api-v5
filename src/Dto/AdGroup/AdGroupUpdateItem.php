@@ -44,7 +44,6 @@ class AdGroupUpdateItem extends AdGroupBase
      */
     public function __construct($Id = null)
     {
-      parent::__construct();
       $this->Id = $Id;
     }
 
