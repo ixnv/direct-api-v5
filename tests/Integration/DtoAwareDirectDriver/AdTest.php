@@ -17,13 +17,15 @@ use eLama\DirectApiV5\DtoAwareDirectDriver;
 use eLama\DirectApiV5\RequestBody\AddAdRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteAdRequestBody;
 use eLama\DirectApiV5\RequestBody\GetAdsRequestBody;
+use eLama\DirectApiV5\Dto\General\ActionResult;
 
 class AdTest extends AdGroupExistenceDependantTestCase
 {
-
     const TITLE = 'некий заголовок';
     const TEXT = 'Некоторый текст';
     const HREF = 'http://example.com';
+    const ADS_QUANTITY = 4;
+    const AD_LIMIT = 2;
 
     /**
      * @var DtoAwareDirectDriver
@@ -54,6 +56,43 @@ class AdTest extends AdGroupExistenceDependantTestCase
         assertThat($id, is(typeOf('integer')));
 
         return $id;
+    }
+
+    /**
+     * @test
+     */
+    public function addSeveralAds()
+    {
+        $adItems = $this->generateAdAddItems(self::ADS_QUANTITY);
+
+        $requestBody = new AddAdRequestBody(new AddRequest($adItems));
+
+        /** @var AddResponseBody $responseBody */
+        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
+
+        $result = $responseBody->getResult()->getAddResults();
+
+        $adsIds = array_map(function (ActionResult $item) {
+            return $item->getId();
+        }, $result);
+
+        $this->assertCount(self::ADS_QUANTITY, $adsIds);
+
+        return $adsIds;
+    }
+
+    /**
+     * @test
+     * @depends addSeveralAds
+     */
+    public function getAdsByIdsWithPagination($adsIds)
+    {
+        $adItems = $this->getAdInCampaignWithPagination($adsIds, [self::$campaignId], self::AD_LIMIT, $offset = 0);
+        $this->assertCount(self::AD_LIMIT, $adItems->getAds());
+        $limitedBy = $adItems->getLimitedBy();
+        $this->assertEquals(self::AD_LIMIT, $limitedBy);
+        $adItems = $this->getAdInCampaignWithPagination($adsIds, [self::$campaignId], self::AD_LIMIT, $limitedBy);
+        $this->assertNull($adItems->getLimitedBy());
     }
 
     /**
@@ -126,5 +165,50 @@ class AdTest extends AdGroupExistenceDependantTestCase
         $targetAd = array_pop($targetAd);
 
         return $targetAd;
+    }
+
+    /**
+     * @param $adIds
+     * @param array $campaignIds
+     * @param int $limit
+     * @param int $offset
+     * @return \eLama\DirectApiV5\Dto\Ad\GetResult
+     */
+    private function getAdInCampaignWithPagination($adIds, array $campaignIds, $limit, $offset)
+    {
+        $requestBody = new GetAdsRequestBody(
+            (new AdsSelectionCriteria())->setIds($adIds)->setCampaignIds($campaignIds)
+        );
+
+        $requestBody->setLimit($limit);
+        $requestBody->setOffset($offset);
+
+        /** @var GetResponseBody $responseBody */
+        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
+        return $responseBody->getResult();
+    }
+
+    /**
+     * @param int $quantity
+     * @return AdAddItem[]
+     */
+    private function generateAdAddItems($quantity)
+    {
+        $adAddItems = [];
+        for ($i = 1; $i <= $quantity; $i++) {
+            $adAddItem = new AdAddItem(self::$adGroupId);
+
+            $ad = new TextAdAdd(
+                self::TEXT . $i,
+                self::TITLE . $i,
+                YesNoEnum::NO
+            );
+
+            $ad->setHref(self::HREF . $i);
+            $adAddItem->setTextAd($ad);
+            $adAddItems[] = $adAddItem;
+        }
+
+        return $adAddItems;
     }
 }
