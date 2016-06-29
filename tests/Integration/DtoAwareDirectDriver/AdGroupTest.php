@@ -7,13 +7,13 @@ use eLama\DirectApiV5\Dto\AdGroup\AdGroupAddItem;
 use eLama\DirectApiV5\Dto\AdGroup\AdGroupsSelectionCriteria;
 use eLama\DirectApiV5\Dto\AdGroup\DeleteRequest as AdGroupDeleteRequest;
 use eLama\DirectApiV5\Dto\AdGroup\GetResponseBody;
-use eLama\DirectApiV5\Dto\General\AddResponseBody;
-use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
-use eLama\DirectApiV5\Dto\General\IdsCriteria;
+use eLama\DirectApiV5\Dto\AdGroup;
 use eLama\DirectApiV5\DtoAwareDirectDriver;
 use eLama\DirectApiV5\RequestBody\AddAdGroupRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteAdGroupRequestBody;
 use eLama\DirectApiV5\RequestBody\GetAdGroupsRequestBody;
+use eLama\DirectApiV5\Dto\General;
+use eLama\DirectApiV5\Dto\General\ArrayOfString;
 
 class AdGroupTest extends DirectCampaignExistenceDependantTestCase
 {
@@ -34,17 +34,29 @@ class AdGroupTest extends DirectCampaignExistenceDependantTestCase
     {
         $adGroupAddItem = new AdGroupAddItem(self::AD_GROUP_NAME, self::$campaignId, [1]);
 
+        $this->addAdditionalParamsToAdGroup($adGroupAddItem);
+
         $request = new AddAdGroupRequestBody(
             new AdGroupAddRequest([$adGroupAddItem])
         );
 
-        /** @var AddResponseBody $responseBody */
+        /** @var General\AddResponseBody $responseBody */
         $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
 
         $id = $responseBody->getResult()->getAddResults()[0]->getId();
         assertThat($id, is(typeOf('integer')));
 
         return $id;
+    }
+
+    private function addAdditionalParamsToAdGroup(AdGroupAddItem $adGroupAddItem)
+    {
+        //уже добавлено name, campaignId, regionIds
+        $adGroupAddItem->setNegativeKeywords(
+            new ArrayOfString(['папуас', 'папуасу', 'друг','товарищ', 'и', 'корм'])
+        );
+
+        $adGroupAddItem->setTrackingParams('from=direct&ad=42');
     }
 
     /**
@@ -71,10 +83,10 @@ class AdGroupTest extends DirectCampaignExistenceDependantTestCase
     public function deleteAdGroup($id)
     {
         $request = new DeleteAdGroupRequestBody(
-            new AdGroupDeleteRequest(new IdsCriteria([$id]))
+            new AdGroupDeleteRequest(new General\IdsCriteria([$id]))
         );
 
-        /** @var DeleteResponseBody $responseBody */
+        /** @var General\DeleteResponseBody $responseBody */
         $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
         $deletedId = $responseBody->getResult()->getDeleteResults()[0]->getId();
 
