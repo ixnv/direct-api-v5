@@ -43,7 +43,7 @@ class CampaignBase
      * @param string $ClientInfo
      * @return \eLama\DirectApiV5\Dto\Campaign\CampaignBase
      */
-    public function setClientInfo($ClientInfo = null)
+    public function setClientInfo($ClientInfo)
     {
       $this->ClientInfo = $ClientInfo;
       return $this;
@@ -61,7 +61,7 @@ class CampaignBase
      * @param Notification $Notification
      * @return \eLama\DirectApiV5\Dto\Campaign\CampaignBase
      */
-    public function setNotification(Notification $Notification = null)
+    public function setNotification(Notification $Notification)
     {
       $this->Notification = $Notification;
       return $this;
@@ -79,7 +79,7 @@ class CampaignBase
      * @param string $TimeZone
      * @return \eLama\DirectApiV5\Dto\Campaign\CampaignBase
      */
-    public function setTimeZone($TimeZone = null)
+    public function setTimeZone($TimeZone)
     {
       $this->TimeZone = $TimeZone;
       return $this;

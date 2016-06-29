@@ -26,9 +26,9 @@ class DailyBudget
 
     /**
      * @param int $Amount
-     * @param DailyBudgetModeEnum $Mode
+     * @param string $Mode see DailyBudgetModeEnum
      */
-    public function __construct($Amount = null, $Mode = null)
+    public function __construct($Amount, $Mode)
     {
       $this->Amount = $Amount;
       $this->Mode = $Mode;

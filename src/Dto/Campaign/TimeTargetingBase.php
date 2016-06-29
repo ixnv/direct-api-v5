@@ -61,7 +61,7 @@ class TimeTargetingBase
     }
 
     /**
-     * @param YesNoEnum $ConsiderWorkingWeekends
+     * @param string YesNoEnum $ConsiderWorkingWeekends
      * @return \eLama\DirectApiV5\Dto\Campaign\TimeTargetingBase
      */
     public function setConsiderWorkingWeekends($ConsiderWorkingWeekends)

@@ -33,7 +33,8 @@ use eLama\DirectApiV5\RequestBody\UpdateCampaignRequestBody;
 use GuzzleHttp\Client;
 use Monolog\Logger;
 use eLama\DirectApiV5\Dto\General\ArrayOfString;
-use eLama\DirectApiV5\Dto\Campaign\Notification;
+use eLama\DirectApiV5\Dto\Campaign;
+use eLama\DirectApiV5\RequestBody;
 
 class CampaignTest extends \PHPUnit_Framework_TestCase
 {
@@ -79,32 +80,6 @@ class CampaignTest extends \PHPUnit_Framework_TestCase
         assertThat($id, is(typeOf('integer')));
 
         return $id;
-    }
-
-    /**
-     * @param CampaignAddItem $campaignAddItem
-     */
-    private function addAdditionalParamsToCampaign(CampaignAddItem $campaignAddItem)
-    {
-        $campaignAddItem->setBlockedIps(new ArrayOfString(['5.255.255.77', '87.245.198.29']));
-        $campaignAddItem->setExcludedSites(new ArrayOfString(['bubububu.ru', 'lalala.ru']));
-        $campaignAddItem->setClientInfo('Очень Смешной Петросян');
-
-        /*$campaignAddItem->setNotification(
-            new Notification()
-        );*/
-    }
-
-    private function instanceTextCampaignAddItem()
-    {
-        $textCampaignAddItem = new TextCampaignAddItem(
-            new TextCampaignStrategyAdd(
-                new TextCampaignSearchStrategyAdd(TextCampaignSearchStrategyTypeEnum::HIGHEST_POSITION),
-                new TextCampaignNetworkStrategyAdd(TextCampaignNetworkStrategyTypeEnum::MAXIMUM_COVERAGE)
-            )
-        );
-
-        return $textCampaignAddItem;
     }
 
     /**
@@ -225,5 +200,120 @@ class CampaignTest extends \PHPUnit_Framework_TestCase
         $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
 
         assertThat($responseBody->getResult()->getCampaigns(), emptyArray());
+    }
+
+    private function instanceTimeTargetingAdd()
+    {
+        $timeTargetingAdd = new Campaign\TimeTargetingAdd();
+
+        $timeTargetingAdd->setSchedule(
+            $this->getScheduleParams()
+        );
+
+        $timeTargetingAdd->setConsiderWorkingWeekends(Campaign\YesNoEnum::YES);
+        $timeTargetingAdd->setHolidaysSchedule(
+            (new Campaign\TimeTargetingOnPublicHolidays(
+                Campaign\YesNoEnum::NO)
+            )
+                ->setBidPercent(10)
+                ->setStartHour(1)
+                ->setEndHour(15)
+        );
+
+        return $timeTargetingAdd;
+    }
+
+    /**
+     * @return Campaign\Notification
+     */
+    private function instanceNotification()
+    {
+        $notification = new Campaign\Notification();
+        $notification->setSmsSettings(
+            (new Campaign\SmsSettings())->setEvents([
+                Campaign\SmsEventsEnum::MONEY_IN,
+                Campaign\SmsEventsEnum::FINISHED,
+                Campaign\SmsEventsEnum::MONEY_OUT,
+                Campaign\SmsEventsEnum::MONITORING,
+            ])->setTimeFrom('09:00')
+                ->setTimeTo('19:45')
+        );
+
+        $notification->setEmailSettings(
+            (new Campaign\EmailSettings())
+                ->setEmail('email@email.ru')
+                ->setCheckPositionInterval(Campaign\CheckPositionIntervalEnum::INTERVAL_15)
+                ->setWarningBalance(30)
+                ->setSendAccountNews(Campaign\YesNoEnum::YES)
+                ->setSendWarnings(Campaign\YesNoEnum::YES)
+        );
+
+        return $notification;
+    }
+
+    /**
+     * @return TextCampaignAddItem
+     */
+    private function instanceTextCampaignAddItem()
+    {
+        $textCampaignAddItem = new TextCampaignAddItem(
+            new TextCampaignStrategyAdd(
+                new TextCampaignSearchStrategyAdd(TextCampaignSearchStrategyTypeEnum::HIGHEST_POSITION),
+                new TextCampaignNetworkStrategyAdd(TextCampaignNetworkStrategyTypeEnum::MAXIMUM_COVERAGE)
+            )
+        );
+
+        return $textCampaignAddItem;
+    }
+
+    /**
+     * @param CampaignAddItem $campaignAddItem
+     */
+    private function addAdditionalParamsToCampaign(CampaignAddItem $campaignAddItem)
+    {
+        $campaignAddItem->setBlockedIps(new ArrayOfString(['5.255.255.77', '87.245.198.29']));
+        $campaignAddItem->setExcludedSites(new ArrayOfString(['bubububu.ru', 'lalala.ru']));
+        $campaignAddItem->setClientInfo('Очень Смешной Петросян');
+
+        $campaignAddItem->setNotification($this->instanceNotification());
+        $campaignAddItem->setTimeTargeting($this->instanceTimeTargetingAdd());
+        $campaignAddItem->setTimeZone('Europe/Moscow');
+        $campaignAddItem->setStartDate(
+            (new \DateTime('now'))->add(new \DateInterval('P30D'))->format('Y-m-d')
+        );
+
+        $campaignAddItem->setEndDate(
+            (new \DateTime('now'))->add(new \DateInterval('P60D'))->format('Y-m-d')
+        );
+
+        $campaignAddItem->setDailyBudget(
+            new Campaign\DailyBudget(
+                3000000000,
+                Campaign\DailyBudgetModeEnum::DISTRIBUTED
+            )
+        );
+
+        $campaignAddItem->setNegativeKeywords(
+            new ArrayOfString(['папуас', 'папуасу', 'друг','товарищ', 'и', 'корм'])
+        );
+    }
+
+    /**
+     * @return ArrayOfString
+     */
+    private function getScheduleParams()
+    {
+        return new ArrayOfString(
+            [
+                '1,10,10,50,50,100,100,150,200,200,150,100,100,80,70,100,100,100,50,50,40,30,10,10,10',
+                '2,10,10,50,50,100,100,150,200,200,150,100,100,80,70,100,100,100,50,50,40,30,10,10,10',
+                '3,10,10,50,50,100,100,150,200,200,150,100,100,80,70,100,100,100,50,50,40,30,10,10,10',
+                '4,10,10,50,50,100,100,150,200,200,150,100,100,80,70,100,100,100,50,50,40,30,10,10,10',
+                '5,10,10,50,50,100,100,150,200,200,150,100,100,80,70,100,100,100,50,50,40,30,10,10,10',
+                '6,10,10,50,50,100,100,150,200,200,150,100,100,80,70,100,100,100,50,50,40,30,10,10,10',
+                '7,10,10,50,50,100,100,150,200,200,150,100,100,80,70,100,100,100,50,50,40,30,10,10,10',
+
+            ]
+        );
     }
 }

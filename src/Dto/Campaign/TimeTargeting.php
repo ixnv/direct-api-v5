@@ -18,9 +18,9 @@ class TimeTargeting extends TimeTargetingBase
     private $HolidaysSchedule;
 
     /**
-     * @param YesNoEnum $ConsiderWorkingWeekends
+     * @param string $ConsiderWorkingWeekends see YesNoEnum
      */
-    public function __construct($ConsiderWorkingWeekends = null)
+    public function __construct($ConsiderWorkingWeekends)
     {
       parent::__construct($ConsiderWorkingWeekends);
     }
