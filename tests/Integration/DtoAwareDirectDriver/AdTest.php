@@ -44,7 +44,9 @@ class AdTest extends AdGroupExistenceDependantTestCase
     {
         $adAddItem = new AdAddItem(self::$adGroupId);
         $textAd = new TextAdAdd(self::TEXT, self::TITLE, YesNoEnum::NO);
-        $textAd->setHref(self::HREF);
+
+        $this->addAdditionalParamsToTextAdAdd($textAd);
+
         $adAddItem->setTextAd($textAd);
 
         $requestBody = new AddAdRequestBody(new AddRequest([$adAddItem]));
@@ -56,6 +58,16 @@ class AdTest extends AdGroupExistenceDependantTestCase
         assertThat($id, is(typeOf('integer')));
 
         return $id;
+    }
+
+    private function addAdditionalParamsToTextAdAdd(TextAdAdd $textAd)
+    {
+        $textAd->setHref(self::HREF);
+        $textAd->setDisplayUrlPath('чудо-сайт');
+//        $textAd->setVCardId();todo  сделать добавление визитки, а потом тестить и это
+//        $textAd->setAdImageHash('');todo пока не понятно, что с этим делать
+//        $textAd->setSitelinkSetId(1);todo сначала запилить Sitelinks
+//        $textAd->setAdExtensionIds(['1', '2']);todo расширения надо сделать сначала
     }
 
     /**

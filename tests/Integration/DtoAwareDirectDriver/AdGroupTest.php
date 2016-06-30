@@ -51,7 +51,6 @@ class AdGroupTest extends DirectCampaignExistenceDependantTestCase
 
     private function addAdditionalParamsToAdGroup(AdGroupAddItem $adGroupAddItem)
     {
-        //уже добавлено name, campaignId, regionIds
         $adGroupAddItem->setNegativeKeywords(
             new ArrayOfString(['папуас', 'папуасу', 'друг','товарищ', 'и', 'корм'])
         );
