@@ -18,9 +18,15 @@ class EnsureSuccessDriver implements LowLevelDriverInterface
      * @var array
      */
     private $allowedMethods = [
-        'campaign' => [
+        'campaigns' => [
             'suspend',
             'resume'
+        ],
+        'ads' => [
+            'suspend'
+        ],
+        'keywords' => [
+            'suspend'
         ]
     ];
 

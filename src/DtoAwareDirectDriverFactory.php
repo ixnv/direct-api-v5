@@ -7,6 +7,7 @@ use eLama\DirectApiV5\Dto\Ad;
 use eLama\DirectApiV5\Dto\Campaign;
 use eLama\DirectApiV5\Dto\Keyword;
 use eLama\DirectApiV5\LowLevelDriver\AutoRoutingDriver;
+use eLama\DirectApiV5\LowLevelDriver\EnsureSuccessDriver;
 use eLama\DirectApiV5\LowLevelDriver\Guzzle5Adapter;
 use eLama\DirectApiV5\LowLevelDriver\Guzzle6Adapter;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
@@ -68,13 +69,15 @@ class DtoAwareDirectDriverFactory
             $this->directBaseUrl
         );
 
+        $ensureSuccessDriver = new EnsureSuccessDriver($lowLevelDriver);
+
         $proxyDriver = new ProxyDriver(
             $this->createGuzzleAdapter(),
             $this->proxyBaseUrl,
             $cacheMaxAge
         );
 
-        $proxyDriverWithFallback = new ProxyDriverWithFallback($proxyDriver, $lowLevelDriver);
+        $proxyDriverWithFallback = new ProxyDriverWithFallback($proxyDriver, $ensureSuccessDriver);
 
         $autoRoutingDriver = new AutoRoutingDriver($proxyDriverWithFallback, $lowLevelDriver);
 
