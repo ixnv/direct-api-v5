@@ -36,21 +36,13 @@ class SimpleDirectDriver
     private $pageLimit;
 
     /**
-     * @param Serializer $jmsSerializer
-     * @param Client $client
+     * @param \eLama\DirectApiV5\DtoAwareDirectDriver $driver
+     * @param null $pageLimit
      */
-    public function __construct(
-        Serializer $jmsSerializer,
-        Client $client,
-        LoggerInterface $logger,
-        $baseUrl,
-        $token,
-        $login,
-        $pageLimit = null
-    ) {
-        $lowLevelDriver = LowLevelDriver::createAdapterForClient($client, $logger, $baseUrl);
-        $this->driver = new DtoAwareDirectDriver($jmsSerializer, $lowLevelDriver, $token, $login);
+    public function __construct(DtoAwareDirectDriver $driver, $pageLimit = null)
+    {
         $this->pageLimit = $pageLimit;
+        $this->driver = $driver;
     }
 
     /**

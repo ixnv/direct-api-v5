@@ -5,6 +5,7 @@ namespace eLama\DirectApiV5\Test\Integration;
 use eLama\DirectApiV5\Dto\Ad\AdGetItem;
 use eLama\DirectApiV5\Dto\AdGroup\AdGroupGetItem;
 use eLama\DirectApiV5\Dto\Keyword\KeywordGetItem;
+use eLama\DirectApiV5\DtoAwareDirectDriver;
 use eLama\DirectApiV5\LoggerFactory;
 use eLama\DirectApiV5\SimpleDirectDriver;
 use eLama\DirectApiV5\SimpleDirectDriverFactory;
@@ -207,16 +208,20 @@ class GeneralTest extends PHPUnit_Framework_TestCase
      */
     private function createDriver($token = self::TOKEN)
     {
-        $serializer = JmsFactory::create()->serializer();
-        $client = new Client();
+        $lowLevelDriver = LowLevelDriver::createAdapterForClient(
+            new Client(),
+            (new LoggerFactory([]))->create(self::class),
+            LowLevelDriver::URL_SANDBOX
+        );
 
-        $tokenResolver = function () use ($token) {
-            return $token;
-        };
+        $dtoDriver = new DtoAwareDirectDriver(
+            JmsFactory::create()->serializer(),
+            $lowLevelDriver,
+            $token,
+            self::LOGIN
+        );
 
-        $factory = new SimpleDirectDriverFactory($serializer, $client, new LoggerFactory([]), $tokenResolver, LowLevelDriver::URL_SANDBOX);
-        
-        return $factory->driverForClient(self::LOGIN, self::class);
+        return $directDriver = new SimpleDirectDriver($dtoDriver);
     }
 
     /**
@@ -225,13 +230,21 @@ class GeneralTest extends PHPUnit_Framework_TestCase
      */
     private function createDriverWithPageLimit($pageLimit)
     {
-        return $directDriver = new SimpleDirectDriver(
-            JmsFactory::create()->serializer(),
+        $lowLevelDriver = LowLevelDriver::createAdapterForClient(
             new Client(),
             (new LoggerFactory([]))->create(self::class),
-            LowLevelDriver::URL_SANDBOX,
+            LowLevelDriver::URL_SANDBOX
+        );
+
+        $dtoDriver = new DtoAwareDirectDriver(
+            JmsFactory::create()->serializer(),
+            $lowLevelDriver,
             self::TOKEN,
-            self::LOGIN,
+            self::LOGIN
+        );
+
+        return $directDriver = new SimpleDirectDriver(
+            $dtoDriver,
             $pageLimit
         );
     }

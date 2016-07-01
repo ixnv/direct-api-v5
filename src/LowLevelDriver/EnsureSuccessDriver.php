@@ -64,7 +64,7 @@ class EnsureSuccessDriver implements LowLevelDriverInterface
     {
         $body = $response->getUnserializedBody();
 
-        return isset($body['error']['error_code']) && $body['error']['error_code'] == $error;
+        return $body->getError() && $body->getError()->getErrorCode() == $error;
     }
 
     protected function isMethodAllowed($service, $method)
