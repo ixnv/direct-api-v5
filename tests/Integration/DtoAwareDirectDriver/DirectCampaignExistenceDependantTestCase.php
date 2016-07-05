@@ -24,9 +24,7 @@ use Monolog\Logger;
 abstract class DirectCampaignExistenceDependantTestCase extends \PHPUnit_Framework_TestCase
 {
     const LOGIN = 'ra-trinet-add-dev-01';
-//    const LOGIN = 'elama-15880669';
     const TOKEN = '3fe13d8bd818458c89624f678f365051';
-//    const TOKEN = '3fe13d8bd818458c89624f678f365051';
     const AD_GROUP_NAME = 'Moo';
 
     /**

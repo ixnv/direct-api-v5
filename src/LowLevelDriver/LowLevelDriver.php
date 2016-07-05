@@ -60,7 +60,6 @@ class LowLevelDriver implements LowLevelDriverInterface
         $headers = $this->createHeaders($request);
 
         $startTime = microtime(true);
-        /*$this->logger->info($url . ' - ' . $requestBodyInJson);*/
 
         return $this->client->sendAsync($url, $headers, $requestBodyInJson)
             ->then(function ($response) use ($serializer, $uniqId, $request, $requestBodyInJson, $startTime) {

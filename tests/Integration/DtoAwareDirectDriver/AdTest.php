@@ -107,8 +107,6 @@ class AdTest extends AdGroupExistenceDependantTestCase
         return $adId;
     }
 
-
-
     /**
      * @test
      * @depends deleteAd
