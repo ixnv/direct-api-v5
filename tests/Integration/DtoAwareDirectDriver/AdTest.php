@@ -142,13 +142,13 @@ class AdTest extends AdGroupExistenceDependantTestCase
      * @test
      * @depends addAdsByQuantity
      */
-    public function getAdsByIdsWithPagination($adsIds)
+    public function getAdsByIdsWithPagination()
     {
-        $adItems = $this->getAdInCampaignWithPagination($adsIds, [self::$campaignIdForPagination], self::AD_LIMIT, $offset = 0);
+        $adItems = $this->getAdInCampaignWithPagination([self::$campaignIdForPagination], self::AD_LIMIT, $offset = 0);
         $this->assertCount(self::AD_LIMIT, $adItems->getAds());
         $limitedBy = $adItems->getLimitedBy();
         $this->assertEquals(self::AD_LIMIT, $limitedBy);
-        $adItems = $this->getAdInCampaignWithPagination($adsIds, [self::$campaignIdForPagination], self::AD_LIMIT, $limitedBy);
+        $adItems = $this->getAdInCampaignWithPagination([self::$campaignIdForPagination], self::AD_LIMIT, $limitedBy);
         $this->assertNull($adItems->getLimitedBy());
     }
 
@@ -198,16 +198,15 @@ class AdTest extends AdGroupExistenceDependantTestCase
     }
 
     /**
-     * @param $adIds
      * @param array $campaignIds
      * @param int $limit
      * @param int $offset
      * @return \eLama\DirectApiV5\Dto\Ad\GetResult
      */
-    private function getAdInCampaignWithPagination($adIds, array $campaignIds, $limit, $offset)
+    private function getAdInCampaignWithPagination(array $campaignIds, $limit, $offset)
     {
         $requestBody = new GetAdsRequestBody(
-            (new Ad\AdsSelectionCriteria())->setIds($adIds)->setCampaignIds($campaignIds)
+            (new Ad\AdsSelectionCriteria())->setCampaignIds($campaignIds)
         );
 
         $requestBody->setLimit($limit);
