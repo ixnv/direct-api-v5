@@ -32,6 +32,10 @@ class AdTest extends AdGroupExistenceDependantTestCase
      */
     protected $driver;
 
+    protected static $campaignIdForPagination = null;
+
+    protected static $adGroupIdForPagination = null;
+
     protected function setUp()
     {
         $this->driver = self::createDtoAwareDirectDriver();
@@ -60,6 +64,25 @@ class AdTest extends AdGroupExistenceDependantTestCase
         return $id;
     }
 
+    /**
+     * @test
+     * @depends getAd
+     */
+    public function deleteAd($id)
+    {
+        $request = new DeleteAdRequestBody(
+            new DeleteRequest(new IdsCriteria([$id]))
+        );
+
+        /** @var DeleteResponseBody $responseBody */
+        $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
+        $deletedId = $responseBody->getResult()->getDeleteResults()[0]->getId();
+
+        assertThat($id, is(equalTo($deletedId)));
+
+        return $id;
+    }
+
     private function addAdditionalParamsToTextAdAdd(TextAdAdd $textAd)
     {
         $textAd->setHref(self::HREF);
@@ -72,10 +95,41 @@ class AdTest extends AdGroupExistenceDependantTestCase
 
     /**
      * @test
+     * @depends addAd
+     */
+    public function getAd($adId)
+    {
+        $ad = $this->getAdInCampaignWithId(self::$campaignId, $adId);
+        assertThat($ad->getTextAd()->getTitle(), is(equalTo(self::TITLE)));
+        assertThat($ad->getTextAd()->getText(), is(equalTo(self::TEXT)));
+        assertThat($ad->getTextAd()->getHref(), is(equalTo(self::HREF)));
+
+        return $adId;
+    }
+
+
+
+    /**
+     * @test
+     * @depends deleteAd
+     */
+    public function getDeletedAd($id)
+    {
+        $ad = $this->getAdInCampaignWithId(self::$campaignId, $id);
+
+        assertThat($ad, is(nullValue()));
+    }
+
+    /**
+     * @test
      */
     public function addAdsByQuantity()
     {
-        $adItems = $this->generateAdAddItems(self::ADS_QUANTITY);
+        $this->createCampaignForPagination();
+
+        $this->createAdGroupForPagination(self::$campaignIdForPagination);
+
+        $adItems = $this->generateAdAddItems(self::ADS_QUANTITY, self::$adGroupIdForPagination);
 
         $requestBody = new AddAdRequestBody(new AddRequest($adItems));
 
@@ -99,57 +153,12 @@ class AdTest extends AdGroupExistenceDependantTestCase
      */
     public function getAdsByIdsWithPagination($adsIds)
     {
-        $adItems = $this->getAdInCampaignWithPagination($adsIds, [self::$campaignId], self::AD_LIMIT, $offset = 0);
+        $adItems = $this->getAdInCampaignWithPagination($adsIds, [self::$campaignIdForPagination], self::AD_LIMIT, $offset = 0);
         $this->assertCount(self::AD_LIMIT, $adItems->getAds());
         $limitedBy = $adItems->getLimitedBy();
         $this->assertEquals(self::AD_LIMIT, $limitedBy);
-        $adItems = $this->getAdInCampaignWithPagination($adsIds, [self::$campaignId], self::AD_LIMIT, $limitedBy);
+        $adItems = $this->getAdInCampaignWithPagination($adsIds, [self::$campaignIdForPagination], self::AD_LIMIT, $limitedBy);
         $this->assertNull($adItems->getLimitedBy());
-    }
-
-    /**
-     * @test
-     * @depends addAd
-     */
-    public function getAd($adId)
-    {
-        $ad = $this->getAdInCampaignWithId(self::$campaignId, $adId);
-
-        assertThat($ad->getTextAd()->getTitle(), is(equalTo(self::TITLE)));
-        assertThat($ad->getTextAd()->getText(), is(equalTo(self::TEXT)));
-        assertThat($ad->getTextAd()->getHref(), is(equalTo(self::HREF)));
-
-        return $adId;
-    }
-
-    /**
-     * @test
-     * @depends getAd
-     */
-    public function deleteAd($id)
-    {
-        $request = new DeleteAdRequestBody(
-            new DeleteRequest(new IdsCriteria([$id]))
-        );
-
-        /** @var DeleteResponseBody $responseBody */
-        $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
-        $deletedId = $responseBody->getResult()->getDeleteResults()[0]->getId();
-
-        assertThat($id, is(equalTo($deletedId)));
-
-        return $id;
-    }
-
-    /**
-     * @test
-     * @depends deleteAd
-     */
-    public function getDeletedAd($id)
-    {
-        $ad = $this->getAdInCampaignWithId(self::$campaignId, $id);
-
-        assertThat($ad, is(nullValue()));
     }
 
     /**
@@ -201,14 +210,15 @@ class AdTest extends AdGroupExistenceDependantTestCase
     }
 
     /**
-     * @param int $quantity
-     * @return AdAddItem[]
+     * @param $quantity
+     * @param $adGroupId
+     * @return array
      */
-    private function generateAdAddItems($quantity)
+    private function generateAdAddItems($quantity, $adGroupId)
     {
         $adAddItems = [];
         for ($i = 1; $i <= $quantity; $i++) {
-            $adAddItem = new AdAddItem(self::$adGroupId);
+            $adAddItem = new AdAddItem($adGroupId);
 
             $ad = new TextAdAdd(
                 self::TEXT . $i,
@@ -222,5 +232,18 @@ class AdTest extends AdGroupExistenceDependantTestCase
         }
 
         return $adAddItems;
+    }
+
+    private function createCampaignForPagination()
+    {
+        $driver = self::createDtoAwareDirectDriver();
+        $responseBody = self::createCampaign($driver);
+
+        self::$campaignIdForPagination = $responseBody->getResult()->getAddResults()[0]->getId();
+    }
+
+    private function createAdGroupForPagination($campaignId)
+    {
+        self::$adGroupIdForPagination = static::createAdGroupForCampaign($campaignId);
     }
 }

@@ -20,7 +20,12 @@ class AdGroupExistenceDependantTestCase extends DirectCampaignExistenceDependant
 
     protected static function createAdGroup()
     {
-        $adGroupAddItem = new AdGroupAddItem('Foo', static::$campaignId, [1]);
+        static::$adGroupId = static::createAdGroupForCampaign(static::$campaignId);
+    }
+
+    protected static function createAdGroupForCampaign($campaignId)
+    {
+        $adGroupAddItem = new AdGroupAddItem('Foo', $campaignId, [1]);
 
         $request = new AddAdGroupRequestBody(
             new AddRequest([$adGroupAddItem])
@@ -29,7 +34,7 @@ class AdGroupExistenceDependantTestCase extends DirectCampaignExistenceDependant
         /** @var AddResponseBody $responseBody */
         $responseBody = static::createDtoAwareDirectDriver()->call($request)->wait()->getUnserializedBody();
 
-        static::$adGroupId = $responseBody->getResult()->getAddResults()[0]->getId();
+        return $responseBody->getResult()->getAddResults()[0]->getId();
     }
 
     protected static function removeAdGroup()
