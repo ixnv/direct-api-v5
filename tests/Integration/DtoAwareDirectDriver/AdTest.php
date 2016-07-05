@@ -2,14 +2,6 @@
 
 namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
 
-use eLama\DirectApiV5\Dto\Ad\AdAddItem;
-use eLama\DirectApiV5\Dto\Ad\AddRequest;
-use eLama\DirectApiV5\Dto\Ad\AdGetItem;
-use eLama\DirectApiV5\Dto\Ad\AdsSelectionCriteria;
-use eLama\DirectApiV5\Dto\Ad\DeleteRequest;
-use eLama\DirectApiV5\Dto\Ad\GetResponseBody;
-use eLama\DirectApiV5\Dto\Ad\TextAdAdd;
-use eLama\DirectApiV5\Dto\Ad\YesNoEnum;
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
@@ -18,6 +10,7 @@ use eLama\DirectApiV5\RequestBody\AddAdRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteAdRequestBody;
 use eLama\DirectApiV5\RequestBody\GetAdsRequestBody;
 use eLama\DirectApiV5\Dto\General\ActionResult;
+use eLama\DirectApiV5\Dto\Ad;
 
 class AdTest extends AdGroupExistenceDependantTestCase
 {
@@ -46,14 +39,14 @@ class AdTest extends AdGroupExistenceDependantTestCase
      */
     public function addAd()
     {
-        $adAddItem = new AdAddItem(self::$adGroupId);
-        $textAd = new TextAdAdd(self::TEXT, self::TITLE, YesNoEnum::NO);
+        $adAddItem = new Ad\AdAddItem(self::$adGroupId);
+        $textAd = new Ad\TextAdAdd(self::TEXT, self::TITLE, Ad\YesNoEnum::NO);
 
         $this->addAdditionalParamsToTextAdAdd($textAd);
 
         $adAddItem->setTextAd($textAd);
 
-        $requestBody = new AddAdRequestBody(new AddRequest([$adAddItem]));
+        $requestBody = new AddAdRequestBody(new Ad\AddRequest([$adAddItem]));
 
         /** @var AddResponseBody $responseBody */
         $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
@@ -71,7 +64,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
     public function deleteAd($id)
     {
         $request = new DeleteAdRequestBody(
-            new DeleteRequest(new IdsCriteria([$id]))
+            new Ad\DeleteRequest(new IdsCriteria([$id]))
         );
 
         /** @var DeleteResponseBody $responseBody */
@@ -83,7 +76,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
         return $id;
     }
 
-    private function addAdditionalParamsToTextAdAdd(TextAdAdd $textAd)
+    private function addAdditionalParamsToTextAdAdd(Ad\TextAdAdd $textAd)
     {
         $textAd->setHref(self::HREF);
         $textAd->setDisplayUrlPath('чудо-сайт');
@@ -129,7 +122,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
 
         $adItems = $this->generateAdAddItems(self::ADS_QUANTITY, self::$adGroupIdForPagination);
 
-        $requestBody = new AddAdRequestBody(new AddRequest($adItems));
+        $requestBody = new AddAdRequestBody(new Ad\AddRequest($adItems));
 
         /** @var AddResponseBody $responseBody */
         $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
@@ -160,6 +153,24 @@ class AdTest extends AdGroupExistenceDependantTestCase
     }
 
     /**
+     * @test
+     */
+    public function getAdsForCampaignId_GivenNoAds_ReturnsCorrectResponseWithoutAds()
+    {
+        $responseBody = self::createCampaign($this->driver);
+        $campaignId = $responseBody->getResult()->getAddResults()[0]->getId();
+        $requestBody = new GetAdsRequestBody(
+            (new Ad\AdsSelectionCriteria())->setCampaignIds([$campaignId])
+        );
+
+        /** @var Ad\GetResponseBody $responseBody */
+        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
+
+        assertThat($responseBody->getResult()->getAds(), is(emptyArray()));
+        self::deleteCampaign($this->driver, $campaignId);
+    }
+
+    /**
      * @param $campaignId
      * @param $adId
      * @return array|mixed
@@ -167,17 +178,17 @@ class AdTest extends AdGroupExistenceDependantTestCase
     private function getAdInCampaignWithId($campaignId, $adId)
     {
         $requestBody = new GetAdsRequestBody(
-            (new AdsSelectionCriteria())->setCampaignIds([$campaignId])
+            (new Ad\AdsSelectionCriteria())->setCampaignIds([$campaignId])
         );
 
-        /** @var GetResponseBody $responseBody */
+        /** @var Ad\GetResponseBody $responseBody */
         $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
 
         $adGetItems = $responseBody->getResult()->getAds();
 
         $targetAd = array_filter(
             $adGetItems,
-            function (AdGetItem $ad) use ($adId) {
+            function (Ad\AdGetItem $ad) use ($adId) {
                 return $ad->getId() == $adId;
             }
         );
@@ -196,13 +207,13 @@ class AdTest extends AdGroupExistenceDependantTestCase
     private function getAdInCampaignWithPagination($adIds, array $campaignIds, $limit, $offset)
     {
         $requestBody = new GetAdsRequestBody(
-            (new AdsSelectionCriteria())->setIds($adIds)->setCampaignIds($campaignIds)
+            (new Ad\AdsSelectionCriteria())->setIds($adIds)->setCampaignIds($campaignIds)
         );
 
         $requestBody->setLimit($limit);
         $requestBody->setOffset($offset);
 
-        /** @var GetResponseBody $responseBody */
+        /** @var Ad\GetResponseBody $responseBody */
         $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
         return $responseBody->getResult();
     }
@@ -216,12 +227,12 @@ class AdTest extends AdGroupExistenceDependantTestCase
     {
         $adAddItems = [];
         for ($i = 1; $i <= $quantity; $i++) {
-            $adAddItem = new AdAddItem($adGroupId);
+            $adAddItem = new Ad\AdAddItem($adGroupId);
 
-            $ad = new TextAdAdd(
+            $ad = new Ad\TextAdAdd(
                 self::TEXT . $i,
                 self::TITLE . $i,
-                YesNoEnum::NO
+                Ad\YesNoEnum::NO
             );
 
             $ad->setHref(self::HREF . $i);

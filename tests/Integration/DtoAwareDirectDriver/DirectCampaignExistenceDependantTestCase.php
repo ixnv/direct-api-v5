@@ -46,11 +46,7 @@ abstract class DirectCampaignExistenceDependantTestCase extends \PHPUnit_Framewo
         if (!empty(static::$campaignId)) {
             $driver = self::createDtoAwareDirectDriver();
 
-            $request = new DeleteCampaignRequestBody(new DeleteRequest(
-                new IdsCriteria([static::$campaignId])
-            ));
-
-            $driver->call($request)->wait();
+            self::deleteCampaign($driver, static::$campaignId);
         }
     }
 
@@ -85,5 +81,18 @@ abstract class DirectCampaignExistenceDependantTestCase extends \PHPUnit_Framewo
         $responseBody = $driver->call($request)->wait()->getUnserializedBody();
 
         return $responseBody;
+    }
+
+    /**
+     * @param DtoAwareDirectDriver $driver
+     * @param int $campaignId
+     */
+    protected static function deleteCampaign(DtoAwareDirectDriver $driver, $campaignId)
+    {
+        $request = new DeleteCampaignRequestBody(new DeleteRequest(
+            new IdsCriteria([$campaignId])
+        ));
+
+        $driver->call($request)->wait();
     }
 }

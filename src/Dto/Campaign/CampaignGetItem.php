@@ -451,9 +451,6 @@ class CampaignGetItem extends CampaignBase
      */
     public function setNegativeKeywords(ArrayOfString $NegativeKeywords = null)
     {
-        if (!$NegativeKeywords) {
-            $NegativeKeywords = new ArrayOfString();
-        }
         $this->NegativeKeywords = $NegativeKeywords;
         return $this;
     }
