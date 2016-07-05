@@ -33,7 +33,7 @@ class AdGroupAddItem
     private $RegionIds;
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\AdGroup\ArrayOfString")
+     * @JMS\Type("eLama\DirectApiV5\Dto\General\ArrayOfString")
      *
      * @var ArrayOfString $NegativeKeywords
      */
@@ -138,7 +138,7 @@ class AdGroupAddItem
      * @param ArrayOfString $NegativeKeywords
      * @return \eLama\DirectApiV5\Dto\AdGroup\AdGroupAddItem
      */
-    public function setNegativeKeywords(ArrayOfString $NegativeKeywords = null)
+    public function setNegativeKeywords(ArrayOfString $NegativeKeywords)
     {
       $this->NegativeKeywords = $NegativeKeywords;
       return $this;
@@ -156,7 +156,7 @@ class AdGroupAddItem
      * @param string $TrackingParams
      * @return \eLama\DirectApiV5\Dto\AdGroup\AdGroupAddItem
      */
-    public function setTrackingParams($TrackingParams = null)
+    public function setTrackingParams($TrackingParams)
     {
       $this->TrackingParams = $TrackingParams;
       return $this;
@@ -174,7 +174,7 @@ class AdGroupAddItem
      * @param MobileAppAdGroupAdd $MobileAppAdGroup
      * @return \eLama\DirectApiV5\Dto\AdGroup\AdGroupAddItem
      */
-    public function setMobileAppAdGroup(MobileAppAdGroupAdd $MobileAppAdGroup = null)
+    public function setMobileAppAdGroup(MobileAppAdGroupAdd $MobileAppAdGroup)
     {
       $this->MobileAppAdGroup = $MobileAppAdGroup;
       return $this;
@@ -192,7 +192,7 @@ class AdGroupAddItem
      * @param DynamicTextAdGroup $DynamicTextAdGroup
      * @return \eLama\DirectApiV5\Dto\AdGroup\AdGroupAddItem
      */
-    public function setDynamicTextAdGroup(DynamicTextAdGroup $DynamicTextAdGroup = null)
+    public function setDynamicTextAdGroup(DynamicTextAdGroup $DynamicTextAdGroup)
     {
       $this->DynamicTextAdGroup = $DynamicTextAdGroup;
       return $this;

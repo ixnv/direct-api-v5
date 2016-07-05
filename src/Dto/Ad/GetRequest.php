@@ -4,10 +4,12 @@ namespace eLama\DirectApiV5\Dto\Ad;
 
 use JMS\Serializer\Annotation as JMS;
 
+use eLama\DirectApiV5\Dto\General\GetRequestGeneral;
+
 /**
  * @JMS\AccessType("public_method")
  */
-class GetRequest
+class GetRequest extends GetRequestGeneral
 {
     /**
      * @JMS\Type("eLama\DirectApiV5\Dto\Ad\AdsSelectionCriteria")

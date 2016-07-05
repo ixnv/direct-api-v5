@@ -57,7 +57,7 @@ class EmailSettings
      * @param string $Email
      * @return \eLama\DirectApiV5\Dto\Campaign\EmailSettings
      */
-    public function setEmail($Email = null)
+    public function setEmail($Email)
     {
       $this->Email = $Email;
       return $this;
@@ -72,10 +72,10 @@ class EmailSettings
     }
 
     /**
-     * @param int $CheckPositionInterval
+     * @param $CheckPositionInterval string see CheckPositionIntervalEnum
      * @return \eLama\DirectApiV5\Dto\Campaign\EmailSettings
      */
-    public function setCheckPositionInterval($CheckPositionInterval = null)
+    public function setCheckPositionInterval($CheckPositionInterval)
     {
       $this->CheckPositionInterval = $CheckPositionInterval;
       return $this;
@@ -93,7 +93,7 @@ class EmailSettings
      * @param int $WarningBalance
      * @return \eLama\DirectApiV5\Dto\Campaign\EmailSettings
      */
-    public function setWarningBalance($WarningBalance = null)
+    public function setWarningBalance($WarningBalance)
     {
       $this->WarningBalance = $WarningBalance;
       return $this;
@@ -108,10 +108,10 @@ class EmailSettings
     }
 
     /**
-     * @param YesNoEnum $SendAccountNews
+     * @param string $SendAccountNews see YesNoEnum
      * @return \eLama\DirectApiV5\Dto\Campaign\EmailSettings
      */
-    public function setSendAccountNews($SendAccountNews = null)
+    public function setSendAccountNews($SendAccountNews)
     {
       $this->SendAccountNews = $SendAccountNews;
       return $this;
@@ -126,10 +126,10 @@ class EmailSettings
     }
 
     /**
-     * @param YesNoEnum $SendWarnings
+     * @param string $SendWarnings see YesNoEnum
      * @return \eLama\DirectApiV5\Dto\Campaign\EmailSettings
      */
-    public function setSendWarnings($SendWarnings = null)
+    public function setSendWarnings($SendWarnings)
     {
       $this->SendWarnings = $SendWarnings;
       return $this;
