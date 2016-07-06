@@ -59,6 +59,20 @@ class AdTest extends AdGroupExistenceDependantTestCase
 
     /**
      * @test
+     * @depends addAd
+     */
+    public function getAd($adId)
+    {
+        $ad = $this->getAdInCampaignWithId(self::$campaignId, $adId);
+        assertThat($ad->getTextAd()->getTitle(), is(equalTo(self::TITLE)));
+        assertThat($ad->getTextAd()->getText(), is(equalTo(self::TEXT)));
+        assertThat($ad->getTextAd()->getHref(), is(equalTo(self::HREF)));
+
+        return $adId;
+    }
+
+    /**
+     * @test
      * @depends getAd
      */
     public function deleteAd($id)
@@ -84,20 +98,6 @@ class AdTest extends AdGroupExistenceDependantTestCase
 //        $textAd->setAdImageHash('');todo пока не понятно, что с этим делать
 //        $textAd->setSitelinkSetId(1);todo сначала запилить Sitelinks
 //        $textAd->setAdExtensionIds(['1', '2']);todo расширения надо сделать сначала
-    }
-
-    /**
-     * @test
-     * @depends addAd
-     */
-    public function getAd($adId)
-    {
-        $ad = $this->getAdInCampaignWithId(self::$campaignId, $adId);
-        assertThat($ad->getTextAd()->getTitle(), is(equalTo(self::TITLE)));
-        assertThat($ad->getTextAd()->getText(), is(equalTo(self::TEXT)));
-        assertThat($ad->getTextAd()->getHref(), is(equalTo(self::HREF)));
-
-        return $adId;
     }
 
     /**
