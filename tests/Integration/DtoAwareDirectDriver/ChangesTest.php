@@ -32,8 +32,7 @@ class ChangesTest extends \PHPUnit_Framework_TestCase
      */
     public function checkCampaignsForGettingUnits()
     {
-        $dateTime = new \DateTime();
-        $checkRequest = new Changes\CheckCampaignsRequest($dateTime->format('Y-m-d\TH:i:s\Z'));
+        $checkRequest = new Changes\CheckCampaignsRequest(new \DateTimeImmutable());
 
         $checkCampaignsRequestBody = new RequestBody\CheckCampaignsRequestBody($checkRequest);
         /** @var Response $responseBody */
