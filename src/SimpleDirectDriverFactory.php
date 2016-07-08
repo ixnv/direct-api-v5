@@ -5,7 +5,6 @@ namespace eLama\DirectApiV5;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use GuzzleHttp\Client;
 use JMS\Serializer\Serializer;
-use Psr\Log\LoggerInterface;
 
 class SimpleDirectDriverFactory
 {
@@ -46,7 +45,7 @@ class SimpleDirectDriverFactory
     }
 
     /**
-     * @param string  $token
+     * @param string $token
      * @param string $login
      * @param string $toolName Строковый код инструмента использующего драйвер
      * @return SimpleDirectDriver
