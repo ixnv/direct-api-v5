@@ -3,14 +3,17 @@
 namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
 
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
+use eLama\DirectApiV5\Dto\General\UpdateResponseBody;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\DtoAwareDirectDriver;
 use eLama\DirectApiV5\RequestBody\AddAdRequestBody;
+use eLama\DirectApiV5\RequestBody\UpdateAdRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteAdRequestBody;
 use eLama\DirectApiV5\RequestBody\GetAdsRequestBody;
 use eLama\DirectApiV5\Dto\General\ActionResult;
 use eLama\DirectApiV5\Dto\Ad;
+use eLama\DirectApiV5\Dto\Ad\AdUpdateItem;
 
 class AdTest extends AdGroupExistenceDependantTestCase
 {
@@ -74,6 +77,30 @@ class AdTest extends AdGroupExistenceDependantTestCase
     /**
      * @test
      * @depends getAd
+     */
+    public function updateAdd($id)
+    {
+        $ad = new AdUpdateItem($id);
+        $textAd = new Ad\TextAdUpdate;
+        $textAd->setHref('http://yandex.ru');
+        $ad->setTextAd($textAd);
+
+        $request = new UpdateAdRequestBody(
+            new Ad\UpdateRequest([$ad])
+        );
+
+        /** @var UpdateResponseBody $responseBody */
+        $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
+        $updateId = $responseBody->getResult()->getUpdateResults()[0]->getId();
+
+        assertThat($id, is(equalTo($updateId)));
+
+        return $id;
+    }
+
+    /**
+     * @test
+     * @depends updateAdd
      */
     public function deleteAd($id)
     {
