@@ -153,6 +153,37 @@ class SimpleDirectDriver
         return $this->callGetCollectingItems($getAdsParams);
     }
 
+    /**
+     * @deprecated
+     * @param Ad\AdUpdateItem[] $ads
+     */
+    public function updateAds(array $ads)
+    {
+        // TODO: реализовать метод
+    }
+
+    /**
+     * @deprecated
+     * @param int[] $sitelinksSetIds
+     * @return PromiseInterface
+     * @see \eLama\DirectApiV5\Dto\SiteLink\SitelinksSetGetItem[]
+     */
+    public function getSitelinksSets(array $sitelinksSetIds)
+    {
+        // TODO: реализовать метод
+    }
+
+    /**
+     * @deprecated
+     * @param SitelinksSetAddItem[] $sitelinksSets
+     * @return PromiseInterface
+     * @see \eLama\DirectApiV5\Dto\General\ActionResult[]
+     */
+    public function addSitelinksSets(array $sitelinksSets)
+    {
+        // TODO: реализовать метод
+    }
+    
     private function callGetCollectingItems(GetRequestBody $params)
     {
         if ($this->pageLimit) {
