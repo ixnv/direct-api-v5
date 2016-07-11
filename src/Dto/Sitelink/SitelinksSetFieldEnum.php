@@ -10,6 +10,4 @@ class SitelinksSetFieldEnum extends BaseEnum
     const __default = 'Id';
     const Id = 'Id';
     const Sitelinks = 'Sitelinks';
-
-
 }

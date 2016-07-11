@@ -4,30 +4,28 @@ namespace eLama\DirectApiV5\Dto\Sitelink;
 
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
 class AddRequest
 {
-
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Sitelink\SitelinksSetAddItem")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\Sitelink\SitelinksSetAddItem>")
      *
-     * @var SitelinksSetAddItem $SitelinksSets
+     * @var SitelinksSetAddItem[] $SitelinksSets
      */
     private $SitelinksSets;
 
     /**
-     * @param SitelinksSetAddItem $SitelinksSets
+     * @param SitelinksSetAddItem[] $SitelinksSets
      */
-    public function __construct(SitelinksSetAddItem $SitelinksSets = null)
+    public function __construct(array $SitelinksSets = null)
     {
       $this->SitelinksSets = $SitelinksSets;
     }
 
     /**
-     * @return SitelinksSetAddItem
+     * @return SitelinksSetAddItem[]
      */
     public function getSitelinksSets()
     {
@@ -35,12 +33,13 @@ class AddRequest
     }
 
     /**
-     * @param SitelinksSetAddItem $SitelinksSets
-     * @return \eLama\DirectApiV5\Dto\Sitelink\AddRequest
+     * @param SitelinksSetAddItem[] $SitelinksSets
+     * @return self
      */
-    public function setSitelinksSets(SitelinksSetAddItem $SitelinksSets)
+    public function setSitelinksSets(array $SitelinksSets)
     {
       $this->SitelinksSets = $SitelinksSets;
+
       return $this;
     }
 

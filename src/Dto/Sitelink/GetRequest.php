@@ -14,24 +14,26 @@ class GetRequest extends GetRequestGeneral
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Sitelink\IdsCriteria")
+     * @JMS\Type("eLama\DirectApiV5\Dto\General\IdsCriteria")
      *
      * @var IdsCriteria $SelectionCriteria
      */
     private $SelectionCriteria;
 
     /**
-     * @JMS\Type("string")
+     * @JMS\Type("array<string>")
      *
-     * @var SitelinksSetFieldEnum $FieldNames
+     * @var string[] $FieldNames
+     * @see SitelinksSetFieldEnum
      */
     private $FieldNames;
 
     /**
      * @param IdsCriteria $SelectionCriteria
-     * @param SitelinksSetFieldEnum $FieldNames
+     * @param string[] $FieldNames
+     * @see SitelinksSetFieldEnum
      */
-    public function __construct(IdsCriteria $SelectionCriteria = null, $FieldNames = null)
+    public function __construct(IdsCriteria $SelectionCriteria = null, array $FieldNames = null)
     {
       $this->SelectionCriteria = $SelectionCriteria;
       $this->FieldNames = $FieldNames;
@@ -47,16 +49,17 @@ class GetRequest extends GetRequestGeneral
 
     /**
      * @param IdsCriteria $SelectionCriteria
-     * @return \eLama\DirectApiV5\Dto\Sitelink\GetRequest
+     * @return self
      */
     public function setSelectionCriteria(IdsCriteria $SelectionCriteria)
     {
       $this->SelectionCriteria = $SelectionCriteria;
+
       return $this;
     }
 
     /**
-     * @return SitelinksSetFieldEnum
+     * @return string[]
      */
     public function getFieldNames()
     {
@@ -64,12 +67,13 @@ class GetRequest extends GetRequestGeneral
     }
 
     /**
-     * @param SitelinksSetFieldEnum $FieldNames
-     * @return \eLama\DirectApiV5\Dto\Sitelink\GetRequest
+     * @param string[] $FieldNames
+     * @return self
      */
-    public function setFieldNames($FieldNames)
+    public function setFieldNames(array $FieldNames)
     {
       $this->FieldNames = $FieldNames;
+
       return $this;
     }
 

@@ -36,12 +36,12 @@ class SitelinksSetAddItem
 
     /**
      * @param Sitelink[] $Sitelinks
-     * @return \eLama\DirectApiV5\Dto\Sitelink\SitelinksSetAddItem
+     * @return self
      */
     public function setSitelinks(array $Sitelinks)
     {
       $this->Sitelinks = $Sitelinks;
+
       return $this;
     }
-
 }

@@ -5,7 +5,6 @@ namespace eLama\DirectApiV5\Dto\Sitelink;
 use eLama\DirectApiV5\Dto\General\GetResultGeneral;
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
@@ -13,35 +12,36 @@ class GetResult extends GetResultGeneral
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Sitelink\SitelinksSetGetItem")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\Sitelink\SitelinksSetGetItem>")
      *
-     * @var SitelinksSetGetItem $SitelinksSets
+     * @var SitelinksSetGetItem[] $SitelinksSets
      */
-    private $SitelinksSets;
+    private $SitelinksSets = [];
 
     /**
-     * @param SitelinksSetGetItem $SitelinksSets
+     * @param SitelinksSetGetItem[] $SitelinksSets
      */
-    public function __construct(SitelinksSetGetItem $SitelinksSets = null)
+    public function __construct(array $SitelinksSets = null)
     {
       $this->SitelinksSets = $SitelinksSets;
     }
 
     /**
-     * @return SitelinksSetGetItem
+     * @return SitelinksSetGetItem[]
      */
     public function getSitelinksSets()
     {
-      return $this->SitelinksSets;
+      return $this->SitelinksSets === null ? [] : $this->SitelinksSets;
     }
 
     /**
-     * @param SitelinksSetGetItem $SitelinksSets
-     * @return \eLama\DirectApiV5\Dto\Sitelink\GetResponse
+     * @param SitelinksSetGetItem[] $SitelinksSets
+     * @return self
      */
-    public function setSitelinksSets(SitelinksSetGetItem $SitelinksSets)
+    public function setSitelinksSets(array $SitelinksSets)
     {
       $this->SitelinksSets = $SitelinksSets;
+
       return $this;
     }
 
