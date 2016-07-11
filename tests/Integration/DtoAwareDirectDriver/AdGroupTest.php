@@ -5,7 +5,7 @@ namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
 use eLama\DirectApiV5\Dto\AdGroup\AddRequest as AdGroupAddRequest;
 use eLama\DirectApiV5\Dto\AdGroup\AdGroupAddItem;
 use eLama\DirectApiV5\Dto\AdGroup\AdGroupsSelectionCriteria;
-use eLama\DirectApiV5\Dto\AdGroup\DeleteRequest as AdGroupDeleteRequest;
+use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\AdGroup\GetResponseBody;
 use eLama\DirectApiV5\Dto\AdGroup;
 use eLama\DirectApiV5\DtoAwareDirectDriver;
@@ -82,7 +82,7 @@ class AdGroupTest extends DirectCampaignExistenceDependantTestCase
     public function deleteAdGroup($id)
     {
         $request = new DeleteAdGroupRequestBody(
-            new AdGroupDeleteRequest(new General\IdsCriteria([$id]))
+            new DeleteRequest(new General\IdsCriteria([$id]))
         );
 
         /** @var General\DeleteResponseBody $responseBody */

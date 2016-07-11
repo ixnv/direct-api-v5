@@ -1,11 +1,11 @@
 <?php
+
 namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
 
 use eLama\DirectApiV5\Dto\Campaign\AddRequest;
 use eLama\DirectApiV5\Dto\Campaign\CampaignAddItem;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Campaign\CampaignUpdateItem;
-use eLama\DirectApiV5\Dto\Campaign\DeleteRequest;
 use eLama\DirectApiV5\Dto\Campaign\GetResponseBody;
 use eLama\DirectApiV5\Dto\Campaign\ResumeRequest;
 use eLama\DirectApiV5\Dto\Campaign\SuspendRequest;
@@ -17,6 +17,7 @@ use eLama\DirectApiV5\Dto\Campaign\TextCampaignSearchStrategyTypeEnum;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignStrategyAdd;
 use eLama\DirectApiV5\Dto\Campaign\UpdateRequest;
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
+use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\Dto\General\ResumeResponseBody;

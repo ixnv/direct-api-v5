@@ -2,7 +2,7 @@
 
 namespace eLama\DirectApiV5\RequestBody;
 
-use eLama\DirectApiV5\Dto\AdGroup\DeleteRequest;
+use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
 
 class DeleteAdGroupRequestBody extends RequestBody

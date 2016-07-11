@@ -1,7 +1,8 @@
 <?php
+
 namespace eLama\DirectApiV5\RequestBody;
 
-use eLama\DirectApiV5\Dto\Campaign\DeleteRequest;
+use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
 
 class DeleteCampaignRequestBody extends RequestBody

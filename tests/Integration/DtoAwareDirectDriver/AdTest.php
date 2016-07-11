@@ -3,6 +3,7 @@
 namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
 
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
+use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\DtoAwareDirectDriver;
@@ -78,7 +79,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
     public function deleteAd($id)
     {
         $request = new DeleteAdRequestBody(
-            new Ad\DeleteRequest(new IdsCriteria([$id]))
+            new DeleteRequest(new IdsCriteria([$id]))
         );
 
         /** @var DeleteResponseBody $responseBody */

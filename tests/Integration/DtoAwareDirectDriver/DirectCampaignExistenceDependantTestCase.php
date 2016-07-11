@@ -4,7 +4,6 @@ namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
 
 use eLama\DirectApiV5\Dto\Campaign\AddRequest as CampaignAddRequest;
 use eLama\DirectApiV5\Dto\Campaign\CampaignAddItem;
-use eLama\DirectApiV5\Dto\Campaign\DeleteRequest;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignAddItem;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignNetworkStrategyAdd;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignNetworkStrategyTypeEnum;
@@ -12,6 +11,7 @@ use eLama\DirectApiV5\Dto\Campaign\TextCampaignSearchStrategyAdd;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignSearchStrategyTypeEnum;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignStrategyAdd;
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
+use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\DtoAwareDirectDriver;
 use eLama\DirectApiV5\JmsFactory;

@@ -3,10 +3,10 @@
 namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
 
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
+use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\Dto\Keyword\AddRequest;
-use eLama\DirectApiV5\Dto\Keyword\DeleteRequest;
 use eLama\DirectApiV5\Dto\Keyword\GetResponseBody;
 use eLama\DirectApiV5\Dto\Keyword\KeywordAddItem;
 use eLama\DirectApiV5\Dto\Keyword\KeywordsSelectionCriteria;

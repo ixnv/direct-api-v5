@@ -4,8 +4,8 @@ namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
 
 use eLama\DirectApiV5\Dto\AdGroup\AddRequest;
 use eLama\DirectApiV5\Dto\AdGroup\AdGroupAddItem;
-use eLama\DirectApiV5\Dto\AdGroup\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
+use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\RequestBody\AddAdGroupRequestBody;

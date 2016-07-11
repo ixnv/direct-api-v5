@@ -2,8 +2,8 @@
 
 namespace eLama\DirectApiV5\RequestBody;
 
+use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
-use eLama\DirectApiV5\Dto\Keyword\DeleteRequest;
 
 class DeleteKeywordRequestBody extends RequestBody
 {
