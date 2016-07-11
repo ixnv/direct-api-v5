@@ -11,5 +11,6 @@ class StateEnum extends BaseEnum
     const SUSPENDED = 'SUSPENDED';
     const OFF_BY_MONITORING = 'OFF_BY_MONITORING';
     const ARCHIVED = 'ARCHIVED';
+    const DELETED = 'DELETED';
     const UNKNOWN = 'UNKNOWN';
 }

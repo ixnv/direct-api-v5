@@ -1,8 +1,9 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Campaign;
+namespace eLama\DirectApiV5\Dto\General;
 
 use JMS\Serializer\Annotation as JMS;
+
 
 /**
  * @JMS\AccessType("public_method")
@@ -35,7 +36,7 @@ class MultiIdsActionResult
 
     /**
      * @param int $Ids
-     * @return \eLama\DirectApiV5\Dto\Campaign\MultiIdsActionResult
+     * @return self
      */
     public function setIds($Ids)
     {
