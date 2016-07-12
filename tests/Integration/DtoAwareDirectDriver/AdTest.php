@@ -3,15 +3,22 @@
 namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
 
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
+use eLama\DirectApiV5\Dto\General\UpdateResponseBody;
 use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
+use eLama\DirectApiV5\Dto\Sitelink\AddRequest;
+use eLama\DirectApiV5\Dto\Sitelink\Sitelink;
+use eLama\DirectApiV5\Dto\Sitelink\SitelinksSetAddItem;
 use eLama\DirectApiV5\DtoAwareDirectDriver;
 use eLama\DirectApiV5\RequestBody\AddAdRequestBody;
+use eLama\DirectApiV5\RequestBody\AddSitelinkRequestBody;
+use eLama\DirectApiV5\RequestBody\UpdateAdRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteAdRequestBody;
 use eLama\DirectApiV5\RequestBody\GetAdsRequestBody;
 use eLama\DirectApiV5\Dto\General\ActionResult;
 use eLama\DirectApiV5\Dto\Ad;
+use eLama\DirectApiV5\Dto\Ad\AdUpdateItem;
 
 class AdTest extends AdGroupExistenceDependantTestCase
 {
@@ -40,8 +47,10 @@ class AdTest extends AdGroupExistenceDependantTestCase
      */
     public function addAd()
     {
+        $sitelinkSetId = $this->createSitelinksSet();
         $adAddItem = new Ad\AdAddItem(self::$adGroupId);
         $textAd = new Ad\TextAdAdd(self::TEXT, self::TITLE, Ad\YesNoEnum::NO);
+        $textAd->setSitelinkSetId($sitelinkSetId);
 
         $this->addAdditionalParamsToTextAdAdd($textAd);
 
@@ -68,6 +77,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
         assertThat($ad->getTextAd()->getTitle(), is(equalTo(self::TITLE)));
         assertThat($ad->getTextAd()->getText(), is(equalTo(self::TEXT)));
         assertThat($ad->getTextAd()->getHref(), is(equalTo(self::HREF)));
+        assertThat($ad->getTextAd()->getSitelinkSetId(), is(integerValue()));
 
         return $adId;
     }
@@ -75,6 +85,30 @@ class AdTest extends AdGroupExistenceDependantTestCase
     /**
      * @test
      * @depends getAd
+     */
+    public function updateAdd($id)
+    {
+        $ad = new AdUpdateItem($id);
+        $textAd = new Ad\TextAdUpdate;
+        $textAd->setHref('http://yandex.ru');
+        $ad->setTextAd($textAd);
+
+        $request = new UpdateAdRequestBody(
+            new Ad\UpdateRequest([$ad])
+        );
+
+        /** @var UpdateResponseBody $responseBody */
+        $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
+        $updateId = $responseBody->getResult()->getUpdateResults()[0]->getId();
+
+        assertThat($id, is(equalTo($updateId)));
+
+        return $id;
+    }
+
+    /**
+     * @test
+     * @depends updateAdd
      */
     public function deleteAd($id)
     {
@@ -91,13 +125,30 @@ class AdTest extends AdGroupExistenceDependantTestCase
         return $id;
     }
 
+    /**
+     * @return int
+     */
+    private function createSitelinksSet()
+    {
+        $sitelinkSetAddItem = new SitelinksSetAddItem([
+            (new Sitelink('первая ссылка', 'http://ya.ru/1'))->setDescription('description 1'),
+            (new Sitelink('вторая ссылка', 'http://ya.ru/2'))->setDescription('description 2'),
+        ]);
+
+        $requestBody = new AddSitelinkRequestBody(new AddRequest([$sitelinkSetAddItem]));
+
+        /** @var AddResponseBody $responseBody */
+        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
+
+        return $responseBody->getResult()->getAddResults()[0]->getId();
+    }
+
     private function addAdditionalParamsToTextAdAdd(Ad\TextAdAdd $textAd)
     {
         $textAd->setHref(self::HREF);
         $textAd->setDisplayUrlPath('чудо-сайт');
 //        $textAd->setVCardId();todo  сделать добавление визитки, а потом тестить и это
 //        $textAd->setAdImageHash('');todo пока не понятно, что с этим делать
-//        $textAd->setSitelinkSetId(1);todo сначала запилить Sitelinks
 //        $textAd->setAdExtensionIds(['1', '2']);todo расширения надо сделать сначала
     }
 
@@ -174,7 +225,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
     /**
      * @param $campaignId
      * @param $adId
-     * @return array|mixed
+     * @return Ad\AdGetItem
      */
     private function getAdInCampaignWithId($campaignId, $adId)
     {
