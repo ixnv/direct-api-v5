@@ -31,4 +31,21 @@ class SimpleDirectDriverTest extends \PHPUnit_Framework_TestCase
 
         $this->driver->updateAds([new \stdClass()]);
     }
+
+    /**
+     * @test
+     */
+    public function getSitelinksSets_EmptyArray_AssertionException()
+    {
+        $this->setExpectedException(\Assert\InvalidArgumentException::class);
+
+        $this->driver->getSitelinksSets([]);
+    }
+
+    public function addSitelinksSets_ArrayOfWrongClasses_AssertionException()
+    {
+        $this->setExpectedException(\Assert\InvalidArgumentException::class);
+
+        $this->driver->addSitelinksSets([new \stdClass()]);
+    }
 }

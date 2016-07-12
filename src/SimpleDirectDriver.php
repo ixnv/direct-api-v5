@@ -10,16 +10,21 @@ use eLama\DirectApiV5\Dto\Campaign;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Campaign\CampaignStateEnum;
 use eLama\DirectApiV5\Dto\Campaign\CampaignTypeEnum;
+use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\Dto\General\StateEnum;
 use eLama\DirectApiV5\Dto\General\StatusEnum;
 use eLama\DirectApiV5\Dto\Keyword;
 use eLama\DirectApiV5\Dto\Keyword\KeywordStateEnum;
+use eLama\DirectApiV5\Dto\Sitelink;
+use eLama\DirectApiV5\Dto\Sitelink\SitelinksSetAddItem;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
+use eLama\DirectApiV5\RequestBody\AddSitelinkRequestBody;
 use eLama\DirectApiV5\RequestBody\GetAdGroupsRequestBody;
 use eLama\DirectApiV5\RequestBody\GetAdsRequestBody;
 use eLama\DirectApiV5\RequestBody\GetCampaignsRequestBody;
 use eLama\DirectApiV5\RequestBody\GetKeywordsRequestBody;
 use eLama\DirectApiV5\RequestBody\GetRequestBody;
+use eLama\DirectApiV5\RequestBody\GetSitelinkRequestBody;
 use eLama\DirectApiV5\RequestBody\UpdateAdRequestBody;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise\PromiseInterface;
@@ -182,25 +187,33 @@ class SimpleDirectDriver
     }
 
     /**
-     * @deprecated
      * @param int[] $sitelinksSetIds
      * @return PromiseInterface
-     * @see \eLama\DirectApiV5\Dto\SiteLink\SitelinksSetGetItem[]
+     * @see GetResponseBody
      */
     public function getSitelinksSets(array $sitelinksSetIds)
     {
-        // TODO: реализовать метод
+        \Assert\that($sitelinksSetIds)->notEmpty();
+
+        $requestBody = new GetSitelinkRequestBody(
+            (new IdsCriteria())->setIds($sitelinksSetIds)
+        );
+
+        return $this->driver->call($requestBody);
     }
 
     /**
-     * @deprecated
      * @param SitelinksSetAddItem[] $sitelinksSets
      * @return PromiseInterface
-     * @see \eLama\DirectApiV5\Dto\General\ActionResult[]
+     * @see AddResponseBody
      */
     public function addSitelinksSets(array $sitelinksSets)
     {
-        // TODO: реализовать метод
+        \Assert\thatAll($sitelinksSets)->isInstanceOf(SitelinksSetAddItem::class);
+
+        $requestBody = new AddSitelinkRequestBody(new Sitelink\AddRequest($sitelinksSets));
+
+        return $this->driver->call($requestBody);
     }
     
     private function callGetCollectingItems(GetRequestBody $params)
