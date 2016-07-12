@@ -2,17 +2,17 @@
 
 namespace eLama\DirectApiV5\RequestBody;
 
-use eLama\DirectApiV5\Dto\General\DeleteRequest;
-use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
+use eLama\DirectApiV5\Dto\General\AddResponseBody;
+use eLama\DirectApiV5\Dto\Sitelink\AddRequest;
 
-class DeleteAdGroupRequestBody extends RequestBody
+class AddSitelinkRequestBody extends RequestBody
 {
     /**
-     * @var DeleteRequest
+     * @var AddRequest
      */
     private $request;
 
-    public function __construct(DeleteRequest $request)
+    public function __construct(AddRequest $request)
     {
         $this->request = $request;
     }
@@ -22,7 +22,7 @@ class DeleteAdGroupRequestBody extends RequestBody
      */
     public function resource()
     {
-        return 'adgroups';
+        return 'sitelinks';
     }
 
     /**
@@ -30,7 +30,7 @@ class DeleteAdGroupRequestBody extends RequestBody
      */
     public function resultClass()
     {
-        return DeleteResponseBody::class;
+        return AddResponseBody::class;
     }
 
     /**
@@ -46,6 +46,6 @@ class DeleteAdGroupRequestBody extends RequestBody
      */
     public function method()
     {
-        return 'delete';
+        return 'add';
     }
 }

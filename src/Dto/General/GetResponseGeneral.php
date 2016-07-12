@@ -1,9 +1,8 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Changes;
+namespace eLama\DirectApiV5\Dto\General;
 
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
@@ -28,12 +27,11 @@ class GetResponseGeneral
 
     /**
      * @param int $LimitedBy
-     * @return \eLama\DirectApiV5\Dto\Changes\GetResponseGeneral
+     * @return self
      */
     public function setLimitedBy($LimitedBy = null)
     {
       $this->LimitedBy = $LimitedBy;
       return $this;
     }
-
 }

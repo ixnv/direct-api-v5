@@ -1,8 +1,7 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Campaign;
+namespace eLama\DirectApiV5\Dto\General;
 
-use eLama\DirectApiV5\Dto\General\ActionResult;
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -36,7 +35,7 @@ class AddResponse
 
     /**
      * @param ActionResult $AddResults
-     * @return \eLama\DirectApiV5\Dto\Campaign\AddResponse
+     * @return self
      */
     public function setAddResults(ActionResult $AddResults)
     {
