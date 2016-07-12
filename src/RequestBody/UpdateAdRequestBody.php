@@ -34,7 +34,7 @@ class UpdateAdRequestBody extends RequestBody
     }
 
     /**
-     * @return mixed
+     * @return UpdateRequest
      */
     public function params()
     {

@@ -21,7 +21,7 @@ class UpdateRequest
     /**
      * @param AdUpdateItem[] $Ads
      */
-    public function __construct(array $Ads)
+    public function __construct(array $Ads = [])
     {
       $this->Ads = $Ads;
     }
@@ -31,7 +31,7 @@ class UpdateRequest
      */
     public function getAds()
     {
-      return $this->Ads ?: [];
+      return $this->Ads;
     }
 
     /**
