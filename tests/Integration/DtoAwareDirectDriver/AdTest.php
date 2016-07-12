@@ -45,30 +45,9 @@ class AdTest extends AdGroupExistenceDependantTestCase
     /**
      * @test
      */
-    public function addSitelinks()
+    public function addAd()
     {
-        $sitelinkSetAddItem = new SitelinksSetAddItem([
-            (new Sitelink('первая ссылка', 'http://ya.ru/1'))->setDescription('description 1'),
-            (new Sitelink('вторая ссылка', 'http://ya.ru/2'))->setDescription('description 2'),
-        ]);
-
-        $requestBody = new AddSitelinkRequestBody(new AddRequest([$sitelinkSetAddItem]));
-
-        /** @var AddResponseBody $responseBody */
-        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
-
-        $id = $responseBody->getResult()->getAddResults()[0]->getId();
-        assertThat($id, is(typeOf('integer')));
-
-        return $id;
-    }
-
-    /**
-     * @test
-     * @depends addSitelinks
-     */
-    public function addAd($sitelinkSetId)
-    {
+        $sitelinkSetId = $this->createSitelinksSet();
         $adAddItem = new Ad\AdAddItem(self::$adGroupId);
         $textAd = new Ad\TextAdAdd(self::TEXT, self::TITLE, Ad\YesNoEnum::NO);
         $textAd->setSitelinkSetId($sitelinkSetId);
@@ -144,6 +123,24 @@ class AdTest extends AdGroupExistenceDependantTestCase
         assertThat($id, is(equalTo($deletedId)));
 
         return $id;
+    }
+
+    /**
+     * @return int
+     */
+    private function createSitelinksSet()
+    {
+        $sitelinkSetAddItem = new SitelinksSetAddItem([
+            (new Sitelink('первая ссылка', 'http://ya.ru/1'))->setDescription('description 1'),
+            (new Sitelink('вторая ссылка', 'http://ya.ru/2'))->setDescription('description 2'),
+        ]);
+
+        $requestBody = new AddSitelinkRequestBody(new AddRequest([$sitelinkSetAddItem]));
+
+        /** @var AddResponseBody $responseBody */
+        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
+
+        return $responseBody->getResult()->getAddResults()[0]->getId();
     }
 
     private function addAdditionalParamsToTextAdAdd(Ad\TextAdAdd $textAd)
