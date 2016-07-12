@@ -10,6 +10,7 @@ use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Campaign\CampaignStateEnum;
 use eLama\DirectApiV5\Dto\Campaign\CampaignTypeEnum;
 use eLama\DirectApiV5\Dto\General\StateEnum;
+use eLama\DirectApiV5\Dto\General\StatusEnum;
 use eLama\DirectApiV5\Dto\Keyword;
 use eLama\DirectApiV5\Dto\Keyword\KeywordStateEnum;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
@@ -91,7 +92,7 @@ class SimpleDirectDriver
      * @return PromiseInterface
      * @see \eLama\DirectApiV5\Dto\Ad\AdGetItem
      */
-    public function getNonArchivedAds(array $campaignIds)
+    public function getNonArchivedAds(array $campaignIds, $acceptedOrOnModeration = false)
     {
         //Проблема API - не удается получить все объявления не передавая ID кампании
         \Assert\that($campaignIds)->notEmpty();
@@ -101,6 +102,13 @@ class SimpleDirectDriver
         $criteria->setStates(
             [StateEnum::ON, StateEnum::OFF_BY_MONITORING, StateEnum::SUSPENDED, StateEnum::OFF]
         );
+        
+        if ($acceptedOrOnModeration) {
+            $criteria->setStatuses(
+                [StatusEnum::MODERATION, StatusEnum::PREACCEPTED, StatusEnum::ACCEPTED]
+            );
+        }
+        
         $criteria->setTypes([Ad\AdTypeEnum::TEXT_AD]);
 
         $getAdsParams = new GetAdsRequestBody($criteria);
@@ -150,6 +158,37 @@ class SimpleDirectDriver
         return $this->callGetCollectingItems($getAdsParams);
     }
 
+    /**
+     * @deprecated
+     * @param Ad\AdUpdateItem[] $ads
+     */
+    public function updateAds(array $ads)
+    {
+        // TODO: реализовать метод
+    }
+
+    /**
+     * @deprecated
+     * @param int[] $sitelinksSetIds
+     * @return PromiseInterface
+     * @see \eLama\DirectApiV5\Dto\SiteLink\SitelinksSetGetItem[]
+     */
+    public function getSitelinksSets(array $sitelinksSetIds)
+    {
+        // TODO: реализовать метод
+    }
+
+    /**
+     * @deprecated
+     * @param SitelinksSetAddItem[] $sitelinksSets
+     * @return PromiseInterface
+     * @see \eLama\DirectApiV5\Dto\General\ActionResult[]
+     */
+    public function addSitelinksSets(array $sitelinksSets)
+    {
+        // TODO: реализовать метод
+    }
+    
     private function callGetCollectingItems(GetRequestBody $params)
     {
         if ($this->pageLimit) {

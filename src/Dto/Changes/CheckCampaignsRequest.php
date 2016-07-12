@@ -21,9 +21,9 @@ class CheckCampaignsRequest
     /**
      * @param string $Timestamp
      */
-    public function __construct($Timestamp = null)
+    public function __construct($Timestamp)
     {
-      $this->Timestamp = $Timestamp;
+      $this->setTimestamp($Timestamp);
     }
 
     /**
@@ -35,13 +35,16 @@ class CheckCampaignsRequest
     }
 
     /**
-     * @param string $Timestamp
-     * @return \eLama\DirectApiV5\Dto\Changes\CheckCampaignsRequest
+     * @param string|\DateTimeImmutable $Timestamp
+     * @return \eLama\DirectApiV5\Dto\Changes\CheckRequest
      */
     public function setTimestamp($Timestamp)
     {
-      $this->Timestamp = $Timestamp;
-      return $this;
-    }
+        if ($Timestamp instanceof \DateTimeImmutable) {
+            $Timestamp = $Timestamp->setTimezone(new \DateTimeZone('UTC'))->format('Y-m-d\TH:i:s\Z');
+        }
+        $this->Timestamp = $Timestamp;
 
+        return $this;
+    }
 }

@@ -5,7 +5,7 @@ namespace eLama\DirectApiV5\RequestBody;
 use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
 
-class DeleteAdGroupRequestBody extends RequestBody
+class DeleteSitelinkRequestBody extends RequestBody
 {
     /**
      * @var DeleteRequest
@@ -22,7 +22,7 @@ class DeleteAdGroupRequestBody extends RequestBody
      */
     public function resource()
     {
-        return 'adgroups';
+        return 'sitelinks';
     }
 
     /**

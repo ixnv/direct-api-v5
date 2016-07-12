@@ -1,8 +1,7 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Campaign;
+namespace eLama\DirectApiV5\Dto\General;
 
-use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -21,7 +20,7 @@ class DeleteRequest
     /**
      * @param IdsCriteria $SelectionCriteria
      */
-    public function __construct(IdsCriteria $SelectionCriteria)
+    public function __construct(IdsCriteria $SelectionCriteria = null)
     {
       $this->SelectionCriteria = $SelectionCriteria;
     }
@@ -36,12 +35,12 @@ class DeleteRequest
 
     /**
      * @param IdsCriteria $SelectionCriteria
-     * @return \eLama\DirectApiV5\Dto\Campaign\DeleteRequest
+     * @return self
      */
     public function setSelectionCriteria(IdsCriteria $SelectionCriteria)
     {
       $this->SelectionCriteria = $SelectionCriteria;
+
       return $this;
     }
-
 }

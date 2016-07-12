@@ -4,7 +4,6 @@ namespace eLama\DirectApiV5\Dto\General;
 
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
@@ -21,9 +20,9 @@ class IdsCriteria
     /**
      * @param int[] $Ids
      */
-    public function __construct(array $Ids)
+    public function __construct(array $Ids = null)
     {
-      $this->Ids = $Ids;
+        $this->Ids = $Ids ?: [];
     }
 
     /**
@@ -36,9 +35,12 @@ class IdsCriteria
 
     /**
      * @param int[] $Ids
+     * @return self
      */
     public function setIds(array $Ids)
     {
-      $this->Ids = $Ids;
+        $this->Ids = $Ids;
+
+        return $this;
     }
 }
