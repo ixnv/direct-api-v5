@@ -28,7 +28,7 @@ class GeneralTest extends PHPUnit_Framework_TestCase
      * @test
      *
      * Чтобы тест работал, в аккаунте должны быть тестовые данные.
-     * Их можно автоматом сгенерить в управлении песочницей в Директе.
+     * Их можно автоматом сгенерить в управлении песочницей в Директе (RED-1070).
      *
      * @return int[] Массив ID существующих кампаний
      */
@@ -52,7 +52,6 @@ class GeneralTest extends PHPUnit_Framework_TestCase
             $campaigns
         );
     }
-
 
     /**
      * @test
