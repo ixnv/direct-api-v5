@@ -15,6 +15,11 @@ abstract class Service
         $this->driver = $dtoAwareDirectDriver;
     }
 
+    /**
+     * @param GetRequestBody $params
+     * @param int|null $pageLimit
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
     protected function callGetCollectingItems(GetRequestBody $params, $pageLimit = null)
     {
         if ($pageLimit) {
