@@ -57,7 +57,10 @@ class CampaignTest extends \PHPUnit_Framework_TestCase
      */
     public function addCampaign()
     {
-        $campaignAddItem = new CampaignAddItem(self::NAME, (new \DateTime())->format('Y-m-d'));
+        $campaignAddItem = new CampaignAddItem(
+            self::NAME,
+            (new \DateTime('now', new \DateTimeZone('Europe/Moscow')))->format('Y-m-d')
+        );
         $campaignAddItem->setTextCampaign(
             new TextCampaignAddItem(
                 new TextCampaignStrategyAdd(
