@@ -63,7 +63,10 @@ abstract class DirectCampaignExistenceDependantTestCase extends \PHPUnit_Framewo
      */
     protected static function createCampaign(DtoAwareDirectDriver $driver)
     {
-        $campaignAddItem = new CampaignAddItem('AdTest', (new \DateTime())->format('Y-m-d'));
+        $campaignAddItem = new CampaignAddItem(
+            'AdTest',
+            (new \DateTime('now', new \DateTimeZone('Europe/Moscow')))->format('Y-m-d')
+        );
         $campaignAddItem->setTextCampaign(
             new TextCampaignAddItem(
                 new TextCampaignStrategyAdd(
