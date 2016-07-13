@@ -26,4 +26,13 @@ class AdServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->service->updateAds([new \stdClass()]);
     }
+
+    /**
+     * @test
+     */
+    public function getNonArchivedAds_EmptyCampaignList_ThrowsInvalidArgumentException()
+    {
+        $this->setExpectedException(\InvalidArgumentException::class);
+        $this->service->getNonArchivedAds([]);
+    }
 }

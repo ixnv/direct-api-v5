@@ -45,6 +45,7 @@ class SimpleDirectDriverFactory
     }
 
     /**
+     * @deprecated нужно использовать сервисы для работы с Директовскими сущностями напрямую, не через SimpleDirectDriver
      * @param string $token
      * @param string $login
      * @param string $toolName Строковый код инструмента использующего драйвер
@@ -63,6 +64,7 @@ class SimpleDirectDriverFactory
     }
 
     /**
+     * @deprecated нужно использовать сервисы для работы с Директовскими сущностями напрямую, не через SimpleDirectDriver
      * @param string $login
      * @param string $toolName Строковый код инструмента использующего драйвер
      * @return SimpleDirectDriver
