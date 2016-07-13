@@ -24,7 +24,6 @@ class AdService extends Service
      */
     public function getNonArchivedAds(array $campaignIds, $acceptedOrOnModeration = false, $pageLimit = null)
     {
-        //Проблема API - не удается получить все объявления не передавая ID кампании
         \Assert\that($campaignIds)->notEmpty();
 
         $criteria = new AdsSelectionCriteria();

@@ -17,7 +17,6 @@ class KeywordService extends Service
      */
     public function getNonArchivedKeywords(array $campaignIds, $pageLimit = null)
     {
-        // Проблема API - не удается получить все ключевики не передавая ID кампании
         \Assert\that($campaignIds)->notEmpty();
 
         $criteria = new KeywordsSelectionCriteria();
