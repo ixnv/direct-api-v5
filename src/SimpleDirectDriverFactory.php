@@ -53,14 +53,22 @@ class SimpleDirectDriverFactory
      */
     public function driver($token, $login, $toolName)
     {
-        return new SimpleDirectDriver(
+        /** Хардкор для рефакторинга и перехода к сервисам */
+        $dtoAwareDriverFactory = new DtoAwareDirectDriverFactory(
             $this->serializer,
             $this->client,
-            $this->loggerFactory->create($toolName),
             $this->baseUrl,
-            $token,
-            $login
+            'http://52.50.197.65/v5',
+            $this->loggerFactory->create($toolName)
         );
+
+        $dtoAwareDriver = $dtoAwareDriverFactory->createProxyDriverWithFallback(
+            $token,
+            $login,
+            $cacheMaxAge = 300 /* TODO Определиться */
+        );
+
+        return new SimpleDirectDriver($dtoAwareDriver);
     }
 
     /**

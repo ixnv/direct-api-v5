@@ -8,6 +8,7 @@ use eLama\DirectApiV5\LowLevelDriver\EnsureSuccessDriver;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\Request;
 use eLama\DirectApiV5\Serializer\ArraySerializer;
+use eLama\DirectApiV5\Serializer\JmsSerializer;
 use Phake;
 use Psr\Log\LoggerInterface;
 
@@ -40,11 +41,11 @@ class EnsureSuccessDriverTest extends \PHPUnit_Framework_TestCase
         $jms = JmsFactory::create()->serializer();
 
         $this->logger = Phake::mock(LoggerInterface::class);
-        $this->serializer = new ArraySerializer($jms);
+        $this->serializer = new JmsSerializer($jms, DummyResponseBody::class);
         $this->guzzleAdapter = new TestGuzzleAdapter();
 
         $this->driver = new EnsureSuccessDriver(
-            new LowLevelDriver($this->guzzleAdapter, $this->logger)
+            new LowLevelDriver($this->guzzleAdapter, $this->logger, LowLevelDriver::URL_SANDBOX)
         );
     }
 
