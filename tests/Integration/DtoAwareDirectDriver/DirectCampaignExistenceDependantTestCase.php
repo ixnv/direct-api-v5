@@ -26,7 +26,7 @@ abstract class DirectCampaignExistenceDependantTestCase extends DirectApiV5TestC
     /** @var int */
     protected static $campaignId;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(DtoAwareDirectDriver $dtoAwareDirectDriver = null)
     {
         $driver = self::createDtoAwareDirectDriver();
 
