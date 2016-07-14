@@ -41,9 +41,6 @@ class DirectApiV5TestCase extends \PHPUnit_Framework_TestCase
     protected static function clearTestCampaigns(DtoAwareDirectDriver $dtoAwareDirectDriver)
     {
         $criteria = new CampaignsSelectionCriteria();
-        $criteria->setStates(
-            [CampaignStateEnum::ON, CampaignStateEnum::ENDED, CampaignStateEnum::SUSPENDED, CampaignStateEnum::OFF]
-        );
         $criteria->setTypes([CampaignTypeEnum::TEXT_CAMPAIGN]);
 
         $allSandboxCampaigns = $dtoAwareDirectDriver
