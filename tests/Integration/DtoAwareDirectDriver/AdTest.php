@@ -27,6 +27,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
     const HREF = 'http://example.com';
     const ADS_QUANTITY = 4;
     const AD_LIMIT = 2;
+    const DISPLAY_URL_PATH = 'чудо-сайт';
 
     /**
      * @var DtoAwareDirectDriver
@@ -78,6 +79,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
         assertThat($ad->getTextAd()->getText(), is(equalTo(self::TEXT)));
         assertThat($ad->getTextAd()->getHref(), is(equalTo(self::HREF)));
         assertThat($ad->getTextAd()->getSitelinkSetId(), is(integerValue()));
+        assertThat($ad->getTextAd()->getDisplayUrlPath(), is(equalTo(self::DISPLAY_URL_PATH)));
 
         return $adId;
     }
@@ -146,7 +148,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
     private function addAdditionalParamsToTextAdAdd(Ad\TextAdAdd $textAd)
     {
         $textAd->setHref(self::HREF);
-        $textAd->setDisplayUrlPath('чудо-сайт');
+        $textAd->setDisplayUrlPath(self::DISPLAY_URL_PATH);
 //        $textAd->setVCardId();todo  сделать добавление визитки, а потом тестить и это
 //        $textAd->setAdImageHash('');todo пока не понятно, что с этим делать
 //        $textAd->setAdExtensionIds(['1', '2']);todo расширения надо сделать сначала
