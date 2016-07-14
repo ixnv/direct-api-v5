@@ -21,7 +21,7 @@ class DirectApiV5TestCase extends \PHPUnit_Framework_TestCase
     const LOGIN = 'ra-trinet-add-dev-01';
     const TOKEN = '3fe13d8bd818458c89624f678f365051';
 
-    public static function setUpBeforeClass(DtoAwareDirectDriver $dtoAwareDirectDriver = null )
+    public static function setUpBeforeClass(DtoAwareDirectDriver $dtoAwareDirectDriver = null)
     {
         if (!$dtoAwareDirectDriver) {
             $dtoAwareDirectDriver = self::createDtoAwareDirectDriver();
