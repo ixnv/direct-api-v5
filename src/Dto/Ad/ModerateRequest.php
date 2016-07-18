@@ -13,7 +13,7 @@ class ModerateRequest
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Ad\IdsCriteria")
+     * @JMS\Type("eLama\DirectApiV5\Dto\General\IdsCriteria")
      *
      * @var IdsCriteria $SelectionCriteria
      */
@@ -22,7 +22,7 @@ class ModerateRequest
     /**
      * @param IdsCriteria $SelectionCriteria
      */
-    public function __construct(IdsCriteria $SelectionCriteria = null)
+    public function __construct(IdsCriteria $SelectionCriteria)
     {
       $this->SelectionCriteria = $SelectionCriteria;
     }
