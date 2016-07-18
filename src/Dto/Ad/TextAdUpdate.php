@@ -90,6 +90,7 @@ class TextAdUpdate extends TextAdUpdateBase
     public function setHref($Href = null)
     {
       $this->Href = $Href;
+
       return $this;
     }
 
@@ -108,6 +109,7 @@ class TextAdUpdate extends TextAdUpdateBase
     public function setAgeLabel($AgeLabel = null)
     {
       $this->AgeLabel = $AgeLabel;
+
       return $this;
     }
 

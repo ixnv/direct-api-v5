@@ -62,7 +62,7 @@ class TextAdAddBase
      * @param string $AdImageHash
      * @return \eLama\DirectApiV5\Dto\Ad\TextAdAddBase
      */
-    public function setAdImageHash($AdImageHash = null)
+    public function setAdImageHash($AdImageHash)
     {
       $this->AdImageHash = $AdImageHash;
       return $this;
@@ -80,7 +80,7 @@ class TextAdAddBase
      * @param int $SitelinkSetId
      * @return \eLama\DirectApiV5\Dto\Ad\TextAdAddBase
      */
-    public function setSitelinkSetId($SitelinkSetId = null)
+    public function setSitelinkSetId($SitelinkSetId)
     {
       $this->SitelinkSetId = $SitelinkSetId;
       return $this;

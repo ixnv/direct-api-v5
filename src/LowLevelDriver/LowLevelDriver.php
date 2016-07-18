@@ -53,13 +53,14 @@ class LowLevelDriver implements LowLevelDriverInterface
         $uniqId = uniqid('', false);
 
         $requestBodyInJson = $serializer->serialize($body);
-
+        
         $this->logger->info("Going to send request", $this->createLogContext($uniqId, $request, $requestBodyInJson));
 
         $url = $this->baseUrl . '/' . $request->getService();
         $headers = $this->createHeaders($request);
 
         $startTime = microtime(true);
+
         return $this->client->sendAsync($url, $headers, $requestBodyInJson)
             ->then(function ($response) use ($serializer, $uniqId, $request, $requestBodyInJson, $startTime) {
                 $contents = $response->getBody()->getContents();

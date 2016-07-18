@@ -4,23 +4,17 @@ namespace eLama\DirectApiV5;
 
 use eLama\DirectApiV5\Dto;
 use eLama\DirectApiV5\Dto\Ad;
-use eLama\DirectApiV5\Dto\AdGroup\AdGroupTypesEnum;
+use eLama\DirectApiV5\Dto\Ad\AdUpdateItem;
 use eLama\DirectApiV5\Dto\Campaign;
-use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
-use eLama\DirectApiV5\Dto\Campaign\CampaignStateEnum;
-use eLama\DirectApiV5\Dto\Campaign\CampaignTypeEnum;
-use eLama\DirectApiV5\Dto\General\GetResultGeneral;
-use eLama\DirectApiV5\Dto\General\StateEnum;
 use eLama\DirectApiV5\Dto\Keyword;
-use eLama\DirectApiV5\Dto\Keyword\KeywordStateEnum;
+use eLama\DirectApiV5\Dto\Sitelink;
+use eLama\DirectApiV5\Dto\Sitelink\SitelinksSetAddItem;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
-use eLama\DirectApiV5\RequestBody\GetAdGroupsRequestBody;
-use eLama\DirectApiV5\RequestBody\GetAdsRequestBody;
-use eLama\DirectApiV5\RequestBody\GetCampaignsRequestBody;
-use eLama\DirectApiV5\RequestBody\GetKeywordsRequestBody;
-use eLama\DirectApiV5\RequestBody\GetRequestBody;
-use eLama\DirectApiV5\RequestBody\RequestBody;
-use eLama\DirectApiV5\Serializer\JmsSerializer;
+use eLama\DirectApiV5\Service\AdGroupService;
+use eLama\DirectApiV5\Service\AdService;
+use eLama\DirectApiV5\Service\CampaignService;
+use eLama\DirectApiV5\Service\KeywordService;
+use eLama\DirectApiV5\Service\SitelinkService;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise\PromiseInterface;
 use JMS\Serializer\Serializer;
@@ -30,9 +24,8 @@ class SimpleDirectDriver
 {
     /** @var DtoAwareDirectDriver  */
     private $driver;
-    /**
-     * @var null
-     */
+
+    /** @var int|null */
     private $pageLimit;
 
     /**
@@ -47,110 +40,101 @@ class SimpleDirectDriver
 
     /**
      * Получить незаархивированные текстовые кампании
+     * @deprecated нужно использовать CampaignService напрямую
      * @return PromiseInterface promise of \eLama\DirectApiV5\Dto\Campaign\CampaignGetItem[]
      * @see \eLama\DirectApiV5\Dto\Campaign\CampaignGetItem
      */
     public function getNonArchivedCampaigns()
     {
-        $criteria = new CampaignsSelectionCriteria();
-        $criteria->setStates(
-            [CampaignStateEnum::ON, CampaignStateEnum::ENDED, CampaignStateEnum::SUSPENDED, CampaignStateEnum::OFF]
-        );
-        $criteria->setTypes([CampaignTypeEnum::TEXT_CAMPAIGN]);
-
-        $getCampaignsRequest = new GetCampaignsRequestBody($criteria);
-
-        return $this->callGetCollectingItems($getCampaignsRequest);
+        $campaignService = new CampaignService($this->driver);
+        return $campaignService->getNonArchivedCampaigns($this->pageLimit);
     }
 
     /**
+     * @deprecated нужно использовать CampaignService напрямую
      * @param int $id
-     * @return PromiseInterface on \eLama\DirectApiV5\Dto\Campaign\CampaignGetItem
+     * @return PromiseInterface
      * @see \eLama\DirectApiV5\Dto\Campaign\CampaignGetItem
      */
     public function getCampaign($id)
     {
-        $criteria = new CampaignsSelectionCriteria();
-        $criteria->setIds([$id]);
-
-        $getCampaignsRequest = new GetCampaignsRequestBody($criteria);
-
-        return $this->driver->call($getCampaignsRequest)
-            ->then(function (Response $response) {
-                return $response->getUnserializedBody()->getResult()->getCampaigns()[0];
-            });
+        $campaignService = new CampaignService($this->driver);
+        return $campaignService->getCampaign($id);
     }
 
     /**
      * Получить незаархивированные текстовые объявления
+     * @deprecated нужно использовать AdService напрямую
+     * @param int[] $campaignIds
      * @return PromiseInterface
      * @see \eLama\DirectApiV5\Dto\Ad\AdGetItem
      */
-    public function getNonArchivedAds(array $campaignIds)
+    public function getNonArchivedAds(array $campaignIds, $acceptedOrOnModeration = false)
     {
-        //Проблема API - не удается получить все объявления не передавая ID кампании
-        \Assert\that($campaignIds)->notEmpty();
-
-        $criteria = new Dto\Ad\AdsSelectionCriteria();
-        $criteria->setCampaignIds($campaignIds);
-        $criteria->setStates(
-            [StateEnum::ON, StateEnum::OFF_BY_MONITORING, StateEnum::SUSPENDED, StateEnum::OFF]
-        );
-        $criteria->setTypes([Ad\AdTypeEnum::TEXT_AD]);
-
-        $getAdsParams = new GetAdsRequestBody($criteria);
-
-        return $this->callGetCollectingItems($getAdsParams);
+        $adService = new AdService($this->driver);
+        return $adService->getNonArchivedAds($campaignIds, $acceptedOrOnModeration, $this->pageLimit);
     }
 
     /**
      * Получить незаархивированные текстовые объявления
-     *
+     * @deprecated нужно использовать AdGroupService напрямую
      * @param int[] $campaignIds
      * @return PromiseInterface
      * @see \eLama\DirectApiV5\Dto\Ad\AdGetItem
      */
     public function getAllTextAdGroups(array $campaignIds)
     {
-        //Проблема API - не удается получить все объявления не передавая ID кампании
-        \Assert\that($campaignIds)->notEmpty()->all()->min(1);
-
-        $criteria = new Dto\AdGroup\AdGroupsSelectionCriteria();
-        $criteria->setCampaignIds($campaignIds);
-        $criteria->setTypes([AdGroupTypesEnum::TEXT_AD_GROUP]);
-
-        $getAdsParams = new GetAdGroupsRequestBody($criteria);
-
-        return $this->callGetCollectingItems($getAdsParams);
+        $adGroupService = new AdGroupService($this->driver);
+        return $adGroupService->getAllTextAdGroups($campaignIds, $this->pageLimit);
     }
 
     /**
+     * @deprecated нужно использовать KeywordService напрямую
      * @param int[] $campaignIds
      * @return PromiseInterface
      * @see \eLama\DirectApiV5\Dto\Keyword\KeywordGetItem
      */
     public function getNonArchivedKeywords(array $campaignIds)
     {
-        // Проблема API - не удается получить все ключевики не передавая ID кампании
-        \Assert\that($campaignIds)->notEmpty();
-
-        $criteria = new Dto\Keyword\KeywordsSelectionCriteria();
-        $criteria->setCampaignIds($campaignIds);
-        $criteria->setStates(
-            [KeywordStateEnum::ON, KeywordStateEnum::SUSPENDED, KeywordStateEnum::OFF]
-        );
-
-        $getAdsParams = new GetKeywordsRequestBody($criteria);
-
-        return $this->callGetCollectingItems($getAdsParams);
+        $keywordService = new KeywordService($this->driver);
+        return $keywordService->getNonArchivedKeywords($campaignIds, $this->pageLimit);
     }
 
-    private function callGetCollectingItems(GetRequestBody $params)
+    /**
+     * @deprecated нужно использовать AdService напрямую
+     * @param AdUpdateItem[] $ads
+     * @return PromiseInterface
+     * @see UpdateResult
+     */
+    public function updateAds(array $ads)
     {
-        if ($this->pageLimit) {
-            $params->setLimit($this->pageLimit);
-        }
+        $adService = new AdService($this->driver);
+        return $adService->updateAds($ads);
+    }
 
-        return $this->driver->callGetCollectingItems($params);
+    /**
+     * @deprecated нужно использовать SitelinkService напрямую
+     * @param int[] $sitelinksSetIds
+     * @return PromiseInterface
+     * @see GetResponseBody
+     */
+    public function getSitelinksSets(array $sitelinksSetIds)
+    {
+        $sitelinkService = new SitelinkService($this->driver);
+
+        return $sitelinkService->getSitelinksSets($sitelinksSetIds);
+    }
+
+    /**
+     * @deprecated нужно использовать SitelinkService напрямую
+     * @param SitelinksSetAddItem[] $sitelinksSets
+     * @return PromiseInterface
+     * @see AddResponseBody
+     */
+    public function addSitelinksSets(array $sitelinksSets)
+    {
+        $sitelinkService = new SitelinkService($this->driver);
+
+        return $sitelinkService->addSitelinksSets($sitelinksSets);
     }
 }

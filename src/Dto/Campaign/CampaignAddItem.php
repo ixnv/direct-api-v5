@@ -147,7 +147,7 @@ class CampaignAddItem extends CampaignBase
      * @param DailyBudget $DailyBudget
      * @return \eLama\DirectApiV5\Dto\Campaign\CampaignAddItem
      */
-    public function setDailyBudget(DailyBudget $DailyBudget = null)
+    public function setDailyBudget(DailyBudget $DailyBudget)
     {
       $this->DailyBudget = $DailyBudget;
       return $this;
@@ -165,7 +165,7 @@ class CampaignAddItem extends CampaignBase
      * @param string $EndDate
      * @return \eLama\DirectApiV5\Dto\Campaign\CampaignAddItem
      */
-    public function setEndDate($EndDate = null)
+    public function setEndDate($EndDate)
     {
       $this->EndDate = $EndDate;
       return $this;
@@ -181,9 +181,9 @@ class CampaignAddItem extends CampaignBase
 
     /**
      * @param ArrayOfString $NegativeKeywords
-     * @return self
+     * @return $this
      */
-    public function setNegativeKeywords(ArrayOfString $NegativeKeywords = null)
+    public function setNegativeKeywords(ArrayOfString $NegativeKeywords)
     {
       $this->NegativeKeywords = $NegativeKeywords;
       return $this;
@@ -201,7 +201,7 @@ class CampaignAddItem extends CampaignBase
      * @param ArrayOfString $BlockedIps
      * @return self
      */
-    public function setBlockedIps(ArrayOfString $BlockedIps = null)
+    public function setBlockedIps(ArrayOfString $BlockedIps)
     {
       $this->BlockedIps = $BlockedIps;
       return $this;
@@ -219,7 +219,7 @@ class CampaignAddItem extends CampaignBase
      * @param ArrayOfString $ExcludedSites
      * @return self
      */
-    public function setExcludedSites(ArrayOfString $ExcludedSites = null)
+    public function setExcludedSites(ArrayOfString $ExcludedSites)
     {
       $this->ExcludedSites = $ExcludedSites;
       return $this;
@@ -237,7 +237,7 @@ class CampaignAddItem extends CampaignBase
      * @param TextCampaignAddItem $TextCampaign
      * @return \eLama\DirectApiV5\Dto\Campaign\CampaignAddItem
      */
-    public function setTextCampaign(TextCampaignAddItem $TextCampaign = null)
+    public function setTextCampaign(TextCampaignAddItem $TextCampaign)
     {
       $this->TextCampaign = $TextCampaign;
       return $this;
@@ -255,7 +255,7 @@ class CampaignAddItem extends CampaignBase
      * @param MobileAppCampaignAddItem $MobileAppCampaign
      * @return \eLama\DirectApiV5\Dto\Campaign\CampaignAddItem
      */
-    public function setMobileAppCampaign(MobileAppCampaignAddItem $MobileAppCampaign = null)
+    public function setMobileAppCampaign(MobileAppCampaignAddItem $MobileAppCampaign)
     {
       $this->MobileAppCampaign = $MobileAppCampaign;
       return $this;
@@ -273,7 +273,7 @@ class CampaignAddItem extends CampaignBase
      * @param DynamicTextCampaignAddItem $DynamicTextCampaign
      * @return \eLama\DirectApiV5\Dto\Campaign\CampaignAddItem
      */
-    public function setDynamicTextCampaign(DynamicTextCampaignAddItem $DynamicTextCampaign = null)
+    public function setDynamicTextCampaign(DynamicTextCampaignAddItem $DynamicTextCampaign)
     {
       $this->DynamicTextCampaign = $DynamicTextCampaign;
       return $this;
@@ -291,7 +291,7 @@ class CampaignAddItem extends CampaignBase
      * @param TimeTargetingAdd $TimeTargeting
      * @return \eLama\DirectApiV5\Dto\Campaign\CampaignAddItem
      */
-    public function setTimeTargeting(TimeTargetingAdd $TimeTargeting = null)
+    public function setTimeTargeting(TimeTargetingAdd $TimeTargeting)
     {
       $this->TimeTargeting = $TimeTargeting;
       return $this;

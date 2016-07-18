@@ -42,10 +42,10 @@ class MobileAppAdGroupAdd
     /**
      * @param string $StoreUrl
      * @param TargetDeviceTypeEnum[] $TargetDeviceType
-     * @param TargetCarrierEnum $TargetCarrier
+     * @param string $TargetCarrier see TargetCarrierEnum
      * @param string $TargetOperatingSystemVersion
      */
-    public function __construct($StoreUrl = null, array $TargetDeviceType = null, $TargetCarrier = null, $TargetOperatingSystemVersion = null)
+    public function __construct($StoreUrl, array $TargetDeviceType, $TargetCarrier, $TargetOperatingSystemVersion)
     {
       $this->StoreUrl = $StoreUrl;
       $this->TargetDeviceType = $TargetDeviceType;

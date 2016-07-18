@@ -12,22 +12,22 @@ class UpdateRequest
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Ad\AdUpdateItem")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\Ad\AdUpdateItem>")
      *
-     * @var AdUpdateItem $Ads
+     * @var AdUpdateItem[] $Ads
      */
     private $Ads;
 
     /**
-     * @param AdUpdateItem $Ads
+     * @param AdUpdateItem[] $Ads
      */
-    public function __construct(AdUpdateItem $Ads = null)
+    public function __construct(array $Ads = [])
     {
       $this->Ads = $Ads;
     }
 
     /**
-     * @return AdUpdateItem
+     * @return AdUpdateItem[]
      */
     public function getAds()
     {
@@ -35,12 +35,13 @@ class UpdateRequest
     }
 
     /**
-     * @param AdUpdateItem $Ads
+     * @param AdUpdateItem[] $Ads
      * @return \eLama\DirectApiV5\Dto\Ad\UpdateRequest
      */
-    public function setAds(AdUpdateItem $Ads)
+    public function setAds(array $Ads)
     {
       $this->Ads = $Ads;
+
       return $this;
     }
 

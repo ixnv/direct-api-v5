@@ -20,6 +20,9 @@ abstract class GetRequestBody extends RequestBody
         return 'get';
     }
 
+    /**
+     * @param int $limit
+     */
     public function setLimit($limit)
     {
         if (!$this->request->getPage()) {
@@ -27,6 +30,18 @@ abstract class GetRequestBody extends RequestBody
         }
 
         $this->request->getPage()->setLimit($limit);
+    }
+
+    /**
+     * @param int $offset
+     */
+    public function setOffset($offset)
+    {
+        if (!$this->request->getPage()) {
+            $this->request->setPage(new LimitOffset());
+        }
+
+        $this->request->getPage()->setOffset($offset);
     }
 
     /**

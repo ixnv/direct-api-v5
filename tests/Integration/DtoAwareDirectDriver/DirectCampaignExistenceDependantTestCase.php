@@ -4,7 +4,6 @@ namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
 
 use eLama\DirectApiV5\Dto\Campaign\AddRequest as CampaignAddRequest;
 use eLama\DirectApiV5\Dto\Campaign\CampaignAddItem;
-use eLama\DirectApiV5\Dto\Campaign\DeleteRequest;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignAddItem;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignNetworkStrategyAdd;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignNetworkStrategyTypeEnum;
@@ -12,33 +11,28 @@ use eLama\DirectApiV5\Dto\Campaign\TextCampaignSearchStrategyAdd;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignSearchStrategyTypeEnum;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignStrategyAdd;
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
+use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\DtoAwareDirectDriver;
-use eLama\DirectApiV5\JmsFactory;
-use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\RequestBody\AddCampaignRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteCampaignRequestBody;
-use GuzzleHttp\Client;
-use Monolog\Logger;
+use eLama\DirectApiV5\Test\Integration\DirectApiV5TestCase;
 
-abstract class DirectCampaignExistenceDependantTestCase extends \PHPUnit_Framework_TestCase
+
+abstract class DirectCampaignExistenceDependantTestCase extends DirectApiV5TestCase
 {
-    const LOGIN = 'ra-trinet-add-dev-01';
-    const TOKEN = '3fe13d8bd818458c89624f678f365051';
     const AD_GROUP_NAME = 'Moo';
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected static $campaignId;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(DtoAwareDirectDriver $dtoAwareDirectDriver = null)
     {
         $driver = self::createDtoAwareDirectDriver();
 
-        $responseBody = self::createCampaign($driver);
+        parent::setUpBeforeClass($driver);
 
-        self::$campaignId = $responseBody->getResult()->getAddResults()[0]->getId();
+        self::$campaignId = self::createCampaign($driver)->getResult()->getAddResults()[0]->getId();
     }
 
     public static function tearDownAfterClass()
@@ -48,13 +42,6 @@ abstract class DirectCampaignExistenceDependantTestCase extends \PHPUnit_Framewo
 
             self::deleteCampaign($driver, static::$campaignId);
         }
-    }
-
-    protected static function createDtoAwareDirectDriver()
-    {
-        $serializer = JmsFactory::create()->serializer();
-        $lo = LowLevelDriver::createAdapterForClient(new Client(), new Logger('Test'), LowLevelDriver::URL_SANDBOX);
-        return new DtoAwareDirectDriver($serializer, $lo, self::TOKEN, self::LOGIN);
     }
 
     /**

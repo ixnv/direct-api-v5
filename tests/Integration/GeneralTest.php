@@ -7,21 +7,19 @@ use eLama\DirectApiV5\Dto\AdGroup\AdGroupGetItem;
 use eLama\DirectApiV5\Dto\Keyword\KeywordGetItem;
 use eLama\DirectApiV5\DtoAwareDirectDriver;
 use eLama\DirectApiV5\LoggerFactory;
-use eLama\DirectApiV5\SimpleDirectDriver;
-use eLama\DirectApiV5\SimpleDirectDriverFactory;
+use eLama\DirectApiV5\Service\AdGroupService;
+use eLama\DirectApiV5\Service\AdService;
+use eLama\DirectApiV5\Service\CampaignService;
+use eLama\DirectApiV5\Service\KeywordService;
 use eLama\DirectApiV5\Dto\Campaign\CampaignGetItem;
-use eLama\DirectApiV5\Dto\Campaign\GetResponseBody;
 use eLama\DirectApiV5\ErrorException;
 use eLama\DirectApiV5\JmsFactory;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use GuzzleHttp\Client;
 use PHPUnit_Framework_TestCase;
 
-class GeneralTest extends PHPUnit_Framework_TestCase
+class GeneralTest extends DirectApiV5TestCase
 {
-    const LOGIN = 'ra-trinet-add-dev-01';
-    const TOKEN = '3fe13d8bd818458c89624f678f365051';
-
     /** @var int[] */
     private static $existingCampaigns;
 
@@ -35,10 +33,8 @@ class GeneralTest extends PHPUnit_Framework_TestCase
      */
     public function canGetNonArchivedCampaigns()
     {
-        $directDriver = $this->createDriver();
-
         /** @var CampaignGetItem[] $campaigns */
-        $campaigns = $directDriver->getNonArchivedCampaigns()->wait();
+        $campaigns = $this->createCampaignService()->getNonArchivedCampaigns()->wait();
 
         assertThat(
             $campaigns,
@@ -54,17 +50,14 @@ class GeneralTest extends PHPUnit_Framework_TestCase
         );
     }
 
-
     /**
      * @test
      * @depends canGetNonArchivedCampaigns
      */
     public function getNonArchivedCampaigns_PageLimitIsSetToOnePerRequest_FetchesAllCampaigns()
     {
-        $directDriver = $this->createDriverWithPageLimit($pageLimit = 1);
-
         /** @var CampaignGetItem[] $campaigns */
-        $campaigns = $directDriver->getNonArchivedCampaigns()->wait();
+        $campaigns = $this->createCampaignService()->getNonArchivedCampaigns($pageLimit = 1)->wait();
 
         assertThat(
             $campaigns,
@@ -81,10 +74,8 @@ class GeneralTest extends PHPUnit_Framework_TestCase
     {
         $campaignId = self::$existingCampaigns[0];
 
-        $directDriver = $this->createDriver();
-
         /** @var CampaignGetItem $campaign */
-        $campaign = $directDriver->getCampaign($campaignId)->wait();
+        $campaign = $this->createCampaignService()->getCampaign($campaignId)->wait();
 
         assertThat($campaign->getId(), is(equalTo($campaignId)));
     }
@@ -96,8 +87,10 @@ class GeneralTest extends PHPUnit_Framework_TestCase
      */
     public function canGetNonArchivedAds()
     {
+        $adService = $this->createAdService();
+
         /** @var AdGetItem[] $ads */
-        $ads = $this->createDriver()->getNonArchivedAds(self::$existingCampaigns)->wait();
+        $ads = $adService->getNonArchivedAds(self::$existingCampaigns)->wait();
 
         assertThat(
             $ads,
@@ -112,8 +105,10 @@ class GeneralTest extends PHPUnit_Framework_TestCase
      */
     public function canGetAllTextAdGroups()
     {
+        $adGroupService = $this->createAdGroupService();
+
         /** @var AdGetItem[] $ads */
-        $ads = $this->createDriver()->getAllTextAdGroups(self::$existingCampaigns)->wait();
+        $ads = $adGroupService->getAllTextAdGroups(self::$existingCampaigns)->wait();
 
         assertThat(
             $ads,
@@ -125,24 +120,12 @@ class GeneralTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function getNonArchivedAds_EmptyCampaignList_ThrowsInvalidArgumentException()
+    public function getNonArchivedCampaigns_InvalidToken_ThrowsException()
     {
-        $driver = $this->createDriver();
+        $campaignService = $this->createCampaignServiceWithInvalidToken();
 
-        $this->setExpectedException(\InvalidArgumentException::class);
-        $driver->getNonArchivedAds([]);
-    }
-
-    /**
-     * @test
-     */
-    public function invalidToken_ThrowsException()
-    {
-        $directDriver = $this->createDriver('invalid token');
-
-        /** @var GetResponseBody $campaigns */
         $this->setExpectedException(ErrorException::class);
-        $directDriver->getNonArchivedCampaigns()->wait();
+        $campaignService->getNonArchivedCampaigns()->wait();
     }
 
     /**
@@ -151,9 +134,11 @@ class GeneralTest extends PHPUnit_Framework_TestCase
      */
     public function canGetNonArchivedKeywords()
     {
+        $keywordService = $this->createKeywordService();
+
         /** @var AdGetItem[] $keywords */
         $campaignId = self::$existingCampaigns[0];
-        $keywords = $this->createDriver()->getNonArchivedKeywords([$campaignId])->wait();
+        $keywords = $keywordService->getNonArchivedKeywords([$campaignId])->wait();
 
         assertThat(
             $keywords,
@@ -167,21 +152,20 @@ class GeneralTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-
-
     /**
      * @test
      * @depends canGetNonArchivedKeywords
      */
     public function getNonArchivedKeywords_PageLimitIsSet_FetchesAllKeywords(array $data)
     {
+        $keywordService = $this->createKeywordService();
+
         $campaignId = $data['campaignId'];
         $keywordCount = $data['keywordCount'];
         $pageSize = ceil($keywordCount / 2);
-        $directDriver = $this->createDriverWithPageLimit($pageSize);
 
         /** @var CampaignGetItem[] $keywords */
-        $keywords = $directDriver->getNonArchivedKeywords([$campaignId])->wait();
+        $keywords = $keywordService->getNonArchivedKeywords([$campaignId], $pageSize)->wait();
 
         assertThat(
             $keywords,
@@ -191,62 +175,42 @@ class GeneralTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @test
+     * @return CampaignService
      */
-    public function getNonArchivedKeywords_EmptyCampaignList_ThrowsInvalidArgumentException()
+    private function createCampaignService()
     {
-        $driver = $this->createDriver();
-
-        $this->setExpectedException(\InvalidArgumentException::class);
-        $driver->getNonArchivedKeywords([]);
-    }
-
-
-    /**
-     * @param string $token
-     * @return SimpleDirectDriver
-     */
-    private function createDriver($token = self::TOKEN)
-    {
-        $lowLevelDriver = LowLevelDriver::createAdapterForClient(
-            new Client(),
-            (new LoggerFactory([]))->create(self::class),
-            LowLevelDriver::URL_SANDBOX
-        );
-
-        $dtoDriver = new DtoAwareDirectDriver(
-            JmsFactory::create()->serializer(),
-            $lowLevelDriver,
-            $token,
-            self::LOGIN
-        );
-
-        return $directDriver = new SimpleDirectDriver($dtoDriver);
+        return new CampaignService(self::createDtoAwareDirectDriver());
     }
 
     /**
-     * @param $pageLimit
-     * @return SimpleDirectDriver
+     * @return CampaignService
      */
-    private function createDriverWithPageLimit($pageLimit)
+    private function createCampaignServiceWithInvalidToken()
     {
-        $lowLevelDriver = LowLevelDriver::createAdapterForClient(
-            new Client(),
-            (new LoggerFactory([]))->create(self::class),
-            LowLevelDriver::URL_SANDBOX
-        );
-
-        $dtoDriver = new DtoAwareDirectDriver(
-            JmsFactory::create()->serializer(),
-            $lowLevelDriver,
-            self::TOKEN,
-            self::LOGIN
-        );
-
-        return $directDriver = new SimpleDirectDriver(
-            $dtoDriver,
-            $pageLimit
-        );
+        return new CampaignService(self::createDtoAwareDirectDriver('invalid token'));
     }
 
+    /**
+     * @return AdService
+     */
+    private function createAdService()
+    {
+        return new AdService(self::createDtoAwareDirectDriver());
+    }
+
+    /**
+     * @return AdGroupService
+     */
+    private function createAdGroupService()
+    {
+        return new AdGroupService(self::createDtoAwareDirectDriver());
+    }
+
+    /**
+     * @return KeywordService
+     */
+    private function createKeywordService()
+    {
+        return new KeywordService(self::createDtoAwareDirectDriver());
+    }
 }

@@ -35,16 +35,30 @@ class TextAdAdd extends TextAdAddBase
     /**
      * @JMS\Type("string")
      *
+     * @var string $DisplayUrlPath
+     */
+    private $DisplayUrlPath;
+
+    /**
+     * @JMS\Type("string")
+     *
      * @var YesNoEnum $Mobile
      */
     private $Mobile;
 
     /**
+     * @JMS\Type("array")
+     *
+     * @var array $AdExtensionIds
+     */
+    private $AdExtensionIds;
+
+    /**
      * @param string $Text
      * @param string $Title
-     * @param YesNoEnum $Mobile
+     * @param string $Mobile see YesNoEnum
      */
-    public function __construct($Text, $Title, $Mobile = null)
+    public function __construct($Text, $Title, $Mobile)
     {
       $this->Text = $Text;
       $this->Title = $Title;
@@ -123,4 +137,37 @@ class TextAdAdd extends TextAdAddBase
       return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getDisplayUrlPath()
+    {
+        return $this->DisplayUrlPath;
+    }
+
+    /**
+     * @param string $DisplayUrlPath
+     * @return \eLama\DirectApiV5\Dto\Ad\TextAdAdd
+     */
+    public function setDisplayUrlPath($DisplayUrlPath)
+    {
+        $this->DisplayUrlPath = $DisplayUrlPath;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAdExtensionIds()
+    {
+        return $this->AdExtensionIds;
+    }
+
+    /**
+     * @param array $AdExtensionIds
+     */
+    public function setAdExtensionIds(array $AdExtensionIds)
+    {
+        $this->AdExtensionIds = $AdExtensionIds;
+    }
 }

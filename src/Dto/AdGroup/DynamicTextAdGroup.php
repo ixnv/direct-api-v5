@@ -21,7 +21,7 @@ class DynamicTextAdGroup
     /**
      * @param string $DomainUrl
      */
-    public function __construct($DomainUrl = null)
+    public function __construct($DomainUrl)
     {
       $this->DomainUrl = $DomainUrl;
     }
