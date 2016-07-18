@@ -56,7 +56,10 @@ class CampaignTest extends DirectApiV5TestCase
      */
     public function addCampaign()
     {
-        $campaignAddItem = new CampaignAddItem(self::NAME, (new \DateTime())->format('Y-m-d'));
+        $campaignAddItem = new CampaignAddItem(
+            self::NAME,
+            (new \DateTime('now', new \DateTimeZone('Europe/Moscow')))->format('Y-m-d')
+        );
         $campaignAddItem->setTextCampaign(
             $this->instanceTextCampaignAddItem()
         );
