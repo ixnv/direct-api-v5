@@ -64,7 +64,7 @@ class TextCampaignStrategyAddBase
      * @param StrategyMaximumClicksAdd $WbMaximumClicks
      * @return \eLama\DirectApiV5\Dto\Campaign\TextCampaignStrategyAddBase
      */
-    public function setWbMaximumClicks(StrategyMaximumClicksAdd $WbMaximumClicks = null)
+    public function setWbMaximumClicks(StrategyMaximumClicksAdd $WbMaximumClicks)
     {
       $this->WbMaximumClicks = $WbMaximumClicks;
       return $this;
@@ -82,7 +82,7 @@ class TextCampaignStrategyAddBase
      * @param StrategyMaximumConversionRateAdd $WbMaximumConversionRate
      * @return \eLama\DirectApiV5\Dto\Campaign\TextCampaignStrategyAddBase
      */
-    public function setWbMaximumConversionRate(StrategyMaximumConversionRateAdd $WbMaximumConversionRate = null)
+    public function setWbMaximumConversionRate(StrategyMaximumConversionRateAdd $WbMaximumConversionRate)
     {
       $this->WbMaximumConversionRate = $WbMaximumConversionRate;
       return $this;
@@ -100,7 +100,7 @@ class TextCampaignStrategyAddBase
      * @param StrategyAverageCpcAdd $AverageCpc
      * @return \eLama\DirectApiV5\Dto\Campaign\TextCampaignStrategyAddBase
      */
-    public function setAverageCpc(StrategyAverageCpcAdd $AverageCpc = null)
+    public function setAverageCpc(StrategyAverageCpcAdd $AverageCpc)
     {
       $this->AverageCpc = $AverageCpc;
       return $this;
@@ -118,7 +118,7 @@ class TextCampaignStrategyAddBase
      * @param StrategyAverageCpaAdd $AverageCpa
      * @return \eLama\DirectApiV5\Dto\Campaign\TextCampaignStrategyAddBase
      */
-    public function setAverageCpa(StrategyAverageCpaAdd $AverageCpa = null)
+    public function setAverageCpa(StrategyAverageCpaAdd $AverageCpa)
     {
       $this->AverageCpa = $AverageCpa;
       return $this;
@@ -136,7 +136,7 @@ class TextCampaignStrategyAddBase
      * @param StrategyWeeklyClickPackageAdd $WeeklyClickPackage
      * @return \eLama\DirectApiV5\Dto\Campaign\TextCampaignStrategyAddBase
      */
-    public function setWeeklyClickPackage(StrategyWeeklyClickPackageAdd $WeeklyClickPackage = null)
+    public function setWeeklyClickPackage(StrategyWeeklyClickPackageAdd $WeeklyClickPackage)
     {
       $this->WeeklyClickPackage = $WeeklyClickPackage;
       return $this;
@@ -154,7 +154,7 @@ class TextCampaignStrategyAddBase
      * @param StrategyAverageRoiAdd $AverageRoi
      * @return \eLama\DirectApiV5\Dto\Campaign\TextCampaignStrategyAddBase
      */
-    public function setAverageRoi(StrategyAverageRoiAdd $AverageRoi = null)
+    public function setAverageRoi(StrategyAverageRoiAdd $AverageRoi)
     {
       $this->AverageRoi = $AverageRoi;
       return $this;

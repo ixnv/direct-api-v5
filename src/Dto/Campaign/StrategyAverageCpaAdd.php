@@ -42,7 +42,7 @@ class StrategyAverageCpaAdd
      * @param int $AverageCpa
      * @param int $GoalId
      */
-    public function __construct($AverageCpa = null, $GoalId = null)
+    public function __construct($AverageCpa, $GoalId)
     {
       $this->AverageCpa = $AverageCpa;
       $this->GoalId = $GoalId;
@@ -96,7 +96,7 @@ class StrategyAverageCpaAdd
      * @param int $WeeklySpendLimit
      * @return \eLama\DirectApiV5\Dto\Campaign\StrategyAverageCpaAdd
      */
-    public function setWeeklySpendLimit($WeeklySpendLimit = null)
+    public function setWeeklySpendLimit($WeeklySpendLimit)
     {
       $this->WeeklySpendLimit = $WeeklySpendLimit;
       return $this;
@@ -114,7 +114,7 @@ class StrategyAverageCpaAdd
      * @param int $BidCeiling
      * @return \eLama\DirectApiV5\Dto\Campaign\StrategyAverageCpaAdd
      */
-    public function setBidCeiling($BidCeiling = null)
+    public function setBidCeiling($BidCeiling)
     {
       $this->BidCeiling = $BidCeiling;
       return $this;

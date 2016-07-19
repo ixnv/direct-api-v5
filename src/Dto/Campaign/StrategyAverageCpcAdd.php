@@ -26,10 +26,12 @@ class StrategyAverageCpcAdd
 
     /**
      * @param int $AverageCpc
+     * @param int $weeklySpendLimit
      */
-    public function __construct($AverageCpc = null)
+    public function __construct($AverageCpc, $weeklySpendLimit = null)
     {
       $this->AverageCpc = $AverageCpc;
+      $this->WeeklySpendLimit = $weeklySpendLimit;
     }
 
     /**
@@ -62,7 +64,7 @@ class StrategyAverageCpcAdd
      * @param int $WeeklySpendLimit
      * @return \eLama\DirectApiV5\Dto\Campaign\StrategyAverageCpcAdd
      */
-    public function setWeeklySpendLimit($WeeklySpendLimit = null)
+    public function setWeeklySpendLimit($WeeklySpendLimit)
     {
       $this->WeeklySpendLimit = $WeeklySpendLimit;
       return $this;

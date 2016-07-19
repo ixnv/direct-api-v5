@@ -258,6 +258,48 @@ class CampaignTest extends DirectApiV5TestCase
         return $textCampaignAddItem;
     }
 
+    private function createSearchStrategy($enum)
+    {
+        $textCampaignSearchStrategyAdd = new TextCampaignSearchStrategyAdd($enum);
+
+        switch ($enum) {
+            case TextCampaignSearchStrategyTypeEnum::AVERAGE_CPA:
+                $strategyAverageCpaAdd = new Campaign\StrategyAverageCpaAdd(2000000, 0);
+                $strategyAverageCpaAdd->setWeeklySpendLimit(2000000);
+                $strategyAverageCpaAdd->setBidCeiling(2000000);
+
+                $textCampaignSearchStrategyAdd->setAverageCpa($strategyAverageCpaAdd);
+                break;
+            case TextCampaignSearchStrategyTypeEnum::AVERAGE_ROI:
+                $strategyAverageRoiAdd = new Campaign\StrategyAverageRoiAdd(10, 2000000, 0);
+                $strategyAverageRoiAdd->setWeeklySpendLimit(2000000);
+                $strategyAverageRoiAdd->setBidCeiling(2000000);
+                $strategyAverageRoiAdd->setProfitability(50000000);
+
+                $textCampaignSearchStrategyAdd->setAverageRoi($strategyAverageRoiAdd);
+                break;
+            case TextCampaignSearchStrategyTypeEnum::AVERAGE_CPC:
+                $strategyAverageCpcAdd = new Campaign\StrategyAverageCpcAdd(2000000, 1000000);
+                
+                $textCampaignSearchStrategyAdd->setAverageCpc($strategyAverageCpcAdd);
+                break;
+            case TextCampaignSearchStrategyTypeEnum::WB_MAXIMUM_CLICKS:
+                $strategyMaximumClicksAdd = new Campaign\StrategyMaximumClicksAdd();
+                $strategyMaximumClicksAdd->setBidCeiling(2000000);
+                $strategyMaximumClicksAdd->setWeeklySpendLimit(2000000);
+
+                $textCampaignSearchStrategyAdd->setWbMaximumClicks($strategyMaximumClicksAdd);
+                break;
+            case TextCampaignSearchStrategyTypeEnum::WB_MAXIMUM_CONVERSION_RATE:
+                $strategyMaximumConversionRateAdd = new Campaign\StrategyMaximumConversionRateAdd(2000000, 0);
+
+                $textCampaignSearchStrategyAdd->setWbMaximumConversionRate($strategyMaximumConversionRateAdd);
+                break;
+        }
+
+        return $textCampaignSearchStrategyAdd;
+    }
+
     /**
      * @param CampaignAddItem $campaignAddItem
      */
