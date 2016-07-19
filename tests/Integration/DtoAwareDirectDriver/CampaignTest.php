@@ -109,8 +109,6 @@ class CampaignTest extends DirectApiV5TestCase
      */
     public function createCampaignsWithDifferentTextCampaignSearchStrategies()
     {
-        //надо проверить, можно ли создать кампанию с противоречивым enum
-
         $strategies = [
             TextCampaignSearchStrategyTypeEnum::AVERAGE_CPC,
 //            TextCampaignSearchStrategyTypeEnum::AVERAGE_CPA,
