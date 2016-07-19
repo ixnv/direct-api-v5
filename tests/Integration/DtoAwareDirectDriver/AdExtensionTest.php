@@ -51,26 +51,12 @@ class AdExtensionTest extends AdGroupExistenceDependantTestCase
     /**
      * @test
      */
-    public function addAd()
+    public function addAdWithAdExtensions()
     {
-        $requestBody = new AddAdExtensionRequestBody(
-            new AddAdExtensionRequest(
-                [
-                    new AdExtensionAddItem(new Callout('Крутое уточнение'))
-                ]
-            )
-        );
-
-        /** @var AddResponseBody $responseBody */
-        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
-
-        $sitelinkSetId = $this->createSitelinksSet();
         $adAddItem = new Ad\AdAddItem(self::$adGroupId);
         $textAd = new Ad\TextAdAdd(self::TEXT, self::TITLE, Ad\YesNoEnum::NO);
-        $textAd->setSitelinkSetId($sitelinkSetId);
 
         $this->addAdditionalParamsToTextAdAdd($textAd);
-
         $adAddItem->setTextAd($textAd);
 
         $requestBody = new AddAdRequestBody(new Ad\AddRequest([$adAddItem]));
@@ -86,9 +72,9 @@ class AdExtensionTest extends AdGroupExistenceDependantTestCase
 
     /**
      * @test
-     * @depends addAd
+     * @depends addAdWithAdExtensions
      */
-    public function getAd($adId)
+    public function getAdWithAdExtensions($adId)
     {
         $ad = $this->getAdInCampaignWithId(self::$campaignId, $adId);
         assertThat($ad->getTextAd()->getTitle(), is(equalTo(self::TITLE)));
@@ -144,30 +130,15 @@ class AdExtensionTest extends AdGroupExistenceDependantTestCase
     }
 
     /**
-     * @return int
+     * @param Ad\TextAdAdd $textAd
      */
-    private function createSitelinksSet()
-    {
-        $sitelinkSetAddItem = new SitelinksSetAddItem([
-            (new Sitelink('первая ссылка', 'http://ya.ru/1'))->setDescription('description 1'),
-            (new Sitelink('вторая ссылка', 'http://ya.ru/2'))->setDescription('description 2'),
-        ]);
-
-        $requestBody = new AddSitelinkRequestBody(new AddRequest([$sitelinkSetAddItem]));
-
-        /** @var AddResponseBody $responseBody */
-        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
-
-        return $responseBody->getResult()->getAddResults()[0]->getId();
-    }
-
     private function addAdditionalParamsToTextAdAdd(Ad\TextAdAdd $textAd)
     {
         $textAd->setHref(self::HREF);
         $textAd->setDisplayUrlPath(self::DISPLAY_URL_PATH);
 //        $textAd->setVCardId();todo  сделать добавление визитки, а потом тестить и это
 //        $textAd->setAdImageHash('');todo пока не понятно, что с этим делать
-//        $textAd->setAdExtensionIds(['1', '2']);todo расширения надо сделать сначала
+        $textAd->setAdExtensionIds($this->createAdExtensions());
     }
 
     /**
@@ -179,65 +150,6 @@ class AdExtensionTest extends AdGroupExistenceDependantTestCase
         $ad = $this->getAdInCampaignWithId(self::$campaignId, $id);
 
         assertThat($ad, is(nullValue()));
-    }
-
-    /**
-     * @test
-     */
-    public function addAdsByQuantity()
-    {
-        $this->createCampaignForPagination();
-
-        $this->createAdGroupForPagination(self::$campaignIdForPagination);
-
-        $adItems = $this->generateAdAddItems(self::ADS_QUANTITY, self::$adGroupIdForPagination);
-
-        $requestBody = new AddAdRequestBody(new Ad\AddRequest($adItems));
-
-        /** @var AddResponseBody $responseBody */
-        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
-
-        $result = $responseBody->getResult()->getAddResults();
-
-        $adsIds = array_map(function (ActionResult $item) {
-            return $item->getId();
-        }, $result);
-
-        $this->assertCount(self::ADS_QUANTITY, $adsIds);
-
-        return $adsIds;
-    }
-
-    /**
-     * @test
-     * @depends addAdsByQuantity
-     */
-    public function getAdsByIdsWithPagination()
-    {
-        $adItems = $this->getAdInCampaignWithPagination([self::$campaignIdForPagination], self::AD_LIMIT, $offset = 0);
-        $this->assertCount(self::AD_LIMIT, $adItems->getAds());
-        $limitedBy = $adItems->getLimitedBy();
-        $this->assertEquals(self::AD_LIMIT, $limitedBy);
-        $adItems = $this->getAdInCampaignWithPagination([self::$campaignIdForPagination], self::AD_LIMIT, $limitedBy);
-        $this->assertNull($adItems->getLimitedBy());
-    }
-
-    /**
-     * @test
-     */
-    public function getAdsForCampaignId_GivenNoAds_ReturnsCorrectResponseWithoutAds()
-    {
-        $responseBody = self::createCampaign($this->driver);
-        $campaignId = $responseBody->getResult()->getAddResults()[0]->getId();
-        $requestBody = new GetAdsRequestBody(
-            (new Ad\AdsSelectionCriteria())->setCampaignIds([$campaignId])
-        );
-
-        /** @var Ad\GetResponseBody $responseBody */
-        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
-
-        assertThat($responseBody->getResult()->getAds(), is(emptyArray()));
-        self::deleteCampaign($this->driver, $campaignId);
     }
 
     /**
@@ -268,60 +180,23 @@ class AdExtensionTest extends AdGroupExistenceDependantTestCase
     }
 
     /**
-     * @param array $campaignIds
-     * @param int $limit
-     * @param int $offset
-     * @return \eLama\DirectApiV5\Dto\Ad\GetResult
+     * @return int[]
      */
-    private function getAdInCampaignWithPagination(array $campaignIds, $limit, $offset)
+    private function createAdExtensions()
     {
-        $requestBody = new GetAdsRequestBody(
-            (new Ad\AdsSelectionCriteria())->setCampaignIds($campaignIds)
+        $requestBody = new AddAdExtensionRequestBody(
+            new AddAdExtensionRequest(
+                [
+                    new AdExtensionAddItem(new Callout('Крутое уточнение'))
+                ]
+            )
         );
 
-        $requestBody->setLimit($limit);
-        $requestBody->setOffset($offset);
-
-        /** @var Ad\GetResponseBody $responseBody */
+        /** @var AddResponseBody $responseBody */
         $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
-        return $responseBody->getResult();
-    }
 
-    /**
-     * @param $quantity
-     * @param $adGroupId
-     * @return array
-     */
-    private function generateAdAddItems($quantity, $adGroupId)
-    {
-        $adAddItems = [];
-        for ($i = 1; $i <= $quantity; $i++) {
-            $adAddItem = new Ad\AdAddItem($adGroupId);
-
-            $ad = new Ad\TextAdAdd(
-                self::TEXT . $i,
-                self::TITLE . $i,
-                Ad\YesNoEnum::NO
-            );
-
-            $ad->setHref(self::HREF . $i);
-            $adAddItem->setTextAd($ad);
-            $adAddItems[] = $adAddItem;
-        }
-
-        return $adAddItems;
-    }
-
-    private function createCampaignForPagination()
-    {
-        $driver = self::createDtoAwareDirectDriver();
-        $responseBody = self::createCampaign($driver);
-
-        self::$campaignIdForPagination = $responseBody->getResult()->getAddResults()[0]->getId();
-    }
-
-    private function createAdGroupForPagination($campaignId)
-    {
-        self::$adGroupIdForPagination = static::createAdGroupForCampaign($campaignId);
+        return array_map(function (ActionResult $result) {
+            return $result->getId();
+        }, $responseBody->getResult()->getAddResults());
     }
 }
