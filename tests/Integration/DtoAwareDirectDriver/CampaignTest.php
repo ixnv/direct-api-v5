@@ -120,9 +120,9 @@ class CampaignTest extends DirectApiV5TestCase
             TextCampaignSearchStrategyTypeEnum::LOWEST_COST,
             TextCampaignSearchStrategyTypeEnum::LOWEST_COST_GUARANTEE,
             TextCampaignSearchStrategyTypeEnum::LOWEST_COST_PREMIUM,
-//            TextCampaignSearchStrategyTypeEnum::SERVING_OFF,//todo другая network стратегия
+//            TextCampaignSearchStrategyTypeEnum::SERVING_OFF,//todo другая network стратегия (может это и не надо)
             TextCampaignSearchStrategyTypeEnum::WB_MAXIMUM_CLICKS,
-//            TextCampaignSearchStrategyTypeEnum::WEEKLY_CLICK_PACKAGE,//todo добавить сущность
+            TextCampaignSearchStrategyTypeEnum::WEEKLY_CLICK_PACKAGE,
 //            TextCampaignSearchStrategyTypeEnum::AVERAGE_ROI
         ];
 
@@ -378,6 +378,13 @@ class CampaignTest extends DirectApiV5TestCase
                 $strategyMaximumConversionRateAdd = new Campaign\StrategyMaximumConversionRateAdd(300000000, 0);
 
                 $textCampaignSearchStrategyAdd->setWbMaximumConversionRate($strategyMaximumConversionRateAdd);
+                break;
+            case TextCampaignSearchStrategyTypeEnum::WEEKLY_CLICK_PACKAGE:
+                $strategyWeeklyClickPackageAdd = new Campaign\StrategyWeeklyClickPackageAdd();
+                $strategyWeeklyClickPackageAdd->setBidCeiling(2000000);
+                $strategyWeeklyClickPackageAdd->setClicksPerWeek(100);
+                $textCampaignSearchStrategyAdd->setWeeklyClickPackage($strategyWeeklyClickPackageAdd);
+
                 break;
         }
 
