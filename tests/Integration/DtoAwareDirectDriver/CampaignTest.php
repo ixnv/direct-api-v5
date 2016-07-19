@@ -74,6 +74,35 @@ class CampaignTest extends DirectApiV5TestCase
         return $id;
     }
 
+
+    /**
+     * @test
+     */
+    public function createCampaignsWithDifferentTextCampaignSearchStrategies()
+    {
+        //надо проверить, можно ли создать кампанию с противоречивым enum
+        $campaignAddItem = new CampaignAddItem(self::NAME, (new \DateTime())->format('Y-m-d'));
+        $campaignAddItem->setTextCampaign(
+            $this->instanceTextCampaignAddItem()
+        );
+
+        $request = new AddCampaignRequestBody(
+            new AddRequest([
+                $campaignAddItem,
+            ])
+        );
+
+
+        /** @var AddResponseBody $responseBody */
+        $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
+
+        $id = $responseBody->getResult()->getAddResults()[0]->getId();
+
+        $this->deleteCampaign($id);
+    }
+
+
+
     /**
      * @test
      * @depends addCampaign
@@ -244,21 +273,30 @@ class CampaignTest extends DirectApiV5TestCase
     }
 
     /**
+     * @param string $textCampaignSearchStrategyEnum
+     * @param string $textCampaignNetworkStrategyAdd
      * @return TextCampaignAddItem
      */
-    private function instanceTextCampaignAddItem()
+    private function instanceTextCampaignAddItem(
+        $textCampaignSearchStrategyEnum = TextCampaignSearchStrategyTypeEnum::HIGHEST_POSITION,
+        $textCampaignNetworkStrategyAdd = TextCampaignNetworkStrategyTypeEnum::MAXIMUM_COVERAGE
+    )
     {
         $textCampaignAddItem = new TextCampaignAddItem(
             new TextCampaignStrategyAdd(
-                new TextCampaignSearchStrategyAdd(TextCampaignSearchStrategyTypeEnum::HIGHEST_POSITION),
-                new TextCampaignNetworkStrategyAdd(TextCampaignNetworkStrategyTypeEnum::MAXIMUM_COVERAGE)
+                $this->instanceSearchStrategyByEnum($textCampaignSearchStrategyEnum),
+                $this->instanceNetworkStrategyByEnum($textCampaignNetworkStrategyAdd)
             )
         );
 
         return $textCampaignAddItem;
     }
 
-    private function createSearchStrategy($enum)
+    /**
+     * @param $enum @see TextCampaignSearchStrategyTypeEnum
+     * @return TextCampaignSearchStrategyAdd
+     */
+    private function instanceSearchStrategyByEnum($enum)
     {
         $textCampaignSearchStrategyAdd = new TextCampaignSearchStrategyAdd($enum);
 
@@ -298,6 +336,16 @@ class CampaignTest extends DirectApiV5TestCase
         }
 
         return $textCampaignSearchStrategyAdd;
+    }
+
+    /**
+     * @param string $enum @see TextCampaignNetworkStrategyTypeEnum
+     * @return TextCampaignNetworkStrategyAdd
+     */
+    private function instanceNetworkStrategyByEnum($enum)
+    {
+        //todo накарябать switch, по аналогии с instanceSearchStrategyByEnum
+        return new TextCampaignNetworkStrategyAdd($enum);
     }
 
     /**
