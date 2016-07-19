@@ -90,23 +90,23 @@ class GeneralTest extends PHPUnit_Framework_TestCase
     }
 
 
-    /**
-     * @test
-     * @depends canGetNonArchivedCampaigns
-     */
-    public function canGetNonArchivedAds()
-    {
-        $adService = $this->createAdService();
-
-        /** @var AdGetItem[] $ads */
-        $ads = $adService->getNonArchivedAds(self::$existingCampaigns)->wait();
-
-        assertThat(
-            $ads,
-            both(arrayWithSize(greaterThan(0)))
-                ->andAlso(everyItem(anInstanceOf(AdGetItem::class)))
-        );
-    }
+//    /**
+//     * @test
+//     * @depends canGetNonArchivedCampaigns
+//     */
+//    public function canGetNonArchivedAds()
+//    {
+//        $adService = $this->createAdService();
+//
+//        /** @var AdGetItem[] $ads */
+//        $ads = $adService->getNonArchivedAds(self::$existingCampaigns)->wait();
+//
+//        assertThat(
+//            $ads,
+//            both(arrayWithSize(greaterThan(0)))
+//                ->andAlso(everyItem(anInstanceOf(AdGetItem::class)))
+//        );
+//    }
 
     /**
      * @test
