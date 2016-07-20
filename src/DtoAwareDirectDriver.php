@@ -48,6 +48,14 @@ class DtoAwareDirectDriver
     }
 
     /**
+     * @return string
+     */
+    public function getLogin() : string
+    {
+        return $this->login;
+    }
+
+    /**
      * @param RequestBody $request
      * @return \GuzzleHttp\Promise\PromiseInterface
      * @see Response
