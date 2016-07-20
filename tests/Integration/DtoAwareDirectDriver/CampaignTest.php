@@ -76,17 +76,6 @@ class CampaignTest extends DirectApiV5TestCase
     }
 
     /**
-     * @test
-     * @dataProvider textCampaignSearchStrategyProvider
-     */
-    public function createTextCampaignsWithDifferentTextCampaignSearchStrategies($strategyEnum)
-    {
-        $id = $this->createTextCampaignWithCertainStrategies($strategyEnum, TextCampaignNetworkStrategyTypeEnum::NETWORK_DEFAULT);
-
-        $this->deleteCampaignById($id);
-    }
-
-    /**
      * @return array
      */
     public function textCampaignSearchStrategyProvider()
@@ -109,8 +98,68 @@ class CampaignTest extends DirectApiV5TestCase
 
     /**
      * @test
+     * @dataProvider textCampaignSearchStrategyProvider
      */
-    public function createTextCampaignWithServingOffSearchStrategies()
+    public function createTextCampaignsWithDifferentTextCampaignSearchStrategies($textCampaignSearchStrategyEnum)
+    {
+        $id = $this->createTextCampaignWithCertainStrategies(
+            $textCampaignSearchStrategyEnum,
+            TextCampaignNetworkStrategyTypeEnum::NETWORK_DEFAULT
+        );
+
+        $this->deleteCampaignById($id);
+    }
+
+    /**
+     * @return array
+     */
+    public function textCampaignNetworkStrategyProvider()
+    {
+        return [
+            /*стратегии, которые нельзя протестировать, и\или неоправданно дорого
+            [TextCampaignNetworkStrategyTypeEnum::AVERAGE_CPA],
+            [TextCampaignNetworkStrategyTypeEnum::WB_MAXIMUM_CONVERSION_RATE],
+            [TextCampaignNetworkStrategyTypeEnum::AVERAGE_ROI],*/
+            [TextCampaignNetworkStrategyTypeEnum::AVERAGE_CPC],
+            [TextCampaignNetworkStrategyTypeEnum::WB_MAXIMUM_CLICKS],
+            [TextCampaignNetworkStrategyTypeEnum::WEEKLY_CLICK_PACKAGE],
+            [TextCampaignNetworkStrategyTypeEnum::MAXIMUM_COVERAGE],
+            [TextCampaignNetworkStrategyTypeEnum::WB_MAXIMUM_CLICKS],
+            [TextCampaignNetworkStrategyTypeEnum::WEEKLY_CLICK_PACKAGE],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider textCampaignNetworkStrategyProvider
+     */
+    public function createTextCampaignsWithDifferentTextCampaignNetworkStrategies($textCampaignNetworkStrategyEnum)
+    {
+        $id = $this->createTextCampaignWithCertainStrategies(
+            TextCampaignSearchStrategyTypeEnum::SERVING_OFF,
+            $textCampaignNetworkStrategyEnum
+        );
+
+        $this->deleteCampaignById($id);
+    }
+
+    /**
+     * @test
+     */
+    public function createTextCampaignWithServingOffSearchStrategy()
+    {
+        $id = $this->createTextCampaignWithCertainStrategies(
+            TextCampaignSearchStrategyTypeEnum::LOWEST_COST,
+            TextCampaignNetworkStrategyTypeEnum::SERVING_OFF
+        );
+
+        $this->deleteCampaign($id);
+    }
+
+    /**
+     * @test
+     */
+    public function createTextCampaignWithServingOffNetworkStrategy()
     {
         $id = $this->createTextCampaignWithCertainStrategies(
             TextCampaignSearchStrategyTypeEnum::SERVING_OFF,
@@ -236,10 +285,9 @@ class CampaignTest extends DirectApiV5TestCase
     }
 
     private function createTextCampaignWithCertainStrategies(
-        $textCampaignSearchStrategyEnum = TextCampaignSearchStrategyTypeEnum::HIGHEST_POSITION,
-        $textCampaignNetworkStrategyEnum = TextCampaignNetworkStrategyTypeEnum::MAXIMUM_COVERAGE
-    )
-    {
+        $textCampaignSearchStrategyEnum,
+        $textCampaignNetworkStrategyEnum
+    ) {
         $campaignAddItem = new CampaignAddItem(self::NAME, (new \DateTime())->format('Y-m-d'));
         $campaignAddItem->setTextCampaign(
             $this->instanceTextCampaignAddItemWithCertainStrategies(
@@ -382,7 +430,10 @@ class CampaignTest extends DirectApiV5TestCase
                 $textCampaignSearchStrategyAdd->setWbMaximumClicks($strategyMaximumClicksAdd);
                 break;
             case TextCampaignSearchStrategyTypeEnum::WB_MAXIMUM_CONVERSION_RATE:
-                $strategyMaximumConversionRateAdd = new Campaign\StrategyMaximumConversionRateAdd(self::WEEKLY_SPEND_LIMIT, 0);
+                $strategyMaximumConversionRateAdd = new Campaign\StrategyMaximumConversionRateAdd(
+                    self::WEEKLY_SPEND_LIMIT,
+                    0
+                );
 
                 $textCampaignSearchStrategyAdd->setWbMaximumConversionRate($strategyMaximumConversionRateAdd);
                 break;
@@ -414,6 +465,49 @@ class CampaignTest extends DirectApiV5TestCase
 
                 $textCampaignNetworkStrategyAdd->setNetworkDefault($strategyNetworkDefaultAdd);
                 break;
+            case TextCampaignNetworkStrategyTypeEnum::AVERAGE_CPA:
+                $strategyAverageCpaAdd = new Campaign\StrategyAverageCpaAdd(2000000, 0);
+                $strategyAverageCpaAdd->setWeeklySpendLimit(self::WEEKLY_SPEND_LIMIT);
+                $strategyAverageCpaAdd->setBidCeiling(2000000);
+
+                $textCampaignNetworkStrategyAdd->setAverageCpa($strategyAverageCpaAdd);
+                break;
+            case TextCampaignNetworkStrategyTypeEnum::AVERAGE_ROI:
+                $strategyAverageRoiAdd = new Campaign\StrategyAverageRoiAdd(10, 2000000, 0);
+                $strategyAverageRoiAdd->setWeeklySpendLimit(self::WEEKLY_SPEND_LIMIT);
+                $strategyAverageRoiAdd->setBidCeiling(2000000);
+                $strategyAverageRoiAdd->setProfitability(50000000);
+
+                $textCampaignNetworkStrategyAdd->setAverageRoi($strategyAverageRoiAdd);
+                break;
+            case TextCampaignNetworkStrategyTypeEnum::AVERAGE_CPC:
+                $strategyAverageCpcAdd = new Campaign\StrategyAverageCpcAdd(2000000, self::WEEKLY_SPEND_LIMIT);
+
+                $textCampaignNetworkStrategyAdd->setAverageCpc($strategyAverageCpcAdd);
+                break;
+            case TextCampaignNetworkStrategyTypeEnum::WB_MAXIMUM_CLICKS:
+                $strategyMaximumClicksAdd = new Campaign\StrategyMaximumClicksAdd();
+                $strategyMaximumClicksAdd->setBidCeiling(2000000);
+                $strategyMaximumClicksAdd->setWeeklySpendLimit(self::WEEKLY_SPEND_LIMIT);
+
+                $textCampaignNetworkStrategyAdd->setWbMaximumClicks($strategyMaximumClicksAdd);
+                break;
+            case TextCampaignNetworkStrategyTypeEnum::WB_MAXIMUM_CONVERSION_RATE:
+                $strategyMaximumConversionRateAdd = new Campaign\StrategyMaximumConversionRateAdd(
+                    self::WEEKLY_SPEND_LIMIT,
+                    0
+                );
+
+                $textCampaignNetworkStrategyAdd->setWbMaximumConversionRate($strategyMaximumConversionRateAdd);
+                break;
+            case TextCampaignNetworkStrategyTypeEnum::WEEKLY_CLICK_PACKAGE:
+                $strategyWeeklyClickPackageAdd = new Campaign\StrategyWeeklyClickPackageAdd();
+                $strategyWeeklyClickPackageAdd->setBidCeiling(2000000);
+                $strategyWeeklyClickPackageAdd->setClicksPerWeek(100);
+
+                $textCampaignNetworkStrategyAdd->setWeeklyClickPackage($strategyWeeklyClickPackageAdd);
+                break;
+
         }
 
         return $textCampaignNetworkStrategyAdd;
