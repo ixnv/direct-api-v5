@@ -69,7 +69,7 @@ class AdExtensionTest extends AdGroupExistenceDependantTestCase
     public function getAdExtension($id)
     {
         $requestBody = new GetAdExtensionRequestBody(
-            new AdExtensionsSelectionCriteria([$id])
+            (new AdExtensionsSelectionCriteria())->setIds([$id])
         );
 
         /** @var AdExtensions\GetResponseBody $responseBody */

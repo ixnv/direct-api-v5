@@ -47,16 +47,6 @@ class AdExtensionsSelectionCriteria
     private $ModifiedSince;
 
     /**
-     * AdExtensionsSelectionCriteria constructor.
-     *
-     * @param \int[] $Ids
-     */
-    public function __construct(array $Ids)
-    {
-        $this->Ids = $Ids;
-    }
-
-    /**
      * @return int[]
      */
     public function getIds()
