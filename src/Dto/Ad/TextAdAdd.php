@@ -47,9 +47,9 @@ class TextAdAdd extends TextAdAddBase
     private $Mobile;
 
     /**
-     * @JMS\Type("array")
+     * @JMS\Type("array<integer>")
      *
-     * @var array $AdExtensionIds
+     * @var int[] $AdExtensionIds
      */
     private $AdExtensionIds;
 

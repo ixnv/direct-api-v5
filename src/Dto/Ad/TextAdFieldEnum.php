@@ -10,6 +10,7 @@ class TextAdFieldEnum extends BaseEnum
     const __default = 'AdImageHash';
     const AdImageHash = 'AdImageHash';
     const DisplayDomain = 'DisplayDomain';
+    const DisplayUrlPath = 'DisplayUrlPath';
     const Href = 'Href';
     const SitelinkSetId = 'SitelinkSetId';
     const Text = 'Text';
@@ -19,4 +20,5 @@ class TextAdFieldEnum extends BaseEnum
     const AdImageModeration = 'AdImageModeration';
     const SitelinksModeration = 'SitelinksModeration';
     const VCardModeration = 'VCardModeration';
+    const AdExtensions = 'AdExtensions';
 }

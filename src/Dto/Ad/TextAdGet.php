@@ -47,6 +47,13 @@ class TextAdGet extends TextAdGetBase
     private $DisplayDomain;
 
     /**
+     * @JMS\Type("string")
+     *
+     * @var string $DisplayUrlPath
+     */
+    private $DisplayUrlPath;
+
+    /**
      * @return string
      */
     public function getText()
@@ -136,4 +143,19 @@ class TextAdGet extends TextAdGetBase
       return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getDisplayUrlPath()
+    {
+        return $this->DisplayUrlPath;
+    }
+
+    /**
+     * @param string $DisplayUrlPath
+     */
+    public function setDisplayUrlPath($DisplayUrlPath)
+    {
+        $this->DisplayUrlPath = $DisplayUrlPath;
+    }
 }
