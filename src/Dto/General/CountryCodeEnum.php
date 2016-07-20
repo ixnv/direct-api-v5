@@ -4,7 +4,7 @@ namespace eLama\DirectApiV5\Dto\General;
 
 use JMS\Serializer\Annotation as JMS;
 
-class CountryCodeEnum
+class CountryCodeEnum extends BaseEnum
 {
     const __default = 'RU';
     const RU = 'RU';
@@ -13,6 +13,4 @@ class CountryCodeEnum
     const KZ = 'KZ';
     const BY = 'BY';
     const US = 'US';
-
-
 }
