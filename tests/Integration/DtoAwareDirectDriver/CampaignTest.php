@@ -82,17 +82,17 @@ class CampaignTest extends DirectApiV5TestCase
     {
         return [
             /*стратегии, которые нельзя протестировать, и\или неоправданно дорого
-            TextCampaignSearchStrategyTypeEnum::AVERAGE_CPA,
-            TextCampaignSearchStrategyTypeEnum::WB_MAXIMUM_CONVERSION_RATE,
-            TextCampaignSearchStrategyTypeEnum::AVERAGE_ROI*/
-            [TextCampaignSearchStrategyTypeEnum::AVERAGE_CPC],
-            [TextCampaignSearchStrategyTypeEnum::HIGHEST_POSITION],
-            [TextCampaignSearchStrategyTypeEnum::IMPRESSIONS_BELOW_SEARCH],
-            [TextCampaignSearchStrategyTypeEnum::LOWEST_COST],
-            [TextCampaignSearchStrategyTypeEnum::LOWEST_COST_GUARANTEE],
-            [TextCampaignSearchStrategyTypeEnum::LOWEST_COST_PREMIUM],
-            [TextCampaignSearchStrategyTypeEnum::WB_MAXIMUM_CLICKS],
-            [TextCampaignSearchStrategyTypeEnum::WEEKLY_CLICK_PACKAGE],
+            'average_cpa' => TextCampaignSearchStrategyTypeEnum::AVERAGE_CPA,
+            'wb_maximum_conversion_rate' => TextCampaignSearchStrategyTypeEnum::WB_MAXIMUM_CONVERSION_RATE,
+            'average_roi' => TextCampaignSearchStrategyTypeEnum::AVERAGE_ROI*/
+            'average_cpc' => [TextCampaignSearchStrategyTypeEnum::AVERAGE_CPC],
+            'highest_position' => [TextCampaignSearchStrategyTypeEnum::HIGHEST_POSITION],
+            'impressions_below_search' => [TextCampaignSearchStrategyTypeEnum::IMPRESSIONS_BELOW_SEARCH],
+            'lowest_cost' => [TextCampaignSearchStrategyTypeEnum::LOWEST_COST],
+            'lowest_cost_guarantee' => [TextCampaignSearchStrategyTypeEnum::LOWEST_COST_GUARANTEE],
+            'lowest_cost_premium' => [TextCampaignSearchStrategyTypeEnum::LOWEST_COST_PREMIUM],
+            'wb_maximum_clicks' => [TextCampaignSearchStrategyTypeEnum::WB_MAXIMUM_CLICKS],
+            'weekly_click_package' => [TextCampaignSearchStrategyTypeEnum::WEEKLY_CLICK_PACKAGE],
         ];
     }
 
@@ -117,15 +117,13 @@ class CampaignTest extends DirectApiV5TestCase
     {
         return [
             /*стратегии, которые нельзя протестировать, и\или неоправданно дорого
-            [TextCampaignNetworkStrategyTypeEnum::AVERAGE_CPA],
-            [TextCampaignNetworkStrategyTypeEnum::WB_MAXIMUM_CONVERSION_RATE],
-            [TextCampaignNetworkStrategyTypeEnum::AVERAGE_ROI],*/
-            [TextCampaignNetworkStrategyTypeEnum::AVERAGE_CPC],
-            [TextCampaignNetworkStrategyTypeEnum::WB_MAXIMUM_CLICKS],
-            [TextCampaignNetworkStrategyTypeEnum::WEEKLY_CLICK_PACKAGE],
-            [TextCampaignNetworkStrategyTypeEnum::MAXIMUM_COVERAGE],
-            [TextCampaignNetworkStrategyTypeEnum::WB_MAXIMUM_CLICKS],
-            [TextCampaignNetworkStrategyTypeEnum::WEEKLY_CLICK_PACKAGE],
+            'average_cpa' => [TextCampaignNetworkStrategyTypeEnum::AVERAGE_CPA],
+            'wb_maximum_conversion_rate' => [TextCampaignNetworkStrategyTypeEnum::WB_MAXIMUM_CONVERSION_RATE],
+            'average_roi' => [TextCampaignNetworkStrategyTypeEnum::AVERAGE_ROI],*/
+            'average_cpc' => [TextCampaignNetworkStrategyTypeEnum::AVERAGE_CPC],
+            'wb_maximum_clicks' => [TextCampaignNetworkStrategyTypeEnum::WB_MAXIMUM_CLICKS],
+            'weekly_click_package' => [TextCampaignNetworkStrategyTypeEnum::WEEKLY_CLICK_PACKAGE],
+            'maximum_coverage' => [TextCampaignNetworkStrategyTypeEnum::MAXIMUM_COVERAGE]
         ];
     }
 
