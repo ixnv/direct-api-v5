@@ -8,6 +8,7 @@ use eLama\DirectApiV5\Dto\General\AddResponseBody;
 use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
+use eLama\DirectApiV5\DtoAwareDirectDriver;
 use eLama\DirectApiV5\RequestBody\AddAdGroupRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteAdGroupRequestBody;
 
@@ -47,7 +48,7 @@ class AdGroupExistenceDependantTestCase extends DirectCampaignExistenceDependant
         static::createDtoAwareDirectDriver()->call($request)->wait();
     }
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(DtoAwareDirectDriver $dtoAwareDirectDriver = null)
     {
         parent::setUpBeforeClass();
 

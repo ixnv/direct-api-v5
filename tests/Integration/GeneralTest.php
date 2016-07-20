@@ -18,11 +18,8 @@ use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use GuzzleHttp\Client;
 use PHPUnit_Framework_TestCase;
 
-class GeneralTest extends PHPUnit_Framework_TestCase
+class GeneralTest extends DirectApiV5TestCase
 {
-    const LOGIN = 'ra-trinet-add-dev-01';
-    const TOKEN = '3fe13d8bd818458c89624f678f365051';
-
     /** @var int[] */
     private static $existingCampaigns;
 
@@ -30,16 +27,14 @@ class GeneralTest extends PHPUnit_Framework_TestCase
      * @test
      *
      * Чтобы тест работал, в аккаунте должны быть тестовые данные.
-     * Их можно автоматом сгенерить в управлении песочницей в Директе (RED-1070).
+     * Их можно автоматом сгенерить в управлении песочницей в Директе.
      *
      * @return int[] Массив ID существующих кампаний
      */
     public function canGetNonArchivedCampaigns()
     {
-        $campaignService = $this->createCampaignService();
-
         /** @var CampaignGetItem[] $campaigns */
-        $campaigns = $campaignService->getNonArchivedCampaigns()->wait();
+        $campaigns = $this->createCampaignService()->getNonArchivedCampaigns()->wait();
 
         assertThat(
             $campaigns,
@@ -61,10 +56,8 @@ class GeneralTest extends PHPUnit_Framework_TestCase
      */
     public function getNonArchivedCampaigns_PageLimitIsSetToOnePerRequest_FetchesAllCampaigns()
     {
-        $campaignService = $this->createCampaignService();
-
         /** @var CampaignGetItem[] $campaigns */
-        $campaigns = $campaignService->getNonArchivedCampaigns($pageLimit = 1)->wait();
+        $campaigns = $this->createCampaignService()->getNonArchivedCampaigns($pageLimit = 1)->wait();
 
         assertThat(
             $campaigns,
@@ -81,10 +74,8 @@ class GeneralTest extends PHPUnit_Framework_TestCase
     {
         $campaignId = self::$existingCampaigns[0];
 
-        $campaignService = $this->createCampaignService();
-
         /** @var CampaignGetItem $campaign */
-        $campaign = $campaignService->getCampaign($campaignId)->wait();
+        $campaign = $this->createCampaignService()->getCampaign($campaignId)->wait();
 
         assertThat($campaign->getId(), is(equalTo($campaignId)));
     }
@@ -131,7 +122,7 @@ class GeneralTest extends PHPUnit_Framework_TestCase
      */
     public function getNonArchivedCampaigns_InvalidToken_ThrowsException()
     {
-        $campaignService = $this->createCampaignService('invalid token');
+        $campaignService = $this->createCampaignServiceWithInvalidToken();
 
         $this->setExpectedException(ErrorException::class);
         $campaignService->getNonArchivedCampaigns()->wait();
@@ -184,61 +175,42 @@ class GeneralTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param string $token
      * @return CampaignService
      */
-    private function createCampaignService($token = self::TOKEN)
+    private function createCampaignService()
     {
-        $dtoAwareDirectDriver = $this->createDtoAwareDirectDriver($token);
-
-        return new CampaignService($dtoAwareDirectDriver);
+        return new CampaignService(self::createDtoAwareDirectDriver());
     }
 
     /**
-     * @param string $token
+     * @return CampaignService
+     */
+    private function createCampaignServiceWithInvalidToken()
+    {
+        return new CampaignService(self::createDtoAwareDirectDriver('invalid token'));
+    }
+
+    /**
      * @return AdService
      */
-    private function createAdService($token = self::TOKEN)
+    private function createAdService()
     {
-        $dtoAwareDirectDriver = $this->createDtoAwareDirectDriver($token);
-
-        return new AdService($dtoAwareDirectDriver);
+        return new AdService(self::createDtoAwareDirectDriver());
     }
 
     /**
-     * @param string $token
      * @return AdGroupService
      */
-    private function createAdGroupService($token = self::TOKEN)
+    private function createAdGroupService()
     {
-        $dtoAwareDirectDriver = $this->createDtoAwareDirectDriver($token);
-
-        return new AdGroupService($dtoAwareDirectDriver);
+        return new AdGroupService(self::createDtoAwareDirectDriver());
     }
 
     /**
-     * @param string $token
      * @return KeywordService
      */
-    private function createKeywordService($token = self::TOKEN)
+    private function createKeywordService()
     {
-        $dtoAwareDirectDriver = $this->createDtoAwareDirectDriver($token);
-
-        return new KeywordService($dtoAwareDirectDriver);
-    }
-
-    /**
-     * @param string $token
-     * @return DtoAwareDirectDriver
-     */
-    private function createDtoAwareDirectDriver($token)
-    {
-        $serializer = JmsFactory::create()->serializer();
-        $client = new Client();
-        $logger = (new LoggerFactory([]))->create(self::class);
-
-        $lowLevelDriver = LowLevelDriver::createAdapterForClient($client, $logger, LowLevelDriver::URL_SANDBOX);
-
-        return new DtoAwareDirectDriver($serializer, $lowLevelDriver, $token, self::LOGIN);
+        return new KeywordService(self::createDtoAwareDirectDriver());
     }
 }

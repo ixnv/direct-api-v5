@@ -31,29 +31,24 @@ use eLama\DirectApiV5\RequestBody\GetCampaignsRequestBody;
 use eLama\DirectApiV5\RequestBody\ResumeCampaignsRequestBody;
 use eLama\DirectApiV5\RequestBody\SuspendCampaignsRequestBody;
 use eLama\DirectApiV5\RequestBody\UpdateCampaignRequestBody;
+use eLama\DirectApiV5\Test\Integration\DirectApiV5TestCase;
 use GuzzleHttp\Client;
 use Monolog\Logger;
 use eLama\DirectApiV5\Dto\General\ArrayOfString;
 use eLama\DirectApiV5\Dto\Campaign;
 use eLama\DirectApiV5\RequestBody;
 
-class CampaignTest extends \PHPUnit_Framework_TestCase
+class CampaignTest extends DirectApiV5TestCase
 {
-    const LOGIN = 'ra-trinet-add-dev-01';
-    const TOKEN = '3fe13d8bd818458c89624f678f365051';
     const NAME = 'тестовая кампания';
     const CHANGED_NAME = 'Измененное имя кампании';
 
-    /**
-     * @var DtoAwareDirectDriver
-     */
+    /** @var DtoAwareDirectDriver */
     protected $driver;
 
     public function setUp()
     {
-        $serializer = JmsFactory::create()->serializer();
-        $lo = LowLevelDriver::createAdapterForClient(new Client(), new Logger('Test'), LowLevelDriver::URL_SANDBOX);
-        $this->driver = new DtoAwareDirectDriver($serializer, $lo, self::TOKEN, self::LOGIN);
+        $this->driver = self::createDtoAwareDirectDriver();
     }
 
     /**
