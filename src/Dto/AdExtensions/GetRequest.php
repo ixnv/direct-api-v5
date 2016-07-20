@@ -19,14 +19,14 @@ class GetRequest
     private $SelectionCriteria;
 
     /**
-     * @JMS\Type("string")
+     * @JMS\Type("array<string>")
      *
      * @var AdExtensionFieldEnum $FieldNames
      */
     private $FieldNames;
 
     /**
-     * @JMS\Type("string")
+     * @JMS\Type("array<string>")
      *
      * @var CalloutFieldEnum $CalloutFieldNames
      */

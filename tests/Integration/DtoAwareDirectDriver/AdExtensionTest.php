@@ -4,7 +4,9 @@ namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
 
 use eLama\DirectApiV5\Dto\AdExtensions\AddRequest as AddAdExtensionRequest;
 use eLama\DirectApiV5\Dto\AdExtensions\AdExtensionAddItem;
+use eLama\DirectApiV5\Dto\AdExtensions\AdExtensionsSelectionCriteria;
 use eLama\DirectApiV5\Dto\AdExtensions\Callout;
+use eLama\DirectApiV5\Dto\AdExtensions\GetRequest;
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
 use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
@@ -14,8 +16,10 @@ use eLama\DirectApiV5\RequestBody\AddAdExtensionRequestBody;
 use eLama\DirectApiV5\RequestBody\AddAdRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteAdExtensionRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteAdRequestBody;
+use eLama\DirectApiV5\RequestBody\GetAdExtensionRequestBody;
 use eLama\DirectApiV5\RequestBody\GetAdsRequestBody;
 use eLama\DirectApiV5\Dto\Ad;
+use eLama\DirectApiV5\Dto\AdExtensions;
 
 class AdExtensionTest extends AdGroupExistenceDependantTestCase
 {
@@ -62,6 +66,26 @@ class AdExtensionTest extends AdGroupExistenceDependantTestCase
      * @test
      * @depends addAdExtension
      */
+    public function getAdExtension($id)
+    {
+        $requestBody = new GetAdExtensionRequestBody(
+            new AdExtensionsSelectionCriteria([$id])
+        );
+
+        /** @var AdExtensions\GetResponseBody $responseBody */
+        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
+
+        $adExtensionGetItem = $responseBody->getResult()->getAdExtensions()[0];
+        assertThat($adExtensionGetItem->getId(), is(equalTo($id)));
+        assertThat($adExtensionGetItem->getCallout()->getCalloutText(), is(equalTo('Крутое уточнение')));
+
+        return $id;
+    }
+
+    /**
+     * @test
+     * @depends getAdExtension
+     */
     public function addAdWithAdExtension($extensionId)
     {
         $adAddItem = new Ad\AdAddItem(self::$adGroupId);
@@ -85,7 +109,7 @@ class AdExtensionTest extends AdGroupExistenceDependantTestCase
     /**
      * @test
      * @depends addAdWithAdExtension
-     * @depends addAdExtension
+     * @depends getAdExtension
      */
     public function getAdWithAdExtensions($adId, $extensionId)
     {
@@ -123,7 +147,7 @@ class AdExtensionTest extends AdGroupExistenceDependantTestCase
 
     /**
      * @test
-     * @depends addAdExtension
+     * @depends getAdExtension
      */
     public function deleteAdExtension($id)
     {
