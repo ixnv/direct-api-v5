@@ -20,4 +20,5 @@ class TextAdFieldEnum extends BaseEnum
     const AdImageModeration = 'AdImageModeration';
     const SitelinksModeration = 'SitelinksModeration';
     const VCardModeration = 'VCardModeration';
+    const AdExtensions = 'AdExtensions';
 }
