@@ -2,9 +2,10 @@
 
 namespace eLama\DirectApiV5\Dto\AdExtensions;
 
+use eLama\DirectApiV5\Dto\General\BaseEnum;
 use JMS\Serializer\Annotation as JMS;
 
-class StatusSelectionEnum
+class StatusSelectionEnum extends BaseEnum
 {
     const __default = 'ACCEPTED';
     const ACCEPTED = 'ACCEPTED';
@@ -12,6 +13,4 @@ class StatusSelectionEnum
     const MODERATION = 'MODERATION';
     const PREACCEPTED = 'PREACCEPTED';
     const REJECTED = 'REJECTED';
-
-
 }

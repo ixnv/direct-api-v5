@@ -12,16 +12,16 @@ class GetResponse
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\AdExtensions\AdExtensionGetItem")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\AdExtensions\AdExtensionGetItem>")
      *
-     * @var AdExtensionGetItem $AdExtensions
+     * @var AdExtensionGetItem[] $AdExtensions
      */
     private $AdExtensions;
 
     /**
      * @param AdExtensionGetItem $AdExtensions
      */
-    public function __construct(AdExtensionGetItem $AdExtensions = null)
+    public function __construct(array $AdExtensions)
     {
       $this->AdExtensions = $AdExtensions;
     }

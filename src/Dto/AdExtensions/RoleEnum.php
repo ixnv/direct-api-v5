@@ -2,9 +2,10 @@
 
 namespace eLama\DirectApiV5\Dto\AdExtensions;
 
+use eLama\DirectApiV5\Dto\General\BaseEnum;
 use JMS\Serializer\Annotation as JMS;
 
-class RoleEnum
+class RoleEnum extends BaseEnum
 {
     const __default = 'CHIEF';
     const CHIEF = 'CHIEF';
@@ -13,6 +14,4 @@ class RoleEnum
     const AGENCY = 'AGENCY';
     const MANAGER = 'MANAGER';
     const UNKNOWN = 'UNKNOWN';
-
-
 }

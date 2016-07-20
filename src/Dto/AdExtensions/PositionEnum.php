@@ -2,9 +2,10 @@
 
 namespace eLama\DirectApiV5\Dto\AdExtensions;
 
+use eLama\DirectApiV5\Dto\General\BaseEnum;
 use JMS\Serializer\Annotation as JMS;
 
-class PositionEnum
+class PositionEnum extends BaseEnum
 {
     const __default = 'PREMIUMFIRST';
     const PREMIUMFIRST = 'PREMIUMFIRST';
@@ -18,6 +19,4 @@ class PositionEnum
     const P22 = 'P22';
     const P23 = 'P23';
     const P24 = 'P24';
-
-
 }

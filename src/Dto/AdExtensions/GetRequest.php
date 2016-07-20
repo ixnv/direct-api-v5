@@ -37,7 +37,7 @@ class GetRequest
      * @param AdExtensionFieldEnum $FieldNames
      * @param CalloutFieldEnum $CalloutFieldNames
      */
-    public function __construct(AdExtensionsSelectionCriteria $SelectionCriteria = null, string $FieldNames = null, string $CalloutFieldNames = null)
+    public function __construct(AdExtensionsSelectionCriteria $SelectionCriteria = null, $FieldNames = null, $CalloutFieldNames = null)
     {
       $this->SelectionCriteria = $SelectionCriteria;
       $this->FieldNames = $FieldNames;
@@ -74,7 +74,7 @@ class GetRequest
      * @param AdExtensionFieldEnum $FieldNames
      * @return \eLama\DirectApiV5\Dto\AdExtensions\GetRequest
      */
-    public function setFieldNames(string $FieldNames)
+    public function setFieldNames($FieldNames)
     {
       $this->FieldNames = $FieldNames;
       return $this;
@@ -92,7 +92,7 @@ class GetRequest
      * @param CalloutFieldEnum $CalloutFieldNames
      * @return \eLama\DirectApiV5\Dto\AdExtensions\GetRequest
      */
-    public function setCalloutFieldNames(string $CalloutFieldNames)
+    public function setCalloutFieldNames($CalloutFieldNames)
     {
       $this->CalloutFieldNames = $CalloutFieldNames;
       return $this;
