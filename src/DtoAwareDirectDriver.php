@@ -78,13 +78,13 @@ class DtoAwareDirectDriver
     }
 
     /**
-     * @param GetRequestBody $request
+     * @param GetRequestBody $params
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function callGetCollectingItems(GetRequestBody $params)
     {
         return $this->callGet($params)
-            ->then(function (array $responses) {
+            ->then(function (array $responses) use ($params) {
                 /** @var Response[] $responses */
                 $return = [];
                 foreach ($responses as $response) {
@@ -93,6 +93,10 @@ class DtoAwareDirectDriver
                     foreach ($result->getItems() as $item) {
                         $return[] = $item;
                     }
+                }
+
+                if($params->getLimit() == 1) {
+                    $return = $return[0] ?? null;
                 }
 
                 return $return;

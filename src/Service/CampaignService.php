@@ -11,6 +11,12 @@ use GuzzleHttp\Promise\PromiseInterface;
 
 class CampaignService extends Service
 {
+    public function getCampaigns(CampaignsSelectionCriteria $criteria, $pageLimit = null)
+    {
+        $request = new GetCampaignsRequestBody($criteria);
+
+        return $this->callGetCollectingItems($request, $pageLimit);
+    }
     /**
      * @param int $id
      * @return PromiseInterface
@@ -21,12 +27,7 @@ class CampaignService extends Service
         $criteria = new CampaignsSelectionCriteria();
         $criteria->setIds([$id]);
 
-        $getCampaignsRequest = new GetCampaignsRequestBody($criteria);
-
-        return $this->driver->call($getCampaignsRequest)
-            ->then(function (Response $response) {
-                return $response->getUnserializedBody()->getResult()->getCampaigns()[0];
-            });
+        return $this->getCampaigns($criteria, $pageLimit = 1);
     }
 
     /**
@@ -43,8 +44,6 @@ class CampaignService extends Service
         );
         $criteria->setTypes([CampaignTypeEnum::TEXT_CAMPAIGN]);
 
-        $getCampaignsRequest = new GetCampaignsRequestBody($criteria);
-
-        return $this->callGetCollectingItems($getCampaignsRequest, $pageLimit);
+        return $this->getCampaigns($criteria, $pageLimit);
     }
 }

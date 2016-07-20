@@ -20,6 +20,11 @@ abstract class GetRequestBody extends RequestBody
         return 'get';
     }
 
+    public function getLimit()
+    {
+        return $this->request->getPage()->getLimit();
+    }
+
     /**
      * @param int $limit
      */
@@ -30,6 +35,11 @@ abstract class GetRequestBody extends RequestBody
         }
 
         $this->request->getPage()->setLimit($limit);
+    }
+
+    public function getOffset()
+    {
+        return $this->request->getPage()->getOffset();
     }
 
     /**
