@@ -60,9 +60,7 @@ class GeneralTest extends DirectApiV5TestCase
         $campaigns = $this->createCampaignService()->getNonArchivedCampaigns($pageLimit = 1)->wait();
 
         assertThat(
-            $campaigns,
-            both(arrayWithSize(count(self::$existingCampaigns)))
-              ->andAlso(everyItem(anInstanceOf(CampaignGetItem::class)))
+            $campaigns, anInstanceOf(CampaignGetItem::class)
         );
     }
 

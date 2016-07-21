@@ -8,7 +8,6 @@
     <php>
         <ini name="error_reporting" value="32767" />
         <ini name="display_errors" value="1" />
-        <ini name="zend.assertions" value="1" />
         <ini name="assert.exception" value="1" />
         <server name="KERNEL_DIR" value="../app/" />
     </php>

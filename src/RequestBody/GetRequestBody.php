@@ -22,7 +22,11 @@ abstract class GetRequestBody extends RequestBody
 
     public function getLimit()
     {
-        return $this->request->getPage()->getLimit();
+        if($this->request->getPage()) {
+            return $this->request->getPage()->getLimit();
+        }
+
+        return null;
     }
 
     /**
@@ -39,7 +43,11 @@ abstract class GetRequestBody extends RequestBody
 
     public function getOffset()
     {
-        return $this->request->getPage()->getOffset();
+        if($this->request->getPage()) {
+            return $this->request->getPage()->getOffset();
+        }
+
+        return null;
     }
 
     /**
