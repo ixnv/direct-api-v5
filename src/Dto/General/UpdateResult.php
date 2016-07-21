@@ -1,9 +1,8 @@
 <?php
+
 namespace eLama\DirectApiV5\Dto\General;
 
-
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
@@ -15,12 +14,12 @@ class UpdateResult
      *
      * @var ActionResult[] $UpdateResults
      */
-    private $UpdateResults;
+    private $UpdateResults = [];
 
     /**
      * @param ActionResult[] $UpdateResults
      */
-    public function __construct(array $UpdateResults = null)
+    public function __construct(array $UpdateResults = [])
     {
         $this->UpdateResults = $UpdateResults;
     }
@@ -30,7 +29,7 @@ class UpdateResult
      */
     public function getUpdateResults()
     {
-        return $this->UpdateResults ?: [];
+        return $this->UpdateResults;
     }
 
     /**
@@ -40,7 +39,7 @@ class UpdateResult
     public function setUpdateResults(array $UpdateResults)
     {
         $this->UpdateResults = $UpdateResults;
+
         return $this;
     }
-
 }

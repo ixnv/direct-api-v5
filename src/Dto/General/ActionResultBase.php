@@ -15,31 +15,32 @@ class ActionResultBase
      *
      * @var ExceptionNotification[] $Warnings
      */
-    private $Warnings;
+    private $Warnings = [];
 
     /**
      * @JMS\Type("array<eLama\DirectApiV5\Dto\General\ExceptionNotification>")
      *
      * @var ExceptionNotification[] $Errors
      */
-    private $Errors;
+    private $Errors = [];
 
     /**
      * @return ExceptionNotification[]
      */
     public function getWarnings()
     {
-      return $this->Warnings;
+        return $this->Warnings;
     }
 
     /**
      * @param ExceptionNotification[] $Warnings
      * @return self
      */
-    public function setWarnings(array $Warnings = null)
+    public function setWarnings(array $Warnings = [])
     {
-      $this->Warnings = $Warnings;
-      return $this;
+        $this->Warnings = $Warnings;
+
+        return $this;
     }
 
     /**
@@ -47,17 +48,17 @@ class ActionResultBase
      */
     public function getErrors()
     {
-      return $this->Errors;
+        return $this->Errors;
     }
 
     /**
      * @param ExceptionNotification[] $Errors
      * @return self
      */
-    public function setErrors(array $Errors = null)
+    public function setErrors(array $Errors = [])
     {
-      $this->Errors = $Errors;
-      return $this;
-    }
+        $this->Errors = $Errors;
 
+        return $this;
+    }
 }

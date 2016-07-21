@@ -1,8 +1,8 @@
 <?php
+
 namespace eLama\DirectApiV5\Dto\General;
 
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
@@ -14,12 +14,12 @@ class DeleteResult
      *
      * @var ActionResult[] $DeleteResults
      */
-    private $DeleteResults;
+    private $DeleteResults = [];
 
     /**
      * @param ActionResult[] $DeleteResults
      */
-    public function __construct(array $DeleteResults = null)
+    public function __construct(array $DeleteResults = [])
     {
         $this->DeleteResults = $DeleteResults;
     }
@@ -29,7 +29,7 @@ class DeleteResult
      */
     public function getDeleteResults()
     {
-        return $this->DeleteResults ?: [];
+        return $this->DeleteResults;
     }
 
     /**
@@ -39,7 +39,7 @@ class DeleteResult
     public function setDeleteResults(array $DeleteResults)
     {
         $this->DeleteResults = $DeleteResults;
+
         return $this;
     }
-
 }
