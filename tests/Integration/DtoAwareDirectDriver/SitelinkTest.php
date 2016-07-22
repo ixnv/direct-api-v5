@@ -89,7 +89,7 @@ class SitelinkTest extends AdGroupExistenceDependantTestCase
         $sitelinksSets = $responseBody->getResult()->getDeleteResults();
 
         assertThat($sitelinksSets[0]->getId(), is(equalTo($setilinkSetId)));
-        assertThat($sitelinksSets[0]->getErrors(), is(nullValue()));
-        assertThat($sitelinksSets[0]->getWarnings(), is(nullValue()));
+        assertThat($sitelinksSets[0]->getErrors(), is(emptyArray()));
+        assertThat($sitelinksSets[0]->getWarnings(), is(emptyArray()));
     }
 }

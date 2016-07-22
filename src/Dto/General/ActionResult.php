@@ -30,7 +30,7 @@ class ActionResult extends ActionResultBase
      */
     public function getId()
     {
-      return $this->Id;
+        return $this->Id;
     }
 
     /**
@@ -39,8 +39,8 @@ class ActionResult extends ActionResultBase
      */
     public function setId($Id = null)
     {
-      $this->Id = $Id;
-      return $this;
-    }
+        $this->Id = $Id;
 
+        return $this;
+    }
 }
