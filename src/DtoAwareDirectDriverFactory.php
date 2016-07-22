@@ -82,6 +82,22 @@ class DtoAwareDirectDriverFactory
     }
 
     /**
+     * @param string $token
+     * @param string $login
+     * @return DtoAwareDirectDriver
+     */
+    public function create($token, $login)
+    {
+        $lowLevelDriver = new LowLevelDriver(
+            $this->createGuzzleAdapter(),
+            $this->logger,
+            $this->directBaseUrl
+        );
+
+        return new DtoAwareDirectDriver($this->serializer, $lowLevelDriver, $token, $login);
+    }
+
+    /**
      * @return Guzzle5Adapter|Guzzle6Adapter
      */
     private function createGuzzleAdapter()
