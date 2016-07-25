@@ -6,7 +6,6 @@ use eLama\DirectApiV5\Dto\AdExtensions\AddRequest as AddAdExtensionRequest;
 use eLama\DirectApiV5\Dto\AdExtensions\AdExtensionAddItem;
 use eLama\DirectApiV5\Dto\AdExtensions\AdExtensionsSelectionCriteria;
 use eLama\DirectApiV5\Dto\AdExtensions\Callout;
-use eLama\DirectApiV5\Dto\AdExtensions\GetRequest;
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
 use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
