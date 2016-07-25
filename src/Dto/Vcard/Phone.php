@@ -10,7 +10,6 @@ use JMS\Serializer\Annotation as JMS;
  */
 class Phone
 {
-
     /**
      * @JMS\Type("string")
      *
@@ -40,15 +39,15 @@ class Phone
     private $Extension;
 
     /**
-     * @param string $CountryCode
-     * @param string $CityCode
-     * @param string $PhoneNumber
+     * @param string $countryCode
+     * @param string $cityCode
+     * @param string $phoneNumber
      */
-    public function __construct($CountryCode = null, $CityCode = null, $PhoneNumber = null)
+    public function __construct($countryCode = null, $cityCode = null, $phoneNumber = null)
     {
-        $this->CountryCode = $CountryCode;
-        $this->CityCode = $CityCode;
-        $this->PhoneNumber = $PhoneNumber;
+        $this->CountryCode = $countryCode;
+        $this->CityCode = $cityCode;
+        $this->PhoneNumber = $phoneNumber;
     }
 
     /**
@@ -120,7 +119,7 @@ class Phone
      * @param string $Extension
      * @return \eLama\DirectApiV5\Dto\Vcard\Phone
      */
-    public function setExtension($Extension = null)
+    public function setExtension($Extension)
     {
         $this->Extension = $Extension;
 

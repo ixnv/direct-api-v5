@@ -139,13 +139,13 @@ class VCardAddItem
      * @param Phone $Phone
      */
     public function __construct(
-        $CampaignId = null,
-        $Country = null,
-        $City = null,
-        $CompanyName = null,
-        $WorkTime = null,
-        Phone $Phone = null)
-    {
+        $CampaignId,
+        $Country,
+        $City,
+        $CompanyName,
+        $WorkTime,
+        Phone $Phone
+    ) {
         $this->CampaignId = $CampaignId;
         $this->Country = $Country;
         $this->City = $City;

@@ -29,7 +29,7 @@ class InstantMessenger
      * @param string $MessengerClient
      * @param string $MessengerLogin
      */
-    public function __construct($MessengerClient = null, $MessengerLogin = null)
+    public function __construct($MessengerClient, $MessengerLogin)
     {
         $this->MessengerClient = $MessengerClient;
         $this->MessengerLogin = $MessengerLogin;

@@ -61,8 +61,14 @@ class MapPoint
      * @param  $X2
      * @param  $Y2
      */
-    public function __construct($X = null, $Y = null, $X1 = null, $Y1 = null, $X2 = null, $Y2 = null)
-    {
+    public function __construct(
+        $X = null,
+        $Y = null,
+        $X1 = null,
+        $Y1 = null,
+        $X2 = null,
+        $Y2 = null
+    ) {
         $this->X = $X;
         $this->Y = $Y;
         $this->X1 = $X1;

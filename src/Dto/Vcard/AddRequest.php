@@ -10,18 +10,17 @@ use JMS\Serializer\Annotation as JMS;
  */
 class AddRequest
 {
-
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Vcard\VCardAddItem")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\Vcard\VCardAddItem>")
      *
      * @var VCardAddItem $VCards
      */
     private $VCards;
 
     /**
-     * @param VCardAddItem $VCards
+     * @param VCardAddItem[] $VCards
      */
-    public function __construct(VCardAddItem $VCards = null)
+    public function __construct(array $VCards)
     {
         $this->VCards = $VCards;
     }
