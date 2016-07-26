@@ -7,7 +7,7 @@ use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\RequestBody;
 use eLama\DirectApiV5\Dto\Vcard;
 
-class VcardTest extends AdGroupExistenceDependantTestCase
+class VcardTest extends DirectCampaignExistenceDependantTestCase
 {
     const COUNTRY_NAME = 'Russia';
     const CITY_NAME = 'Moscow';
@@ -51,7 +51,6 @@ class VcardTest extends AdGroupExistenceDependantTestCase
         $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
 
         $id = $responseBody->getResult()->getAddResults()[0]->getId();
-        $this->assertNotNull($id);
         assertThat($id, is(typeOf('integer')));
 
         return $id;
