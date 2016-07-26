@@ -3,25 +3,28 @@
 namespace eLama\DirectApiV5\Dto\Vcard;
 
 use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\IdsCriteria;
+use eLama\DirectApiV5\Dto\General\GetRequestGeneral;
 
 
 /**
  * @JMS\AccessType("public_method")
  */
-class GetRequest
+class GetRequest extends GetRequestGeneral
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Vcard\IdsCriteria")
+     * @JMS\Type("eLama\DirectApiV5\Dto\General\IdsCriteria")
      *
      * @var IdsCriteria $SelectionCriteria
      */
     private $SelectionCriteria;
 
     /**
-     * @JMS\Type("string")
+     * @JMS\Type("array<string>")
      *
-     * @var VCardFieldEnum $FieldNames
+     * @var string[] $FieldNames
+     * @see VCardFieldEnum
      */
     private $FieldNames;
 

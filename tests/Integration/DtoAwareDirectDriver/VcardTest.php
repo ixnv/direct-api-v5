@@ -5,7 +5,9 @@ namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
 use eLama\DirectApiV5\DtoAwareDirectDriver;
 use eLama\DirectApiV5\Dto\Vcard;
 use eLama\DirectApiV5\RequestBody;
-use eLama\DirectApiV5\RequestBody\AddAdRequestBody;
+use eLama\DirectApiV5\Dto\General\IdsCriteria;
+use eLama\DirectApiV5\RequestBody\GetVcardRequestBody;
+use eLama\DirectApiV5\Dto\Vcard\VCardGetItem;
 
 class VcardTest extends AdGroupExistenceDependantTestCase
 {
@@ -17,7 +19,14 @@ class VcardTest extends AdGroupExistenceDependantTestCase
     const EXTRA_MESSAGE = 'some message';
     const CONTACT_EMAIL = 'test@mail.ru';
     const OGRN = '1097847055855';
-    const CONTACT_PERSON = 'contact person ';
+    const CONTACT_PERSON = 'contact person';
+
+    /** @var Vcard\MapPoint */
+    private $mapPoint;
+    /** @var  Vcard\Phone */
+    private $phone;
+    /** @var Vcard\InstantMessenger */
+    private $instantMessenger;
 
     /**
      * @var DtoAwareDirectDriver
@@ -27,6 +36,7 @@ class VcardTest extends AdGroupExistenceDependantTestCase
     protected function setUp()
     {
         $this->driver = self::createDtoAwareDirectDriver();
+        $this->createNestedEntitiesForRequestAndCompare();
     }
 
     /**
@@ -51,10 +61,21 @@ class VcardTest extends AdGroupExistenceDependantTestCase
 
     /**
      * @test
+     * @depends add
      */
-    public function get()
+    public function get($vCardId)
     {
+        $requestBody = new GetVcardRequestBody((new IdsCriteria())->setIds([$vCardId]));
+        $requestBody->setLimit(5);
+        $requestBody->setOffset(0);
 
+        /** @var \eLama\DirectApiV5\Dto\Vcard\GetResponseBody $responseBody */
+        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
+
+        /** @var \eLama\DirectApiV5\Dto\Vcard\VCardGetItem $vCardGetItem */
+        $vCardGetItem = $responseBody->getResult()->getVCards()[0];
+
+        $this->assertVCardGetItem($vCardGetItem);
     }
 
     /**
@@ -62,42 +83,59 @@ class VcardTest extends AdGroupExistenceDependantTestCase
      */
     private function createVcardVCardAddItem()
     {
-        $phone = new Vcard\Phone(
-            '+7',
-            '812',
-            '12345'
-        );
-        $phone->setExtension('89');
         $vcardAddItem = new Vcard\VCardAddItem(
             self::$campaignId,
             self::COUNTRY_NAME,
             self::CITY_NAME,
             self::COMPANY_NAME,
             self::WORK_TIME,
-            $phone
+            $this->phone
         );
 
         $vcardAddItem->setStreet(self::STREET);
         $vcardAddItem->setHouse('1');
         $vcardAddItem->setBuilding('2');
         $vcardAddItem->setApartment('3');
-        $instantMessenger = new Vcard\InstantMessenger('icq', '123-456-789');
-        $vcardAddItem->setInstantMessenger($instantMessenger);
+        $vcardAddItem->setInstantMessenger($this->instantMessenger);
         $vcardAddItem->setExtraMessage(self::EXTRA_MESSAGE);
         $vcardAddItem->setContactEmail(self::CONTACT_EMAIL);
         $vcardAddItem->setOgrn(self::OGRN);
-        $vcardAddItem->setPointOnMap(
-            new Vcard\MapPoint(
-                '39.724068',
-                '47.222555',
-                '39.722020',
-                '47.221160',
-                '39.726116',
-                '47.223951'
-            )
-        );
+        $vcardAddItem->setPointOnMap($this->mapPoint);
         $vcardAddItem->setContactPerson(self::CONTACT_PERSON);
 
         return $vcardAddItem;
+    }
+
+    private function createNestedEntitiesForRequestAndCompare()
+    {
+        $this->instantMessenger = new Vcard\InstantMessenger('icq', '123-456-789');
+        $this->phone = new Vcard\Phone(
+            '+7',
+            '812',
+            '1-23-45'
+        );
+        $this->mapPoint = new Vcard\MapPoint(
+            '39.724068',
+            '47.222555',
+            '39.722020',
+            '47.221160',
+            '39.726116',
+            '47.223951'
+        );
+    }
+
+    /**
+     * @param VCardGetItem $vCardGetItem
+     */
+    private function assertVCardGetItem(VCardGetItem $vCardGetItem)
+    {
+        $this->assertEquals(self::COMPANY_NAME, $vCardGetItem->getCompanyName());
+        $this->assertEquals(self::CITY_NAME, $vCardGetItem->getCity());
+        $this->assertEquals(self::EXTRA_MESSAGE, $vCardGetItem->getExtraMessage());
+        $this->assertEquals(self::CONTACT_EMAIL, $vCardGetItem->getContactEmail());
+        $this->assertEquals(self::CONTACT_PERSON, $vCardGetItem->getContactPerson());
+        $this->assertEquals($this->mapPoint, $vCardGetItem->getPointOnMap());
+        $this->assertEquals($this->phone, $vCardGetItem->getPhone());
+        $this->assertEquals($this->instantMessenger, $vCardGetItem->getInstantMessenger());
     }
 }

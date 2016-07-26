@@ -3,8 +3,9 @@
 namespace eLama\DirectApiV5\Dto\Vcard;
 
 use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\BaseEnum;
 
-class VCardFieldEnum
+class VCardFieldEnum extends BaseEnum
 {
     const __default = 'Id';
     const Id = 'Id';
