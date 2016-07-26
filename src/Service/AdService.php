@@ -45,7 +45,13 @@ class AdService extends Service
         return $this->callGetCollectingItems($getAdsParams, $pageLimit);
     }
 
-    public function getNonArchivedAdsByIds(array $ids)
+    /**
+     * @param int[] $ids
+     * @param int|null $pageLimit
+     * @return PromiseInterface
+     * @see \eLama\DirectApiV5\Dto\Ad\AdGetItem
+     */
+    public function getNonArchivedAdsByIds(array $ids, $pageLimit = null)
     {
         \Assert\that($ids)->notEmpty();
 
@@ -59,7 +65,7 @@ class AdService extends Service
 
         $getAdsParams = new GetAdsRequestBody($criteria);
 
-        return $this->callGetCollectingItems($getAdsParams);
+        return $this->callGetCollectingItems($getAdsParams, $pageLimit);
     }
 
     /**

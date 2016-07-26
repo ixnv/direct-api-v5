@@ -29,4 +29,25 @@ class KeywordService extends Service
 
         return $this->callGetCollectingItems($getAdsParams, $pageLimit);
     }
+
+    /**
+     * @param int[] $adGroupIds
+     * @param int|null $pageLimit
+     * @return PromiseInterface
+     * @see \eLama\DirectApiV5\Dto\Keyword\KeywordGetItem
+     */
+    public function getNonArchivedKeywordsByAdGroupIds(array $adGroupIds, $pageLimit = null)
+    {
+        \Assert\that($adGroupIds)->notEmpty();
+
+        $criteria = new KeywordsSelectionCriteria();
+        $criteria->setAdGroupIds($adGroupIds);
+        $criteria->setStates(
+            [KeywordStateEnum::ON, KeywordStateEnum::SUSPENDED, KeywordStateEnum::OFF]
+        );
+
+        $getAdsParams = new GetKeywordsRequestBody($criteria);
+
+        return $this->callGetCollectingItems($getAdsParams, $pageLimit);
+    }
 }
