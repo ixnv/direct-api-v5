@@ -4,6 +4,8 @@ namespace eLama\DirectApiV5\Dto\Vcard;
 
 use JMS\Serializer\Annotation as JMS;
 
+use eLama\DirectApiV5\Dto\General\IdsCriteria;
+
 
 /**
  * @JMS\AccessType("public_method")
@@ -12,7 +14,7 @@ class DeleteRequest
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Vcard\IdsCriteria")
+     * @JMS\Type("eLama\DirectApiV5\Dto\General\IdsCriteria")
      *
      * @var IdsCriteria $SelectionCriteria
      */
@@ -36,7 +38,7 @@ class DeleteRequest
 
     /**
      * @param IdsCriteria $SelectionCriteria
-     * @return \eLama\DirectApiV5\Dto\Vcard\DeleteRequest
+     * @return \eLama\DirectApiV5\Dto\General\DeleteRequest
      */
     public function setSelectionCriteria(IdsCriteria $SelectionCriteria)
     {

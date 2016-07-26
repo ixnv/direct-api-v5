@@ -7,6 +7,8 @@ use eLama\DirectApiV5\Dto\Vcard;
 use eLama\DirectApiV5\RequestBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\RequestBody\GetVcardRequestBody;
+use eLama\DirectApiV5\RequestBody\DeleteVcardRequestBody;
+use eLama\DirectApiV5\Dto\Vcard\DeleteRequest;
 use eLama\DirectApiV5\Dto\Vcard\VCardGetItem;
 
 class VcardTest extends AdGroupExistenceDependantTestCase
@@ -62,6 +64,8 @@ class VcardTest extends AdGroupExistenceDependantTestCase
     /**
      * @test
      * @depends add
+     * @param int $vCardId
+     * @return int
      */
     public function get($vCardId)
     {
@@ -76,6 +80,31 @@ class VcardTest extends AdGroupExistenceDependantTestCase
         $vCardGetItem = $responseBody->getResult()->getVCards()[0];
 
         $this->assertVCardGetItem($vCardGetItem);
+
+        return $vCardGetItem->getId();
+    }
+
+    /**
+     * @test
+     * @depends get
+     * @param int $vCardId
+     */
+    public function delete($vCardId)
+    {
+        $requestBody = new DeleteVcardRequestBody(
+            new DeleteRequest(
+                new IdsCriteria([$vCardId])
+            )
+        );
+
+        /** @var \eLama\DirectApiV5\Dto\General\DeleteResponseBody $responseBody */
+        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
+
+        $vCards = $responseBody->getResult()->getDeleteResults();
+
+        assertThat($vCards[0]->getId(), is(equalTo($vCardId)));
+        assertThat($vCards[0]->getErrors(), is(emptyArray()));
+        assertThat($vCards[0]->getWarnings(), is(emptyArray()));
     }
 
     /**
