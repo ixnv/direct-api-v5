@@ -5,16 +5,19 @@ namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
 use eLama\DirectApiV5\DtoAwareDirectDriver;
 use eLama\DirectApiV5\Dto\Vcard;
 use eLama\DirectApiV5\RequestBody;
-
 use eLama\DirectApiV5\RequestBody\AddAdRequestBody;
 
 class VcardTest extends AdGroupExistenceDependantTestCase
 {
-    const COUNTRY_NAME = 'Гондурас';
-    const CITY_NAME = 'Тегусигальпа';
-    const COMPANY_NAME = 'good_workers';
-    const WORK_TIME = '0;6;00;00;00;00';
-    const STREET = 'Булевар Република де Франсия';
+    const COUNTRY_NAME = 'Russia';
+    const CITY_NAME = 'Moscow';
+    const COMPANY_NAME = 'Some Company DvKqXuiphd';
+    const WORK_TIME = '0;3;10;0;18;0;4;6;10;0;11;0';
+    const STREET = 'Охотный ряд';
+    const EXTRA_MESSAGE = 'some message';
+    const CONTACT_EMAIL = 'test@mail.ru';
+    const OGRN = '1097847055855';
+    const CONTACT_PERSON = 'contact person ';
 
     /**
      * @var DtoAwareDirectDriver
@@ -38,9 +41,20 @@ class VcardTest extends AdGroupExistenceDependantTestCase
         $requestBody = new RequestBody\AddVcardRequestBody($addRequest);
         /** @var \eLama\DirectApiV5\Dto\General\AddResponseBody $responseBody */
         $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
-        /** eLama\DirectApiV5\Dto\General\ExceptionNotification */
-        var_dump($responseBody->getResult()->getAddResults()[0]->getErrors());
-        die('stop it!');
+
+        $id = $responseBody->getResult()->getAddResults()[0]->getId();
+        $this->assertNotNull($id);
+        assertThat($id, is(typeOf('integer')));
+
+        return $id;
+    }
+
+    /**
+     * @test
+     */
+    public function get()
+    {
+
     }
 
     /**
@@ -53,7 +67,7 @@ class VcardTest extends AdGroupExistenceDependantTestCase
             '812',
             '12345'
         );
-        $phone->setExtension('256');
+        $phone->setExtension('89');
         $vcardAddItem = new Vcard\VCardAddItem(
             self::$campaignId,
             self::COUNTRY_NAME,
@@ -67,25 +81,22 @@ class VcardTest extends AdGroupExistenceDependantTestCase
         $vcardAddItem->setHouse('1');
         $vcardAddItem->setBuilding('2');
         $vcardAddItem->setApartment('3');
-        $instantMessenger = new Vcard\InstantMessenger('icq', 'Gondurasets');
+        $instantMessenger = new Vcard\InstantMessenger('icq', '123-456-789');
         $vcardAddItem->setInstantMessenger($instantMessenger);
-        $vcardAddItem->setExtraMessage('shaverma_iz_myshey');
-        $vcardAddItem->setContactEmail('gondu@ras.com');
-        $vcardAddItem->setOgrn('1234567891234');
-        $vcardAddItem->setMetroStationId(1);
-
+        $vcardAddItem->setExtraMessage(self::EXTRA_MESSAGE);
+        $vcardAddItem->setContactEmail(self::CONTACT_EMAIL);
+        $vcardAddItem->setOgrn(self::OGRN);
         $vcardAddItem->setPointOnMap(
             new Vcard\MapPoint(
-                'X',
-                'Y',
-                'X1',
-                'Y1',
-                'X2',
-                'Y2'
+                '39.724068',
+                '47.222555',
+                '39.722020',
+                '47.221160',
+                '39.726116',
+                '47.223951'
             )
         );
-        $vcardAddItem->setContactPerson('Человек из Гондураса');
-        $vcardAddItem->setWorkTime('0;3;10;0;18;0;4;6;10;0;11;0');
+        $vcardAddItem->setContactPerson(self::CONTACT_PERSON);
 
         return $vcardAddItem;
     }
