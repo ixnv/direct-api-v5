@@ -42,7 +42,7 @@ class VcardTest extends DirectCampaignExistenceDependantTestCase
      */
     public function add()
     {
-        $vcardAddItem = $this->createVcardVCardAddItem();
+        $vcardAddItem = $this->createVCardAddItem();
 
         $addRequest = new Vcard\AddRequest([$vcardAddItem]);
 
@@ -71,12 +71,12 @@ class VcardTest extends DirectCampaignExistenceDependantTestCase
         /** @var \eLama\DirectApiV5\Dto\Vcard\GetResponseBody $responseBody */
         $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
 
-        /** @var \eLama\DirectApiV5\Dto\Vcard\VCardGetItem $vCardGetItem */
-        $vCardGetItem = $responseBody->getResult()->getVCards()[0];
+        /** @var \eLama\DirectApiV5\Dto\Vcard\VCardGetItem $vcardGetItem */
+        $vcardGetItem = $responseBody->getResult()->getVCards()[0];
 
-        $this->assertVCardGetItem($vCardGetItem);
+        $this->assertVcardGetItem($vcardGetItem);
 
-        return $vCardGetItem->getId();
+        return $vcardGetItem->getId();
     }
 
     /**
@@ -95,17 +95,17 @@ class VcardTest extends DirectCampaignExistenceDependantTestCase
         /** @var \eLama\DirectApiV5\Dto\General\DeleteResponseBody $responseBody */
         $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
 
-        $vCards = $responseBody->getResult()->getDeleteResults();
+        $vcards = $responseBody->getResult()->getDeleteResults();
 
-        assertThat($vCards[0]->getId(), is(equalTo($vCardId)));
-        assertThat($vCards[0]->getErrors(), is(emptyArray()));
-        assertThat($vCards[0]->getWarnings(), is(emptyArray()));
+        assertThat($vcards[0]->getId(), is(equalTo($vCardId)));
+        assertThat($vcards[0]->getErrors(), is(emptyArray()));
+        assertThat($vcards[0]->getWarnings(), is(emptyArray()));
     }
 
     /**
      * @return Vcard\VCardAddItem
      */
-    private function createVcardVCardAddItem()
+    private function createVCardAddItem()
     {
         $vcardAddItem = new Vcard\VCardAddItem(
             self::$campaignId,
@@ -151,7 +151,7 @@ class VcardTest extends DirectCampaignExistenceDependantTestCase
     /**
      * @param Vcard\VCardGetItem $vCardGetItem
      */
-    private function assertVCardGetItem(Vcard\VCardGetItem $vCardGetItem)
+    private function assertVcardGetItem(Vcard\VCardGetItem $vCardGetItem)
     {
         $this->assertEquals(self::COMPANY_NAME, $vCardGetItem->getCompanyName());
         $this->assertEquals(self::CITY_NAME, $vCardGetItem->getCity());
