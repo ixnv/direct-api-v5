@@ -3,13 +3,9 @@
 namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
 
 use eLama\DirectApiV5\DtoAwareDirectDriver;
-use eLama\DirectApiV5\Dto\Vcard;
-use eLama\DirectApiV5\RequestBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
-use eLama\DirectApiV5\RequestBody\GetVcardRequestBody;
-use eLama\DirectApiV5\RequestBody\DeleteVcardRequestBody;
-use eLama\DirectApiV5\Dto\Vcard\DeleteRequest;
-use eLama\DirectApiV5\Dto\Vcard\VCardGetItem;
+use eLama\DirectApiV5\RequestBody;
+use eLama\DirectApiV5\Dto\Vcard;
 
 class VcardTest extends AdGroupExistenceDependantTestCase
 {
@@ -69,7 +65,7 @@ class VcardTest extends AdGroupExistenceDependantTestCase
      */
     public function get($vCardId)
     {
-        $requestBody = new GetVcardRequestBody((new IdsCriteria())->setIds([$vCardId]));
+        $requestBody = new RequestBody\GetVcardRequestBody((new IdsCriteria())->setIds([$vCardId]));
         $requestBody->setLimit(5);
         $requestBody->setOffset(0);
 
@@ -91,8 +87,8 @@ class VcardTest extends AdGroupExistenceDependantTestCase
      */
     public function delete($vCardId)
     {
-        $requestBody = new DeleteVcardRequestBody(
-            new DeleteRequest(
+        $requestBody = new RequestBody\DeleteVcardRequestBody(
+            new Vcard\DeleteRequest(
                 new IdsCriteria([$vCardId])
             )
         );
@@ -154,9 +150,9 @@ class VcardTest extends AdGroupExistenceDependantTestCase
     }
 
     /**
-     * @param VCardGetItem $vCardGetItem
+     * @param Vcard\VCardGetItem $vCardGetItem
      */
-    private function assertVCardGetItem(VCardGetItem $vCardGetItem)
+    private function assertVCardGetItem(Vcard\VCardGetItem $vCardGetItem)
     {
         $this->assertEquals(self::COMPANY_NAME, $vCardGetItem->getCompanyName());
         $this->assertEquals(self::CITY_NAME, $vCardGetItem->getCity());
