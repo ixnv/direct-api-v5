@@ -4,7 +4,10 @@ namespace eLama\DirectApiV5\Service;
 
 use eLama\DirectApiV5\Dto\Keyword\KeywordsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Keyword\KeywordStateEnum;
+use eLama\DirectApiV5\Dto\Keyword\KeywordUpdateItem;
+use eLama\DirectApiV5\Dto\Keyword\UpdateRequest;
 use eLama\DirectApiV5\RequestBody\GetKeywordsRequestBody;
+use eLama\DirectApiV5\RequestBody\UpdateKeywordRequestBody;
 use GuzzleHttp\Promise\PromiseInterface;
 
 class KeywordService extends Service
@@ -49,5 +52,21 @@ class KeywordService extends Service
         $getAdsParams = new GetKeywordsRequestBody($criteria);
 
         return $this->callGetCollectingItems($getAdsParams, $pageLimit);
+    }
+
+    /**
+     * @param KeywordUpdateItem[] $items
+     * @return PromiseInterface
+     * @see UpdateResult
+     */
+    public function update(array $items)
+    {
+        \Assert\thatAll($items)->isInstanceOf(KeywordUpdateItem::class);
+
+        $request = new UpdateKeywordRequestBody(
+            new UpdateRequest($items)
+        );
+
+        return $this->driver->call($request);
     }
 }
