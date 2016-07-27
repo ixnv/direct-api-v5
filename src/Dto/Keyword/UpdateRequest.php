@@ -12,36 +12,36 @@ class UpdateRequest
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Keyword\KeywordUpdateItem")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\Keyword\KeywordUpdateItem>")
      *
-     * @var KeywordUpdateItem $Keywords
+     * @var KeywordUpdateItem[] $Keywords
      */
     private $Keywords;
 
     /**
-     * @param KeywordUpdateItem $Keywords
+     * @param KeywordUpdateItem[] $Keywords
      */
-    public function __construct(KeywordUpdateItem $Keywords = null)
+    public function __construct(array $Keywords = [])
     {
-      $this->Keywords = $Keywords;
+        $this->Keywords = $Keywords;
     }
 
     /**
-     * @return KeywordUpdateItem
+     * @return KeywordUpdateItem[]
      */
     public function getKeywords()
     {
-      return $this->Keywords;
+        return $this->Keywords;
     }
 
     /**
-     * @param KeywordUpdateItem $Keywords
+     * @param KeywordUpdateItem[] $Keywords
      * @return \eLama\DirectApiV5\Dto\Keyword\UpdateRequest
      */
-    public function setKeywords(KeywordUpdateItem $Keywords)
+    public function setKeywords(array $Keywords)
     {
-      $this->Keywords = $Keywords;
-      return $this;
-    }
+        $this->Keywords = $Keywords;
 
+        return $this;
+    }
 }
