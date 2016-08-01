@@ -168,7 +168,7 @@ class VCardGetItem
      * @param int $CampaignId
      * @return \eLama\DirectApiV5\Dto\Vcard\VCardGetItem
      */
-    public function setCampaignId($CampaignId)
+    public function setCampaignId($CampaignId = null)
     {
         $this->CampaignId = $CampaignId;
 
@@ -187,7 +187,7 @@ class VCardGetItem
      * @param string $Country
      * @return \eLama\DirectApiV5\Dto\Vcard\VCardGetItem
      */
-    public function setCountry($Country)
+    public function setCountry($Country = null)
     {
         $this->Country = $Country;
 
@@ -206,7 +206,7 @@ class VCardGetItem
      * @param string $City
      * @return \eLama\DirectApiV5\Dto\Vcard\VCardGetItem
      */
-    public function setCity($City)
+    public function setCity($City = null)
     {
         $this->City = $City;
 
@@ -225,7 +225,7 @@ class VCardGetItem
      * @param string $WorkTime
      * @return \eLama\DirectApiV5\Dto\Vcard\VCardGetItem
      */
-    public function setWorkTime($WorkTime)
+    public function setWorkTime($WorkTime = null)
     {
         $this->WorkTime = $WorkTime;
 
@@ -244,7 +244,7 @@ class VCardGetItem
      * @param Phone $Phone
      * @return \eLama\DirectApiV5\Dto\Vcard\VCardGetItem
      */
-    public function setPhone(Phone $Phone)
+    public function setPhone(Phone $Phone = null)
     {
         $this->Phone = $Phone;
 
@@ -263,7 +263,7 @@ class VCardGetItem
      * @param string $Street
      * @return \eLama\DirectApiV5\Dto\Vcard\VCardGetItem
      */
-    public function setStreet($Street)
+    public function setStreet($Street = null)
     {
         $this->Street = $Street;
 
@@ -282,7 +282,7 @@ class VCardGetItem
      * @param string $House
      * @return \eLama\DirectApiV5\Dto\Vcard\VCardGetItem
      */
-    public function setHouse($House)
+    public function setHouse($House = null)
     {
         $this->House = $House;
 
@@ -301,7 +301,7 @@ class VCardGetItem
      * @param string $Building
      * @return \eLama\DirectApiV5\Dto\Vcard\VCardGetItem
      */
-    public function setBuilding($Building)
+    public function setBuilding($Building = null)
     {
         $this->Building = $Building;
 
@@ -320,7 +320,7 @@ class VCardGetItem
      * @param string $Apartment
      * @return \eLama\DirectApiV5\Dto\Vcard\VCardGetItem
      */
-    public function setApartment($Apartment)
+    public function setApartment($Apartment = null)
     {
         $this->Apartment = $Apartment;
 
@@ -339,7 +339,7 @@ class VCardGetItem
      * @param InstantMessenger $InstantMessenger
      * @return \eLama\DirectApiV5\Dto\Vcard\VCardGetItem
      */
-    public function setInstantMessenger(InstantMessenger $InstantMessenger)
+    public function setInstantMessenger(InstantMessenger $InstantMessenger = null)
     {
         $this->InstantMessenger = $InstantMessenger;
 
@@ -358,7 +358,7 @@ class VCardGetItem
      * @param string $CompanyName
      * @return \eLama\DirectApiV5\Dto\Vcard\VCardGetItem
      */
-    public function setCompanyName($CompanyName)
+    public function setCompanyName($CompanyName = null)
     {
         $this->CompanyName = $CompanyName;
 
@@ -377,7 +377,7 @@ class VCardGetItem
      * @param string $ExtraMessage
      * @return \eLama\DirectApiV5\Dto\Vcard\VCardGetItem
      */
-    public function setExtraMessage($ExtraMessage)
+    public function setExtraMessage($ExtraMessage = null)
     {
         $this->ExtraMessage = $ExtraMessage;
 
@@ -396,7 +396,7 @@ class VCardGetItem
      * @param string $ContactEmail
      * @return \eLama\DirectApiV5\Dto\Vcard\VCardGetItem
      */
-    public function setContactEmail($ContactEmail)
+    public function setContactEmail($ContactEmail = null)
     {
         $this->ContactEmail = $ContactEmail;
 
@@ -415,7 +415,7 @@ class VCardGetItem
      * @param string $Ogrn
      * @return \eLama\DirectApiV5\Dto\Vcard\VCardGetItem
      */
-    public function setOgrn($Ogrn)
+    public function setOgrn($Ogrn = null)
     {
         $this->Ogrn = $Ogrn;
 
@@ -434,7 +434,7 @@ class VCardGetItem
      * @param int $MetroStationId
      * @return \eLama\DirectApiV5\Dto\Vcard\VCardGetItem
      */
-    public function setMetroStationId($MetroStationId)
+    public function setMetroStationId($MetroStationId = null)
     {
         $this->MetroStationId = $MetroStationId;
 
@@ -453,7 +453,7 @@ class VCardGetItem
      * @param MapPoint $PointOnMap
      * @return \eLama\DirectApiV5\Dto\Vcard\VCardGetItem
      */
-    public function setPointOnMap(MapPoint $PointOnMap)
+    public function setPointOnMap(MapPoint $PointOnMap = null)
     {
         $this->PointOnMap = $PointOnMap;
 
@@ -472,7 +472,7 @@ class VCardGetItem
      * @param string $ContactPerson
      * @return \eLama\DirectApiV5\Dto\Vcard\VCardGetItem
      */
-    public function setContactPerson($ContactPerson)
+    public function setContactPerson($ContactPerson = null)
     {
         $this->ContactPerson = $ContactPerson;
 
