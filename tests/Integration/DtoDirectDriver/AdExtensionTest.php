@@ -1,6 +1,6 @@
 <?php
 
-namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
+namespace eLama\DirectApiV5\Test\Integration\DtoDirectDriver;
 
 use eLama\DirectApiV5\Dto\AdExtensions\AddRequest as AddAdExtensionRequest;
 use eLama\DirectApiV5\Dto\AdExtensions\AdExtensionAddItem;
@@ -10,7 +10,7 @@ use eLama\DirectApiV5\Dto\General\AddResponseBody;
 use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
-use eLama\DirectApiV5\DtoAwareDirectDriver;
+use eLama\DirectApiV5\DtoDirectDriver;
 use eLama\DirectApiV5\RequestBody\AddAdExtensionRequestBody;
 use eLama\DirectApiV5\RequestBody\AddAdRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteAdExtensionRequestBody;
@@ -30,13 +30,13 @@ class AdExtensionTest extends AdGroupExistenceDependantTestCase
     const DISPLAY_URL_PATH = 'чудо-сайт';
 
     /**
-     * @var DtoAwareDirectDriver
+     * @var DtoDirectDriver
      */
     protected $driver;
 
     protected function setUp()
     {
-        $this->driver = self::createDtoAwareDirectDriver();
+        $this->driver = self::createDtoDirectDriver();
     }
 
     /**

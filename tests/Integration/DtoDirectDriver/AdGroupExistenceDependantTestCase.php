@@ -1,6 +1,6 @@
 <?php
 
-namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
+namespace eLama\DirectApiV5\Test\Integration\DtoDirectDriver;
 
 use eLama\DirectApiV5\Dto\AdGroup\AddRequest;
 use eLama\DirectApiV5\Dto\AdGroup\AdGroupAddItem;
@@ -8,7 +8,7 @@ use eLama\DirectApiV5\Dto\General\AddResponseBody;
 use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
-use eLama\DirectApiV5\DtoAwareDirectDriver;
+use eLama\DirectApiV5\DtoDirectDriver;
 use eLama\DirectApiV5\RequestBody\AddAdGroupRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteAdGroupRequestBody;
 
@@ -33,7 +33,7 @@ class AdGroupExistenceDependantTestCase extends DirectCampaignExistenceDependant
         );
 
         /** @var AddResponseBody $responseBody */
-        $responseBody = static::createDtoAwareDirectDriver()->call($request)->wait()->getUnserializedBody();
+        $responseBody = static::createDtoDirectDriver()->call($request)->wait()->getUnserializedBody();
 
         return $responseBody->getResult()->getAddResults()[0]->getId();
     }
@@ -45,10 +45,10 @@ class AdGroupExistenceDependantTestCase extends DirectCampaignExistenceDependant
         );
 
         /** @var DeleteResponseBody $responseBody */
-        static::createDtoAwareDirectDriver()->call($request)->wait();
+        static::createDtoDirectDriver()->call($request)->wait();
     }
 
-    public static function setUpBeforeClass(DtoAwareDirectDriver $dtoAwareDirectDriver = null)
+    public static function setUpBeforeClass(DtoDirectDriver $dtoDirectDriver = null)
     {
         parent::setUpBeforeClass();
 

@@ -15,7 +15,6 @@ class ProxyDriverWithFallback implements ProxyDriverInterface
 
     public function __construct(ProxyDriverInterface $proxyDriver, LowLevelDriverInterface $fallbackDriver)
     {
-
         $this->proxyDriver = $proxyDriver;
         $this->fallbackDriver = $fallbackDriver;
     }

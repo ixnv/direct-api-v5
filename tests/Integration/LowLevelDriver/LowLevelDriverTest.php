@@ -2,11 +2,12 @@
 
 namespace eLama\DirectApiV5\Test\Integration\LowLevelDriver;
 
+use eLama\DirectApiV5\JmsFactory;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\Request;
 use eLama\DirectApiV5\Response;
 use eLama\DirectApiV5\Serializer\ArraySerializer;
-use eLama\DirectApiV5\Test\Integration\GeneralTest;
+use eLama\DirectApiV5\Test\Integration\DirectApiV5TestCase;
 use GuzzleHttp\Client;
 use Phake;
 use PHPUnit_Framework_TestCase;
@@ -23,7 +24,7 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $jms = \eLama\DirectApiV5\JmsFactory::create()->serializer();
+        $jms = JmsFactory::create()->serializer();
 
         $this->serializer = new ArraySerializer($jms);
         $this->driver = LowLevelDriver::createAdapterForClient(new Client(), new NullLogger(), LowLevelDriver::URL_SANDBOX);
@@ -103,7 +104,7 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
         $logger = Phake::mock(LoggerInterface::class);
         $lowLevelDriver = LowLevelDriver::createAdapterForClient(new Client(), $logger, LowLevelDriver::URL_SANDBOX);
 
-        $lowLevelDriver->execute($this->createRequest(GeneralTest::TOKEN, $useAgencyUnits = true), $this->serializer)->wait();
+        $lowLevelDriver->execute($this->createRequest(DirectApiV5TestCase::TOKEN, $useAgencyUnits = true), $this->serializer)->wait();
 
         Phake::verify($logger)->info(
             containsStringIgnoringCase('request'),
@@ -126,14 +127,14 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
      *
      * @return Request
      */
-    private function createRequest($token = GeneralTest::TOKEN, $useAgencyUnits = false)
+    private function createRequest($token = DirectApiV5TestCase::TOKEN, $useAgencyUnits = false)
     {
         return new Request(
             $token,
             'campaigns',
             'get',
             [],
-            GeneralTest::LOGIN,
+            DirectApiV5TestCase::LOGIN,
             $useAgencyUnits
         );
     }

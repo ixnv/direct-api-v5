@@ -1,6 +1,6 @@
 <?php
 
-namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
+namespace eLama\DirectApiV5\Test\Integration\DtoDirectDriver;
 
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
 use eLama\DirectApiV5\Dto\General\DeleteRequest;
@@ -10,7 +10,7 @@ use eLama\DirectApiV5\Dto\Sitelink\AddRequest;
 use eLama\DirectApiV5\Dto\Sitelink\GetResponseBody;
 use eLama\DirectApiV5\Dto\Sitelink\Sitelink;
 use eLama\DirectApiV5\Dto\Sitelink\SitelinksSetAddItem;
-use eLama\DirectApiV5\DtoAwareDirectDriver;
+use eLama\DirectApiV5\DtoDirectDriver;
 use eLama\DirectApiV5\RequestBody\AddSitelinkRequestBody;
 use eLama\DirectApiV5\Dto\Ad;
 use eLama\DirectApiV5\RequestBody\DeleteSitelinkRequestBody;
@@ -19,13 +19,13 @@ use eLama\DirectApiV5\RequestBody\GetSitelinkRequestBody;
 class SitelinkTest extends AdGroupExistenceDependantTestCase
 {
     /**
-     * @var DtoAwareDirectDriver
+     * @var DtoDirectDriver
      */
     protected $driver;
 
     protected function setUp()
     {
-        $this->driver = self::createDtoAwareDirectDriver();
+        $this->driver = self::createDtoDirectDriver();
     }
 
     /**

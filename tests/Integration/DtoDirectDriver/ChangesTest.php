@@ -1,8 +1,8 @@
 <?php
 
-namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
+namespace eLama\DirectApiV5\Test\Integration\DtoDirectDriver;
 
-use eLama\DirectApiV5\DtoAwareDirectDriver;
+use eLama\DirectApiV5\DtoDirectDriver;
 use eLama\DirectApiV5\Dto\Changes;
 use eLama\DirectApiV5\RequestBody;
 use eLama\DirectApiV5\Response;
@@ -15,12 +15,12 @@ use Monolog\Logger;
 
 class ChangesTest extends DirectApiV5TestCase
 {
-    /** @var DtoAwareDirectDriver */
+    /** @var DtoDirectDriver */
     protected $driver;
 
     protected function setUp()
     {
-        $this->driver = self::createDtoAwareDirectDriver();
+        $this->driver = self::createDtoDirectDriver();
     }
 
     /**

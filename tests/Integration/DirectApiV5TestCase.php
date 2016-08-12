@@ -7,7 +7,7 @@ use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Campaign\CampaignTypeEnum;
 use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
-use eLama\DirectApiV5\DtoAwareDirectDriver;
+use eLama\DirectApiV5\DtoDirectDriver;
 use eLama\DirectApiV5\JmsFactory;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\RequestBody\DeleteCampaignRequestBody;
@@ -20,29 +20,29 @@ class DirectApiV5TestCase extends \PHPUnit_Framework_TestCase
     const LOGIN = 'ra-trinet-add-dev-01';
     const TOKEN = '3fe13d8bd818458c89624f678f365051';
 
-    public static function setUpBeforeClass(DtoAwareDirectDriver $dtoAwareDirectDriver = null)
+    public static function setUpBeforeClass(DtoDirectDriver $DtoDirectDriver = null)
     {
-        if (!$dtoAwareDirectDriver) {
-            $dtoAwareDirectDriver = self::createDtoAwareDirectDriver();
+        if (!$DtoDirectDriver) {
+            $DtoDirectDriver = self::createDtoDirectDriver();
         }
 
-        self::clearTestCampaigns($dtoAwareDirectDriver);
+        self::clearTestCampaigns($DtoDirectDriver);
     }
 
-    protected static function createDtoAwareDirectDriver($token = self::TOKEN)
+    protected static function createDtoDirectDriver($token = self::TOKEN)
     {
         $serializer = JmsFactory::create()->serializer();
         $lo = LowLevelDriver::createAdapterForClient(new Client(), new Logger('Test'), LowLevelDriver::URL_SANDBOX);
 
-        return new DtoAwareDirectDriver($serializer, $lo, $token, self::LOGIN);
+        return new DtoDirectDriver($serializer, $lo, $token, self::LOGIN);
     }
 
-    protected static function clearTestCampaigns(DtoAwareDirectDriver $dtoAwareDirectDriver)
+    protected static function clearTestCampaigns(DtoDirectDriver $DtoDirectDriver)
     {
         $criteria = new CampaignsSelectionCriteria();
         $criteria->setTypes([CampaignTypeEnum::TEXT_CAMPAIGN]);
 
-        $allSandboxCampaigns = $dtoAwareDirectDriver
+        $allSandboxCampaigns = $DtoDirectDriver
             ->callGetCollectingItems(new GetCampaignsRequestBody($criteria))
             ->wait();
 
@@ -56,7 +56,7 @@ class DirectApiV5TestCase extends \PHPUnit_Framework_TestCase
         );
 
         if (!empty($idsOfCampaignsCreatedByTests)) {
-            $dtoAwareDirectDriver
+            $DtoDirectDriver
                 ->call(new DeleteCampaignRequestBody(new DeleteRequest(
                     new IdsCriteria(array_values($idsOfCampaignsCreatedByTests))
                 )))
