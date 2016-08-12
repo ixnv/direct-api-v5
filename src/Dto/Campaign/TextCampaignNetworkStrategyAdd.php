@@ -34,7 +34,7 @@ class TextCampaignNetworkStrategyAdd extends TextCampaignStrategyAddBase
     }
 
     /**
-     * @return TextCampaignNetworkStrategyTypeEnum
+     * @return string @see TextCampaignNetworkStrategyTypeEnum
      */
     public function getBiddingStrategyType()
     {
@@ -42,7 +42,7 @@ class TextCampaignNetworkStrategyAdd extends TextCampaignStrategyAddBase
     }
 
     /**
-     * @param TextCampaignNetworkStrategyTypeEnum $BiddingStrategyType
+     * @param string $BiddingStrategyType @see TextCampaignNetworkStrategyTypeEnum
      * @return \eLama\DirectApiV5\Dto\Campaign\TextCampaignNetworkStrategyAdd
      */
     public function setBiddingStrategyType($BiddingStrategyType)

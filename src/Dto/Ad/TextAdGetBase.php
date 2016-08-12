@@ -54,6 +54,13 @@ class TextAdGetBase
     private $AdImageModeration;
 
     /**
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\Ad\AdExtensionAdGetItem>")
+     *
+     * @var AdExtensionAdGetItem[] $AdExtensions
+     */
+    private $AdExtensions;
+
+    /**
      * @return int
      */
     public function getVCardId()
@@ -161,4 +168,21 @@ class TextAdGetBase
       return $this;
     }
 
+    /**
+     * @return AdExtensionAdGetItem[]
+     */
+    public function getAdExtensions()
+    {
+        return $this->AdExtensions;
+    }
+
+    /**
+     * @param AdExtensionAdGetItem[] $AdExtensions
+     * @return \eLama\DirectApiV5\Dto\Ad\TextAdGetBase
+     */
+    public function setAdExtensions(array $AdExtensions = null)
+    {
+        $this->AdExtensions = $AdExtensions;
+        return $this;
+    }
 }

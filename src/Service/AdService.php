@@ -46,6 +46,29 @@ class AdService extends Service
     }
 
     /**
+     * @param int[] $ids
+     * @param int|null $pageLimit
+     * @return PromiseInterface
+     * @see \eLama\DirectApiV5\Dto\Ad\AdGetItem
+     */
+    public function getNonArchivedAdsByIds(array $ids, $pageLimit = null)
+    {
+        \Assert\that($ids)->notEmpty();
+
+        $criteria = new AdsSelectionCriteria();
+        $criteria->setIds($ids);
+        $criteria->setStates(
+            [StateEnum::ON, StateEnum::OFF_BY_MONITORING, StateEnum::SUSPENDED, StateEnum::OFF]
+        );
+
+        $criteria->setTypes([AdTypeEnum::TEXT_AD]);
+
+        $getAdsParams = new GetAdsRequestBody($criteria);
+
+        return $this->callGetCollectingItems($getAdsParams, $pageLimit);
+    }
+
+    /**
      * @param AdUpdateItem[] $ads
      * @return PromiseInterface
      * @see UpdateResult

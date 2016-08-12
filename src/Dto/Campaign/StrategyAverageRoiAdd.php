@@ -57,7 +57,7 @@ class StrategyAverageRoiAdd
      * @param int $RoiCoef
      * @param int $GoalId
      */
-    public function __construct($ReserveReturn = null, $RoiCoef = null, $GoalId = null)
+    public function __construct($ReserveReturn, $RoiCoef, $GoalId)
     {
       $this->ReserveReturn = $ReserveReturn;
       $this->RoiCoef = $RoiCoef;
@@ -130,7 +130,7 @@ class StrategyAverageRoiAdd
      * @param int $WeeklySpendLimit
      * @return \eLama\DirectApiV5\Dto\Campaign\StrategyAverageRoiAdd
      */
-    public function setWeeklySpendLimit($WeeklySpendLimit = null)
+    public function setWeeklySpendLimit($WeeklySpendLimit)
     {
       $this->WeeklySpendLimit = $WeeklySpendLimit;
       return $this;
@@ -148,7 +148,7 @@ class StrategyAverageRoiAdd
      * @param int $BidCeiling
      * @return \eLama\DirectApiV5\Dto\Campaign\StrategyAverageRoiAdd
      */
-    public function setBidCeiling($BidCeiling = null)
+    public function setBidCeiling($BidCeiling)
     {
       $this->BidCeiling = $BidCeiling;
       return $this;
@@ -166,7 +166,7 @@ class StrategyAverageRoiAdd
      * @param int $Profitability
      * @return \eLama\DirectApiV5\Dto\Campaign\StrategyAverageRoiAdd
      */
-    public function setProfitability($Profitability = null)
+    public function setProfitability($Profitability)
     {
       $this->Profitability = $Profitability;
       return $this;

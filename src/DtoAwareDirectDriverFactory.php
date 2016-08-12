@@ -3,9 +3,6 @@
 namespace eLama\DirectApiV5;
 
 use eLama\DirectApiV5\Dto;
-use eLama\DirectApiV5\Dto\Ad;
-use eLama\DirectApiV5\Dto\Campaign;
-use eLama\DirectApiV5\Dto\Keyword;
 use eLama\DirectApiV5\LowLevelDriver\AutoRoutingDriver;
 use eLama\DirectApiV5\LowLevelDriver\EnsureSuccessDriver;
 use eLama\DirectApiV5\LowLevelDriver\Guzzle5Adapter;
@@ -84,6 +81,22 @@ class DtoAwareDirectDriverFactory
         $autoRoutingDriver = new AutoRoutingDriver($proxyDriverWithFallback, $lowLevelDriver);
 
         return new DtoAwareDirectDriver($this->serializer, $autoRoutingDriver, $token, $login);
+    }
+
+    /**
+     * @param string $token
+     * @param string $login
+     * @return DtoAwareDirectDriver
+     */
+    public function create($token, $login)
+    {
+        $lowLevelDriver = new LowLevelDriver(
+            $this->createGuzzleAdapter(),
+            $this->logger,
+            $this->directBaseUrl
+        );
+
+        return new DtoAwareDirectDriver($this->serializer, $lowLevelDriver, $token, $login);
     }
 
     /**

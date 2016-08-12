@@ -1,6 +1,6 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Ad;
+namespace eLama\DirectApiV5\Dto\General;
 
 use JMS\Serializer\Annotation as JMS;
 
