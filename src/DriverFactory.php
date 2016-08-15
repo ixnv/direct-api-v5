@@ -26,16 +26,15 @@ class DriverFactory
 
     /** @var string */
     private $toolName;
-    /**
-     * @var Client
-     */
+
+    /** @var Client */
     private $client;
 
     /**
      * @param Serializer $jmsSerializer
      * @param LoggerFactory $loggerFactory
      * @param Client $client
-     * @param $toolName
+     * @param string $toolName
      * @param string $directBaseUrl
      */
     public function __construct(
@@ -89,7 +88,7 @@ class DriverFactory
      * @param string $login
      * @param int $cacheMaxAge in seconds
      * @param string $proxyUrl
-     * @param array $servicesToProxy
+     * @param string[] $servicesToProxy
      * @return DtoDirectDriver
      */
     public function createProxyDriver($token, $login, $cacheMaxAge, $proxyUrl, $servicesToProxy = ['campaigns'])
