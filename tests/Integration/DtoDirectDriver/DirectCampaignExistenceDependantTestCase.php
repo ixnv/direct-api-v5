@@ -1,6 +1,6 @@
 <?php
 
-namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
+namespace eLama\DirectApiV5\Test\Integration\DtoDirectDriver;
 
 use eLama\DirectApiV5\Dto\Campaign\AddRequest as CampaignAddRequest;
 use eLama\DirectApiV5\Dto\Campaign\CampaignAddItem;
@@ -13,7 +13,7 @@ use eLama\DirectApiV5\Dto\Campaign\TextCampaignStrategyAdd;
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
 use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
-use eLama\DirectApiV5\DtoAwareDirectDriver;
+use eLama\DirectApiV5\DtoDirectDriver;
 use eLama\DirectApiV5\RequestBody\AddCampaignRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteCampaignRequestBody;
 use eLama\DirectApiV5\Test\Integration\DirectApiV5TestCase;
@@ -26,9 +26,9 @@ abstract class DirectCampaignExistenceDependantTestCase extends DirectApiV5TestC
     /** @var int */
     protected static $campaignId;
 
-    public static function setUpBeforeClass(DtoAwareDirectDriver $dtoAwareDirectDriver = null)
+    public static function setUpBeforeClass(DtoDirectDriver $dtoDirectDriver = null)
     {
-        $driver = self::createDtoAwareDirectDriver();
+        $driver = self::createDtoDirectDriver();
 
         parent::setUpBeforeClass($driver);
 
@@ -38,7 +38,7 @@ abstract class DirectCampaignExistenceDependantTestCase extends DirectApiV5TestC
     public static function tearDownAfterClass()
     {
         if (!empty(static::$campaignId)) {
-            $driver = self::createDtoAwareDirectDriver();
+            $driver = self::createDtoDirectDriver();
 
             self::deleteCampaign($driver, static::$campaignId);
         }
@@ -48,9 +48,12 @@ abstract class DirectCampaignExistenceDependantTestCase extends DirectApiV5TestC
      * @param $driver
      * @return AddResponseBody
      */
-    protected static function createCampaign(DtoAwareDirectDriver $driver)
+    protected static function createCampaign(DtoDirectDriver $driver)
     {
-        $campaignAddItem = new CampaignAddItem('AdTest', (new \DateTime())->format('Y-m-d'));
+        $campaignAddItem = new CampaignAddItem(
+            'AdTest',
+            (new \DateTime('now', new \DateTimeZone('Europe/Moscow')))->format('Y-m-d')
+        );
         $campaignAddItem->setTextCampaign(
             new TextCampaignAddItem(
                 new TextCampaignStrategyAdd(
@@ -71,10 +74,10 @@ abstract class DirectCampaignExistenceDependantTestCase extends DirectApiV5TestC
     }
 
     /**
-     * @param DtoAwareDirectDriver $driver
+     * @param DtoDirectDriver $driver
      * @param int $campaignId
      */
-    protected static function deleteCampaign(DtoAwareDirectDriver $driver, $campaignId)
+    protected static function deleteCampaign(DtoDirectDriver $driver, $campaignId)
     {
         $request = new DeleteCampaignRequestBody(new DeleteRequest(
             new IdsCriteria([$campaignId])

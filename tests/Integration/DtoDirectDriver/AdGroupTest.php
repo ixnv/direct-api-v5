@@ -1,6 +1,6 @@
 <?php
 
-namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
+namespace eLama\DirectApiV5\Test\Integration\DtoDirectDriver;
 
 use eLama\DirectApiV5\Dto\AdGroup\AddRequest as AdGroupAddRequest;
 use eLama\DirectApiV5\Dto\AdGroup\AdGroupAddItem;
@@ -8,7 +8,7 @@ use eLama\DirectApiV5\Dto\AdGroup\AdGroupsSelectionCriteria;
 use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\AdGroup\GetResponseBody;
 use eLama\DirectApiV5\Dto\AdGroup;
-use eLama\DirectApiV5\DtoAwareDirectDriver;
+use eLama\DirectApiV5\DtoDirectDriver;
 use eLama\DirectApiV5\RequestBody\AddAdGroupRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteAdGroupRequestBody;
 use eLama\DirectApiV5\RequestBody\GetAdGroupsRequestBody;
@@ -18,13 +18,13 @@ use eLama\DirectApiV5\Dto\General\ArrayOfString;
 class AdGroupTest extends DirectCampaignExistenceDependantTestCase
 {
     /**
-     * @var DtoAwareDirectDriver
+     * @var DtoDirectDriver
      */
     private $driver;
 
     protected function setUp()
     {
-        $this->driver = self::createDtoAwareDirectDriver();
+        $this->driver = self::createDtoDirectDriver();
     }
 
     /**

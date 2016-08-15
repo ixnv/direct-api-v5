@@ -1,6 +1,6 @@
 <?php
 
-namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
+namespace eLama\DirectApiV5\Test\Integration\DtoDirectDriver;
 
 use eLama\DirectApiV5\Dto\Campaign\AddRequest;
 use eLama\DirectApiV5\Dto\Campaign\CampaignAddItem;
@@ -22,7 +22,7 @@ use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\Dto\General\ResumeResponseBody;
 use eLama\DirectApiV5\Dto\General\UpdateResponseBody;
-use eLama\DirectApiV5\DtoAwareDirectDriver;
+use eLama\DirectApiV5\DtoDirectDriver;
 use eLama\DirectApiV5\RequestBody\AddCampaignRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteCampaignRequestBody;
 use eLama\DirectApiV5\RequestBody\GetCampaignsRequestBody;
@@ -40,12 +40,12 @@ class CampaignTest extends DirectApiV5TestCase
     const CHANGED_NAME = 'Измененное имя кампании';
     const WEEKLY_SPEND_LIMIT = 300000000;
 
-    /** @var DtoAwareDirectDriver */
+    /** @var DtoDirectDriver */
     protected $driver;
 
     public function setUp()
     {
-        $this->driver = self::createDtoAwareDirectDriver();
+        $this->driver = self::createDtoDirectDriver();
     }
 
     /**
@@ -53,7 +53,10 @@ class CampaignTest extends DirectApiV5TestCase
      */
     public function addCampaign()
     {
-        $campaignAddItem = new CampaignAddItem(self::NAME, (new \DateTime())->format('Y-m-d'));
+        $campaignAddItem = new CampaignAddItem(
+            self::NAME,
+            (new \DateTime('now', new \DateTimeZone('Europe/Moscow')))->format('Y-m-d')
+        );
         $campaignAddItem->setTextCampaign(
             $this->instanceTextCampaignAddItem()
         );

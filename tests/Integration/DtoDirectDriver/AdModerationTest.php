@@ -1,6 +1,6 @@
 <?php
 
-namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
+namespace eLama\DirectApiV5\Test\Integration\DtoDirectDriver;
 
 use eLama\DirectApiV5\Dto\Ad;
 use eLama\DirectApiV5\Dto\Ad\AdAddItem;
@@ -12,7 +12,7 @@ use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\Dto\Keyword\AddRequest;
 use eLama\DirectApiV5\Dto\Keyword\KeywordAddItem;
-use eLama\DirectApiV5\DtoAwareDirectDriver;
+use eLama\DirectApiV5\DtoDirectDriver;
 use eLama\DirectApiV5\RequestBody\AddAdRequestBody;
 use eLama\DirectApiV5\RequestBody\AddKeywordRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteAdRequestBody;
@@ -25,9 +25,9 @@ class AdModerationTest extends AdGroupExistenceDependantTestCase
 
     private static $adId;
 
-    public static function setUpBeforeClass(DtoAwareDirectDriver $dtoAwareDirectDriver = null)
+    public static function setUpBeforeClass(DtoDirectDriver $dtoDirectDriver = null)
     {
-        parent::setUpBeforeClass($dtoAwareDirectDriver);
+        parent::setUpBeforeClass($dtoDirectDriver);
 
         self::createKeyword();
         self::createDefaultAd();
@@ -46,7 +46,7 @@ class AdModerationTest extends AdGroupExistenceDependantTestCase
      */
     public function moderateAd()
     {
-        $driver = static::createDtoAwareDirectDriver();
+        $driver = static::createDtoDirectDriver();
 
         $requestBody = new ModerateAdsRequestBody(
             new IdsCriteria([self::$adId])
@@ -61,7 +61,7 @@ class AdModerationTest extends AdGroupExistenceDependantTestCase
 
     private static function createKeyword()
     {
-        $driver = static::createDtoAwareDirectDriver();
+        $driver = static::createDtoDirectDriver();
 
         $keywordAddItem = new KeywordAddItem('moo', static::$adGroupId);
 
@@ -75,7 +75,7 @@ class AdModerationTest extends AdGroupExistenceDependantTestCase
 
     private static function removeKeyword()
     {
-        $driver = static::createDtoAwareDirectDriver();
+        $driver = static::createDtoDirectDriver();
 
         $request = new DeleteKeywordRequestBody(
             new DeleteRequest(new IdsCriteria([self::$keywordId]))
@@ -87,7 +87,7 @@ class AdModerationTest extends AdGroupExistenceDependantTestCase
 
     private static function createDefaultAd()
     {
-        $driver = static::createDtoAwareDirectDriver();
+        $driver = static::createDtoDirectDriver();
 
         $adAddItem = new AdAddItem(static::$adGroupId);
         $textAd = new TextAdAdd('some text', 'some title', Ad\YesNoEnum::NO);
@@ -105,7 +105,7 @@ class AdModerationTest extends AdGroupExistenceDependantTestCase
 
     private static function removeAd()
     {
-        $driver = static::createDtoAwareDirectDriver();
+        $driver = static::createDtoDirectDriver();
 
         $request = new DeleteAdRequestBody(
             new DeleteRequest(new IdsCriteria([self::$adId]))

@@ -43,6 +43,7 @@ class ProxyDriver implements ProxyDriverInterface
      * @param GuzzleAdapter $guzzleAdapter
      * @param string $baseUrl
      * @param int $cacheControlMaxAge
+     * @param string[] $servicesToProxy
      */
     public function __construct(
         GuzzleAdapter $guzzleAdapter,

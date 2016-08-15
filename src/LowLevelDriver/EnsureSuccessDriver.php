@@ -18,9 +18,15 @@ class EnsureSuccessDriver implements LowLevelDriverInterface
      * @var array
      */
     private $allowedMethods = [
-        'campaign' => [
+        'campaigns' => [
             'suspend',
-            'resume'
+            'update'
+        ],
+        'ads' => [
+            'suspend'
+        ],
+        'keywords' => [
+            'suspend'
         ]
     ];
 
@@ -58,7 +64,7 @@ class EnsureSuccessDriver implements LowLevelDriverInterface
     {
         $body = $response->getUnserializedBody();
 
-        return isset($body['error']['error_code']) && $body['error']['error_code'] == $error;
+        return $body->getError() && $body->getError()->getErrorCode() == $error;
     }
 
     protected function isMethodAllowed($service, $method)

@@ -1,8 +1,8 @@
 <?php
 
-namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
+namespace eLama\DirectApiV5\Test\Integration\DtoDirectDriver;
 
-use eLama\DirectApiV5\DtoAwareDirectDriver;
+use eLama\DirectApiV5\DtoDirectDriver;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\RequestBody;
 use eLama\DirectApiV5\Dto\Vcard;
@@ -27,13 +27,13 @@ class VcardTest extends DirectCampaignExistenceDependantTestCase
     private $instantMessenger;
 
     /**
-     * @var DtoAwareDirectDriver
+     * @var DtoDirectDriver
      */
     private $driver;
 
     protected function setUp()
     {
-        $this->driver = self::createDtoAwareDirectDriver();
+        $this->driver = self::createDtoDirectDriver();
         $this->createNestedEntitiesForRequestAndCompare();
     }
 

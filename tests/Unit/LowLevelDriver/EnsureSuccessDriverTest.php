@@ -8,6 +8,7 @@ use eLama\DirectApiV5\LowLevelDriver\EnsureSuccessDriver;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\Request;
 use eLama\DirectApiV5\Serializer\ArraySerializer;
+use eLama\DirectApiV5\Serializer\JmsSerializer;
 use Phake;
 use Psr\Log\LoggerInterface;
 
@@ -40,11 +41,11 @@ class EnsureSuccessDriverTest extends \PHPUnit_Framework_TestCase
         $jms = JmsFactory::create()->serializer();
 
         $this->logger = Phake::mock(LoggerInterface::class);
-        $this->serializer = new ArraySerializer($jms);
+        $this->serializer = new JmsSerializer($jms, DummyResponseBody::class);
         $this->guzzleAdapter = new TestGuzzleAdapter();
 
         $this->driver = new EnsureSuccessDriver(
-            new LowLevelDriver($this->guzzleAdapter, $this->logger)
+            new LowLevelDriver($this->guzzleAdapter, $this->logger, LowLevelDriver::URL_SANDBOX)
         );
     }
 
@@ -96,7 +97,7 @@ class EnsureSuccessDriverTest extends \PHPUnit_Framework_TestCase
     {
         $this->setResponse();
         $this->driver->execute(
-            $this->createRequest('campaign', 'add'),
+            $this->createRequest('not_allowed_service', 'not_allowed_method'),
             $this->serializer
         )->wait();
 
@@ -129,7 +130,7 @@ class EnsureSuccessDriverTest extends \PHPUnit_Framework_TestCase
      *
      * @return Request
      */
-    private function createRequest($service = 'campaign', $method = 'resume')
+    private function createRequest($service = 'campaigns', $method = 'suspend')
     {
         return new Request(
             self::SOME_TOKEN,

@@ -1,6 +1,6 @@
 <?php
 
-namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
+namespace eLama\DirectApiV5\Test\Integration\DtoDirectDriver;
 
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
 use eLama\DirectApiV5\Dto\General\UpdateResponseBody;
@@ -10,7 +10,7 @@ use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\Dto\Sitelink\AddRequest;
 use eLama\DirectApiV5\Dto\Sitelink\Sitelink;
 use eLama\DirectApiV5\Dto\Sitelink\SitelinksSetAddItem;
-use eLama\DirectApiV5\DtoAwareDirectDriver;
+use eLama\DirectApiV5\DtoDirectDriver;
 use eLama\DirectApiV5\RequestBody\AddAdRequestBody;
 use eLama\DirectApiV5\RequestBody\AddSitelinkRequestBody;
 use eLama\DirectApiV5\RequestBody\UpdateAdRequestBody;
@@ -30,7 +30,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
     const DISPLAY_URL_PATH = 'чудо-сайт';
 
     /**
-     * @var DtoAwareDirectDriver
+     * @var DtoDirectDriver
      */
     protected $driver;
 
@@ -40,7 +40,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
 
     protected function setUp()
     {
-        $this->driver = self::createDtoAwareDirectDriver();
+        $this->driver = self::createDtoDirectDriver();
     }
 
     /**
@@ -298,7 +298,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
 
     private function createCampaignForPagination()
     {
-        $driver = self::createDtoAwareDirectDriver();
+        $driver = self::createDtoDirectDriver();
         $responseBody = self::createCampaign($driver);
 
         self::$campaignIdForPagination = $responseBody->getResult()->getAddResults()[0]->getId();

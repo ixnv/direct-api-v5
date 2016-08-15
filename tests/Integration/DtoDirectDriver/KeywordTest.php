@@ -1,6 +1,6 @@
 <?php
 
-namespace eLama\DirectApiV5\Test\Integration\DtoAwareDirectDriver;
+namespace eLama\DirectApiV5\Test\Integration\DtoDirectDriver;
 
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
 use eLama\DirectApiV5\Dto\General\DeleteRequest;
@@ -10,7 +10,7 @@ use eLama\DirectApiV5\Dto\Keyword\AddRequest;
 use eLama\DirectApiV5\Dto\Keyword\GetResponseBody;
 use eLama\DirectApiV5\Dto\Keyword\KeywordAddItem;
 use eLama\DirectApiV5\Dto\Keyword\KeywordsSelectionCriteria;
-use eLama\DirectApiV5\DtoAwareDirectDriver;
+use eLama\DirectApiV5\DtoDirectDriver;
 use eLama\DirectApiV5\RequestBody\AddKeywordRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteKeywordRequestBody;
 use eLama\DirectApiV5\RequestBody\GetKeywordsRequestBody;
@@ -20,13 +20,13 @@ class KeywordTest extends AdGroupExistenceDependantTestCase
     const PHRASE = 'тестовая фраза';
 
     /**
-     * @var DtoAwareDirectDriver
+     * @var DtoDirectDriver
      */
     private $driver;
 
     protected function setUp()
     {
-        $this->driver = self::createDtoAwareDirectDriver();
+        $this->driver = self::createDtoDirectDriver();
     }
 
     /**
