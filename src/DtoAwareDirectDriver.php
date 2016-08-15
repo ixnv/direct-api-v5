@@ -18,8 +18,8 @@ class DtoAwareDirectDriver extends DtoDirectDriver
      *
      * @param Serializer $jmsSerializer
      * @param LowLevelDriverInterface $driver
-     * @param $token
-     * @param null $login
+     * @param string $token
+     * @param string $login
      */
     public function __construct(
         Serializer $jmsSerializer,
@@ -27,7 +27,7 @@ class DtoAwareDirectDriver extends DtoDirectDriver
         $token,
         $login = null
     ) {
-        trigger_error('Класс `DtoAwareDirectDriver` устарел, используй `DtoAwareDirectDriver` или фабрику', E_USER_DEPRECATED);
+        trigger_error('Класс `DtoAwareDirectDriver` устарел, используй `DtoDirectDriver` или фабрику', E_USER_DEPRECATED);
         parent::__construct($jmsSerializer, $driver, $token, $login);
     }
 

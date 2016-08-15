@@ -18,15 +18,6 @@ class DriverFactory
     /** @var Serializer */
     private $serializer;
 
-    /** @var string */
-    private $directBaseUrl;
-
-    /** @var LoggerFactory */
-    private $loggerFactory;
-
-    /** @var string */
-    private $toolName;
-
     /** @var Client */
     private $client;
 
@@ -45,16 +36,20 @@ class DriverFactory
         $directBaseUrl = LowLevelDriver::URL_PRODUCTION
     ) {
         $this->serializer = $jmsSerializer;
-        $this->directBaseUrl = $directBaseUrl;
-        $this->loggerFactory = $loggerFactory;
-        $this->toolName = $toolName;
         $this->client = $client;
+        $this->driver = new EnsureSuccessDriver(
+            new LowLevelDriver(
+                $this->createGuzzleAdapter($client),
+                $loggerFactory->create($toolName),
+                $directBaseUrl
+            )
+        );
     }
 
     /**
      * @param string $token
      * @param string $login
-     * @param int $cacheMaxAge in seconds
+     * @param int $maxCacheSeconds
      * @param string $proxyUrl
      * @param string[] $servicesToProxy
      * @return DtoDirectDriver
@@ -62,23 +57,21 @@ class DriverFactory
     public function createProxyDriverWithFallback(
         $token,
         $login,
-        $cacheMaxAge,
+        $maxCacheSeconds,
         $proxyUrl,
-        $servicesToProxy = ['campaigns']
+        array $servicesToProxy = ['campaigns']
     ) {
-        $ensureSuccessDriver = new EnsureSuccessDriver($this->createLowLevelDriver());
-
         $proxyDriverWithFallback = new ProxyDriverWithFallback(
             new ProxyDriver(
-                $this->createGuzzleAdapter(),
+                $this->createGuzzleAdapter($this->client),
                 $proxyUrl,
-                $cacheMaxAge,
+                $maxCacheSeconds,
                 $servicesToProxy
             ),
-            $ensureSuccessDriver
+            $this->driver
         );
 
-        $autoRoutingDriver = new AutoRoutingDriver($proxyDriverWithFallback, $ensureSuccessDriver);
+        $autoRoutingDriver = new AutoRoutingDriver($proxyDriverWithFallback, $this->driver);
 
         return new DtoDirectDriver($this->serializer, $autoRoutingDriver, $token, $login);
     }
@@ -86,23 +79,21 @@ class DriverFactory
     /**
      * @param string $token
      * @param string $login
-     * @param int $cacheMaxAge in seconds
+     * @param int $maxCacheSeconds
      * @param string $proxyUrl
      * @param string[] $servicesToProxy
      * @return DtoDirectDriver
      */
-    public function createProxyDriver($token, $login, $cacheMaxAge, $proxyUrl, $servicesToProxy = ['campaigns'])
+    public function createProxyDriver($token, $login, $maxCacheSeconds, $proxyUrl, array $servicesToProxy = ['campaigns'])
     {
-        $ensureSuccessDriver = new EnsureSuccessDriver($this->createLowLevelDriver());
-
         $autoRoutingDriver = new AutoRoutingDriver(
             new ProxyDriver(
-                $this->createGuzzleAdapter(),
+                $this->createGuzzleAdapter($this->client),
                 $proxyUrl,
-                $cacheMaxAge,
+                $maxCacheSeconds,
                 $servicesToProxy
             ),
-            $ensureSuccessDriver
+            $this->driver
         );
 
         return new DtoDirectDriver($this->serializer, $autoRoutingDriver, $token, $login);
@@ -118,34 +109,21 @@ class DriverFactory
         if(empty($token) || empty($login)) {
             throw new \RuntimeException('Login and token must be specified');
         }
-        $ensureSuccessDriver = new EnsureSuccessDriver($this->createLowLevelDriver());
 
-        return new DtoDirectDriver($this->serializer, $ensureSuccessDriver, $token, $login);
+        return new DtoDirectDriver($this->serializer, $this->driver, $token, $login);
     }
 
-    /**
-     * @return LowLevelDriver
-     */
-    private function createLowLevelDriver()
-    {
-        return new LowLevelDriver(
-            $this->createGuzzleAdapter(),
-            $this->loggerFactory->create($this->toolName),
-            $this->directBaseUrl
-        );
-    }
 
     /**
+     * @param Client $client
      * @return Guzzle5Adapter|Guzzle6Adapter
      */
-    private function createGuzzleAdapter()
+    private function createGuzzleAdapter($client)
     {
-        $client = $this->client;
         if (version_compare($client::VERSION, '6', 'ge')) {
             return new Guzzle6Adapter($client);
         } else {
             return new Guzzle5Adapter($client);
         }
     }
-
 }

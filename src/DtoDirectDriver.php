@@ -29,8 +29,8 @@ class DtoDirectDriver
     /**
      * @param Serializer $jmsSerializer
      * @param LowLevelDriverInterface $driver
-     * @param $token
-     * @param $login
+     * @param string $token
+     * @param string $login
      */
     public function __construct(
         Serializer $jmsSerializer,

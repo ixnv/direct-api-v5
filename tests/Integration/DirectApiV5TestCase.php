@@ -37,12 +37,12 @@ class DirectApiV5TestCase extends \PHPUnit_Framework_TestCase
         return new DtoDirectDriver($serializer, $lo, $token, self::LOGIN);
     }
 
-    protected static function clearTestCampaigns(DtoDirectDriver $DtoDirectDriver)
+    protected static function clearTestCampaigns(DtoDirectDriver $dtoDirectDriver)
     {
         $criteria = new CampaignsSelectionCriteria();
         $criteria->setTypes([CampaignTypeEnum::TEXT_CAMPAIGN]);
 
-        $allSandboxCampaigns = $DtoDirectDriver
+        $allSandboxCampaigns = $dtoDirectDriver
             ->callGetCollectingItems(new GetCampaignsRequestBody($criteria))
             ->wait();
 
@@ -56,7 +56,7 @@ class DirectApiV5TestCase extends \PHPUnit_Framework_TestCase
         );
 
         if (!empty($idsOfCampaignsCreatedByTests)) {
-            $DtoDirectDriver
+            $dtoDirectDriver
                 ->call(new DeleteCampaignRequestBody(new DeleteRequest(
                     new IdsCriteria(array_values($idsOfCampaignsCreatedByTests))
                 )))
