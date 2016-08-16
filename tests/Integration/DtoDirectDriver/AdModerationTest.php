@@ -49,8 +49,8 @@ class AdModerationTest extends AdGroupExistenceDependantTestCase
     {
         $this->driver = self::createDtoDirectDriver();
     }
+    
     /**
-     *
      * @test
      */
     public function checkAdStatusIsDraft()
@@ -145,7 +145,6 @@ class AdModerationTest extends AdGroupExistenceDependantTestCase
     }
     
     /**
-     * @param $campaignId
      * @param $adId
      * @return Ad\AdGetItem
      */
@@ -161,8 +160,7 @@ class AdModerationTest extends AdGroupExistenceDependantTestCase
         $adGetItems = $responseBody->getResult()->getAds();
 
         $targetAd = $adGetItems;
-        $targetAd = array_pop($targetAd);
+        return array_pop($targetAd);
 
-        return $targetAd;
     }
 }
