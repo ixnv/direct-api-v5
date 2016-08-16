@@ -53,7 +53,7 @@ class DriverFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function createProxyDriver_internalDriverChain()
     {
-        $dtoDriver = $this->createFactory()->createProxyDriver('token', 'login', $ttl = 300, 'proxy url');
+        $dtoDriver = $this->createFactory()->createProxyDriver('token', 'login', $ttl = 300);
         self::assertInstanceOf(DtoDirectDriver::class, $dtoDriver);
 
         $autoRoutingDriver = $this->getPrivateValue($dtoDriver, 'driver');
@@ -72,7 +72,7 @@ class DriverFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function createProxyDriverWithFallback_internalDriverChain()
     {
-        $dtoDriver = $this->createFactory()->createProxyDriverWithFallback('token', 'login', $ttl = 300, 'proxy url');
+        $dtoDriver = $this->createFactory()->createProxyDriverWithFallback('token', 'login', $ttl = 300);
         self::assertInstanceOf(DtoDirectDriver::class, $dtoDriver);
 
         $autoRoutingDriver = $this->getPrivateValue($dtoDriver, 'driver');
@@ -109,7 +109,8 @@ class DriverFactoryTest extends \PHPUnit_Framework_TestCase
             new LoggerFactory([]),
             new Client(),
             self::TOOL_NAME,
-            LowLevelDriver::URL_SANDBOX
+            LowLevelDriver::URL_SANDBOX,
+            'proxy url'
         );
 
     }
