@@ -40,7 +40,7 @@ class ExceptionNotification
      */
     public function __construct($Code = null, $Message = null)
     {
-        trigger_error("Использовать General\ExceptionNotification", E_USER_DEPRECATED);
+        trigger_error('Использовать General\ExceptionNotification', E_USER_DEPRECATED);
         $this->Code = $Code;
         $this->Message = $Message;
     }
