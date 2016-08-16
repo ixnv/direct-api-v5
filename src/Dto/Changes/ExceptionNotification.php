@@ -4,99 +4,21 @@ namespace eLama\DirectApiV5\Dto\Changes;
 
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
-class ExceptionNotification
+class ExceptionNotification extends \eLama\DirectApiV5\Dto\General\ExceptionNotification
 {
-
-    /**
-     * @JMS\Type("integer")
-     *
-     * @var int $Code
-     */
-    private $Code;
-
-    /**
-     * @JMS\Type("string")
-     *
-     * @var string $Message
-     */
-    private $Message;
-
-    /**
-     * @JMS\Type("string")
-     *
-     * @var string $Details
-     */
-    private $Details;
-
     /**
      * @deprecated
      * @see General\ExceptionNotification
      * @param int $Code
      * @param string $Message
+     * @param string $Details
      */
-    public function __construct($Code = null, $Message = null)
+    public function __construct($Code = null, $Message = null, $Details = null)
     {
         trigger_error('Использовать General\ExceptionNotification', E_USER_DEPRECATED);
-        $this->Code = $Code;
-        $this->Message = $Message;
+        parent::__construct($Code, $Message, $Details);
     }
-
-    /**
-     * @return int
-     */
-    public function getCode()
-    {
-      return $this->Code;
-    }
-
-    /**
-     * @param int $Code
-     * @return \eLama\DirectApiV5\Dto\Changes\ExceptionNotification
-     */
-    public function setCode($Code)
-    {
-      $this->Code = $Code;
-      return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMessage()
-    {
-      return $this->Message;
-    }
-
-    /**
-     * @param string $Message
-     * @return \eLama\DirectApiV5\Dto\Changes\ExceptionNotification
-     */
-    public function setMessage($Message)
-    {
-      $this->Message = $Message;
-      return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDetails()
-    {
-      return $this->Details;
-    }
-
-    /**
-     * @param string $Details
-     * @return \eLama\DirectApiV5\Dto\Changes\ExceptionNotification
-     */
-    public function setDetails($Details = null)
-    {
-      $this->Details = $Details;
-      return $this;
-    }
-
 }
