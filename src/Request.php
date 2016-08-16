@@ -61,6 +61,14 @@ class Request
     /**
      * @return string
      */
+    public function getSanitizedToken()
+    {
+        return substr($this->token, 0, 4) . '...' . substr($this->token, -4, 4);
+    }
+
+    /**
+     * @return string
+     */
     public function getService()
     {
         return $this->service;
@@ -86,7 +94,7 @@ class Request
     {
         $request = clone $this;
 
-        $request->token = substr($this->token, 0, 4) . '...' . substr($this->token, -4, 4) ;
+        $request->token = $this->getSanitizedToken();
 
         return $request;
     }
