@@ -80,6 +80,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
         assertThat($ad->getTextAd()->getHref(), is(equalTo(self::HREF)));
         assertThat($ad->getTextAd()->getSitelinkSetId(), is(integerValue()));
         assertThat($ad->getTextAd()->getDisplayUrlPath(), is(equalTo(self::DISPLAY_URL_PATH)));
+        assertThat($ad->getStatus(), is(equalTo("DRAFT")));
 
         return $adId;
     }
@@ -88,7 +89,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
      * @test
      * @depends getAd
      */
-    public function updateAdd($id)
+    public function updateAd($id)
     {
         $ad = new AdUpdateItem($id);
         $textAd = new Ad\TextAdUpdate;
@@ -110,7 +111,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
 
     /**
      * @test
-     * @depends updateAdd
+     * @depends updateAd
      */
     public function deleteAd($id)
     {
