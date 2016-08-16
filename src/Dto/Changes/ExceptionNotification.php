@@ -33,13 +33,16 @@ class ExceptionNotification
     private $Details;
 
     /**
+     * @deprecated
+     * @see General\ExceptionNotification
      * @param int $Code
      * @param string $Message
      */
     public function __construct($Code = null, $Message = null)
     {
-      $this->Code = $Code;
-      $this->Message = $Message;
+        trigger_error("Использовать General\ExceptionNotification", E_USER_DEPRECATED);
+        $this->Code = $Code;
+        $this->Message = $Message;
     }
 
     /**

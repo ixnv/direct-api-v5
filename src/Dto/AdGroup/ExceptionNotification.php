@@ -33,15 +33,17 @@ class ExceptionNotification
     private $Details;
 
     /**
+     * @deprecated
+     * @see General\ExceptionNotification
      * @param int $Code
      * @param string $Message
      * @param string $Details
      */
     public function __construct($Code = null, $Message = null, $Details = null)
     {
-      $this->Code = $Code;
-      $this->Message = $Message;
-      $this->Details = $Details;
+        $this->Code = $Code;
+        $this->Message = $Message;
+        $this->Details = $Details;
     }
 
     /**
