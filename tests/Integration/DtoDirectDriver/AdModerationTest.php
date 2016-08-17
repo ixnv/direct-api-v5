@@ -65,14 +65,12 @@ class AdModerationTest extends AdGroupExistenceDependantTestCase
      */
     public function moderateAd()
     {
-        $driver = $this->driver;
-
         $requestBody = new ModerateAdsRequestBody(
             new IdsCriteria([self::$adId])
         );
 
         /** @var ModerateResponseBody $responseBody */
-        $responseBody = $driver->call($requestBody)->wait()->getUnserializedBody();
+        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
 
         $moderateId = $responseBody->getResult()->getModerateResults()[0]->getId();
         assertThat($moderateId, is(equalTo(self::$adId)));
