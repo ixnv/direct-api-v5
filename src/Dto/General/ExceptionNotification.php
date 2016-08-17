@@ -9,7 +9,6 @@ use JMS\Serializer\Annotation as JMS;
  */
 class ExceptionNotification
 {
-
     /**
      * @JMS\Type("integer")
      *
@@ -34,11 +33,13 @@ class ExceptionNotification
     /**
      * @param int $Code
      * @param string $Message
+     * @param string $Details
      */
-    public function __construct($Code = null, $Message = null)
+    public function __construct($Code = null, $Message = null, $Details = null)
     {
       $this->Code = $Code;
       $this->Message = $Message;
+      $this->Details = $Details;
     }
 
     /**
@@ -51,7 +52,7 @@ class ExceptionNotification
 
     /**
      * @param int $Code
-     * @return \eLama\DirectApiV5\Dto\Ad\ExceptionNotification
+     * @return \eLama\DirectApiV5\Dto\General\ExceptionNotification
      */
     public function setCode($Code)
     {
@@ -69,7 +70,7 @@ class ExceptionNotification
 
     /**
      * @param string $Message
-     * @return \eLama\DirectApiV5\Dto\Ad\ExceptionNotification
+     * @return \eLama\DirectApiV5\Dto\General\ExceptionNotification
      */
     public function setMessage($Message)
     {
@@ -87,12 +88,12 @@ class ExceptionNotification
 
     /**
      * @param string $Details
-     * @return \eLama\DirectApiV5\Dto\Ad\ExceptionNotification
+     * @return \eLama\DirectApiV5\Dto\General\ExceptionNotification
      */
-    public function setDetails($Details = null)
+    public function setDetails($Details)
     {
       $this->Details = $Details;
+
       return $this;
     }
-
 }
