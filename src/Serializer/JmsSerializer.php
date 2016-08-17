@@ -2,10 +2,8 @@
 
 namespace eLama\DirectApiV5\Serializer;
 
-use JMS\Serializer\Serializer;
-use eLama\DirectApiV5\Serializer\Serializer as SerializerInterface;
 
-class JmsSerializer implements SerializerInterface
+class JmsSerializer implements Serializer
 {
 
     /** @var JmsSerializer */
@@ -13,10 +11,10 @@ class JmsSerializer implements SerializerInterface
     private $resultClass;
 
     /**
-     * @param Serializer $jms
+     * @param \JMS\Serializer\Serializer $jms
      * @param string $resultClass
      */
-    public function __construct(Serializer $jms, $resultClass)
+    public function __construct(\JMS\Serializer\Serializer $jms, $resultClass)
     {
         $this->jms = $jms;
         $this->resultClass = $resultClass;
