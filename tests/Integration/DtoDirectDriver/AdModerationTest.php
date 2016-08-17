@@ -145,7 +145,7 @@ class AdModerationTest extends AdGroupExistenceDependantTestCase
     }
     
     /**
-     * @param $adId
+     * @param int $adId
      * @return Ad\AdGetItem
      */
     private function getAdById($adId)
@@ -159,8 +159,7 @@ class AdModerationTest extends AdGroupExistenceDependantTestCase
 
         $adGetItems = $responseBody->getResult()->getAds();
 
-        $targetAd = $adGetItems;
-        return array_pop($targetAd);
+        return array_pop($adGetItems);
 
     }
 }
