@@ -17,6 +17,7 @@ use eLama\DirectApiV5\RequestBody\AddAdRequestBody;
 use eLama\DirectApiV5\RequestBody\AddKeywordRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteAdRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteKeywordRequestBody;
+use eLama\DirectApiV5\RequestBody\GetAdsRequestBody;
 use eLama\DirectApiV5\RequestBody\ModerateAdsRequestBody;
 
 class AdModerationTest extends AdGroupExistenceDependantTestCase
@@ -24,6 +25,9 @@ class AdModerationTest extends AdGroupExistenceDependantTestCase
     private static $keywordId;
 
     private static $adId;
+    
+    /** @var  DtoDirectDriver */
+    protected $driver;
 
     public static function setUpBeforeClass(DtoDirectDriver $dtoDirectDriver = null)
     {
@@ -41,22 +45,45 @@ class AdModerationTest extends AdGroupExistenceDependantTestCase
         parent::tearDownAfterClass();
     }
 
+    protected function setUp()
+    {
+        $this->driver = self::createDtoDirectDriver();
+    }
+    
     /**
      * @test
      */
+    public function checkAdStatusIsDraft()
+    {
+        $ad = $this->getAdById(self::$adId);
+        assertThat($ad->getStatus(), is(equalTo("DRAFT")));
+    }
+
+    /**
+     * @test
+     * @depends checkAdStatusIsDraft
+     */
     public function moderateAd()
     {
-        $driver = static::createDtoDirectDriver();
-
         $requestBody = new ModerateAdsRequestBody(
             new IdsCriteria([self::$adId])
         );
 
         /** @var ModerateResponseBody $responseBody */
-        $responseBody = $driver->call($requestBody)->wait()->getUnserializedBody();
+        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
 
         $moderateId = $responseBody->getResult()->getModerateResults()[0]->getId();
         assertThat($moderateId, is(equalTo(self::$adId)));
+    }
+
+    /**
+     * @test
+     * @depends moderateAd
+     */
+    public function checkAdStatusIsModeration()
+    {
+        $ad = $this->getAdById(self::$adId);
+        assertThat($ad->getStatus(), is(equalTo("MODERATION")));
     }
 
     private static function createKeyword()
@@ -113,5 +140,24 @@ class AdModerationTest extends AdGroupExistenceDependantTestCase
 
         /** @var DeleteResponseBody $responseBody */
         $driver->call($request)->wait()->getUnserializedBody();
+    }
+    
+    /**
+     * @param int $adId
+     * @return Ad\AdGetItem
+     */
+    private function getAdById($adId)
+    {
+        $requestBody = new GetAdsRequestBody(
+            (new Ad\AdsSelectionCriteria())->setIds([$adId])
+        );
+
+        /** @var Ad\GetResponseBody $responseBody */
+        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
+
+        $adGetItems = $responseBody->getResult()->getAds();
+
+        return array_pop($adGetItems);
+
     }
 }
