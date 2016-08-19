@@ -97,7 +97,7 @@ class ProxyDriver implements ProxyDriverInterface
         $headers = $this->createHeaders($request->getToken(), $request->getClientLogin());
 
         return $this->guzzleAdapter->sendAsync($url, $headers, $requestBodyInJson)
-            ->then(function (\GuzzleHttp\Psr7\Response $response) use ($serializer, $uniqId) {
+            ->then(function ($response) use ($serializer, $uniqId) {
                 $contents = $response->getBody()->getContents();
 
                 $deserializedBody = $serializer->deserialize($contents);
