@@ -27,16 +27,16 @@ class DriverFactory
 
     /** @var  LoggerInterface */
     private $logger;
-
+    
     /** @var string */
-    private $directBaseUrl;
+    private $directUrl;
 
     /**
      * @param Serializer $jmsSerializer
      * @param LoggerFactory $loggerFactory
      * @param Client $client
      * @param string $toolName
-     * @param string $directBaseUrl
+     * @param string $directUrl
      * @param string $proxyUrl
      */
     public function __construct(
@@ -44,14 +44,14 @@ class DriverFactory
         LoggerFactory $loggerFactory,
         Client $client,
         $toolName,
-        $directBaseUrl = LowLevelDriver::URL_PRODUCTION,
+        $directUrl = LowLevelDriver::URL_PRODUCTION,
         $proxyUrl = ''
     ) {
         $this->serializer = $jmsSerializer;
         $this->client = $client;
         $this->logger = $loggerFactory->create($toolName);
         $this->proxyUrl = $proxyUrl;
-        $this->directBaseUrl = $directBaseUrl;
+        $this->directUrl = $directUrl;
     }
 
     /**
@@ -111,7 +111,7 @@ class DriverFactory
     /**
      * @param string $token
      * @param string $login
-     * @param array $allowedMethods
+     * @param array|null $allowedMethods
      * @return DtoDirectDriver
      */
     public function create($token, $login, array $allowedMethods = null)
@@ -133,7 +133,7 @@ class DriverFactory
             new LowLevelDriver(
                 $this->createGuzzleAdapter($this->client),
                 $this->logger,
-                $this->directBaseUrl
+                $this->directUrl
             ),
             $allowedMethods
         );
