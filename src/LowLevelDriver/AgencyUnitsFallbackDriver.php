@@ -7,7 +7,7 @@ use eLama\DirectApiV5\Request;
 use eLama\DirectApiV5\Response;
 use eLama\DirectApiV5\Serializer\Serializer;
 
-class EnsureSuccessDriver implements LowLevelDriverInterface
+class AgencyUnitsFallbackDriver implements LowLevelDriverInterface
 {
     /**
      * @var LowLevelDriverInterface
@@ -30,9 +30,13 @@ class EnsureSuccessDriver implements LowLevelDriverInterface
         ]
     ];
 
-    public function __construct(LowLevelDriverInterface $driver)
+    public function __construct(LowLevelDriverInterface $driver, array $allowedMethods = null)
     {
         $this->driver = $driver;
+
+        if(!empty($allowedMethods)) {
+            $this->allowedMethods = $allowedMethods;
+        }
     }
 
     public function execute(Request $request, Serializer $serializer)

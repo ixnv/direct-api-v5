@@ -7,7 +7,7 @@ use eLama\DirectApiV5\DtoDirectDriver;
 use eLama\DirectApiV5\JmsFactory;
 use eLama\DirectApiV5\LoggerFactory;
 use eLama\DirectApiV5\LowLevelDriver\AutoRoutingDriver;
-use eLama\DirectApiV5\LowLevelDriver\EnsureSuccessDriver;
+use eLama\DirectApiV5\LowLevelDriver\AgencyUnitsFallbackDriver;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\LowLevelDriver\ProxyDriver;
 use eLama\DirectApiV5\LowLevelDriver\ProxyDriverWithFallback;
@@ -44,7 +44,7 @@ class DriverFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $dtoDriver = $this->createFactory()->create('token', 'login');
         $ensureDriver = $this->getPrivateValue($dtoDriver, 'driver');
-        self::assertInstanceOf(EnsureSuccessDriver::class, $ensureDriver);
+        self::assertInstanceOf(AgencyUnitsFallbackDriver::class, $ensureDriver);
         self::assertInstanceOf(LowLevelDriver::class, $this->getPrivateValue($ensureDriver, 'driver'));
     }
 
@@ -62,7 +62,7 @@ class DriverFactoryTest extends \PHPUnit_Framework_TestCase
         self::assertInstanceOf(ProxyDriver::class, $this->getPrivateValue($autoRoutingDriver, 'proxyDriver'));
 
         $ensureDriver = $this->getPrivateValue($autoRoutingDriver, 'directDriver');
-        self::assertInstanceOf(EnsureSuccessDriver::class, $ensureDriver);
+        self::assertInstanceOf(AgencyUnitsFallbackDriver::class, $ensureDriver);
 
         self::assertInstanceOf(LowLevelDriver::class, $this->getPrivateValue($ensureDriver, 'driver'));
     }
@@ -84,12 +84,12 @@ class DriverFactoryTest extends \PHPUnit_Framework_TestCase
         self::assertInstanceOf(ProxyDriver::class, $this->getPrivateValue($fallbackDriver, 'proxyDriver'));
 
         $fallbackEnsureDriver = $this->getPrivateValue($fallbackDriver, 'fallbackDriver');
-        self::assertInstanceOf(EnsureSuccessDriver::class, $fallbackEnsureDriver);
+        self::assertInstanceOf(AgencyUnitsFallbackDriver::class, $fallbackEnsureDriver);
 
         self::assertInstanceOf(LowLevelDriver::class, $this->getPrivateValue($fallbackEnsureDriver, 'driver'));
 
         $ensureDriver = $this->getPrivateValue($autoRoutingDriver, 'directDriver');
-        self::assertInstanceOf(EnsureSuccessDriver::class, $ensureDriver);
+        self::assertInstanceOf(AgencyUnitsFallbackDriver::class, $ensureDriver);
 
         self::assertInstanceOf(LowLevelDriver::class, $this->getPrivateValue($ensureDriver, 'driver'));
     }

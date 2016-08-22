@@ -4,7 +4,7 @@ namespace eLama\DirectApiV5;
 
 use eLama\DirectApiV5\Dto;
 use eLama\DirectApiV5\LowLevelDriver\AutoRoutingDriver;
-use eLama\DirectApiV5\LowLevelDriver\EnsureSuccessDriver;
+use eLama\DirectApiV5\LowLevelDriver\AgencyUnitsFallbackDriver;
 use eLama\DirectApiV5\LowLevelDriver\Guzzle5Adapter;
 use eLama\DirectApiV5\LowLevelDriver\Guzzle6Adapter;
 use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
@@ -28,6 +28,9 @@ class DriverFactory
     /** @var  LoggerInterface */
     private $logger;
 
+    /** @var string */
+    private $directBaseUrl;
+
     /**
      * @param Serializer $jmsSerializer
      * @param LoggerFactory $loggerFactory
@@ -47,14 +50,8 @@ class DriverFactory
         $this->serializer = $jmsSerializer;
         $this->client = $client;
         $this->logger = $loggerFactory->create($toolName);
-        $this->driver = new EnsureSuccessDriver(
-            new LowLevelDriver(
-                $this->createGuzzleAdapter($client),
-                $this->logger,
-                $directBaseUrl
-            )
-        );
         $this->proxyUrl = $proxyUrl;
+        $this->directBaseUrl = $directBaseUrl;
     }
 
     /**
@@ -70,6 +67,8 @@ class DriverFactory
         $maxCacheSeconds,
         array $servicesToProxy = ['campaigns']
     ) {
+        $driver = $this->createDriver();
+
         $proxyDriverWithFallback = new ProxyDriverWithFallback(
             new ProxyDriver(
                 $this->createGuzzleAdapter($this->client),
@@ -78,10 +77,10 @@ class DriverFactory
                 $maxCacheSeconds,
                 $servicesToProxy
             ),
-            $this->driver
+            $driver
         );
 
-        $autoRoutingDriver = new AutoRoutingDriver($proxyDriverWithFallback, $this->driver);
+        $autoRoutingDriver = new AutoRoutingDriver($proxyDriverWithFallback, $driver);
 
         return new DtoDirectDriver($this->serializer, $autoRoutingDriver, $token, $login);
     }
@@ -103,7 +102,7 @@ class DriverFactory
                 $maxCacheSeconds,
                 $servicesToProxy
             ),
-            $this->driver
+            $this->createDriver()
         );
 
         return new DtoDirectDriver($this->serializer, $autoRoutingDriver, $token, $login);
@@ -112,17 +111,33 @@ class DriverFactory
     /**
      * @param string $token
      * @param string $login
+     * @param array $allowedMethods
      * @return DtoDirectDriver
      */
-    public function create($token, $login)
+    public function create($token, $login, array $allowedMethods = null)
     {
         if(empty($token) || empty($login)) {
             throw new \RuntimeException('Login and token must be specified');
         }
 
-        return new DtoDirectDriver($this->serializer, $this->driver, $token, $login);
+        return new DtoDirectDriver($this->serializer, $this->createDriver($allowedMethods), $token, $login);
     }
 
+    /**
+     * @param array|null $allowedMethods
+     * @return AgencyUnitsFallbackDriver
+     */
+    private function createDriver(array $allowedMethods = null)
+    {
+        return  new AgencyUnitsFallbackDriver(
+            new LowLevelDriver(
+                $this->createGuzzleAdapter($this->client),
+                $this->logger,
+                $this->directBaseUrl
+            ),
+            $allowedMethods
+        );
+    }
 
     /**
      * @param Client $client
