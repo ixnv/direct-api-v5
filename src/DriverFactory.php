@@ -129,7 +129,7 @@ class DriverFactory
      */
     private function createDriver(array $allowedMethods = null)
     {
-        return  new AgencyUnitsFallbackDriver(
+        return new AgencyUnitsFallbackDriver(
             new LowLevelDriver(
                 $this->createGuzzleAdapter($this->client),
                 $this->logger,
