@@ -210,7 +210,7 @@ class LowLevelDriver implements LowLevelDriverInterface
             "response_${prefix}units_taken" => $unitsInfo->getTaken(),
             "response_${prefix}units_left" => $unitsInfo->getLeft(),
             "response_${prefix}units_dailyLimit" => $unitsInfo->getDailyLimit(),
-            "response_${prefix}units_percentLeft" => round($unitsInfo->getLeft()/$unitsInfo->getDailyLimit() * 100, 1)
+            "response_${prefix}units_percentLeft" => (int)($unitsInfo->getLeft()/$unitsInfo->getDailyLimit() * 100)
         ];
     }
 

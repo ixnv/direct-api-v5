@@ -158,7 +158,7 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
             hasKeyValuePair('response_agency_units_taken', equalTo(1)),
             hasKeyValuePair('response_agency_units_left', equalTo(2)),
             hasKeyValuePair('response_agency_units_dailyLimit', equalTo(3)),
-            hasKeyValuePair('response_agency_units_percentLeft', equalTo(66.7))
+            hasKeyValuePair('response_agency_units_percentLeft', equalTo(66))
         ));
     }
 
