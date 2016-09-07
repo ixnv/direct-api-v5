@@ -85,6 +85,7 @@ class LowLevelDriver implements LowLevelDriverInterface
                     'response_requestId' => $directResponse->getRequestId(),
                     'response_date' => $directResponse->getDate(),
                     'response_body' => $contents,
+                    'agencyUnitsUsed' => $request->usesAgencyUnits(),
                 ];
 
                 $unitsContext = $this->createUnitsContext($directResponse, $request->usesAgencyUnits());
