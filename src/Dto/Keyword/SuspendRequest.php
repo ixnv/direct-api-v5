@@ -2,9 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\Keyword;
 
-use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
@@ -13,22 +11,22 @@ class SuspendRequest
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Keyword\IdsCriteria")
+     * @JMS\Type("eLama\DirectApiV5\Dto\Keyword\KeywordsSelectionCriteria")
      *
-     * @var IdsCriteria $SelectionCriteria
+     * @var KeywordsSelectionCriteria $SelectionCriteria
      */
     private $SelectionCriteria;
 
     /**
-     * @param IdsCriteria $SelectionCriteria
+     * @param KeywordsSelectionCriteria $SelectionCriteria
      */
-    public function __construct(IdsCriteria $SelectionCriteria = null)
+    public function __construct(KeywordsSelectionCriteria $SelectionCriteria = null)
     {
       $this->SelectionCriteria = $SelectionCriteria;
     }
 
     /**
-     * @return IdsCriteria
+     * @return KeywordsSelectionCriteria
      */
     public function getSelectionCriteria()
     {
@@ -36,10 +34,10 @@ class SuspendRequest
     }
 
     /**
-     * @param IdsCriteria $SelectionCriteria
+     * @param KeywordsSelectionCriteria $SelectionCriteria
      * @return \eLama\DirectApiV5\Dto\Keyword\SuspendRequest
      */
-    public function setSelectionCriteria(IdsCriteria $SelectionCriteria)
+    public function setSelectionCriteria(KeywordsSelectionCriteria $SelectionCriteria)
     {
       $this->SelectionCriteria = $SelectionCriteria;
       return $this;
