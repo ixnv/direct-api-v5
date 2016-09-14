@@ -39,7 +39,7 @@ class KeywordTest extends AdGroupExistenceDependantTestCase
     public function addKeyword()
     {
         $id = $this->addCertainKeyword(self::PHRASE_1);
-        assertThat($id, is(typeOf('integer')));
+        assertThat($id, is(integerValue()));
 
         return $id;
     }
@@ -134,7 +134,7 @@ class KeywordTest extends AdGroupExistenceDependantTestCase
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return \eLama\DirectApiV5\Dto\General\ActionResult[]
      */
     private function suspendCertainKeyword($id)
