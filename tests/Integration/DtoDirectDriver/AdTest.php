@@ -2,17 +2,24 @@
 
 namespace eLama\DirectApiV5\Test\Integration\DtoDirectDriver;
 
+use eLama\DirectApiV5\Dto\Ad\ModerateResponseBody;
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
+use eLama\DirectApiV5\Dto\General\SuspendResponseBody;
 use eLama\DirectApiV5\Dto\General\UpdateResponseBody;
 use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
+use eLama\DirectApiV5\Dto\Keyword\KeywordAddItem;
+use eLama\DirectApiV5\Dto\Keyword;
 use eLama\DirectApiV5\Dto\Sitelink\AddRequest;
 use eLama\DirectApiV5\Dto\Sitelink\Sitelink;
 use eLama\DirectApiV5\Dto\Sitelink\SitelinksSetAddItem;
 use eLama\DirectApiV5\DtoDirectDriver;
 use eLama\DirectApiV5\RequestBody\AddAdRequestBody;
+use eLama\DirectApiV5\RequestBody\AddKeywordRequestBody;
 use eLama\DirectApiV5\RequestBody\AddSitelinkRequestBody;
+use eLama\DirectApiV5\RequestBody\ModerateAdsRequestBody;
+use eLama\DirectApiV5\RequestBody\SuspendAdsRequestBody;
 use eLama\DirectApiV5\RequestBody\UpdateAdRequestBody;
 use eLama\DirectApiV5\RequestBody\DeleteAdRequestBody;
 use eLama\DirectApiV5\RequestBody\GetAdsRequestBody;
@@ -112,6 +119,46 @@ class AdTest extends AdGroupExistenceDependantTestCase
     /**
      * @test
      * @depends updateAd
+     */
+    public function moderateAd($id)
+    {
+        $this->createDefaultKeyword(); //иначе не модерируется
+
+        $requestBody = new ModerateAdsRequestBody(new IdsCriteria([$id]));
+
+        /** @var ModerateResponseBody $responseBody */
+        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
+
+        $moderateId = $responseBody->getResult()->getModerateResults()[0]->getId();
+
+        assertThat($moderateId, is(equalTo($id)));
+
+        return $id;
+    }
+
+    /**
+     * @test
+     * @depends moderateAd
+     */
+    public function suspendAd($id)
+    {
+        $requestBody = new SuspendAdsRequestBody(
+            new Ad\SuspendRequest(new IdsCriteria([$id]))
+        );
+
+        /** @var SuspendResponseBody $suspendResponseBody */
+        $suspendResponseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
+
+        $actionResults = $suspendResponseBody->getResult()->getSuspendResults();
+
+        $this->assertEquals($id, $actionResults[0]->getId());
+
+        return $id;
+    }
+
+    /**
+     * @test
+     * @depends suspendAd
      */
     public function deleteAd($id)
     {
@@ -308,5 +355,19 @@ class AdTest extends AdGroupExistenceDependantTestCase
     private function createAdGroupForPagination($campaignId)
     {
         self::$adGroupIdForPagination = static::createAdGroupForCampaign($campaignId);
+    }
+
+    private function createDefaultKeyword()
+    {
+        $keywordAddItem = new KeywordAddItem('moo', self::$adGroupId);
+
+        $requestBody = new AddKeywordRequestBody(new Keyword\AddRequest([$keywordAddItem]));
+
+        /** @var AddResponseBody $responseBody */
+        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
+
+        $id = $responseBody->getResult()->getAddResults()[0]->getId();
+
+        return $id;
     }
 }

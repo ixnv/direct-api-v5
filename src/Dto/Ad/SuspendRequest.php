@@ -13,7 +13,7 @@ class SuspendRequest
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Ad\IdsCriteria")
+     * @JMS\Type("eLama\DirectApiV5\Dto\General\IdsCriteria")
      *
      * @var IdsCriteria $SelectionCriteria
      */
