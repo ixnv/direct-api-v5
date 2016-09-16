@@ -2,13 +2,13 @@
 
 namespace eLama\DirectApiV5\RequestBody;
 
-use eLama\DirectApiV5\Dto\Ad\SuspendRequest;
+use eLama\DirectApiV5\Dto\General\SuspendRequest;
 use eLama\DirectApiV5\Dto\General\SuspendResponseBody;
 
 class SuspendAdsRequestBody extends RequestBody
 {
     /**
-     * @var SuspendRequest
+     * @var \eLama\DirectApiV5\Dto\General\SuspendRequest
      */
     private $request;
 

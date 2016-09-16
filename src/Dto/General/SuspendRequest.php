@@ -1,8 +1,7 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Ad;
+namespace eLama\DirectApiV5\Dto\General;
 
-use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use JMS\Serializer\Annotation as JMS;
 
 
@@ -37,11 +36,12 @@ class SuspendRequest
 
     /**
      * @param IdsCriteria $SelectionCriteria
-     * @return \eLama\DirectApiV5\Dto\Ad\SuspendRequest
+     * @return self
      */
     public function setSelectionCriteria(IdsCriteria $SelectionCriteria)
     {
       $this->SelectionCriteria = $SelectionCriteria;
+
       return $this;
     }
 

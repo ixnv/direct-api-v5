@@ -2,7 +2,7 @@
 
 namespace eLama\DirectApiV5\RequestBody;
 
-use eLama\DirectApiV5\Dto\Campaign\SuspendRequest;
+use eLama\DirectApiV5\Dto\General\SuspendRequest;
 use eLama\DirectApiV5\Dto\General\SuspendResponseBody;
 
 class SuspendCampaignsRequestBody extends RequestBody

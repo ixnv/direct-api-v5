@@ -6,6 +6,7 @@ use eLama\DirectApiV5\Dto\General\AddResponseBody;
 use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
+use eLama\DirectApiV5\Dto\General\SuspendRequest;
 use eLama\DirectApiV5\Dto\General\SuspendResponseBody;
 use eLama\DirectApiV5\Dto\Keyword\AddRequest;
 use eLama\DirectApiV5\Dto\Keyword\GetResponseBody;
@@ -139,8 +140,8 @@ class KeywordTest extends AdGroupExistenceDependantTestCase
      */
     private function suspendCertainKeyword($id)
     {
-        $suspendRequest = new Keyword\SuspendRequest(
-            (new KeywordsSelectionCriteria())->setIds([$id])
+        $suspendRequest = new SuspendRequest(
+            (new IdsCriteria())->setIds([$id])
         );
 
         $suspendRequestBody = new SuspendKeywordsRequestBody($suspendRequest);

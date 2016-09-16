@@ -4,6 +4,7 @@ namespace eLama\DirectApiV5\Test\Integration\DtoDirectDriver;
 
 use eLama\DirectApiV5\Dto\Ad\ModerateResponseBody;
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
+use eLama\DirectApiV5\Dto\General\SuspendRequest;
 use eLama\DirectApiV5\Dto\General\SuspendResponseBody;
 use eLama\DirectApiV5\Dto\General\UpdateResponseBody;
 use eLama\DirectApiV5\Dto\General\DeleteRequest;
@@ -143,7 +144,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
     public function suspendAd($id)
     {
         $requestBody = new SuspendAdsRequestBody(
-            new Ad\SuspendRequest(new IdsCriteria([$id]))
+            new SuspendRequest(new IdsCriteria([$id]))
         );
 
         /** @var SuspendResponseBody $suspendResponseBody */
