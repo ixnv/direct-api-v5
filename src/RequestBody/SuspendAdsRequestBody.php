@@ -5,10 +5,10 @@ namespace eLama\DirectApiV5\RequestBody;
 use eLama\DirectApiV5\Dto\General\SuspendRequest;
 use eLama\DirectApiV5\Dto\General\SuspendResponseBody;
 
-class SuspendCampaignsRequestBody extends RequestBody
+class SuspendAdsRequestBody extends RequestBody
 {
     /**
-     * @var SuspendRequest
+     * @var \eLama\DirectApiV5\Dto\General\SuspendRequest
      */
     private $request;
 
@@ -25,7 +25,7 @@ class SuspendCampaignsRequestBody extends RequestBody
      */
     public function resource()
     {
-        return 'campaigns';
+        return 'ads';
     }
 
     /**

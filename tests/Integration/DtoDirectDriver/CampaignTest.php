@@ -8,7 +8,7 @@ use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Campaign\CampaignUpdateItem;
 use eLama\DirectApiV5\Dto\Campaign\GetResponseBody;
 use eLama\DirectApiV5\Dto\Campaign\ResumeRequest;
-use eLama\DirectApiV5\Dto\Campaign\SuspendRequest;
+use eLama\DirectApiV5\Dto\General\SuspendRequest;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignAddItem;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignNetworkStrategyAdd;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignNetworkStrategyTypeEnum;
@@ -227,9 +227,11 @@ class CampaignTest extends DirectApiV5TestCase
      */
     public function suspendCampaign($id)
     {
-        $request = new SuspendCampaignsRequestBody(new SuspendRequest(
-            new IdsCriteria([$id])
-        ));
+        $request = new SuspendCampaignsRequestBody(
+            new SuspendRequest(
+                new IdsCriteria([$id])
+            )
+        );
         /** @var \eLama\DirectApiV5\Dto\General\SuspendResponseBody $responseBody */
         $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
         $suspendedId = $responseBody->getResult()->getSuspendResults()[0]->getId();
@@ -420,7 +422,7 @@ class CampaignTest extends DirectApiV5TestCase
                 break;
             case TextCampaignSearchStrategyTypeEnum::AVERAGE_CPC:
                 $strategyAverageCpcAdd = new Campaign\StrategyAverageCpcAdd(2000000, self::WEEKLY_SPEND_LIMIT);
-                
+
                 $textCampaignSearchStrategyAdd->setAverageCpc($strategyAverageCpcAdd);
                 break;
             case TextCampaignSearchStrategyTypeEnum::WB_MAXIMUM_CLICKS:
@@ -542,7 +544,7 @@ class CampaignTest extends DirectApiV5TestCase
         );
 
         $campaignAddItem->setNegativeKeywords(
-            new ArrayOfString(['папуас', 'папуасу', 'друг','товарищ', 'и', 'корм'])
+            new ArrayOfString(['папуас', 'папуасу', 'друг', 'товарищ', 'и', 'корм'])
         );
     }
 

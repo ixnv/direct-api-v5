@@ -7,8 +7,9 @@ use JMS\Serializer\Annotation as JMS;
 
 /**
  * @JMS\AccessType("public_method")
+ * @deprecated use eLama\DirectApiV5\Dto\General\SuspendRequest instead
  */
-class SuspendRequest
+class SuspendRequest extends \eLama\DirectApiV5\Dto\General\SuspendRequest
 {
 
     /**
@@ -23,25 +24,7 @@ class SuspendRequest
      */
     public function __construct(IdsCriteria $SelectionCriteria)
     {
-      $this->SelectionCriteria = $SelectionCriteria;
+        parent::__construct($SelectionCriteria);
+        trigger_error('\eLama\DirectApiV5\Dto\Campaign\SuspendRequest is called', E_USER_DEPRECATED);
     }
-
-    /**
-     * @return IdsCriteria
-     */
-    public function getSelectionCriteria()
-    {
-      return $this->SelectionCriteria;
-    }
-
-    /**
-     * @param IdsCriteria $SelectionCriteria
-     * @return \eLama\DirectApiV5\Dto\Campaign\SuspendRequest
-     */
-    public function setSelectionCriteria(IdsCriteria $SelectionCriteria)
-    {
-      $this->SelectionCriteria = $SelectionCriteria;
-      return $this;
-    }
-
 }
