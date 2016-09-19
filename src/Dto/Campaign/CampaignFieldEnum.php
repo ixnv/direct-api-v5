@@ -3,11 +3,11 @@
 namespace eLama\DirectApiV5\Dto\Campaign;
 
 use eLama\DirectApiV5\Dto\General\BaseEnum;
-use JMS\Serializer\Annotation as JMS;
 
 class CampaignFieldEnum extends BaseEnum
 {
     const __default = 'BlockedIps';
+
     const BlockedIps = 'BlockedIps';
     const ExcludedSites = 'ExcludedSites';
     const Currency = 'Currency';

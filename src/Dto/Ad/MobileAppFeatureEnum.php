@@ -2,15 +2,14 @@
 
 namespace eLama\DirectApiV5\Dto\Ad;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\BaseEnum;
 
-class MobileAppFeatureEnum
+class MobileAppFeatureEnum extends BaseEnum
 {
     const __default = 'PRICE';
+
     const PRICE = 'PRICE';
     const ICON = 'ICON';
     const CUSTOMER_RATING = 'CUSTOMER_RATING';
     const RATINGS = 'RATINGS';
-
-
 }

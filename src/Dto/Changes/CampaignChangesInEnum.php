@@ -2,14 +2,13 @@
 
 namespace eLama\DirectApiV5\Dto\Changes;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\BaseEnum;
 
-class CampaignChangesInEnum
+class CampaignChangesInEnum extends BaseEnum
 {
     const __default = 'SELF';
+
     const SELF = 'SELF';
     const CHILDREN = 'CHILDREN';
     const STAT = 'STAT';
-
-
 }

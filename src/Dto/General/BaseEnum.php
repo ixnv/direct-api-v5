@@ -1,6 +1,5 @@
 <?php
 
-
 namespace eLama\DirectApiV5\Dto\General;
 
 use InvalidArgumentException;

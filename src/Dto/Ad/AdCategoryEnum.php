@@ -2,11 +2,12 @@
 
 namespace eLama\DirectApiV5\Dto\Ad;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\BaseEnum;
 
-class AdCategoryEnum
+class AdCategoryEnum extends BaseEnum
 {
     const __default = 'ABORTION';
+
     const ABORTION = 'ABORTION';
     const ALCOHOL = 'ALCOHOL';
     const BABY_FOOD = 'BABY_FOOD';

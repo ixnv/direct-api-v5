@@ -3,11 +3,11 @@
 namespace eLama\DirectApiV5\Dto\Campaign;
 
 use eLama\DirectApiV5\Dto\General\BaseEnum;
-use JMS\Serializer\Annotation as JMS;
 
 class TextCampaignNetworkStrategyTypeEnum extends BaseEnum
 {
     const __default = 'AVERAGE_CPC';
+
     const AVERAGE_CPC = 'AVERAGE_CPC';
     const AVERAGE_CPA = 'AVERAGE_CPA';
     const WB_MAXIMUM_CONVERSION_RATE = 'WB_MAXIMUM_CONVERSION_RATE';

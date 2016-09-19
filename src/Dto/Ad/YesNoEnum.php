@@ -2,12 +2,18 @@
 
 namespace eLama\DirectApiV5\Dto\Ad;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\YesNoEnum as YesNoEnumBase;
 
-//@todo возможно он должен быть один на всех, в папе general
-class YesNoEnum
-{
-    const __default = 'YES';
-    const YES = 'YES';
-    const NO = 'NO';
-}
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        YesNoEnum::class,
+        YesNoEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+class YesNoEnum extends YesNoEnumBase {}

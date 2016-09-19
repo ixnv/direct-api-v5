@@ -2,11 +2,12 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\BaseEnum;
 
-class DynamicTextCampaignSettingsGetEnum
+class DynamicTextCampaignSettingsGetEnum extends BaseEnum
 {
     const __default = 'ADD_OPENSTAT_TAG';
+
     const ADD_OPENSTAT_TAG = 'ADD_OPENSTAT_TAG';
     const ADD_METRICA_TAG = 'ADD_METRICA_TAG';
     const ADD_TO_FAVORITES = 'ADD_TO_FAVORITES';
@@ -17,6 +18,4 @@ class DynamicTextCampaignSettingsGetEnum
     const ENABLE_EXTENDED_AD_TITLE = 'ENABLE_EXTENDED_AD_TITLE';
     const SHARED_ACCOUNT_ENABLED = 'SHARED_ACCOUNT_ENABLED';
     const DAILY_BUDGET_ALLOWED = 'DAILY_BUDGET_ALLOWED';
-
-
 }

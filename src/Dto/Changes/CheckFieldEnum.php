@@ -2,15 +2,14 @@
 
 namespace eLama\DirectApiV5\Dto\Changes;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\BaseEnum;
 
-class CheckFieldEnum
+class CheckFieldEnum extends BaseEnum
 {
     const __default = 'CampaignIds';
+
     const CampaignIds = 'CampaignIds';
     const AdGroupIds = 'AdGroupIds';
     const AdIds = 'AdIds';
     const CampaignsStat = 'CampaignsStat';
-
-
 }

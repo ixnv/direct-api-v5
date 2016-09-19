@@ -2,15 +2,18 @@
 
 namespace eLama\DirectApiV5\Dto\Changes;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\ExtensionStatusSelectionEnum as ExtensionStatusSelectionEnumBase;
 
-class ExtensionStatusSelectionEnum
-{
-    const __default = 'DRAFT';
-    const DRAFT = 'DRAFT';
-    const MODERATION = 'MODERATION';
-    const ACCEPTED = 'ACCEPTED';
-    const REJECTED = 'REJECTED';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        ExtensionStatusSelectionEnum::class,
+        ExtensionStatusSelectionEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-
-}
+/**
+ * @deprecated
+ */
+class ExtensionStatusSelectionEnum extends ExtensionStatusSelectionEnumBase {}

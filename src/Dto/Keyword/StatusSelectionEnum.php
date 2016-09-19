@@ -2,14 +2,14 @@
 
 namespace eLama\DirectApiV5\Dto\Keyword;
 
-class StatusSelectionEnum
-{
-    const __default = 'ACCEPTED';
-    const ACCEPTED = 'ACCEPTED';
-    const DRAFT = 'DRAFT';
-    const MODERATION = 'MODERATION';
-    const PREACCEPTED = 'PREACCEPTED';
-    const REJECTED = 'REJECTED';
+use eLama\DirectApiV5\Dto\General\StatusSelectionEnum as StatusSelectionEnumBase;
 
+trigger_error(
+    sprintf('%s is deprecated use %s', StatusSelectionEnum::class, StatusSelectionEnumBase::class),
+    E_USER_DEPRECATED
+);
 
-}
+/**
+ * @deprecated
+ */
+class StatusSelectionEnum extends StatusSelectionEnumBase {}

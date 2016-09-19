@@ -2,17 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Changes;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\CountryCodeEnum as CountryCodeEnumBase;
 
-class CountryCodeEnum
-{
-    const __default = 'RU';
-    const RU = 'RU';
-    const TR = 'TR';
-    const UA = 'UA';
-    const KZ = 'KZ';
-    const BY = 'BY';
-    const US = 'US';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        CountryCodeEnum::class,
+        CountryCodeEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
+/**
+ * @deprecated
+ */
+class CountryCodeEnum extends CountryCodeEnumBase {}
 
-}

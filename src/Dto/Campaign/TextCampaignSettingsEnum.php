@@ -2,11 +2,12 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\BaseEnum;
 
-class TextCampaignSettingsEnum
+class TextCampaignSettingsEnum extends BaseEnum
 {
     const __default = 'EXCLUDE_PAUSED_COMPETING_ADS';
+
     const EXCLUDE_PAUSED_COMPETING_ADS = 'EXCLUDE_PAUSED_COMPETING_ADS';
     const ADD_OPENSTAT_TAG = 'ADD_OPENSTAT_TAG';
     const ADD_METRICA_TAG = 'ADD_METRICA_TAG';
@@ -19,6 +20,4 @@ class TextCampaignSettingsEnum
     const ENABLE_RELATED_KEYWORDS = 'ENABLE_RELATED_KEYWORDS';
     const ENABLE_EXTENDED_AD_TITLE = 'ENABLE_EXTENDED_AD_TITLE';
     const MAINTAIN_NETWORK_CPC = 'MAINTAIN_NETWORK_CPC';
-
-
 }

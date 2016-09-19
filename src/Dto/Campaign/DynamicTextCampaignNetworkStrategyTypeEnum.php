@@ -2,13 +2,12 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\BaseEnum;
 
-class DynamicTextCampaignNetworkStrategyTypeEnum
+class DynamicTextCampaignNetworkStrategyTypeEnum extends BaseEnum
 {
     const __default = 'SERVING_OFF';
+
     const SERVING_OFF = 'SERVING_OFF';
     const UNKNOWN = 'UNKNOWN';
-
-
 }

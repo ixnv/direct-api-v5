@@ -2,13 +2,12 @@
 
 namespace eLama\DirectApiV5\Dto\AdGroup;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\BaseEnum;
 
-class DynamicTextAdGroupFieldEnum
+class DynamicTextAdGroupFieldEnum extends BaseEnum
 {
     const __default = 'DomainUrl';
+
     const DomainUrl = 'DomainUrl';
     const DomainUrlProcessingStatus = 'DomainUrlProcessingStatus';
-
-
 }

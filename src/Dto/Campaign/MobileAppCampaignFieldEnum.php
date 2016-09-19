@@ -2,13 +2,12 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\BaseEnum;
 
-class MobileAppCampaignFieldEnum
+class MobileAppCampaignFieldEnum extends BaseEnum
 {
     const __default = 'Settings';
+
     const Settings = 'Settings';
     const BiddingStrategy = 'BiddingStrategy';
-
-
 }

@@ -3,11 +3,11 @@
 namespace eLama\DirectApiV5\Dto\Keyword;
 
 use eLama\DirectApiV5\Dto\General\BaseEnum;
-use JMS\Serializer\Annotation as JMS;
 
 class KeywordFieldEnum extends BaseEnum
 {
     const __default = 'Id';
+
     const Id = 'Id';
     const Keyword = 'Keyword';
     const State = 'State';
@@ -22,6 +22,4 @@ class KeywordFieldEnum extends BaseEnum
     const Productivity = 'Productivity';
     const StatisticsSearch = 'StatisticsSearch';
     const StatisticsNetwork = 'StatisticsNetwork';
-
-
 }

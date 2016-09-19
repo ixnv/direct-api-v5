@@ -2,15 +2,18 @@
 
 namespace eLama\DirectApiV5\Dto\AdExtensions;
 
-use eLama\DirectApiV5\Dto\General\BaseEnum;
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\StatusSelectionEnum as StatusSelectionEnumBase;
 
-class StatusSelectionEnum extends BaseEnum
-{
-    const __default = 'ACCEPTED';
-    const ACCEPTED = 'ACCEPTED';
-    const DRAFT = 'DRAFT';
-    const MODERATION = 'MODERATION';
-    const PREACCEPTED = 'PREACCEPTED';
-    const REJECTED = 'REJECTED';
-}
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        StatusSelectionEnum::class,
+        StatusSelectionEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+class StatusSelectionEnum extends StatusSelectionEnumBase {}

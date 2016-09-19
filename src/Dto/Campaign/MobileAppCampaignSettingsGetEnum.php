@@ -2,11 +2,12 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\BaseEnum;
 
-class MobileAppCampaignSettingsGetEnum
+class MobileAppCampaignSettingsGetEnum extends BaseEnum
 {
     const __default = 'ADD_TO_FAVORITES';
+
     const ADD_TO_FAVORITES = 'ADD_TO_FAVORITES';
     const ENABLE_AREA_OF_INTEREST_TARGETING = 'ENABLE_AREA_OF_INTEREST_TARGETING';
     const ENABLE_BEHAVIORAL_TARGETING = 'ENABLE_BEHAVIORAL_TARGETING';
@@ -15,6 +16,4 @@ class MobileAppCampaignSettingsGetEnum
     const MAINTAIN_NETWORK_CPC = 'MAINTAIN_NETWORK_CPC';
     const SHARED_ACCOUNT_ENABLED = 'SHARED_ACCOUNT_ENABLED';
     const DAILY_BUDGET_ALLOWED = 'DAILY_BUDGET_ALLOWED';
-
-
 }

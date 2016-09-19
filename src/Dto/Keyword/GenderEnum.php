@@ -2,11 +2,18 @@
 
 namespace eLama\DirectApiV5\Dto\Keyword;
 
-use eLama\DirectApiV5\Dto\General\BaseEnum;
+use eLama\DirectApiV5\Dto\General\GenderEnum as GenderEnumBase;
 
-class GenderEnum extends BaseEnum
-{
-    const __default = 'GENDER_MALE';
-    const GENDER_MALE = 'GENDER_MALE';
-    const GENDER_FEMALE = 'GENDER_FEMALE';
-}
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        GenderEnum::class,
+        GenderEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+class GenderEnum extends GenderEnumBase {}

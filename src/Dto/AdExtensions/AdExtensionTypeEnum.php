@@ -2,13 +2,18 @@
 
 namespace eLama\DirectApiV5\Dto\AdExtensions;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\AdExtensionTypeEnum as AdExtensionTypeEnumBase;
 
-class AdExtensionTypeEnum
-{
-    const __default = 'CALLOUT';
-    const CALLOUT = 'CALLOUT';
-    const UNKNOWN = 'UNKNOWN';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        AdExtensionTypeEnum::class,
+        AdExtensionTypeEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-
-}
+/**
+ * @deprecated
+ */
+class AdExtensionTypeEnum extends AdExtensionTypeEnumBase {}

@@ -2,11 +2,12 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\BaseEnum;
 
-class SmsEventsEnum
+class SmsEventsEnum extends BaseEnum
 {
     const __default = 'MONITORING';
+
     const MONITORING = 'MONITORING';
     const MODERATION = 'MODERATION';
     const MONEY_IN = 'MONEY_IN';

@@ -2,16 +2,15 @@
 
 namespace eLama\DirectApiV5\Dto\Ad;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\BaseEnum;
 
-class MobAppAgeLabelEnum
+class MobAppAgeLabelEnum extends BaseEnum
 {
     const __default = 'AGE_0';
+
     const AGE_0 = 'AGE_0';
     const AGE_6 = 'AGE_6';
     const AGE_12 = 'AGE_12';
     const AGE_16 = 'AGE_16';
     const AGE_18 = 'AGE_18';
-
-
 }

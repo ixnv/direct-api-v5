@@ -2,11 +2,12 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\BaseEnum;
 
-class MobileAppCampaignSearchStrategyTypeEnum
+class MobileAppCampaignSearchStrategyTypeEnum extends BaseEnum
 {
     const __default = 'AVERAGE_CPC';
+
     const AVERAGE_CPC = 'AVERAGE_CPC';
     const AVERAGE_CPI = 'AVERAGE_CPI';
     const WB_MAXIMUM_APP_INSTALLS = 'WB_MAXIMUM_APP_INSTALLS';
@@ -19,6 +20,4 @@ class MobileAppCampaignSearchStrategyTypeEnum
     const UNKNOWN = 'UNKNOWN';
     const WB_MAXIMUM_CLICKS = 'WB_MAXIMUM_CLICKS';
     const WEEKLY_CLICK_PACKAGE = 'WEEKLY_CLICK_PACKAGE';
-
-
 }

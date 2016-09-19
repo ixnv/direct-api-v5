@@ -2,11 +2,12 @@
 
 namespace eLama\DirectApiV5\Dto\Ad;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\BaseEnum;
 
-class DynamicTextAdFieldEnum
+class DynamicTextAdFieldEnum extends BaseEnum
 {
     const __default = 'AdImageHash';
+
     const AdImageHash = 'AdImageHash';
     const SitelinkSetId = 'SitelinkSetId';
     const Text = 'Text';
@@ -14,6 +15,4 @@ class DynamicTextAdFieldEnum
     const AdImageModeration = 'AdImageModeration';
     const SitelinksModeration = 'SitelinksModeration';
     const VCardModeration = 'VCardModeration';
-
-
 }

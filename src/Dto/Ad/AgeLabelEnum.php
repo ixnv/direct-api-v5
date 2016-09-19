@@ -2,11 +2,12 @@
 
 namespace eLama\DirectApiV5\Dto\Ad;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\BaseEnum;
 
-class AgeLabelEnum
+class AgeLabelEnum extends BaseEnum
 {
     const __default = 'MONTHS_0';
+
     const MONTHS_0 = 'MONTHS_0';
     const MONTHS_1 = 'MONTHS_1';
     const MONTHS_2 = 'MONTHS_2';
@@ -25,6 +26,4 @@ class AgeLabelEnum
     const AGE_12 = 'AGE_12';
     const AGE_16 = 'AGE_16';
     const AGE_18 = 'AGE_18';
-
-
 }
