@@ -1,10 +1,10 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keyword;
+namespace eLama\DirectApiV5\Dto\General;
 
-use eLama\DirectApiV5\Dto\General\BaseEnum;
+use JMS\Serializer\Annotation as JMS;
 
-class GenderEnum extends BaseEnum
+class GenderEnum
 {
     const __default = 'GENDER_MALE';
     const GENDER_MALE = 'GENDER_MALE';
