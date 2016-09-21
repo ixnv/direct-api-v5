@@ -109,7 +109,7 @@ class AgencyUnitsFallbackDriverTest extends \PHPUnit_Framework_TestCase
         ));
     }
 
-    private function setResponse($units = '0/0/3', $body = false)
+    private function setResponse($units = '0/0/3', $body = null)
     {
         if(!$body) {
             $body = [
