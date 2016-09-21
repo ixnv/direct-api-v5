@@ -2,17 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Ad;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\Ad\Enum\AdCategoryEnum as AdCategoryEnumBase;
 
-class AdCategoryEnum extends BaseEnum
-{
-    const __default = 'ABORTION';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        AdCategoryEnum::class,
+        AdCategoryEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const ABORTION = 'ABORTION';
-    const ALCOHOL = 'ALCOHOL';
-    const BABY_FOOD = 'BABY_FOOD';
-    const DIETARY_SUPPLEMENTS = 'DIETARY_SUPPLEMENTS';
-    const MEDICINE = 'MEDICINE';
-    const PSEUDO_WEAPON = 'PSEUDO_WEAPON';
-    const TOBACCO = 'TOBACCO';
-}
+/**
+ * @deprecated
+ */
+
+class AdCategoryEnum extends AdCategoryEnumBase {}

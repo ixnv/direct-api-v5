@@ -2,23 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Ad;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\Ad\Enum\TextAdFieldEnum as TextAdFieldEnumBase;
 
-class TextAdFieldEnum extends BaseEnum
-{
-    const __default = 'AdImageHash';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        TextAdFieldEnum::class,
+        TextAdFieldEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const AdImageHash = 'AdImageHash';
-    const DisplayDomain = 'DisplayDomain';
-    const DisplayUrlPath = 'DisplayUrlPath';
-    const Href = 'Href';
-    const SitelinkSetId = 'SitelinkSetId';
-    const Text = 'Text';
-    const Title = 'Title';
-    const Mobile = 'Mobile';
-    const VCardId = 'VCardId';
-    const AdImageModeration = 'AdImageModeration';
-    const SitelinksModeration = 'SitelinksModeration';
-    const VCardModeration = 'VCardModeration';
-    const AdExtensions = 'AdExtensions';
-}
+/**
+ * @deprecated
+ */
+
+class TextAdFieldEnum extends TextAdFieldEnumBase {}
