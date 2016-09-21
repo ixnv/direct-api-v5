@@ -3,11 +3,19 @@
 namespace eLama\DirectApiV5\Dto\General;
 
 use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\Enum\ScopeEnum as ScopeBaseEnum;
 
-class ScopeEnum extends BaseEnum
-{
-    const __default = 'SEARCH';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        ScopeEnum::class,
+        ScopeBaseEnum::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const SEARCH = 'SEARCH';
-    const NETWORK = 'NETWORK';
-}
+/**
+ * @deprecated
+ */
+
+class ScopeEnum extends ScopeBaseEnum {}

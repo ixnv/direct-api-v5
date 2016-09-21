@@ -2,12 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\General;
 
-class ExtensionStatusSelectionEnum extends BaseEnum
-{
-    const __default = 'DRAFT';
+use eLama\DirectApiV5\Dto\General\Enum\ExtensionStatusSelectionEnum as ExtensionStatusSelectionBaseEnum;
 
-    const DRAFT = 'DRAFT';
-    const MODERATION = 'MODERATION';
-    const ACCEPTED = 'ACCEPTED';
-    const REJECTED = 'REJECTED';
-}
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        ExtensionStatusSelectionEnum::class,
+        ExtensionStatusSelectionBaseEnum::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+
+class ExtensionStatusSelectionEnum extends ExtensionStatusSelectionBaseEnum {}

@@ -2,11 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\General;
 
-class PriorityEnum extends BaseEnum
-{
-    const __default = 'LOW';
+use eLama\DirectApiV5\Dto\General\Enum\PriorityEnum as PriorityBaseEnum;
 
-    const LOW = 'LOW';
-    const NORMAL = 'NORMAL';
-    const HIGH = 'HIGH';
-}
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        PriorityEnum::class,
+        PriorityBaseEnum::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+
+class PriorityEnum extends PriorityBaseEnum {}

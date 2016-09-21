@@ -2,15 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\General;
 
-class StateEnum extends BaseEnum
-{
-    const __default = 'OFF';
+use eLama\DirectApiV5\Dto\General\Enum\StateEnum as StateBaseEnum;
 
-    const OFF = 'OFF';
-    const ON = 'ON';
-    const SUSPENDED = 'SUSPENDED';
-    const OFF_BY_MONITORING = 'OFF_BY_MONITORING';
-    const ARCHIVED = 'ARCHIVED';
-    const DELETED = 'DELETED';
-    const UNKNOWN = 'UNKNOWN';
-}
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        StateEnum::class,
+        StateBaseEnum::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+
+class StateEnum extends StateBaseEnum {}

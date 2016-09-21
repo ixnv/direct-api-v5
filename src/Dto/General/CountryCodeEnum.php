@@ -2,14 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\General;
 
-class CountryCodeEnum extends BaseEnum
-{
-    const __default = 'RU';
+use eLama\DirectApiV5\Dto\General\Enum\CountryCodeEnum as CountryCodeBaseEnum;
 
-    const RU = 'RU';
-    const TR = 'TR';
-    const UA = 'UA';
-    const KZ = 'KZ';
-    const BY = 'BY';
-    const US = 'US';
-}
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        CountryCodeEnum::class,
+        CountryCodeBaseEnum::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+
+class CountryCodeEnum extends CountryCodeBaseEnum {}

@@ -2,10 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\General;
 
-class AdExtensionStateSelectionEnum extends BaseEnum
-{
-    const __default = 'ON';
+use eLama\DirectApiV5\Dto\General\Enum\AdExtensionStateSelectionEnum as AdExtensionStateSelectionBaseEnum;
 
-    const ON = 'ON';
-    const DELETED = 'DELETED';
-}
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        AdExtensionStateSelectionEnum::class,
+        AdExtensionStateSelectionBaseEnum::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+
+class AdExtensionStateSelectionEnum extends AdExtensionStateSelectionBaseEnum {}

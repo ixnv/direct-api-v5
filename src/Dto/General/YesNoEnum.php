@@ -2,10 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\General;
 
-class YesNoEnum extends BaseEnum
-{
-    const __default = 'YES';
+use eLama\DirectApiV5\Dto\General\Enum\YesNoEnum as YesNoBaseEnum;
 
-    const YES = 'YES';
-    const NO = 'NO';
-}
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        YesNoEnum::class,
+        YesNoBaseEnum::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+
+class YesNoEnum extends YesNoBaseEnum {}

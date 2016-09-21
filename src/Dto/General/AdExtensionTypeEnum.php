@@ -2,10 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\General;
 
-class AdExtensionTypeEnum extends BaseEnum
-{
-    const __default = 'CALLOUT';
+use eLama\DirectApiV5\Dto\General\Enum\AdExtensionTypeEnum as AdExtensionTypeBaseEnum;
 
-    const CALLOUT = 'CALLOUT';
-    const UNKNOWN = 'UNKNOWN';
-}
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        AdExtensionTypeEnum::class,
+        AdExtensionTypeBaseEnum::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+
+class AdExtensionTypeEnum extends AdExtensionTypeBaseEnum {}

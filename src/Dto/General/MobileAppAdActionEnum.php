@@ -2,9 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\General;
 
-class MobileAppAdActionEnum extends BaseEnum
-{
-    const __default = 'DOWNLOAD';
+use eLama\DirectApiV5\Dto\General\Enum\MobileAppAdActionEnum as MobileAppAdActionBaseEnum;
 
-    const DOWNLOAD = 'DOWNLOAD';
-}
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        MobileAppAdActionEnum::class,
+        MobileAppAdActionBaseEnum::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+
+class MobileAppAdActionEnum extends MobileAppAdActionBaseEnum {}
