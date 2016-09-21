@@ -2,7 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\Changes;
 
-use eLama\DirectApiV5\Dto\General\BaseEnum;
+use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
 
 class CampaignChangesInEnum extends BaseEnum
 {

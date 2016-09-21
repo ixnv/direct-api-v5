@@ -3,7 +3,7 @@
 
 namespace eLama\DirectApiV5\Dto\Keyword;
 
-use eLama\DirectApiV5\Dto\General\BaseEnum;
+use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
 
 class KeywordStateEnum extends BaseEnum
 {

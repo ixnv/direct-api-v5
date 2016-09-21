@@ -2,7 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use eLama\DirectApiV5\Dto\General\BaseEnum;
+use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
 
 class TextCampaignNetworkStrategyTypeEnum extends BaseEnum
 {
