@@ -19,6 +19,7 @@ use eLama\DirectApiV5\Dto\Campaign\UpdateRequest;
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
 use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
+use eLama\DirectApiV5\Dto\General\Enum\YesNoEnum;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\Dto\General\ResumeResponseBody;
 use eLama\DirectApiV5\Dto\General\UpdateResponseBody;
@@ -319,11 +320,9 @@ class CampaignTest extends DirectApiV5TestCase
             $this->getScheduleParams()
         );
 
-        $timeTargetingAdd->setConsiderWorkingWeekends(Campaign\YesNoEnum::YES);
+        $timeTargetingAdd->setConsiderWorkingWeekends(YesNoEnum::YES);
         $timeTargetingAdd->setHolidaysSchedule(
-            (new Campaign\TimeTargetingOnPublicHolidays(
-                Campaign\YesNoEnum::NO)
-            )
+            (new Campaign\TimeTargetingOnPublicHolidays(YesNoEnum::NO))
                 ->setBidPercent(10)
                 ->setStartHour(1)
                 ->setEndHour(15)
@@ -353,8 +352,8 @@ class CampaignTest extends DirectApiV5TestCase
                 ->setEmail('email@email.ru')
                 ->setCheckPositionInterval(Campaign\CheckPositionIntervalEnum::INTERVAL_15)
                 ->setWarningBalance(30)
-                ->setSendAccountNews(Campaign\YesNoEnum::YES)
-                ->setSendWarnings(Campaign\YesNoEnum::YES)
+                ->setSendAccountNews(YesNoEnum::YES)
+                ->setSendWarnings(YesNoEnum::YES)
         );
 
         return $notification;
