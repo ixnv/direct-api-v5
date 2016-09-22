@@ -2,12 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\AdGroup;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\AdGroup\Enum\TargetDeviceTypeEnum as TargetDeviceTypeEnumBase;
 
-class TargetDeviceTypeEnum extends BaseEnum
-{
-    const __default = 'DEVICE_TYPE_MOBILE';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        TargetDeviceTypeEnum::class,
+        TargetDeviceTypeEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const DEVICE_TYPE_MOBILE = 'DEVICE_TYPE_MOBILE';
-    const DEVICE_TYPE_TABLET = 'DEVICE_TYPE_TABLET';
-}
+/**
+ * @deprecated
+ */
+
+class TargetDeviceTypeEnum extends TargetDeviceTypeEnumBase {}

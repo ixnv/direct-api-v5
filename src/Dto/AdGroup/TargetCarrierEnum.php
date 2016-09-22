@@ -2,12 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\AdGroup;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\AdGroup\Enum\TargetCarrierEnum as TargetCarrierEnumBase;
 
-class TargetCarrierEnum extends BaseEnum
-{
-    const __default = 'WI_FI_ONLY';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        TargetCarrierEnum::class,
+        TargetCarrierEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const WI_FI_ONLY = 'WI_FI_ONLY';
-    const WI_FI_AND_CELLULAR = 'WI_FI_AND_CELLULAR';
-}
+/**
+ * @deprecated
+ */
+
+class TargetCarrierEnum extends TargetCarrierEnumBase {}

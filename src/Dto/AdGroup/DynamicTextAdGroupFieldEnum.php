@@ -2,12 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\AdGroup;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\AdGroup\Enum\DynamicTextAdGroupFieldEnum as DynamicTextAdGroupFieldEnumBase;
 
-class DynamicTextAdGroupFieldEnum extends BaseEnum
-{
-    const __default = 'DomainUrl';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        DynamicTextAdGroupFieldEnum::class,
+        DynamicTextAdGroupFieldEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const DomainUrl = 'DomainUrl';
-    const DomainUrlProcessingStatus = 'DomainUrlProcessingStatus';
-}
+/**
+ * @deprecated
+ */
+
+class DynamicTextAdGroupFieldEnum extends DynamicTextAdGroupFieldEnumBase {}

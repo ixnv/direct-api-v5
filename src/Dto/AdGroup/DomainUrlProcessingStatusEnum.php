@@ -2,13 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\AdGroup;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\AdGroup\Enum\DomainUrlProcessingStatusEnum as DomainUrlProcessingStatusEnumBase;
 
-class DomainUrlProcessingStatusEnum extends BaseEnum
-{
-    const __default = 'UNPROCESSED';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        DomainUrlProcessingStatusEnum::class,
+        DomainUrlProcessingStatusEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const UNPROCESSED = 'UNPROCESSED';
-    const PROCESSED = 'PROCESSED';
-    const EMPTY_RESULT = 'EMPTY_RESULT';
-}
+/**
+ * @deprecated
+ */
+
+class DomainUrlProcessingStatusEnum extends DomainUrlProcessingStatusEnumBase {}

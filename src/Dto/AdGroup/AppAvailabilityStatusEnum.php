@@ -2,13 +2,18 @@
 
 namespace eLama\DirectApiV5\Dto\AdGroup;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\AdGroup\Enum\AppAvailabilityStatusEnum as AppAvailabilityStatusEnumBase;
 
-class AppAvailabilityStatusEnum extends BaseEnum
-{
-    const __default = 'UNPROCESSED';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        AppAvailabilityStatusEnum::class,
+        AppAvailabilityStatusEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const UNPROCESSED = 'UNPROCESSED';
-    const AVAILABLE = 'AVAILABLE';
-    const NOT_AVAILABLE = 'NOT_AVAILABLE';
-}
+/**
+ * @deprecated
+ */
+class AppAvailabilityStatusEnum extends AppAvailabilityStatusEnumBase {}
