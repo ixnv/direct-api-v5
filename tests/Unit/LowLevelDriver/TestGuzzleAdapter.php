@@ -12,18 +12,24 @@ use GuzzleHttp\Stream\Stream;
 class TestGuzzleAdapter implements GuzzleAdapter
 {
     /**
-     * @var mixed
+     * @var array
      */
-    public $result;
+    private $headers = [];
+
+    /**
+     * @var string
+     */
+    private $body = '{}';
 
     public function __construct()
     {
-        $this->setResponse();
+
     }
 
-    public function setResponse(array $headers = [], $body = '{}')
+    public function setResponse(array $headers, $body)
     {
-        $this->result = $this->createResponse($headers, $body);
+        $this->headers = $headers;
+        $this->body = $body;
     }
 
     /**
@@ -50,6 +56,8 @@ class TestGuzzleAdapter implements GuzzleAdapter
      */
     public function sendAsync($url, $headers, $jsonBody)
     {
-        return \GuzzleHttp\Promise\promise_for($this->result);
+        return \GuzzleHttp\Promise\promise_for(
+            $this->createResponse($this->headers, $this->body)
+        );
     }
 }

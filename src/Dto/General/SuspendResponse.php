@@ -1,9 +1,8 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keyword;
+namespace eLama\DirectApiV5\Dto\General;
 
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
@@ -12,7 +11,7 @@ class SuspendResponse
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Keyword\ActionResult")
+     * @JMS\Type("eLama\DirectApiV5\Dto\General\ActionResult")
      *
      * @var ActionResult $SuspendResults
      */
@@ -23,7 +22,7 @@ class SuspendResponse
      */
     public function __construct(ActionResult $SuspendResults = null)
     {
-      $this->SuspendResults = $SuspendResults;
+        $this->SuspendResults = $SuspendResults;
     }
 
     /**
@@ -31,17 +30,18 @@ class SuspendResponse
      */
     public function getSuspendResults()
     {
-      return $this->SuspendResults;
+        return $this->SuspendResults;
     }
 
     /**
      * @param ActionResult $SuspendResults
-     * @return \eLama\DirectApiV5\Dto\Keyword\SuspendResponse
+     * @return $this
      */
     public function setSuspendResults(ActionResult $SuspendResults)
     {
-      $this->SuspendResults = $SuspendResults;
-      return $this;
+        $this->SuspendResults = $SuspendResults;
+
+        return $this;
     }
 
 }
