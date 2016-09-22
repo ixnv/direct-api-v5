@@ -2,12 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignFundsEnum as CampaignFundsEnumBase;
 
-class CampaignFundsEnum extends BaseEnum
-{
-    const __default = 'CAMPAIGN_FUNDS';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        CampaignFundsEnum::class,
+        CampaignFundsEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const CAMPAIGN_FUNDS = 'CAMPAIGN_FUNDS';
-    const SHARED_ACCOUNT_FUNDS = 'SHARED_ACCOUNT_FUNDS';
-}
+/**
+ * @deprecated
+ */
+
+class CampaignFundsEnum extends CampaignFundsEnumBase {}

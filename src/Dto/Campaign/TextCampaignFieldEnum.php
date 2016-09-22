@@ -2,14 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\TextCampaignFieldEnum as TextCampaignFieldEnumBase;
 
-class TextCampaignFieldEnum extends BaseEnum
-{
-    const __default = 'CounterIds';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        TextCampaignFieldEnum::class,
+        TextCampaignFieldEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const CounterIds = 'CounterIds';
-    const RelevantKeywords = 'RelevantKeywords';
-    const Settings = 'Settings';
-    const BiddingStrategy = 'BiddingStrategy';
-}
+/**
+ * @deprecated
+ */
+
+class TextCampaignFieldEnum extends TextCampaignFieldEnumBase {}

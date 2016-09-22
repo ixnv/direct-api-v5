@@ -2,17 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignStateGetEnum as CampaignStateGetEnumBase;
 
-class CampaignStateGetEnum extends BaseEnum
-{
-    const __default = 'ARCHIVED';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        CampaignStateGetEnum::class,
+        CampaignStateGetEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const ARCHIVED = 'ARCHIVED';
-    const CONVERTED = 'CONVERTED';
-    const ENDED = 'ENDED';
-    const OFF = 'OFF';
-    const ON = 'ON';
-    const SUSPENDED = 'SUSPENDED';
-    const UNKNOWN = 'UNKNOWN';
-}
+/**
+ * @deprecated
+ */
+
+class CampaignStateGetEnum extends CampaignStateGetEnumBase {}

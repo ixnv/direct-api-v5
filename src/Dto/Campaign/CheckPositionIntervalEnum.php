@@ -2,13 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\CheckPositionIntervalEnum as CheckPositionIntervalEnumBase;
 
-class CheckPositionIntervalEnum extends BaseEnum
-{
-    const __default = 60;
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        CheckPositionIntervalEnum::class,
+        CheckPositionIntervalEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const INTERVAL_15 = 15;
-    const INTERVAL_30 = 30;
-    const INTERVAL_60 = 60;
-}
+/**
+ * @deprecated
+ */
+
+class CheckPositionIntervalEnum extends CheckPositionIntervalEnumBase {}

@@ -2,12 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\DailyBudgetModeEnum as DailyBudgetModeEnumBase;
 
-class DailyBudgetModeEnum extends BaseEnum
-{
-    const __default = 'STANDARD';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        DailyBudgetModeEnum::class,
+        DailyBudgetModeEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const STANDARD = 'STANDARD';
-    const DISTRIBUTED = 'DISTRIBUTED';
-}
+/**
+ * @deprecated
+ */
+
+class DailyBudgetModeEnum extends DailyBudgetModeEnumBase {}

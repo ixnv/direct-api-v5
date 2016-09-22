@@ -2,18 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\MobileAppCampaignSettingsGetEnum as MobileAppCampaignSettingsGetEnumBase;
 
-class MobileAppCampaignSettingsGetEnum extends BaseEnum
-{
-    const __default = 'ADD_TO_FAVORITES';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        MobileAppCampaignSettingsGetEnum::class,
+        MobileAppCampaignSettingsGetEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const ADD_TO_FAVORITES = 'ADD_TO_FAVORITES';
-    const ENABLE_AREA_OF_INTEREST_TARGETING = 'ENABLE_AREA_OF_INTEREST_TARGETING';
-    const ENABLE_BEHAVIORAL_TARGETING = 'ENABLE_BEHAVIORAL_TARGETING';
-    const ENABLE_AUTOFOCUS = 'ENABLE_AUTOFOCUS';
-    const REQUIRE_SERVICING = 'REQUIRE_SERVICING';
-    const MAINTAIN_NETWORK_CPC = 'MAINTAIN_NETWORK_CPC';
-    const SHARED_ACCOUNT_ENABLED = 'SHARED_ACCOUNT_ENABLED';
-    const DAILY_BUDGET_ALLOWED = 'DAILY_BUDGET_ALLOWED';
-}
+/**
+ * @deprecated
+ */
+
+class MobileAppCampaignSettingsGetEnum extends MobileAppCampaignSettingsGetEnumBase {}

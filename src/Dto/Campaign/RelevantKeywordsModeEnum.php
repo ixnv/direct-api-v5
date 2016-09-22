@@ -2,13 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\RelevantKeywordsModeEnum as RelevantKeywordsModeEnumBase;
 
-class RelevantKeywordsModeEnum extends BaseEnum
-{
-    const __default = 'MINIMUM';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        RelevantKeywordsModeEnum::class,
+        RelevantKeywordsModeEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const MINIMUM = 'MINIMUM';
-    const OPTIMAL = 'OPTIMAL';
-    const MAXIMUM = 'MAXIMUM';
-}
+/**
+ * @deprecated
+ */
+
+class RelevantKeywordsModeEnum extends RelevantKeywordsModeEnumBase {}

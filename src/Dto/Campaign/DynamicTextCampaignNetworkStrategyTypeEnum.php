@@ -2,12 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\DynamicTextCampaignNetworkStrategyTypeEnum as DynamicTextCampaignNetworkStrategyTypeEnumBase;
 
-class DynamicTextCampaignNetworkStrategyTypeEnum extends BaseEnum
-{
-    const __default = 'SERVING_OFF';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        DynamicTextCampaignNetworkStrategyTypeEnum::class,
+        DynamicTextCampaignNetworkStrategyTypeEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const SERVING_OFF = 'SERVING_OFF';
-    const UNKNOWN = 'UNKNOWN';
-}
+/**
+ * @deprecated
+ */
+
+class DynamicTextCampaignNetworkStrategyTypeEnum extends DynamicTextCampaignNetworkStrategyTypeEnumBase {}

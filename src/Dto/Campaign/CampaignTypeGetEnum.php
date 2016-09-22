@@ -2,14 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignTypeGetEnum as CampaignTypeGetEnumBase;
 
-class CampaignTypeGetEnum extends BaseEnum
-{
-    const __default = 'TEXT_CAMPAIGN';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        CampaignTypeGetEnum::class,
+        CampaignTypeGetEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const TEXT_CAMPAIGN = 'TEXT_CAMPAIGN';
-    const MOBILE_APP_CAMPAIGN = 'MOBILE_APP_CAMPAIGN';
-    const DYNAMIC_TEXT_CAMPAIGN = 'DYNAMIC_TEXT_CAMPAIGN';
-    const UNKNOWN = 'UNKNOWN';
-}
+/**
+ * @deprecated
+ */
+
+class CampaignTypeGetEnum extends CampaignTypeGetEnumBase {}

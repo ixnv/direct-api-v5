@@ -2,12 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\MobileAppCampaignFieldEnum as MobileAppCampaignFieldEnumBase;
 
-class MobileAppCampaignFieldEnum extends BaseEnum
-{
-    const __default = 'Settings';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        MobileAppCampaignFieldEnum::class,
+        MobileAppCampaignFieldEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const Settings = 'Settings';
-    const BiddingStrategy = 'BiddingStrategy';
-}
+/**
+ * @deprecated
+ */
+
+class MobileAppCampaignFieldEnum extends MobileAppCampaignFieldEnumBase {}

@@ -2,12 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignStatusPaymentEnum as CampaignStatusPaymentEnumBase;
 
-class CampaignStatusPaymentEnum extends BaseEnum
-{
-    const __default = 'DISALLOWED';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        CampaignStatusPaymentEnum::class,
+        CampaignStatusPaymentEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const DISALLOWED = 'DISALLOWED';
-    const ALLOWED = 'ALLOWED';
-}
+/**
+ * @deprecated
+ */
+
+class CampaignStatusPaymentEnum extends CampaignStatusPaymentEnumBase {}
