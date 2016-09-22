@@ -12,7 +12,7 @@ class SetRequest
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Bids\BidSetItem")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\Bids\BidSetItem>")
      *
      * @var BidSetItem $Bids
      */
@@ -21,7 +21,7 @@ class SetRequest
     /**
      * @param BidSetItem $Bids
      */
-    public function __construct(BidSetItem $Bids = null)
+    public function __construct(array $Bids = null)
     {
       $this->Bids = $Bids;
     }
