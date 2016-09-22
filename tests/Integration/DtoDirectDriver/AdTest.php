@@ -4,6 +4,7 @@ namespace eLama\DirectApiV5\Test\Integration\DtoDirectDriver;
 
 use eLama\DirectApiV5\Dto\Ad\ModerateResponseBody;
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
+use eLama\DirectApiV5\Dto\General\Enum\YesNoEnum;
 use eLama\DirectApiV5\Dto\General\SuspendRequest;
 use eLama\DirectApiV5\Dto\General\SuspendResponseBody;
 use eLama\DirectApiV5\Dto\General\UpdateResponseBody;
@@ -58,7 +59,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
     {
         $sitelinkSetId = $this->createSitelinksSet();
         $adAddItem = new Ad\AdAddItem(self::$adGroupId);
-        $textAd = new Ad\TextAdAdd(self::TEXT, self::TITLE, Ad\YesNoEnum::NO);
+        $textAd = new Ad\TextAdAdd(self::TEXT, self::TITLE, YesNoEnum::NO);
         $textAd->setSitelinkSetId($sitelinkSetId);
 
         $this->addAdditionalParamsToTextAdAdd($textAd);
@@ -334,7 +335,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
             $ad = new Ad\TextAdAdd(
                 self::TEXT . $i,
                 self::TITLE . $i,
-                Ad\YesNoEnum::NO
+                YesNoEnum::NO
             );
 
             $ad->setHref(self::HREF . $i);
