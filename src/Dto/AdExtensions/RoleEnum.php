@@ -2,16 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\AdExtensions;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\AdExtensions\Enum\RoleEnum as RoleEnumBase;
 
-class RoleEnum extends BaseEnum
-{
-    const __default = 'CHIEF';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        RoleEnum::class,
+        RoleEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const CHIEF = 'CHIEF';
-    const DELEGATE = 'DELEGATE';
-    const CLIENT = 'CLIENT';
-    const AGENCY = 'AGENCY';
-    const MANAGER = 'MANAGER';
-    const UNKNOWN = 'UNKNOWN';
-}
+/**
+ * @deprecated
+ */
+
+class RoleEnum extends RoleEnumBase {}

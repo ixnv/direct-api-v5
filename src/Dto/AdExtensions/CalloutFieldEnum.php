@@ -2,11 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\AdExtensions;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\AdExtensions\Enum\CalloutFieldEnum as CalloutFieldEnumBase;
 
-class CalloutFieldEnum extends BaseEnum
-{
-    const __default = 'CalloutText';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        CalloutFieldEnum::class,
+        CalloutFieldEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const CalloutText = 'CalloutText';
-}
+/**
+ * @deprecated
+ */
+
+class CalloutFieldEnum extends CalloutFieldEnumBase {}

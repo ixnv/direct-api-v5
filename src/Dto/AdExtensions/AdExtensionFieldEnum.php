@@ -2,16 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\AdExtensions;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\AdExtensions\Enum\AdExtensionFieldEnum as AdExtensionFieldEnumBase;
 
-class AdExtensionFieldEnum extends BaseEnum
-{
-    const __default = 'Id';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        AdExtensionFieldEnum::class,
+        AdExtensionFieldEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const Id = 'Id';
-    const Type = 'Type';
-    const State = 'State';
-    const Status = 'Status';
-    const StatusClarification = 'StatusClarification';
-    const Associated = 'Associated';
-}
+/**
+ * @deprecated
+ */
+
+class AdExtensionFieldEnum extends AdExtensionFieldEnumBase {}
