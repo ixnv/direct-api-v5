@@ -2,12 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Sitelink;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\Sitelink\Enum\SitelinksSetFieldEnum as SitelinksSetFieldEnumBase;
 
-class SitelinksSetFieldEnum extends BaseEnum
-{
-    const __default = 'Id';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        SitelinksSetFieldEnum::class,
+        SitelinksSetFieldEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const Id = 'Id';
-    const Sitelinks = 'Sitelinks';
-}
+/**
+ * @deprecated
+ */
+
+class SitelinksSetFieldEnum extends SitelinksSetFieldEnumBase {}

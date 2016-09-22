@@ -2,13 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Changes;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\Changes\Enum\CampaignChangesInEnum as CampaignChangesInEnumBase;
 
-class CampaignChangesInEnum extends BaseEnum
-{
-    const __default = 'SELF';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        CampaignChangesInEnum::class,
+        CampaignChangesInEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const SELF = 'SELF';
-    const CHILDREN = 'CHILDREN';
-    const STAT = 'STAT';
-}
+/**
+ * @deprecated
+ */
+
+class CampaignChangesInEnum extends CampaignChangesInEnumBase {}

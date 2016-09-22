@@ -2,14 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Changes;
 
-use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+use eLama\DirectApiV5\Dto\Changes\Enum\CheckFieldEnum as CheckFieldEnumBase;
 
-class CheckFieldEnum extends BaseEnum
-{
-    const __default = 'CampaignIds';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        CheckFieldEnum::class,
+        CheckFieldEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-    const CampaignIds = 'CampaignIds';
-    const AdGroupIds = 'AdGroupIds';
-    const AdIds = 'AdIds';
-    const CampaignsStat = 'CampaignsStat';
-}
+/**
+ * @deprecated
+ */
+
+class CheckFieldEnum extends CheckFieldEnumBase {}
