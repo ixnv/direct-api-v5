@@ -2,9 +2,9 @@
 
 namespace eLama\DirectApiV5\RequestBody;
 
-use eLama\DirectApiV5\Dto\AdExtensions\AdExtensionFieldEnum;
+use eLama\DirectApiV5\Dto\AdExtensions\Enum\AdExtensionFieldEnum;
 use eLama\DirectApiV5\Dto\AdExtensions\AdExtensionsSelectionCriteria;
-use eLama\DirectApiV5\Dto\AdExtensions\CalloutFieldEnum;
+use eLama\DirectApiV5\Dto\AdExtensions\Enum\CalloutFieldEnum;
 use eLama\DirectApiV5\Dto\AdExtensions\GetRequest;
 use eLama\DirectApiV5\Dto\AdExtensions\GetResponseBody;
 

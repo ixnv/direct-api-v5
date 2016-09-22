@@ -6,7 +6,7 @@ namespace eLama\DirectApiV5\RequestBody;
 use eLama\DirectApiV5\Dto\General\LimitOffset;
 use eLama\DirectApiV5\Dto\Keyword\GetResponseBody;
 use eLama\DirectApiV5\Dto\Keyword\GetRequest;
-use eLama\DirectApiV5\Dto\Keyword\KeywordFieldEnum;
+use eLama\DirectApiV5\Dto\Keyword\Enum\KeywordFieldEnum;
 use eLama\DirectApiV5\Dto\Keyword\KeywordsSelectionCriteria;
 
 class GetKeywordsRequestBody extends GetRequestBody

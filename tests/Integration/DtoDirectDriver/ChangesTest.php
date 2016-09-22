@@ -8,10 +8,6 @@ use eLama\DirectApiV5\RequestBody;
 use eLama\DirectApiV5\Response;
 use eLama\DirectApiV5\Test\Integration\DirectApiV5TestCase;
 use eLama\DirectApiV5\UnitsInfo;
-use eLama\DirectApiV5\JmsFactory;
-use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
-use GuzzleHttp\Client;
-use Monolog\Logger;
 
 class ChangesTest extends DirectApiV5TestCase
 {
