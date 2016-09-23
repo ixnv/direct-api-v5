@@ -2,6 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\Bids;
 
+use eLama\DirectApiV5\Dto\General\PriorityEnum;
 use JMS\Serializer\Annotation as JMS;
 
 

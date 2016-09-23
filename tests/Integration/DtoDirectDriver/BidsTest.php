@@ -2,17 +2,31 @@
 
 namespace eLama\DirectApiV5\Test\Integration\DtoDirectDriver;
 
+use eLama\DirectApiV5\Dto\Bids\BidActionResult;
+use eLama\DirectApiV5\Dto\Bids\BidGetItem;
 use eLama\DirectApiV5\Dto\Bids\BidSetItem;
+use eLama\DirectApiV5\Dto\Bids\BidsSelectionCriteria;
+use eLama\DirectApiV5\Dto\Bids\GetResponseBody;
 use eLama\DirectApiV5\Dto\Bids\SetRequest;
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
+use eLama\DirectApiV5\Dto\General\IdsCriteria;
+use eLama\DirectApiV5\Dto\General\PriorityEnum;
+use eLama\DirectApiV5\Dto\General\SetResponseBody;
+use eLama\DirectApiV5\Dto\General\SuspendRequest;
+use eLama\DirectApiV5\Dto\General\SuspendResponseBody;
 use eLama\DirectApiV5\Dto\Keyword\AddRequest;
 use eLama\DirectApiV5\Dto\Keyword\KeywordAddItem;
 use eLama\DirectApiV5\DtoDirectDriver;
 use eLama\DirectApiV5\RequestBody\AddKeywordRequestBody;
+use eLama\DirectApiV5\RequestBody\GetBidsRequestBody;
 use eLama\DirectApiV5\RequestBody\SetBidsRequestBody;
+use eLama\DirectApiV5\RequestBody\SuspendKeywordsRequestBody;
 
 class BidsTest extends AdGroupExistenceDependantTestCase
 {
+    const BID_VALUE = 400000;
+    const CONTEXT_BID_VALUE = 500000;
+
     /**
      * @var DtoDirectDriver
      */
@@ -28,25 +42,84 @@ class BidsTest extends AdGroupExistenceDependantTestCase
      */
     public function setBids()
     {
-        $keywordAddItem = new KeywordAddItem('тестовая фраза', self::$adGroupId);
+        $keywordId = $this->addCertainKeyword('тестовая фраза');
+
+        $requestBody = new SetBidsRequestBody(
+            new SetRequest([
+                (new BidSetItem())
+                    ->setKeywordId($keywordId)
+                    ->setBid(self::BID_VALUE)
+                    ->setContextBid(self::CONTEXT_BID_VALUE)
+                    ->setStrategyPriority(PriorityEnum::HIGH)
+            ])
+        );
+
+        /** @var SetResponseBody $responseBody */
+        $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
+
+        /** @var BidActionResult $result */
+        $result = $responseBody->getResult()->getSetResults()[0];
+
+        assertThat($result->getKeywordId(), is(typeOf('integer')));
+
+        return $result->getKeywordId();
+    }
+
+    /**
+     * @test
+     * @depends setBids
+     * @param int $keywordId
+     */
+    public function getBids($keywordId)
+    {
+        $request = new GetBidsRequestBody(
+            (new BidsSelectionCriteria())->setKeywordIds([$keywordId])
+        );
+
+        /** @var GetResponseBody $responseBody */
+        $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
+        $bids = $responseBody->getResult()->getBids()[0];
+
+        $this->suspendCertainKeyword($keywordId);
+
+        $this->assertEquals(self::BID_VALUE, $bids->getBid());
+        $this->assertEquals(self::CONTEXT_BID_VALUE, $bids->getContextBid());
+    }
+
+
+    /**
+     * @param string $keyword
+     * @return int
+     */
+    private function addCertainKeyword($keyword)
+    {
+        $keywordAddItem = new KeywordAddItem($keyword, self::$adGroupId);
 
         $requestBody = new AddKeywordRequestBody(new AddRequest([$keywordAddItem]));
 
         /** @var AddResponseBody $responseBody */
         $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
 
-        $keywordId = $responseBody->getResult()->getAddResults()[0]->getId();
+        $id = $responseBody->getResult()->getAddResults()[0]->getId();
 
+        return $id;
+    }
 
-        $bidRequestBody = new SetBidsRequestBody(
-            new SetRequest(
-                [(new BidSetItem())->setKeywordId($keywordId)->setBid(300000)->setContextBid(300000)]
-            )
+    /**
+     * @param int $id
+     * @return \eLama\DirectApiV5\Dto\General\ActionResult[]
+     */
+    private function suspendCertainKeyword($id)
+    {
+        $suspendRequest = new SuspendRequest(
+            (new IdsCriteria())->setIds([$id])
         );
 
-        /** @var AddResponseBody $responseBody */
-        $bidResponseBody = $this->driver->call($bidRequestBody)->wait()->getUnserializedBody();
+        $suspendRequestBody = new SuspendKeywordsRequestBody($suspendRequest);
 
-        $result = $bidResponseBody->getResult();
+        /** @var SuspendResponseBody $suspendResponseBody */
+        $suspendResponseBody = $this->driver->call($suspendRequestBody)->wait()->getUnserializedBody();
+
+        return $suspendResponseBody->getResult()->getSuspendResults();
     }
 }

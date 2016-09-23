@@ -19,7 +19,7 @@ class GetRequest
     private $SelectionCriteria;
 
     /**
-     * @JMS\Type("string")
+     * @JMS\Type("array")
      *
      * @var BidFieldEnum $FieldNames
      */

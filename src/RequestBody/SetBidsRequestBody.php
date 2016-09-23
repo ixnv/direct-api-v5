@@ -3,15 +3,18 @@
 namespace eLama\DirectApiV5\RequestBody;
 
 use eLama\DirectApiV5\Dto\Bids\SetRequest;
-use eLama\DirectApiV5\Dto\General\AddResponseBody;
+use eLama\DirectApiV5\Dto\General\SetResponseBody;
 
 class SetBidsRequestBody extends RequestBody
 {
     /**
-     * @var AddRequest
+     * @var SetRequest
      */
     private $request;
 
+    /**
+     * @param SetRequest $request
+     */
     public function __construct(SetRequest $request)
     {
         $this->request = $request;
@@ -30,7 +33,7 @@ class SetBidsRequestBody extends RequestBody
      */
     public function resultClass()
     {
-        return AddResponseBody::class;
+        return SetResponseBody::class;
     }
 
     /**

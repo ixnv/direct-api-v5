@@ -2,9 +2,10 @@
 
 namespace eLama\DirectApiV5\Dto\Bids;
 
+use eLama\DirectApiV5\Dto\General\BaseEnum;
 use JMS\Serializer\Annotation as JMS;
 
-class BidFieldEnum
+class BidFieldEnum extends BaseEnum
 {
     const __default = 'KeywordId';
     const KeywordId = 'KeywordId';

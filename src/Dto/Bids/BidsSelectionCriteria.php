@@ -14,26 +14,26 @@ class BidsSelectionCriteria
     /**
      * @JMS\Type("array<integer>")
      *
-     * @var long[] $CampaignIds
+     * @var int[] $CampaignIds
      */
     private $CampaignIds;
 
     /**
      * @JMS\Type("array<integer>")
      *
-     * @var long[] $AdGroupIds
+     * @var int[] $AdGroupIds
      */
     private $AdGroupIds;
 
     /**
      * @JMS\Type("array<integer>")
      *
-     * @var long[] $KeywordIds
+     * @var int[] $KeywordIds
      */
     private $KeywordIds;
 
     /**
-     * @return long[]
+     * @return int[]
      */
     public function getCampaignIds()
     {
@@ -41,7 +41,7 @@ class BidsSelectionCriteria
     }
 
     /**
-     * @param long[] $CampaignIds
+     * @param int[] $CampaignIds
      * @return \eLama\DirectApiV5\Dto\Bids\BidsSelectionCriteria
      */
     public function setCampaignIds(array $CampaignIds = null)
@@ -51,7 +51,7 @@ class BidsSelectionCriteria
     }
 
     /**
-     * @return long[]
+     * @return int[]
      */
     public function getAdGroupIds()
     {
@@ -59,7 +59,7 @@ class BidsSelectionCriteria
     }
 
     /**
-     * @param long[] $AdGroupIds
+     * @param int[] $AdGroupIds
      * @return \eLama\DirectApiV5\Dto\Bids\BidsSelectionCriteria
      */
     public function setAdGroupIds(array $AdGroupIds = null)
@@ -69,7 +69,7 @@ class BidsSelectionCriteria
     }
 
     /**
-     * @return long[]
+     * @return int[]
      */
     public function getKeywordIds()
     {
@@ -77,7 +77,7 @@ class BidsSelectionCriteria
     }
 
     /**
-     * @param long[] $KeywordIds
+     * @param int[] $KeywordIds
      * @return \eLama\DirectApiV5\Dto\Bids\BidsSelectionCriteria
      */
     public function setKeywordIds(array $KeywordIds = null)
