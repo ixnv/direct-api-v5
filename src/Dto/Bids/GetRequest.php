@@ -2,15 +2,14 @@
 
 namespace eLama\DirectApiV5\Dto\Bids;
 
+use eLama\DirectApiV5\Dto\General\GetRequestGeneral;
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
  */
-class GetRequest
+class GetRequest extends GetRequestGeneral
 {
-
     /**
      * @JMS\Type("eLama\DirectApiV5\Dto\Bids\BidsSelectionCriteria")
      *
@@ -21,13 +20,13 @@ class GetRequest
     /**
      * @JMS\Type("array")
      *
-     * @var BidFieldEnum $FieldNames
+     * @var string[] $FieldNames
      */
     private $FieldNames;
 
     /**
      * @param BidsSelectionCriteria $SelectionCriteria
-     * @param BidFieldEnum $FieldNames
+     * @param string[] $FieldNames
      */
     public function __construct(BidsSelectionCriteria $SelectionCriteria = null, $FieldNames = null)
     {
@@ -54,7 +53,7 @@ class GetRequest
     }
 
     /**
-     * @return BidFieldEnum
+     * @return string[]
      */
     public function getFieldNames()
     {
@@ -62,7 +61,7 @@ class GetRequest
     }
 
     /**
-     * @param BidFieldEnum $FieldNames
+     * @param string[] $FieldNames
      * @return \eLama\DirectApiV5\Dto\Bids\GetRequest
      */
     public function setFieldNames($FieldNames)
@@ -70,5 +69,4 @@ class GetRequest
       $this->FieldNames = $FieldNames;
       return $this;
     }
-
 }

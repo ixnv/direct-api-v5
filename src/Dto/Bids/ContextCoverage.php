@@ -4,13 +4,11 @@ namespace eLama\DirectApiV5\Dto\Bids;
 
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
 class ContextCoverage
 {
-
     /**
      * @JMS\Type("array<eLama\DirectApiV5\Dto\Bids\ContextCoverageItem>")
      *
@@ -35,5 +33,4 @@ class ContextCoverage
       $this->Items = $Items;
       return $this;
     }
-
 }

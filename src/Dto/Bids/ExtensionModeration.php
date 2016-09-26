@@ -4,17 +4,15 @@ namespace eLama\DirectApiV5\Dto\Bids;
 
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
 class ExtensionModeration
 {
-
     /**
      * @JMS\Type("string")
      *
-     * @var StatusEnum $Status
+     * @var string $Status
      */
     private $Status;
 
@@ -26,7 +24,7 @@ class ExtensionModeration
     private $StatusClarification;
 
     /**
-     * @param StatusEnum $Status
+     * @param string $Status
      */
     public function __construct($Status = null)
     {
@@ -34,7 +32,7 @@ class ExtensionModeration
     }
 
     /**
-     * @return StatusEnum
+     * @return string
      */
     public function getStatus()
     {
@@ -42,7 +40,7 @@ class ExtensionModeration
     }
 
     /**
-     * @param StatusEnum $Status
+     * @param string $Status
      * @return \eLama\DirectApiV5\Dto\Bids\ExtensionModeration
      */
     public function setStatus($Status)
@@ -68,5 +66,4 @@ class ExtensionModeration
       $this->StatusClarification = $StatusClarification;
       return $this;
     }
-
 }

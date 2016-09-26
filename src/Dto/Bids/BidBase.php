@@ -4,13 +4,11 @@ namespace eLama\DirectApiV5\Dto\Bids;
 
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
 class BidBase
 {
-
     /**
      * @JMS\Type("integer")
      *
@@ -85,5 +83,4 @@ class BidBase
       $this->KeywordId = $KeywordId;
       return $this;
     }
-
 }

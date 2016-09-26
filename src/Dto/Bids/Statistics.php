@@ -4,13 +4,11 @@ namespace eLama\DirectApiV5\Dto\Bids;
 
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
 class Statistics
 {
-
     /**
      * @JMS\Type("integer")
      *
@@ -70,5 +68,4 @@ class Statistics
       $this->Impressions = $Impressions;
       return $this;
     }
-
 }

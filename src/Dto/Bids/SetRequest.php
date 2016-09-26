@@ -4,22 +4,20 @@ namespace eLama\DirectApiV5\Dto\Bids;
 
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
 class SetRequest
 {
-
     /**
      * @JMS\Type("array<eLama\DirectApiV5\Dto\Bids\BidSetItem>")
      *
-     * @var BidSetItem $Bids
+     * @var BidSetItem[] $Bids
      */
     private $Bids;
 
     /**
-     * @param BidSetItem $Bids
+     * @param BidSetItem[] $Bids
      */
     public function __construct(array $Bids = null)
     {
@@ -27,7 +25,7 @@ class SetRequest
     }
 
     /**
-     * @return BidSetItem
+     * @return BidSetItem[]
      */
     public function getBids()
     {
@@ -43,5 +41,4 @@ class SetRequest
       $this->Bids = $Bids;
       return $this;
     }
-
 }

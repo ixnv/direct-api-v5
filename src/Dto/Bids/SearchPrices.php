@@ -4,7 +4,6 @@ namespace eLama\DirectApiV5\Dto\Bids;
 
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
@@ -14,7 +13,7 @@ class SearchPrices
     /**
      * @JMS\Type("string")
      *
-     * @var PositionEnum $Position
+     * @var string $Position
      */
     private $Position;
 
@@ -26,7 +25,7 @@ class SearchPrices
     private $Price;
 
     /**
-     * @return PositionEnum
+     * @return string
      */
     public function getPosition()
     {
@@ -34,7 +33,7 @@ class SearchPrices
     }
 
     /**
-     * @param PositionEnum $Position
+     * @param string $Position
      * @return \eLama\DirectApiV5\Dto\Bids\SearchPrices
      */
     public function setPosition($Position = null)
@@ -60,5 +59,4 @@ class SearchPrices
       $this->Price = $Price;
       return $this;
     }
-
 }

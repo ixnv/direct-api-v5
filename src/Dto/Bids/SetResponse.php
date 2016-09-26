@@ -5,13 +5,11 @@ namespace eLama\DirectApiV5\Dto\Bids;
 use eLama\DirectApiV5\Dto\General\ActionResult;
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
 class SetResponse
 {
-
     /**
      * @JMS\Type("eLama\DirectApiV5\Dto\Bids\BidActionResult")
      *
@@ -44,5 +42,4 @@ class SetResponse
       $this->SetResults = $SetResults;
       return $this;
     }
-
 }

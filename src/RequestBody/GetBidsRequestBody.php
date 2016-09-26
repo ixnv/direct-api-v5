@@ -3,7 +3,7 @@
 
 namespace eLama\DirectApiV5\RequestBody;
 
-use eLama\DirectApiV5\Dto\Bids\BidFieldEnum;
+use eLama\DirectApiV5\Dto\Bids\Enum\BidFieldEnum;
 use eLama\DirectApiV5\Dto\Bids\BidsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Bids\GetRequest;
 use eLama\DirectApiV5\Dto\Bids\GetResponseBody;

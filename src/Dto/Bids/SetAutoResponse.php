@@ -4,13 +4,11 @@ namespace eLama\DirectApiV5\Dto\Bids;
 
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
 class SetAutoResponse
 {
-
     /**
      * @JMS\Type("eLama\DirectApiV5\Dto\Bids\BidActionResult")
      *
@@ -43,5 +41,4 @@ class SetAutoResponse
       $this->SetAutoResults = $SetAutoResults;
       return $this;
     }
-
 }

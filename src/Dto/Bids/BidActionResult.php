@@ -5,13 +5,11 @@ namespace eLama\DirectApiV5\Dto\Bids;
 use eLama\DirectApiV5\Dto\General\ExceptionNotification;
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
 class BidActionResult extends BidBase
 {
-
     /**
      * @JMS\Type("array<eLama\DirectApiV5\Dto\General\ExceptionNotification>")
      *

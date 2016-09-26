@@ -1,6 +1,6 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Bids;
+namespace eLama\DirectApiV5\Dto\Bids\Enum;
 
 use eLama\DirectApiV5\Dto\General\BaseEnum;
 use JMS\Serializer\Annotation as JMS;
@@ -8,6 +8,7 @@ use JMS\Serializer\Annotation as JMS;
 class BidFieldEnum extends BaseEnum
 {
     const __default = 'KeywordId';
+
     const KeywordId = 'KeywordId';
     const AdGroupId = 'AdGroupId';
     const CampaignId = 'CampaignId';
@@ -20,6 +21,4 @@ class BidFieldEnum extends BaseEnum
     const MinSearchPrice = 'MinSearchPrice';
     const CurrentSearchPrice = 'CurrentSearchPrice';
     const AuctionBids = 'AuctionBids';
-
-
 }

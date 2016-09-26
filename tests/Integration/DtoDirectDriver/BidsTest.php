@@ -3,14 +3,13 @@
 namespace eLama\DirectApiV5\Test\Integration\DtoDirectDriver;
 
 use eLama\DirectApiV5\Dto\Bids\BidActionResult;
-use eLama\DirectApiV5\Dto\Bids\BidGetItem;
 use eLama\DirectApiV5\Dto\Bids\BidSetItem;
 use eLama\DirectApiV5\Dto\Bids\BidsSelectionCriteria;
+use eLama\DirectApiV5\Dto\Bids\Enum\PriorityEnum;
 use eLama\DirectApiV5\Dto\Bids\GetResponseBody;
 use eLama\DirectApiV5\Dto\Bids\SetRequest;
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
-use eLama\DirectApiV5\Dto\General\PriorityEnum;
 use eLama\DirectApiV5\Dto\General\SetResponseBody;
 use eLama\DirectApiV5\Dto\General\SuspendRequest;
 use eLama\DirectApiV5\Dto\General\SuspendResponseBody;
@@ -80,12 +79,9 @@ class BidsTest extends AdGroupExistenceDependantTestCase
         $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
         $bids = $responseBody->getResult()->getBids()[0];
 
-        $this->suspendCertainKeyword($keywordId);
-
         $this->assertEquals(self::BID_VALUE, $bids->getBid());
         $this->assertEquals(self::CONTEXT_BID_VALUE, $bids->getContextBid());
     }
-
 
     /**
      * @param string $keyword
@@ -100,9 +96,7 @@ class BidsTest extends AdGroupExistenceDependantTestCase
         /** @var AddResponseBody $responseBody */
         $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
 
-        $id = $responseBody->getResult()->getAddResults()[0]->getId();
-
-        return $id;
+        return $responseBody->getResult()->getAddResults()[0]->getId();
     }
 
     /**

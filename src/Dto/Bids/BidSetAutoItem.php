@@ -2,16 +2,13 @@
 
 namespace eLama\DirectApiV5\Dto\Bids;
 
-use eLama\DirectApiV5\Dto\General\ScopeEnum;
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
  */
 class BidSetAutoItem
 {
-
     /**
      * @JMS\Type("integer")
      *
@@ -43,7 +40,7 @@ class BidSetAutoItem
     /**
      * @JMS\Type("string")
      *
-     * @var PositionEnum $Position
+     * @var string $Position
      */
     private $Position;
 
@@ -57,7 +54,7 @@ class BidSetAutoItem
     /**
      * @JMS\Type("string")
      *
-     * @var CalculateByEnum $CalculateBy
+     * @var string $CalculateBy
      */
     private $CalculateBy;
 
@@ -71,12 +68,12 @@ class BidSetAutoItem
     /**
      * @JMS\Type("array<string>")
      *
-     * @var ScopeEnum[] $Scope
+     * @var string[] $Scope
      */
     private $Scope;
 
     /**
-     * @param ScopeEnum[] $Scope
+     * @param string[] $Scope
      */
     public function __construct(array $Scope = null)
     {
@@ -156,7 +153,7 @@ class BidSetAutoItem
     }
 
     /**
-     * @return PositionEnum
+     * @return string
      */
     public function getPosition()
     {
@@ -164,7 +161,7 @@ class BidSetAutoItem
     }
 
     /**
-     * @param PositionEnum $Position
+     * @param string $Position
      * @return \eLama\DirectApiV5\Dto\Bids\BidSetAutoItem
      */
     public function setPosition($Position = null)
@@ -192,7 +189,7 @@ class BidSetAutoItem
     }
 
     /**
-     * @return CalculateByEnum
+     * @return string
      */
     public function getCalculateBy()
     {
@@ -200,7 +197,7 @@ class BidSetAutoItem
     }
 
     /**
-     * @param CalculateByEnum $CalculateBy
+     * @param string $CalculateBy
      * @return \eLama\DirectApiV5\Dto\Bids\BidSetAutoItem
      */
     public function setCalculateBy($CalculateBy = null)
@@ -228,7 +225,7 @@ class BidSetAutoItem
     }
 
     /**
-     * @return ScopeEnum[]
+     * @return string[]
      */
     public function getScope()
     {
@@ -236,7 +233,7 @@ class BidSetAutoItem
     }
 
     /**
-     * @param ScopeEnum[] $Scope
+     * @param string[] $Scope
      * @return \eLama\DirectApiV5\Dto\Bids\BidSetAutoItem
      */
     public function setScope(array $Scope)
@@ -244,5 +241,4 @@ class BidSetAutoItem
       $this->Scope = $Scope;
       return $this;
     }
-
 }

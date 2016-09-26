@@ -2,21 +2,20 @@
 
 namespace eLama\DirectApiV5\Dto\Bids;
 
+use eLama\DirectApiV5\Dto\General\SelectionCriteria;
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
  */
-class BidsSelectionCriteria
+class BidsSelectionCriteria extends SelectionCriteria
 {
-
     /**
      * @JMS\Type("array<integer>")
      *
      * @var int[] $CampaignIds
      */
-    private $CampaignIds;
+    protected $CampaignIds;
 
     /**
      * @JMS\Type("array<integer>")
@@ -85,5 +84,4 @@ class BidsSelectionCriteria
       $this->KeywordIds = $KeywordIds;
       return $this;
     }
-
 }

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace eLama\DirectApiV5\Dto\Bids;
 
 use eLama\DirectApiV5\Dto\General\ResponseBody;

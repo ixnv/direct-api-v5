@@ -2,16 +2,13 @@
 
 namespace eLama\DirectApiV5\Dto\Bids;
 
-use eLama\DirectApiV5\Dto\General\PriorityEnum;
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
  */
 class BidGetItem extends BidBase
 {
-
     /**
      * @JMS\Type("integer")
      *
@@ -29,7 +26,7 @@ class BidGetItem extends BidBase
     /**
      * @JMS\Type("string")
      *
-     * @var PriorityEnum $StrategyPriority
+     * @var string $StrategyPriority
      */
     private $StrategyPriority;
 
@@ -112,7 +109,7 @@ class BidGetItem extends BidBase
     }
 
     /**
-     * @return PriorityEnum
+     * @return string
      */
     public function getStrategyPriority()
     {
@@ -120,7 +117,7 @@ class BidGetItem extends BidBase
     }
 
     /**
-     * @param PriorityEnum $StrategyPriority
+     * @param string $StrategyPriority
      * @return \eLama\DirectApiV5\Dto\Bids\BidGetItem
      */
     public function setStrategyPriority($StrategyPriority = null)
@@ -236,5 +233,4 @@ class BidGetItem extends BidBase
       $this->AuctionBids = $AuctionBids;
       return $this;
     }
-
 }

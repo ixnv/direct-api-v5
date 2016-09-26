@@ -4,13 +4,11 @@ namespace eLama\DirectApiV5\Dto\Bids;
 
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
 class ContextCoverageItem
 {
-
     /**
      * @JMS\Type("double")
      *
@@ -70,5 +68,4 @@ class ContextCoverageItem
       $this->Price = $Price;
       return $this;
     }
-
 }

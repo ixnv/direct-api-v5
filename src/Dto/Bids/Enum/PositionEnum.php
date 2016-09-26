@@ -1,12 +1,14 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Bids;
+namespace eLama\DirectApiV5\Dto\Bids\Enum;
 
+use eLama\DirectApiV5\Dto\General\BaseEnum;
 use JMS\Serializer\Annotation as JMS;
 
-class PositionEnum
+class PositionEnum extends BaseEnum
 {
     const __default = 'PREMIUMFIRST';
+
     const PREMIUMFIRST = 'PREMIUMFIRST';
     const PREMIUMBLOCK = 'PREMIUMBLOCK';
     const FOOTERFIRST = 'FOOTERFIRST';
@@ -18,6 +20,4 @@ class PositionEnum
     const P22 = 'P22';
     const P23 = 'P23';
     const P24 = 'P24';
-
-
 }
