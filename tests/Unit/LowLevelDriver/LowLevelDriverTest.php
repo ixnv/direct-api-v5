@@ -170,7 +170,7 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
      */
     private function createRequest($token = self::SOME_TOKEN, $useAgencyUnits = false)
     {
-        $request = new Request(
+        return new Request(
             $token,
             'service value',
             'method value',
@@ -178,8 +178,5 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
             'client login',
             $useAgencyUnits
         );
-
-        return $request;
     }
-
 }

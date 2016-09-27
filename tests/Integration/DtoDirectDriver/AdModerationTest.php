@@ -9,6 +9,7 @@ use eLama\DirectApiV5\Dto\Ad\TextAdAdd;
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
 use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
+use eLama\DirectApiV5\Dto\General\Enum\YesNoEnum;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\Dto\Keyword\AddRequest;
 use eLama\DirectApiV5\Dto\Keyword\KeywordAddItem;
@@ -117,7 +118,7 @@ class AdModerationTest extends AdGroupExistenceDependantTestCase
         $driver = static::createDtoDirectDriver();
 
         $adAddItem = new AdAddItem(static::$adGroupId);
-        $textAd = new TextAdAdd('some text', 'some title', Ad\YesNoEnum::NO);
+        $textAd = new TextAdAdd('some text', 'some title', YesNoEnum::NO);
         $textAd->setHref('http://example.com');
 
         $adAddItem->setTextAd($textAd);

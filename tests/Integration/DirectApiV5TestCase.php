@@ -4,7 +4,7 @@ namespace eLama\DirectApiV5\Test\Integration;
 
 use eLama\DirectApiV5\Dto\Campaign\CampaignGetItem;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
-use eLama\DirectApiV5\Dto\Campaign\CampaignTypeEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignTypeEnum;
 use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\DtoDirectDriver;
