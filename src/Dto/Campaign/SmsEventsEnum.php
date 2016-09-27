@@ -2,14 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\Campaign\Enum\SmsEventsEnum as SmsEventsEnumBase;
 
-class SmsEventsEnum
-{
-    const __default = 'MONITORING';
-    const MONITORING = 'MONITORING';
-    const MODERATION = 'MODERATION';
-    const MONEY_IN = 'MONEY_IN';
-    const MONEY_OUT = 'MONEY_OUT';
-    const FINISHED = 'FINISHED';
-}
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        SmsEventsEnum::class,
+        SmsEventsEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+
+class SmsEventsEnum extends SmsEventsEnumBase {}

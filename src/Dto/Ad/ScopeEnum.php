@@ -2,13 +2,18 @@
 
 namespace eLama\DirectApiV5\Dto\Ad;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\ScopeEnum as ScopeEnumBase;
 
-class ScopeEnum
-{
-    const __default = 'SEARCH';
-    const SEARCH = 'SEARCH';
-    const NETWORK = 'NETWORK';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        ScopeEnum::class,
+        ScopeEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-
-}
+/**
+ * @deprecated
+ */
+class ScopeEnum extends ScopeEnumBase {}

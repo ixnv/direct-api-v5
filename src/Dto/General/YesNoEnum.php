@@ -2,11 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\General;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\Enum\YesNoEnum as YesNoBaseEnum;
 
-class YesNoEnum extends BaseEnum
-{
-    const __default = 'YES';
-    const YES = 'YES';
-    const NO = 'NO';
-}
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        YesNoEnum::class,
+        YesNoBaseEnum::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+
+class YesNoEnum extends YesNoBaseEnum {}

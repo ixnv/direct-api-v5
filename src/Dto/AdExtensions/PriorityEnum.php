@@ -2,13 +2,18 @@
 
 namespace eLama\DirectApiV5\Dto\AdExtensions;
 
-use eLama\DirectApiV5\Dto\General\BaseEnum;
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\PriorityEnum as PriorityEnumBase;
 
-class PriorityEnum extends BaseEnum
-{
-    const __default = 'LOW';
-    const LOW = 'LOW';
-    const NORMAL = 'NORMAL';
-    const HIGH = 'HIGH';
-}
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        PriorityEnum::class,
+        PriorityEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+class PriorityEnum extends PriorityEnumBase {}

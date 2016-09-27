@@ -2,14 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\Campaign\Enum\RelevantKeywordsModeEnum as RelevantKeywordsModeEnumBase;
 
-class RelevantKeywordsModeEnum
-{
-    const __default = 'MINIMUM';
-    const MINIMUM = 'MINIMUM';
-    const OPTIMAL = 'OPTIMAL';
-    const MAXIMUM = 'MAXIMUM';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        RelevantKeywordsModeEnum::class,
+        RelevantKeywordsModeEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
+/**
+ * @deprecated
+ */
 
-}
+class RelevantKeywordsModeEnum extends RelevantKeywordsModeEnumBase {}

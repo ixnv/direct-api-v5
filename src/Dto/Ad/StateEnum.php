@@ -2,18 +2,15 @@
 
 namespace eLama\DirectApiV5\Dto\Ad;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\StateEnum as StateEnumBase;
 
-class StateEnum
-{
-    const __default = 'OFF';
-    const OFF = 'OFF';
-    const ON = 'ON';
-    const SUSPENDED = 'SUSPENDED';
-    const OFF_BY_MONITORING = 'OFF_BY_MONITORING';
-    const ARCHIVED = 'ARCHIVED';
-    const DELETED = 'DELETED';
-    const UNKNOWN = 'UNKNOWN';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        StateEnum::class,
+        StateEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-
-}
+class StateEnum extends StateEnumBase {}

@@ -2,14 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Changes;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\Changes\Enum\CampaignChangesInEnum as CampaignChangesInEnumBase;
 
-class CampaignChangesInEnum
-{
-    const __default = 'SELF';
-    const SELF = 'SELF';
-    const CHILDREN = 'CHILDREN';
-    const STAT = 'STAT';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        CampaignChangesInEnum::class,
+        CampaignChangesInEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
+/**
+ * @deprecated
+ */
 
-}
+class CampaignChangesInEnum extends CampaignChangesInEnumBase {}

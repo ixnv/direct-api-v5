@@ -1,15 +1,20 @@
 <?php
 
-
 namespace eLama\DirectApiV5\Dto\General;
 
-class StatusEnum extends BaseEnum
-{
-    const __default = 'ACCEPTED';
-    const ACCEPTED = 'ACCEPTED';
-    const DRAFT = 'DRAFT';
-    const MODERATION = 'MODERATION';
-    const PREACCEPTED = 'PREACCEPTED';
-    const REJECTED = 'REJECTED';
-    const UNKNOWN = 'UNKNOWN';
-}
+use eLama\DirectApiV5\Dto\General\Enum\StatusEnum as StatusBaseEnum;
+
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        StatusEnum::class,
+        StatusBaseEnum::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+
+class StatusEnum extends StatusBaseEnum {}

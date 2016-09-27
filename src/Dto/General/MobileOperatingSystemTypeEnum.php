@@ -1,15 +1,20 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\AdExtensions;
+namespace eLama\DirectApiV5\Dto\General;
 
-use eLama\DirectApiV5\Dto\General\BaseEnum;
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\Enum\MobileOperatingSystemTypeEnum as MobileOperatingSystemTypeBaseEnum;
 
-class MobileOperatingSystemTypeEnum extends BaseEnum
-{
-    const __default = 'IOS';
-    const IOS = 'IOS';
-    const ANDROID = 'ANDROID';
-    const OS_TYPE_OTHER = 'OS_TYPE_OTHER';
-    const OS_TYPE_UNKNOWN = 'OS_TYPE_UNKNOWN';
-}
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        MobileOperatingSystemTypeEnum::class,
+        MobileOperatingSystemTypeBaseEnum::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+
+class MobileOperatingSystemTypeEnum extends MobileOperatingSystemTypeBaseEnum {}

@@ -2,15 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Changes;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\Changes\Enum\CheckFieldEnum as CheckFieldEnumBase;
 
-class CheckFieldEnum
-{
-    const __default = 'CampaignIds';
-    const CampaignIds = 'CampaignIds';
-    const AdGroupIds = 'AdGroupIds';
-    const AdIds = 'AdIds';
-    const CampaignsStat = 'CampaignsStat';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        CheckFieldEnum::class,
+        CheckFieldEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
+/**
+ * @deprecated
+ */
 
-}
+class CheckFieldEnum extends CheckFieldEnumBase {}

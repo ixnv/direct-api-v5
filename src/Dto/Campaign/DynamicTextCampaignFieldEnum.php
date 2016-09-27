@@ -2,14 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\Campaign\Enum\DynamicTextCampaignFieldEnum as DynamicTextCampaignFieldEnumBase;
 
-class DynamicTextCampaignFieldEnum
-{
-    const __default = 'CounterIds';
-    const CounterIds = 'CounterIds';
-    const Settings = 'Settings';
-    const BiddingStrategy = 'BiddingStrategy';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        DynamicTextCampaignFieldEnum::class,
+        DynamicTextCampaignFieldEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
+/**
+ * @deprecated
+ */
 
-}
+class DynamicTextCampaignFieldEnum extends DynamicTextCampaignFieldEnumBase {}

@@ -2,12 +2,18 @@
 
 namespace eLama\DirectApiV5\Dto\Keyword;
 
-class PriorityEnum
-{
-    const __default = 'LOW';
-    const LOW = 'LOW';
-    const NORMAL = 'NORMAL';
-    const HIGH = 'HIGH';
+use eLama\DirectApiV5\Dto\General\PriorityEnum as PriorityEnumBase;
 
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        PriorityEnum::class,
+        PriorityEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-}
+/**
+ * @deprecated
+ */
+class PriorityEnum extends PriorityEnumBase {}

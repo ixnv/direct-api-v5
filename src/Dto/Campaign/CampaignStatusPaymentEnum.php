@@ -2,13 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignStatusPaymentEnum as CampaignStatusPaymentEnumBase;
 
-class CampaignStatusPaymentEnum
-{
-    const __default = 'DISALLOWED';
-    const DISALLOWED = 'DISALLOWED';
-    const ALLOWED = 'ALLOWED';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        CampaignStatusPaymentEnum::class,
+        CampaignStatusPaymentEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
+/**
+ * @deprecated
+ */
 
-}
+class CampaignStatusPaymentEnum extends CampaignStatusPaymentEnumBase {}

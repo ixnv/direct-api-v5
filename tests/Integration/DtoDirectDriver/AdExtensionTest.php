@@ -9,6 +9,7 @@ use eLama\DirectApiV5\Dto\AdExtensions\Callout;
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
 use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
+use eLama\DirectApiV5\Dto\General\Enum\YesNoEnum;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\DtoDirectDriver;
 use eLama\DirectApiV5\RequestBody\AddAdExtensionRequestBody;
@@ -88,7 +89,7 @@ class AdExtensionTest extends AdGroupExistenceDependantTestCase
     public function addAdWithAdExtension($extensionId)
     {
         $adAddItem = new Ad\AdAddItem(self::$adGroupId);
-        $textAd = new Ad\TextAdAdd(self::TEXT, self::TITLE, Ad\YesNoEnum::NO);
+        $textAd = new Ad\TextAdAdd(self::TEXT, self::TITLE, YesNoEnum::NO);
         $textAd->setAdExtensionIds([$extensionId]);
         $textAd->setHref('http://example.com');
 

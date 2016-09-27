@@ -1,15 +1,20 @@
 <?php
 
-
 namespace eLama\DirectApiV5\Dto\Keyword;
 
-use eLama\DirectApiV5\Dto\General\BaseEnum;
+use eLama\DirectApiV5\Dto\Keyword\Enum\KeywordStateEnum as KeywordStateEnumBase;
 
-class KeywordStateEnum extends BaseEnum
-{
-    const __default = 'OFF';
-    const OFF = 'OFF';
-    const ON = 'ON';
-    const SUSPENDED = 'SUSPENDED';
-    const UNKNOWN = 'UNKNOWN';
-}
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        KeywordStateEnum::class,
+        KeywordStateEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+
+class KeywordStateEnum extends KeywordStateEnumBase {}

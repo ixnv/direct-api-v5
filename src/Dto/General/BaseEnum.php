@@ -1,44 +1,20 @@
 <?php
 
-
 namespace eLama\DirectApiV5\Dto\General;
 
-use InvalidArgumentException;
-use ReflectionClass;
+use eLama\DirectApiV5\Dto\General\Enum\BaseEnum as GeneralEnum;
 
-class BaseEnum
-{
-    /**
-     * Метод возвращает все константы Enum'ов, кроме тех,
-     * что начинаются с двойного подчеркивания.
-     */
-    public static function values()
-    {
-        $reflection = new ReflectionClass(get_called_class());
-        $constants = $reflection->getConstants();
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        BaseEnum::class,
+        GeneralEnum::class
+    ),
+    E_USER_DEPRECATED
+);
 
-        $constants = array_filter(array_keys($constants), function($constantName) {
-            return strpos($constantName, '__') === false;
-        });
+/**
+ * @deprecated
+ */
 
-        return array_values($constants);
-    }
-
-    public static function inEnum($value)
-    {
-        return in_array($value, static::values(), true);
-    }
-
-    /**
-     * @param string $value
-     * @throws InvalidArgumentException
-     */
-    public static function throwExceptionIfNotInEnum($value)
-    {
-        if (!static::inEnum($value)) {
-            throw new InvalidArgumentException(
-                'Запрашиваемой константы не существует: ' . $value
-            );
-        }
-    }
-}
+class BaseEnum extends GeneralEnum {}

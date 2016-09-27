@@ -6,7 +6,7 @@ namespace eLama\DirectApiV5\RequestBody;
 use eLama\DirectApiV5\Dto\Vcard\GetResponseBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\Dto\Vcard\GetRequest;
-use eLama\DirectApiV5\Dto\Vcard\VCardFieldEnum;
+use eLama\DirectApiV5\Dto\Vcard\Enum\VCardFieldEnum;
 
 class GetVcardRequestBody extends GetRequestBody
 {
