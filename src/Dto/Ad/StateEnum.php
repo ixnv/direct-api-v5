@@ -13,4 +13,7 @@ trigger_error(
     E_USER_DEPRECATED
 );
 
+/**
+ * @deprecated
+ */
 class StateEnum extends StateEnumBase {}
