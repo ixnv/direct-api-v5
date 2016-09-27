@@ -3,7 +3,7 @@
 namespace eLama\DirectApiV5\Dto\Changes;
 
 use JMS\Serializer\Annotation as JMS;
-use eLama\DirectApiV5\Dto\Changes\Enum\CheckFieldEnum;
+use eLama\DirectApiV5\Dto\Changes\Enum\CheckFieldEnum as CheckFieldEnumNew;
 /**
  * @JMS\AccessType("public_method")
  */
@@ -60,10 +60,10 @@ class CheckRequest
         $this->setTimestamp($Timestamp);
         $this->FieldNames = $FieldNames ?:
             [
-                CheckFieldEnum::CampaignIds,
-                CheckFieldEnum::CampaignsStat,
-                CheckFieldEnum::AdGroupIds,
-                CheckFieldEnum::AdIds
+                CheckFieldEnumNew::CampaignIds,
+                CheckFieldEnumNew::CampaignsStat,
+                CheckFieldEnumNew::AdGroupIds,
+                CheckFieldEnumNew::AdIds
             ];
     }
 
