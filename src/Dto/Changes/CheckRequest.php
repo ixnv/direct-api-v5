@@ -3,7 +3,7 @@
 namespace eLama\DirectApiV5\Dto\Changes;
 
 use JMS\Serializer\Annotation as JMS;
-
+use eLama\DirectApiV5\Dto\Changes\Enum\CheckFieldEnum;
 /**
  * @JMS\AccessType("public_method")
  */
