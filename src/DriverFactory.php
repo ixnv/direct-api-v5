@@ -59,7 +59,7 @@ class DriverFactory
      * @param string $login
      * @param int $maxCacheSeconds
      * @param string[] $servicesToProxy    array of services, e.g. ['service']
-     * @param array|null $useAgencyUnitsMethods array like ['service' => ['method']], null for default
+     * @param array|null $methodsUsingAgencyUnits array like ['service' => ['method']], null for default
      * @return DtoDirectDriver
      */
     public function createProxyDriverWithFallback(
@@ -67,9 +67,9 @@ class DriverFactory
         $login,
         $maxCacheSeconds,
         array $servicesToProxy = ['campaigns'],
-        array $useAgencyUnitsMethods = null
+        array $methodsUsingAgencyUnits = null
     ) {
-        $driver = $this->createDriver($useAgencyUnitsMethods);
+        $driver = $this->createDriver($methodsUsingAgencyUnits);
 
         $proxyDriverWithFallback = new ProxyDriverWithFallback(
             new ProxyDriver(
@@ -92,7 +92,7 @@ class DriverFactory
      * @param string $login
      * @param int $maxCacheSeconds
      * @param string[] $servicesToProxy    array of services, e.g. ['service']
-     * @param array|null $useAgencyUnitsMethods array like ['service' => ['method']], null for default
+     * @param array|null $methodsUsingAgencyUnits array like ['service' => ['method']], null for default
      * @return DtoDirectDriver
      */
     public function createProxyDriver(
@@ -100,7 +100,7 @@ class DriverFactory
         $login,
         $maxCacheSeconds,
         array $servicesToProxy = ['campaigns'],
-        array $useAgencyUnitsMethods = null
+        array $methodsUsingAgencyUnits = null
     ) {
         $autoRoutingDriver = new AutoRoutingDriver(
             new ProxyDriver(
@@ -110,7 +110,7 @@ class DriverFactory
                 $maxCacheSeconds,
                 $servicesToProxy
             ),
-            $this->createDriver($useAgencyUnitsMethods)
+            $this->createDriver($methodsUsingAgencyUnits)
         );
 
         return new DtoDirectDriver($this->serializer, $autoRoutingDriver, $token, $login);
@@ -119,23 +119,23 @@ class DriverFactory
     /**
      * @param string $token
      * @param string $login
-     * @param array|null $useAgencyUnitsMethods array like ['service' => ['method']], null for default
+     * @param array|null $methodsUsingAgencyUnits array like ['service' => ['method']], null for default
      * @return DtoDirectDriver
      */
-    public function create($token, $login, array $useAgencyUnitsMethods = null)
+    public function create($token, $login, array $methodsUsingAgencyUnits = null)
     {
         if (empty($token) || empty($login)) {
             throw new \RuntimeException('Login and token must be specified');
         }
 
-        return new DtoDirectDriver($this->serializer, $this->createDriver($useAgencyUnitsMethods), $token, $login);
+        return new DtoDirectDriver($this->serializer, $this->createDriver($methodsUsingAgencyUnits), $token, $login);
     }
 
     /**
-     * @param array|null $allowedMethods
+     * @param array|null $methodsUsingAgencyUnits
      * @return AgencyUnitsFallbackDriver
      */
-    private function createDriver(array $allowedMethods = null)
+    private function createDriver(array $methodsUsingAgencyUnits = null)
     {
         return new AgencyUnitsFallbackDriver(
             new LowLevelDriver(
@@ -143,7 +143,7 @@ class DriverFactory
                 $this->logger,
                 $this->directUrl
             ),
-            $allowedMethods
+            $methodsUsingAgencyUnits
         );
     }
 
