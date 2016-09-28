@@ -119,7 +119,7 @@ class DriverFactory
     /**
      * @param string $token
      * @param string $login
-     * @param array|null $useAgencyUnitsMethods
+     * @param array|null $useAgencyUnitsMethods array like ['service' => ['method']], null for default
      * @return DtoDirectDriver
      */
     public function create($token, $login, array $useAgencyUnitsMethods = null)
