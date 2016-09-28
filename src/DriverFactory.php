@@ -27,7 +27,7 @@ class DriverFactory
 
     /** @var  LoggerInterface */
     private $logger;
-    
+
     /** @var string */
     private $directUrl;
 
@@ -58,16 +58,18 @@ class DriverFactory
      * @param string $token
      * @param string $login
      * @param int $maxCacheSeconds
-     * @param string[] $servicesToProxy
+     * @param string[] $servicesToProxy    array of services, e.g. ['service']
+     * @param array|null $useAgencyUnitsMethods array like ['service' => ['method']], null for default
      * @return DtoDirectDriver
      */
     public function createProxyDriverWithFallback(
         $token,
         $login,
         $maxCacheSeconds,
-        array $servicesToProxy = ['campaigns']
+        array $servicesToProxy = ['campaigns'],
+        array $useAgencyUnitsMethods = null
     ) {
-        $driver = $this->createDriver();
+        $driver = $this->createDriver($useAgencyUnitsMethods);
 
         $proxyDriverWithFallback = new ProxyDriverWithFallback(
             new ProxyDriver(
@@ -89,11 +91,17 @@ class DriverFactory
      * @param string $token
      * @param string $login
      * @param int $maxCacheSeconds
-     * @param string[] $servicesToProxy
+     * @param string[] $servicesToProxy    array of services, e.g. ['service']
+     * @param array|null $useAgencyUnitsMethods array like ['service' => ['method']], null for default
      * @return DtoDirectDriver
      */
-    public function createProxyDriver($token, $login, $maxCacheSeconds, array $servicesToProxy = ['campaigns'])
-    {
+    public function createProxyDriver(
+        $token,
+        $login,
+        $maxCacheSeconds,
+        array $servicesToProxy = ['campaigns'],
+        array $useAgencyUnitsMethods = null
+    ) {
         $autoRoutingDriver = new AutoRoutingDriver(
             new ProxyDriver(
                 $this->createGuzzleAdapter($this->client),
@@ -102,7 +110,7 @@ class DriverFactory
                 $maxCacheSeconds,
                 $servicesToProxy
             ),
-            $this->createDriver()
+            $this->createDriver($useAgencyUnitsMethods)
         );
 
         return new DtoDirectDriver($this->serializer, $autoRoutingDriver, $token, $login);
@@ -111,16 +119,16 @@ class DriverFactory
     /**
      * @param string $token
      * @param string $login
-     * @param array|null $allowedMethods
+     * @param array|null $useAgencyUnitsMethods
      * @return DtoDirectDriver
      */
-    public function create($token, $login, array $allowedMethods = null)
+    public function create($token, $login, array $useAgencyUnitsMethods = null)
     {
-        if(empty($token) || empty($login)) {
+        if (empty($token) || empty($login)) {
             throw new \RuntimeException('Login and token must be specified');
         }
 
-        return new DtoDirectDriver($this->serializer, $this->createDriver($allowedMethods), $token, $login);
+        return new DtoDirectDriver($this->serializer, $this->createDriver($useAgencyUnitsMethods), $token, $login);
     }
 
     /**
