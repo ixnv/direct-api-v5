@@ -23,7 +23,7 @@ class SetResult
     }
 
     /**
-     * @return BidActionResult
+     * @return BidActionResult[]
      */
     public function getSetResults()
     {
@@ -31,7 +31,7 @@ class SetResult
     }
 
     /**
-     * @param BidActionResult $SetResults
+     * @param BidActionResult[] $SetResults
      */
     public function setSetResults($SetResults)
     {

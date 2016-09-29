@@ -34,24 +34,6 @@ class BidsSelectionCriteria extends SelectionCriteria
     /**
      * @return int[]
      */
-    public function getCampaignIds()
-    {
-      return $this->CampaignIds;
-    }
-
-    /**
-     * @param int[] $CampaignIds
-     * @return \eLama\DirectApiV5\Dto\Bids\BidsSelectionCriteria
-     */
-    public function setCampaignIds(array $CampaignIds = null)
-    {
-      $this->CampaignIds = $CampaignIds;
-      return $this;
-    }
-
-    /**
-     * @return int[]
-     */
     public function getAdGroupIds()
     {
       return $this->AdGroupIds;

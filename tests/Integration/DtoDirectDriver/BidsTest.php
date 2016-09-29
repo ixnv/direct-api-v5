@@ -98,22 +98,4 @@ class BidsTest extends AdGroupExistenceDependantTestCase
 
         return $responseBody->getResult()->getAddResults()[0]->getId();
     }
-
-    /**
-     * @param int $id
-     * @return \eLama\DirectApiV5\Dto\General\ActionResult[]
-     */
-    private function suspendCertainKeyword($id)
-    {
-        $suspendRequest = new SuspendRequest(
-            (new IdsCriteria())->setIds([$id])
-        );
-
-        $suspendRequestBody = new SuspendKeywordsRequestBody($suspendRequest);
-
-        /** @var SuspendResponseBody $suspendResponseBody */
-        $suspendResponseBody = $this->driver->call($suspendRequestBody)->wait()->getUnserializedBody();
-
-        return $suspendResponseBody->getResult()->getSuspendResults();
-    }
 }

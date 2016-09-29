@@ -40,7 +40,7 @@ class BidSetAutoItem
     /**
      * @JMS\Type("string")
      *
-     * @var string $Position
+     * @var string $Position @see PositionEnum
      */
     private $Position;
 
