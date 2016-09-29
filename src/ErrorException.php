@@ -22,8 +22,7 @@ class ErrorException extends \Exception
         $result = new ErrorException($error->getErrorString(), $error->getErrorCode());
         $result->requestId = $error->getRequestId();
         $result->detail = $error->getErrorDetail();
-        //TODO Обрезать токен
-        $result->request = $request;
+        $result->request = $request->withSanitizedToken();
         $result->response = $response;
         throw $result;
     }
