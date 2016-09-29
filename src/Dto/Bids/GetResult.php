@@ -51,7 +51,7 @@ class GetResult extends GetResultGeneral
     }
 
     /**
-     * @return mixed
+     * @return BidGetItem[]
      */
     public function getItems()
     {

@@ -17,8 +17,4 @@ trigger_error(
  * @deprecated
  */
 
-class MobileAppAdActionEnum extends MobileAppAdActionBaseEnum 
-{
-    const __default = 'DOWNLOAD';
-    const DOWNLOAD = 'DOWNLOAD';
-}
+class MobileAppAdActionEnum extends MobileAppAdActionBaseEnum {}
