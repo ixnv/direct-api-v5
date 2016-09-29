@@ -32,6 +32,7 @@ class SelectionCriteria
 
     /**
      * @param int[] $campaignIds
+     * @return int[]
      */
     public function setCampaignIds(array $campaignIds = null)
     {
