@@ -3,7 +3,7 @@
 
 namespace eLama\DirectApiV5\RequestBody;
 
-use eLama\DirectApiV5\Dto\AdGroup\AdGroupFieldEnum;
+use eLama\DirectApiV5\Dto\AdGroup\Enum\AdGroupFieldEnum;
 use eLama\DirectApiV5\Dto\AdGroup\AdGroupsSelectionCriteria;
 use eLama\DirectApiV5\Dto\AdGroup\GetResponseBody;
 use eLama\DirectApiV5\Dto\AdGroup\GetRequest;

@@ -2,19 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\AdGroup;
 
-use eLama\DirectApiV5\Dto\General\BaseEnum;
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\AdGroup\Enum\MobileAppAdGroupFieldEnum as MobileAppAdGroupFieldEnumBase;
 
-class MobileAppAdGroupFieldEnum extends BaseEnum
-{
-    const __default = 'StoreUrl';
-    const StoreUrl = 'StoreUrl';
-    const TargetDeviceType = 'TargetDeviceType';
-    const TargetCarrier = 'TargetCarrier';
-    const TargetOperatingSystemVersion = 'TargetOperatingSystemVersion';
-    const AppIconModeration = 'AppIconModeration';
-    const AppAvailabilityStatus = 'AppAvailabilityStatus';
-    const AppOperatingSystemType = 'AppOperatingSystemType';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        MobileAppAdGroupFieldEnum::class,
+        MobileAppAdGroupFieldEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
+/**
+ * @deprecated
+ */
 
-}
+class MobileAppAdGroupFieldEnum extends MobileAppAdGroupFieldEnumBase {}

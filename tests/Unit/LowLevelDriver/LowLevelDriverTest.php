@@ -95,7 +95,7 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
      */
     public function doRequest_UnitsHeaderIsSet_LogsUnitsInfo()
     {
-        $this->guzzleAdapter->setResponse(['units' => '1/2/3']);
+        $this->guzzleAdapter->setResponse(['units' => '1/2/3'], '{}');
 
         $this->driver->execute(
             $this->createRequest(),
@@ -147,7 +147,7 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
      */
     public function doRequest_UseAgencyUnits_ResponseLogsUnitsInfo()
     {
-        $this->guzzleAdapter->setResponse(['units' => '1/2/3']);
+        $this->guzzleAdapter->setResponse(['units' => '1/2/3'], '{}');
 
         $this->driver->execute(
             $this->createRequest(self::SOME_TOKEN, $useAgencyUnits = true),
@@ -170,7 +170,7 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
      */
     private function createRequest($token = self::SOME_TOKEN, $useAgencyUnits = false)
     {
-        $request = new Request(
+        return new Request(
             $token,
             'service value',
             'method value',
@@ -178,8 +178,5 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
             'client login',
             $useAgencyUnits
         );
-
-        return $request;
     }
-
 }

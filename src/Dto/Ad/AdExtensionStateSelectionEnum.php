@@ -2,13 +2,18 @@
 
 namespace eLama\DirectApiV5\Dto\Ad;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\AdExtensionStateSelectionEnum as AdExtensionStateSelectionEnumBase;
 
-class AdExtensionStateSelectionEnum
-{
-    const __default = 'ON';
-    const ON = 'ON';
-    const DELETED = 'DELETED';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        AdExtensionStateSelectionEnum::class,
+        AdExtensionStateSelectionEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-
-}
+/**
+ * @deprecated
+ */
+class AdExtensionStateSelectionEnum extends AdExtensionStateSelectionEnumBase {}

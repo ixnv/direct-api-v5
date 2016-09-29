@@ -2,18 +2,18 @@
 
 namespace eLama\DirectApiV5\Dto\AdGroup;
 
-use eLama\DirectApiV5\Dto\General\BaseEnum;
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\AdGroup\Enum\AdGroupFieldEnum as AdGroupFieldEnumBase;
 
-class AdGroupFieldEnum extends BaseEnum
-{
-    const __default = 'Id';
-    const Id = 'Id';
-    const CampaignId = 'CampaignId';
-    const Status = 'Status';
-    const Name = 'Name';
-    const RegionIds = 'RegionIds';
-    const NegativeKeywords = 'NegativeKeywords';
-    const Type = 'Type';
-    const TrackingParams = 'TrackingParams';
-}
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        AdGroupFieldEnum::class,
+        AdGroupFieldEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+class AdGroupFieldEnum extends AdGroupFieldEnumBase {}

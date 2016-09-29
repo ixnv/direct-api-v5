@@ -2,11 +2,18 @@
 
 namespace eLama\DirectApiV5\Dto\Keyword;
 
-class ScopeEnum
-{
-    const __default = 'SEARCH';
-    const SEARCH = 'SEARCH';
-    const NETWORK = 'NETWORK';
+use eLama\DirectApiV5\Dto\General\ScopeEnum as ScopeEnumBase;
 
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        ScopeEnum::class,
+        ScopeEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-}
+/**
+ * @deprecated
+ */
+class ScopeEnum extends ScopeEnumBase {}

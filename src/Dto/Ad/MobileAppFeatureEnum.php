@@ -2,15 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Ad;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\Ad\Enum\MobileAppFeatureEnum as MobileAppFeatureEnumBase;
 
-class MobileAppFeatureEnum
-{
-    const __default = 'PRICE';
-    const PRICE = 'PRICE';
-    const ICON = 'ICON';
-    const CUSTOMER_RATING = 'CUSTOMER_RATING';
-    const RATINGS = 'RATINGS';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        MobileAppFeatureEnum::class,
+        MobileAppFeatureEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
+/**
+ * @deprecated
+ */
 
-}
+class MobileAppFeatureEnum extends MobileAppFeatureEnumBase {}

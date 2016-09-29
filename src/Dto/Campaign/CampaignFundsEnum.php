@@ -2,13 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignFundsEnum as CampaignFundsEnumBase;
 
-class CampaignFundsEnum
-{
-    const __default = 'CAMPAIGN_FUNDS';
-    const CAMPAIGN_FUNDS = 'CAMPAIGN_FUNDS';
-    const SHARED_ACCOUNT_FUNDS = 'SHARED_ACCOUNT_FUNDS';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        CampaignFundsEnum::class,
+        CampaignFundsEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
+/**
+ * @deprecated
+ */
 
-}
+class CampaignFundsEnum extends CampaignFundsEnumBase {}

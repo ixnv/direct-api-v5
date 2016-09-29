@@ -2,10 +2,18 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-//@todo возможно он должен быть один на всех, в папе general
-class YesNoEnum
-{
-    const __default = 'YES';
-    const YES = 'YES';
-    const NO = 'NO';
-}
+use eLama\DirectApiV5\Dto\General\YesNoEnum as YesNoEnumBase;
+
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        YesNoEnum::class,
+        YesNoEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+class YesNoEnum extends YesNoEnumBase {}

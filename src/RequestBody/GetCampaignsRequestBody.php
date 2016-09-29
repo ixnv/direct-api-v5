@@ -3,11 +3,11 @@
 
 namespace eLama\DirectApiV5\RequestBody;
 
-use eLama\DirectApiV5\Dto\Campaign\CampaignFieldEnum;
 use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
+use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignFieldEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\TextCampaignFieldEnum;
 use eLama\DirectApiV5\Dto\Campaign\GetResponseBody;
 use eLama\DirectApiV5\Dto\Campaign\GetRequest;
-use eLama\DirectApiV5\Dto\Campaign\TextCampaignFieldEnum;
 use eLama\DirectApiV5\Dto\General\LimitOffset;
 
 class GetCampaignsRequestBody extends GetRequestBody

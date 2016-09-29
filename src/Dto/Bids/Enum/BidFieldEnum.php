@@ -2,8 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\Bids\Enum;
 
-use eLama\DirectApiV5\Dto\General\BaseEnum;
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
 
 class BidFieldEnum extends BaseEnum
 {

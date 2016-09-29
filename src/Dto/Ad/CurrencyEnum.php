@@ -2,22 +2,18 @@
 
 namespace eLama\DirectApiV5\Dto\Ad;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\CurrencyEnum as CurrencyEnumBase;
+
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        CurrencyEnum::class,
+        CurrencyEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
 /**
- * @deprecated не использовать этот класс. Использовать General\CurrencyEnum
+ * @deprecated
  */
-class CurrencyEnum
-{
-    const __default = 'YND_FIXED';
-    const YND_FIXED = 'YND_FIXED';
-    const RUB = 'RUB';
-    const CHF = 'CHF';
-    const EUR = 'EUR';
-    const KZT = 'KZT';
-    const UAH = 'UAH';
-    const USD = 'USD';
-
-    const aTRY = 'TRY';
-    const TL = 'TRY';
-}
+class CurrencyEnum extends CurrencyEnumBase {}

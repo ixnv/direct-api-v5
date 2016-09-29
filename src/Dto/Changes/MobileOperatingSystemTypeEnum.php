@@ -2,15 +2,18 @@
 
 namespace eLama\DirectApiV5\Dto\Changes;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\MobileOperatingSystemTypeEnum as MobileOperatingSystemTypeEnumBase;
 
-class MobileOperatingSystemTypeEnum
-{
-    const __default = 'IOS';
-    const IOS = 'IOS';
-    const ANDROID = 'ANDROID';
-    const OS_TYPE_OTHER = 'OS_TYPE_OTHER';
-    const OS_TYPE_UNKNOWN = 'OS_TYPE_UNKNOWN';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        MobileOperatingSystemTypeEnum::class,
+        MobileOperatingSystemTypeEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-
-}
+/**
+ * @deprecated
+ */
+class MobileOperatingSystemTypeEnum extends MobileOperatingSystemTypeEnumBase {}

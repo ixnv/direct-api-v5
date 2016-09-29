@@ -2,12 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\Campaign\Enum\CheckPositionIntervalEnum as CheckPositionIntervalEnumBase;
 
-class CheckPositionIntervalEnum
-{
-    const __default = 60;
-    const INTERVAL_15 = 15;
-    const INTERVAL_30 = 30;
-    const INTERVAL_60 = 60;
-}
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        CheckPositionIntervalEnum::class,
+        CheckPositionIntervalEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+
+class CheckPositionIntervalEnum extends CheckPositionIntervalEnumBase {}

@@ -2,13 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\AdGroup;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\AdGroup\Enum\DynamicTextAdGroupFieldEnum as DynamicTextAdGroupFieldEnumBase;
 
-class DynamicTextAdGroupFieldEnum
-{
-    const __default = 'DomainUrl';
-    const DomainUrl = 'DomainUrl';
-    const DomainUrlProcessingStatus = 'DomainUrlProcessingStatus';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        DynamicTextAdGroupFieldEnum::class,
+        DynamicTextAdGroupFieldEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
+/**
+ * @deprecated
+ */
 
-}
+class DynamicTextAdGroupFieldEnum extends DynamicTextAdGroupFieldEnumBase {}

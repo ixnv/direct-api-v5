@@ -2,16 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignStatusGetEnum as CampaignStatusGetEnumBase;
 
-class CampaignStatusGetEnum
-{
-    const __default = 'ACCEPTED';
-    const ACCEPTED = 'ACCEPTED';
-    const DRAFT = 'DRAFT';
-    const MODERATION = 'MODERATION';
-    const REJECTED = 'REJECTED';
-    const UNKNOWN = 'UNKNOWN';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        CampaignStatusGetEnum::class,
+        CampaignStatusGetEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
+/**
+ * @deprecated
+ */
 
-}
+class CampaignStatusGetEnum extends CampaignStatusGetEnumBase {}

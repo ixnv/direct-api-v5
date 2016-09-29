@@ -2,15 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignTypeGetEnum as CampaignTypeGetEnumBase;
 
-class CampaignTypeGetEnum
-{
-    const __default = 'TEXT_CAMPAIGN';
-    const TEXT_CAMPAIGN = 'TEXT_CAMPAIGN';
-    const MOBILE_APP_CAMPAIGN = 'MOBILE_APP_CAMPAIGN';
-    const DYNAMIC_TEXT_CAMPAIGN = 'DYNAMIC_TEXT_CAMPAIGN';
-    const UNKNOWN = 'UNKNOWN';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        CampaignTypeGetEnum::class,
+        CampaignTypeGetEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
+/**
+ * @deprecated
+ */
 
-}
+class CampaignTypeGetEnum extends CampaignTypeGetEnumBase {}

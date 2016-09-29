@@ -6,7 +6,7 @@ namespace eLama\DirectApiV5\RequestBody;
 use eLama\DirectApiV5\Dto\Sitelink\GetResponseBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\Dto\Sitelink\GetRequest;
-use eLama\DirectApiV5\Dto\Sitelink\SitelinksSetFieldEnum;
+use eLama\DirectApiV5\Dto\Sitelink\Enum\SitelinksSetFieldEnum;
 
 class GetSitelinkRequestBody extends GetRequestBody
 {

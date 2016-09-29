@@ -2,16 +2,19 @@
 
 namespace eLama\DirectApiV5\Dto\Ad;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\Ad\Enum\AdCategoryEnum as AdCategoryEnumBase;
 
-class AdCategoryEnum
-{
-    const __default = 'ABORTION';
-    const ABORTION = 'ABORTION';
-    const ALCOHOL = 'ALCOHOL';
-    const BABY_FOOD = 'BABY_FOOD';
-    const DIETARY_SUPPLEMENTS = 'DIETARY_SUPPLEMENTS';
-    const MEDICINE = 'MEDICINE';
-    const PSEUDO_WEAPON = 'PSEUDO_WEAPON';
-    const TOBACCO = 'TOBACCO';
-}
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        AdCategoryEnum::class,
+        AdCategoryEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+
+class AdCategoryEnum extends AdCategoryEnumBase {}

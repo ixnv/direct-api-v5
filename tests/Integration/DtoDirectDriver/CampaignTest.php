@@ -11,14 +11,15 @@ use eLama\DirectApiV5\Dto\Campaign\ResumeRequest;
 use eLama\DirectApiV5\Dto\General\SuspendRequest;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignAddItem;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignNetworkStrategyAdd;
-use eLama\DirectApiV5\Dto\Campaign\TextCampaignNetworkStrategyTypeEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\TextCampaignNetworkStrategyTypeEnum;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignSearchStrategyAdd;
-use eLama\DirectApiV5\Dto\Campaign\TextCampaignSearchStrategyTypeEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\TextCampaignSearchStrategyTypeEnum;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignStrategyAdd;
 use eLama\DirectApiV5\Dto\Campaign\UpdateRequest;
 use eLama\DirectApiV5\Dto\General\AddResponseBody;
 use eLama\DirectApiV5\Dto\General\DeleteRequest;
 use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
+use eLama\DirectApiV5\Dto\General\Enum\YesNoEnum;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\Dto\General\ResumeResponseBody;
 use eLama\DirectApiV5\Dto\General\UpdateResponseBody;
@@ -321,11 +322,9 @@ class CampaignTest extends DirectApiV5TestCase
             $this->getScheduleParams()
         );
 
-        $timeTargetingAdd->setConsiderWorkingWeekends(Campaign\YesNoEnum::YES);
+        $timeTargetingAdd->setConsiderWorkingWeekends(YesNoEnum::YES);
         $timeTargetingAdd->setHolidaysSchedule(
-            (new Campaign\TimeTargetingOnPublicHolidays(
-                Campaign\YesNoEnum::NO)
-            )
+            (new Campaign\TimeTargetingOnPublicHolidays(YesNoEnum::NO))
                 ->setBidPercent(10)
                 ->setStartHour(1)
                 ->setEndHour(15)
@@ -342,10 +341,10 @@ class CampaignTest extends DirectApiV5TestCase
         $notification = new Campaign\Notification();
         $notification->setSmsSettings(
             (new Campaign\SmsSettings())->setEvents([
-                Campaign\SmsEventsEnum::MONEY_IN,
-                Campaign\SmsEventsEnum::FINISHED,
-                Campaign\SmsEventsEnum::MONEY_OUT,
-                Campaign\SmsEventsEnum::MONITORING,
+                Campaign\Enum\SmsEventsEnum::MONEY_IN,
+                Campaign\Enum\SmsEventsEnum::FINISHED,
+                Campaign\Enum\SmsEventsEnum::MONEY_OUT,
+                Campaign\Enum\SmsEventsEnum::MONITORING,
             ])->setTimeFrom('09:00')
                 ->setTimeTo('19:45')
         );
@@ -353,10 +352,10 @@ class CampaignTest extends DirectApiV5TestCase
         $notification->setEmailSettings(
             (new Campaign\EmailSettings())
                 ->setEmail('email@email.ru')
-                ->setCheckPositionInterval(Campaign\CheckPositionIntervalEnum::INTERVAL_15)
+                ->setCheckPositionInterval(Campaign\Enum\CheckPositionIntervalEnum::INTERVAL_15)
                 ->setWarningBalance(30)
-                ->setSendAccountNews(Campaign\YesNoEnum::YES)
-                ->setSendWarnings(Campaign\YesNoEnum::YES)
+                ->setSendAccountNews(YesNoEnum::YES)
+                ->setSendWarnings(YesNoEnum::YES)
         );
 
         return $notification;
@@ -539,7 +538,7 @@ class CampaignTest extends DirectApiV5TestCase
         $campaignAddItem->setDailyBudget(
             new Campaign\DailyBudget(
                 3000000000,
-                Campaign\DailyBudgetModeEnum::DISTRIBUTED
+                Campaign\Enum\DailyBudgetModeEnum::DISTRIBUTED
             )
         );
 

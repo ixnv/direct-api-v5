@@ -2,11 +2,18 @@
 
 namespace eLama\DirectApiV5\Dto\AdExtensions;
 
-use eLama\DirectApiV5\Dto\General\BaseEnum;
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\MobileAppAdActionEnum as MobileAppAdActionEnumBase;
 
-class MobileAppAdActionEnum extends BaseEnum
-{
-    const __default = 'DOWNLOAD';
-    const DOWNLOAD = 'DOWNLOAD';
-}
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        MobileAppAdActionEnum::class,
+        MobileAppAdActionEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+class MobileAppAdActionEnum extends MobileAppAdActionEnumBase {}

@@ -2,14 +2,18 @@
 
 namespace eLama\DirectApiV5\Dto\Ad;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\OperationEnum as OperationEnumBase;
 
-class OperationEnum
-{
-    const __default = 'ADD';
-    const ADD = 'ADD';
-    const REMOVE = 'REMOVE';
-    const SET = 'SET';
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        OperationEnum::class,
+        OperationEnumBase::class
+    ),
+    E_USER_DEPRECATED
+);
 
-
-}
+/**
+ * @deprecated
+ */
+class OperationEnum extends OperationEnumBase {}

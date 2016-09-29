@@ -3,12 +3,19 @@
 namespace eLama\DirectApiV5\Dto\General;
 
 use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\Enum\LangEnum as LangBaseEnum;
 
-class LangEnum extends BaseEnum
-{
-    const __default = 'RU';
-    const RU = 'RU';
-    const UK = 'UK';
-    const EN = 'EN';
-    const TR = 'TR';
-}
+trigger_error(
+    sprintf(
+        '%s is deprecated use %s',
+        LangEnum::class,
+        LangBaseEnum::class
+    ),
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated
+ */
+
+class LangEnum extends LangBaseEnum {}
