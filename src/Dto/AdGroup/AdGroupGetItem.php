@@ -116,7 +116,8 @@ class AdGroupGetItem extends AdGroupBase
     }
 
     /**
-     * @return StatusEnum
+     * @see StatusEnum
+     * @return string
      */
     public function getStatus()
     {
@@ -124,7 +125,8 @@ class AdGroupGetItem extends AdGroupBase
     }
 
     /**
-     * @param StatusEnum $Status
+     * @see StatusEnum
+     * @param string|null $Status
      * @return \eLama\DirectApiV5\Dto\AdGroup\AdGroupGetItem
      */
     public function setStatus($Status = null)
@@ -134,7 +136,8 @@ class AdGroupGetItem extends AdGroupBase
     }
 
     /**
-     * @return AdGroupTypesEnum
+     * @see AdGroupTypesEnum
+     * @return string
      */
     public function getType()
     {
@@ -142,7 +145,8 @@ class AdGroupGetItem extends AdGroupBase
     }
 
     /**
-     * @param AdGroupTypesEnum $Type
+     * @see AdGroupTypesEnum
+     * @param string|null $Type
      * @return \eLama\DirectApiV5\Dto\AdGroup\AdGroupGetItem
      */
     public function setType($Type = null)
