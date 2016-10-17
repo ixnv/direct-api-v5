@@ -25,9 +25,16 @@
     },
     "require-dev": {
         "phpunit/phpunit": "4.*",
+        "squizlabs/php_codesniffer": "2.7.0",
+        "phing/phing": "2.15.*",
         "hamcrest/hamcrest-php": "~2.0.0",
         "phake/phake": "~2.2.1"
     },
+
+    "config": {
+        "bin-dir": "bin"
+    },
+
     "suggest": {
         "elama/common-api": "Не то что бы советую ставить, но есть адаптер для получения токенов используя ExternalSystemAccount"
     }
