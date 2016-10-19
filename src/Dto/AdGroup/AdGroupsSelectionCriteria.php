@@ -60,7 +60,7 @@ class AdGroupsSelectionCriteria extends SelectionCriteria
      * @JMS\Type("array<string>")
      *
      * @var string[]
-     * @see StatusEnum
+     * @see AdGroupAppIconStatusSelectionEnum
      */
     private $AppIconStatuses;
 
@@ -157,7 +157,7 @@ class AdGroupsSelectionCriteria extends SelectionCriteria
     }
 
     /**
-     * @see StatusEnum
+     * @see AdGroupAppIconStatusSelectionEnum
      * @return string[]
      */
     public function getAppIconStatuses()
@@ -166,7 +166,7 @@ class AdGroupsSelectionCriteria extends SelectionCriteria
     }
 
     /**
-     * @see StatusEnum
+     * @see AdGroupAppIconStatusSelectionEnum
      * @param string[] $AppIconStatuses
      * @return \eLama\DirectApiV5\Dto\AdGroup\AdGroupsSelectionCriteria
      */
