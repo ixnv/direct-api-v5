@@ -61,7 +61,7 @@
         <exec executable="build/phpcs.sh" dir="${project.dir}" passthru="true" checkreturn="true"/>
     </target>
 
-    <target name="main" depends="init, composer-install, cache-clear, run-tests"/>
+    <target name="main" depends="init, composer-install, run-tests"/>
 
 </project>
 
