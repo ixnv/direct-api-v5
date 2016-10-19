@@ -188,7 +188,7 @@ class LowLevelDriver implements LowLevelDriverInterface
             'service' => $request->getService(),
             'request_body' => $requestBodyInJson,
             'token' => $request->getToken(),
-            'agencyUnitsUsed' => $request->usesAgencyUnits()
+            'agencyUnitsUsed' => $request->usesAgencyUnits() ? 'true' : 'false'
         ];
 
         return $context;
