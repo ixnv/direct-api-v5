@@ -33,48 +33,9 @@
         </exec>
     </target>
 
-    <target name="cache-clear">
-        <phingcall target="-cache-clear">
-            <property name="symfony_env" value="dev" />
-        </phingcall>
-        <phingcall target="-cache-clear">
-            <property name="symfony_env" value="prod" />
-        </phingcall>
-    </target>
-
-    <target name="-cache-clear">
-        <exec executable="sudo" dir="${project.dir}" passthru="true">
-            <arg value="-u"/>
-            <arg value="${project.www-user}"/>
-            <arg value="-E"/>
-            <arg value="${project.php_executable}"/>
-            <arg value="app/console"/>
-            <arg value="cache:clear"/>
-            <arg value="--env=${symfony_env}"/>
-        </exec>
-    </target>
-
-
     <target name="test-pull-request" depends="init">
         <phingcall target="composer-install"/>
-        <phingcall target="-remove-cache">
-            <property name="symfony_env" value="prod" />
-        </phingcall>
-        <phingcall target="-cache-clear">
-            <property name="symfony_env" value="prod" />
-        </phingcall>
         <phingcall target="run-tests"/>
-    </target>
-
-    <target name="-remove-cache" hidden="true">
-        <exec executable="sudo" dir="${project.dir}" passthru="true" checkreturn="true">
-            <arg value="-E"/>
-            <arg value="-u"/>
-            <arg value="${project.www-user}"/>
-            <arg value="rm"/>
-            <arg value="-rf"/>
-            <arg value="app/cache/${symfony_env}"/>
-        </exec>
     </target>
 
     <target name="run-tests">

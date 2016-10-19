@@ -6,10 +6,7 @@
     <exclude-pattern>*/tests/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
     <exclude-pattern>*/build/*</exclude-pattern>
-    <exclude-pattern>*/app/*</exclude-pattern>
     <exclude-pattern>*/bin/*</exclude-pattern>
-    <exclude-pattern>*/common-api/*</exclude-pattern>
-    <exclude-pattern>*/web/*</exclude-pattern>
 
     <rule ref="./Standard/"/>
     <!-- 2. General -->
