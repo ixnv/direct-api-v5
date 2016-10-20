@@ -12,36 +12,35 @@ class UpdateRequest
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\AdGroup\AdGroupUpdateItem")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\AdGroup\AdGroupUpdateItem>")
      *
-     * @var AdGroupUpdateItem $AdGroups
+     * @var AdGroupUpdateItem[] $AdGroups
      */
     private $AdGroups;
 
     /**
-     * @param AdGroupUpdateItem $AdGroups
+     * @param AdGroupUpdateItem[] $AdGroups
      */
-    public function __construct(AdGroupUpdateItem $AdGroups = null)
+    public function __construct(array $AdGroups = [])
     {
-      $this->AdGroups = $AdGroups;
+        $this->AdGroups = $AdGroups;
     }
 
     /**
-     * @return AdGroupUpdateItem
+     * @return AdGroupUpdateItem[]
      */
     public function getAdGroups()
     {
-      return $this->AdGroups;
+        return $this->AdGroups;
     }
 
     /**
-     * @param AdGroupUpdateItem $AdGroups
+     * @param AdGroupUpdateItem[] $AdGroups
      * @return \eLama\DirectApiV5\Dto\AdGroup\UpdateRequest
      */
-    public function setAdGroups(AdGroupUpdateItem $AdGroups)
+    public function setAdGroups(array $AdGroups)
     {
-      $this->AdGroups = $AdGroups;
-      return $this;
+        $this->AdGroups = $AdGroups;
+        return $this;
     }
-
 }
