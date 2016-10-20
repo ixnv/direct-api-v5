@@ -1,5 +1,4 @@
 vendor
-composer.lock
 
 /.idea
 !/.idea/.name
@@ -8,3 +7,5 @@ composer.lock
 !/.idea/misc.xml
 !/.idea/modules.xml
 !/.idea/vcs.xml
+bin
+!bin/composer.phar
