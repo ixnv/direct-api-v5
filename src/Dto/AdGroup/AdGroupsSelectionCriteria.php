@@ -83,7 +83,8 @@ class AdGroupsSelectionCriteria extends SelectionCriteria
     }
 
     /**
-     * @return AdGroupTypesEnum[]
+     * @see AdGroupTypesEnum
+     * @return string[]
      */
     public function getTypes()
     {
