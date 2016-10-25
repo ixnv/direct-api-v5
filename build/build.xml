@@ -20,7 +20,7 @@
         <echo message="Using ${project.php_executable} as php interpreter"/>
     </target>
 
-    <target name="composer-install">
+    <target name="composer-update">
         <echo>composer - version:</echo>
         <exec executable="${project.php_executable}" dir="${project.dir}" passthru="true">
             <arg value="bin/composer.phar"/>
@@ -28,13 +28,13 @@
         </exec>
         <exec executable="${project.php_executable}" dir="${project.dir}" passthru="true">
             <arg value="bin/composer.phar"/>
-            <arg value="install"/>
+            <arg value="update"/>
             <arg value="--profile"/>
         </exec>
     </target>
 
     <target name="test-pull-request" depends="init">
-        <phingcall target="composer-install"/>
+        <phingcall target="composer-update"/>
         <phingcall target="run-tests"/>
     </target>
 
@@ -54,14 +54,14 @@
         </if>
     </target>
 
-    <target name="code-style" depends="init, composer-install, php-code-sniffer">
+    <target name="code-style" depends="init, composer-update, php-code-sniffer">
     </target>
 
     <target name="php-code-sniffer">
         <exec executable="build/phpcs.sh" dir="${project.dir}" passthru="true" checkreturn="true"/>
     </target>
 
-    <target name="main" depends="init, composer-install, run-tests"/>
+    <target name="main" depends="init, composer-update, run-tests"/>
 
 </project>
 
