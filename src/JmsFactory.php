@@ -19,11 +19,27 @@ class JmsFactory
      */
     public function serializer()
     {
-        //TODO Настроить файловый кеш
-
-        return SerializerBuilder::create()
-            ->setPropertyNamingStrategy(new SerializedNameAnnotationStrategy(new IdenticalPropertyNamingStrategy()))
+        return $this->defaultSerializerBuilder()
             ->build();
     }
 
+    /**
+     * @param string $cacheDir
+     * @return \JMS\Serializer\Serializer
+     */
+    public function cachedSerializer($cacheDir)
+    {
+        return $this->defaultSerializerBuilder()
+            ->setCacheDir($cacheDir)
+            ->build();
+    }
+
+    /**
+     * @return SerializerBuilder
+     */
+    private function defaultSerializerBuilder()
+    {
+        return SerializerBuilder::create()
+            ->setPropertyNamingStrategy(new SerializedNameAnnotationStrategy(new IdenticalPropertyNamingStrategy()));
+    }
 }
