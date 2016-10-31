@@ -2,6 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
+use eLama\DirectApiV5\Dto\General\ActionResult;
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -9,7 +10,6 @@ use JMS\Serializer\Annotation as JMS;
  */
 class ArchiveResponse
 {
-
     /**
      * @JMS\Type("eLama\DirectApiV5\Dto\Campaign\ActionResult")
      *
