@@ -11,36 +11,36 @@ use JMS\Serializer\Annotation as JMS;
 class ArchiveResponse
 {
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Campaign\ActionResult")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\General\ActionResult>")
      *
-     * @var ActionResult $ArchiveResults
+     * @var ActionResult[] $ArchiveResults
      */
     private $ArchiveResults;
 
     /**
-     * @param ActionResult $ArchiveResults
+     * @param ActionResult[] $ArchiveResults
      */
-    public function __construct(ActionResult $ArchiveResults = null)
+    public function __construct(array $ArchiveResults)
     {
-      $this->ArchiveResults = $ArchiveResults;
+        $this->ArchiveResults = $ArchiveResults;
     }
 
     /**
-     * @return ActionResult
+     * @return ActionResult[]
      */
     public function getArchiveResults()
     {
-      return $this->ArchiveResults;
+        return $this->ArchiveResults;
     }
 
     /**
-     * @param ActionResult $ArchiveResults
-     * @return \eLama\DirectApiV5\Dto\Campaign\ArchiveResponse
+     * @param ActionResult[] $ArchiveResults
+     * @return ArchiveResponse
      */
-    public function setArchiveResults(ActionResult $ArchiveResults)
+    public function setArchiveResults(array $ArchiveResults)
     {
-      $this->ArchiveResults = $ArchiveResults;
-      return $this;
-    }
+        $this->ArchiveResults = $ArchiveResults;
 
+        return $this;
+    }
 }

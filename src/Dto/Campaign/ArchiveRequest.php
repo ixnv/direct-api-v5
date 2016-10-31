@@ -10,9 +10,8 @@ use JMS\Serializer\Annotation as JMS;
  */
 class ArchiveRequest
 {
-
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Campaign\IdsCriteria")
+     * @JMS\Type("eLama\DirectApiV5\Dto\General\IdsCriteria")
      *
      * @var IdsCriteria $SelectionCriteria
      */
@@ -23,7 +22,7 @@ class ArchiveRequest
      */
     public function __construct(IdsCriteria $SelectionCriteria = null)
     {
-      $this->SelectionCriteria = $SelectionCriteria;
+        $this->SelectionCriteria = $SelectionCriteria;
     }
 
     /**
@@ -31,17 +30,17 @@ class ArchiveRequest
      */
     public function getSelectionCriteria()
     {
-      return $this->SelectionCriteria;
+        return $this->SelectionCriteria;
     }
 
     /**
      * @param IdsCriteria $SelectionCriteria
-     * @return \eLama\DirectApiV5\Dto\Campaign\ArchiveRequest
+     * @return ArchiveRequest
      */
     public function setSelectionCriteria(IdsCriteria $SelectionCriteria)
     {
-      $this->SelectionCriteria = $SelectionCriteria;
-      return $this;
-    }
+        $this->SelectionCriteria = $SelectionCriteria;
 
+        return $this;
+    }
 }

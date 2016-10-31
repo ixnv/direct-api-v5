@@ -8,6 +8,7 @@ use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Campaign\CampaignUpdateItem;
 use eLama\DirectApiV5\Dto\Campaign\GetResponseBody;
 use eLama\DirectApiV5\Dto\Campaign\ResumeRequest;
+use eLama\DirectApiV5\Dto\General\ArchiveResponseBody;
 use eLama\DirectApiV5\Dto\General\SuspendRequest;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignAddItem;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignNetworkStrategyAdd;
@@ -22,6 +23,7 @@ use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
 use eLama\DirectApiV5\Dto\General\Enum\YesNoEnum;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\Dto\General\ResumeResponseBody;
+use eLama\DirectApiV5\Dto\General\UnarchiveResponseBody;
 use eLama\DirectApiV5\Dto\General\UpdateResponseBody;
 use eLama\DirectApiV5\DtoDirectDriver;
 use eLama\DirectApiV5\RequestBody\AddCampaignRequestBody;
@@ -260,9 +262,47 @@ class CampaignTest extends DirectApiV5TestCase
         return $id;
     }
 
+
     /**
      * @test
      * @depends resumeCampaign
+     */
+    public function archiveCampaign($id)
+    {
+        $request = new RequestBody\ArchiveCampaignRequestBody([$id]);
+
+        /** @var ArchiveResponseBody $responseBody */
+        $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
+        $archived = $responseBody->getResult()->getArchiveResults()[0];
+
+        // Невозможно заархивировать объект
+        // Для архивации кампания должна быть остановлена
+        // и с момента остановки и последнего показа должно пройти не менее 60 минут
+        assertThat($archived->getErrors()[0]->getCode(), is(8303));
+
+        return $id;
+    }
+
+    /**
+     * @test
+     * @depends archiveCampaign
+     */
+    public function unarchiveCampaign($id)
+    {
+        $request = new RequestBody\UnarchiveCampaignRequestBody([$id]);
+
+        /** @var UnarchiveResponseBody $responseBody */
+        $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
+        $archived = $responseBody->getResult()->getUnarchiveResults()[0];
+
+        assertThat($archived->getId(), $id);
+
+        return $id;
+    }
+
+    /**
+     * @test
+     * @depends unarchiveCampaign
      */
     public function deleteCampaign($id)
     {

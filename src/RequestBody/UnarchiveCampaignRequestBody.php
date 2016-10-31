@@ -2,14 +2,14 @@
 
 namespace eLama\DirectApiV5\RequestBody;
 
-use eLama\DirectApiV5\Dto\Campaign\ArchiveRequest;
-use eLama\DirectApiV5\Dto\General\ArchiveResponseBody;
+use eLama\DirectApiV5\Dto\Campaign\UnarchiveRequest;
+use eLama\DirectApiV5\Dto\General\UnarchiveResponseBody;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 
-class ArchiveCampaignRequestBody extends RequestBody
+class UnarchiveCampaignRequestBody extends RequestBody
 {
     /**
-     * @var ArchiveRequest
+     * @var UnarchiveRequest
      */
     private $request;
 
@@ -18,7 +18,7 @@ class ArchiveCampaignRequestBody extends RequestBody
      */
     public function __construct(array $ids)
     {
-        $this->request = new ArchiveRequest(new IdsCriteria($ids));
+        $this->request = new UnarchiveRequest(new IdsCriteria($ids));
     }
 
     public function resource()
@@ -28,7 +28,7 @@ class ArchiveCampaignRequestBody extends RequestBody
 
     public function resultClass()
     {
-        return ArchiveResponseBody::class;
+        return UnarchiveResponseBody::class;
     }
 
     public function params()
@@ -38,6 +38,6 @@ class ArchiveCampaignRequestBody extends RequestBody
 
     public function method()
     {
-        return 'archive';
+        return 'unarchive';
     }
 }
