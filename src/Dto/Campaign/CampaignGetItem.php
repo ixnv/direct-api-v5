@@ -348,7 +348,8 @@ class CampaignGetItem extends CampaignBase
     }
 
     /**
-     * @return CurrencyEnum
+     * @see CurrencyEnum
+     * @return string
      */
     public function getCurrency()
     {
@@ -356,7 +357,8 @@ class CampaignGetItem extends CampaignBase
     }
 
     /**
-     * @param CurrencyEnum $Currency
+     * @see CurrencyEnum
+     * @param string $Currency
      * @return \eLama\DirectApiV5\Dto\Campaign\CampaignGetItem
      */
     public function setCurrency($Currency = null)
