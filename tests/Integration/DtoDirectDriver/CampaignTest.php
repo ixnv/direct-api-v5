@@ -42,6 +42,7 @@ class CampaignTest extends DirectApiV5TestCase
     const NAME = 'тестовая кампания';
     const CHANGED_NAME = 'Измененное имя кампании';
     const WEEKLY_SPEND_LIMIT = 300000000;
+    const COULD_NOT_ARCHIVE_NOT_STOPPED_CAMPAIGN_ERROR_CODE = 8303;
 
     /** @var DtoDirectDriver */
     protected $driver;
@@ -275,10 +276,10 @@ class CampaignTest extends DirectApiV5TestCase
         $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
         $archived = $responseBody->getResult()->getArchiveResults()[0];
 
-        // Невозможно заархивировать объект
-        // Для архивации кампания должна быть остановлена
-        // и с момента остановки и последнего показа должно пройти не менее 60 минут
-        assertThat($archived->getErrors()[0]->getCode(), is(8303));
+        assertThat(
+            $archived->getErrors()[0]->getCode(),
+            is(self::COULD_NOT_ARCHIVE_NOT_STOPPED_CAMPAIGN_ERROR_CODE)
+        );
 
         return $id;
     }
