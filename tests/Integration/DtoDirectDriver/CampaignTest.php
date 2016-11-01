@@ -8,6 +8,7 @@ use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Campaign\CampaignUpdateItem;
 use eLama\DirectApiV5\Dto\Campaign\GetResponseBody;
 use eLama\DirectApiV5\Dto\Campaign\ResumeRequest;
+use eLama\DirectApiV5\Dto\General\ArchiveResponseBody;
 use eLama\DirectApiV5\Dto\General\SuspendRequest;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignAddItem;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignNetworkStrategyAdd;
@@ -22,6 +23,7 @@ use eLama\DirectApiV5\Dto\General\DeleteResponseBody;
 use eLama\DirectApiV5\Dto\General\Enum\YesNoEnum;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\Dto\General\ResumeResponseBody;
+use eLama\DirectApiV5\Dto\General\UnarchiveResponseBody;
 use eLama\DirectApiV5\Dto\General\UpdateResponseBody;
 use eLama\DirectApiV5\DtoDirectDriver;
 use eLama\DirectApiV5\RequestBody\AddCampaignRequestBody;
@@ -40,6 +42,7 @@ class CampaignTest extends DirectApiV5TestCase
     const NAME = 'тестовая кампания';
     const CHANGED_NAME = 'Измененное имя кампании';
     const WEEKLY_SPEND_LIMIT = 300000000;
+    const COULD_NOT_ARCHIVE_NOT_STOPPED_CAMPAIGN_ERROR_CODE = 8303;
 
     /** @var DtoDirectDriver */
     protected $driver;
@@ -260,9 +263,47 @@ class CampaignTest extends DirectApiV5TestCase
         return $id;
     }
 
+
     /**
      * @test
      * @depends resumeCampaign
+     */
+    public function archiveCampaign($id)
+    {
+        $request = new RequestBody\ArchiveCampaignRequestBody([$id]);
+
+        /** @var ArchiveResponseBody $responseBody */
+        $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
+        $archived = $responseBody->getResult()->getArchiveResults()[0];
+
+        assertThat(
+            $archived->getErrors()[0]->getCode(),
+            is(self::COULD_NOT_ARCHIVE_NOT_STOPPED_CAMPAIGN_ERROR_CODE)
+        );
+
+        return $id;
+    }
+
+    /**
+     * @test
+     * @depends archiveCampaign
+     */
+    public function unarchiveCampaign($id)
+    {
+        $request = new RequestBody\UnarchiveCampaignRequestBody([$id]);
+
+        /** @var UnarchiveResponseBody $responseBody */
+        $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
+        $archived = $responseBody->getResult()->getUnarchiveResults()[0];
+
+        assertThat($archived->getId(), $id);
+
+        return $id;
+    }
+
+    /**
+     * @test
+     * @depends unarchiveCampaign
      */
     public function deleteCampaign($id)
     {

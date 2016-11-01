@@ -2,6 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
+use eLama\DirectApiV5\Dto\General\ActionResult;
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -11,36 +12,37 @@ class UnarchiveResponse
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Campaign\ActionResult")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\General\ActionResult>")
      *
-     * @var ActionResult $UnarchiveResults
+     * @var ActionResult[] $UnarchiveResults
      */
     private $UnarchiveResults;
 
     /**
-     * @param ActionResult $UnarchiveResults
+     * @param ActionResult[] $UnarchiveResults
      */
-    public function __construct(ActionResult $UnarchiveResults = null)
+    public function __construct(array $UnarchiveResults)
     {
-      $this->UnarchiveResults = $UnarchiveResults;
+        $this->UnarchiveResults = $UnarchiveResults;
     }
 
     /**
-     * @return ActionResult
+     * @return ActionResult[]
      */
     public function getUnarchiveResults()
     {
-      return $this->UnarchiveResults;
+        return $this->UnarchiveResults;
     }
 
     /**
-     * @param ActionResult $UnarchiveResults
+     * @param ActionResult[] $UnarchiveResults
      * @return \eLama\DirectApiV5\Dto\Campaign\UnarchiveResponse
      */
-    public function setUnarchiveResults(ActionResult $UnarchiveResults)
+    public function setUnarchiveResults(array $UnarchiveResults)
     {
-      $this->UnarchiveResults = $UnarchiveResults;
-      return $this;
+        $this->UnarchiveResults = $UnarchiveResults;
+
+        return $this;
     }
 
 }
