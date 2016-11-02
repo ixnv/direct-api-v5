@@ -13,10 +13,5 @@ class CurrencyEnum extends BaseEnum
     const KZT = 'KZT';
     const UAH = 'UAH';
     const USD = 'USD';
-
-    /**
-     * @deprecated не использовать константу aTRY, использовать TL
-     */
-    const aTRY = 'TRY';
     const TL = 'TRY';
 }
