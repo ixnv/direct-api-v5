@@ -36,7 +36,7 @@ class AdGroupBase
      */
     public function getRegionIds()
     {
-      return $this->RegionIds;
+        return $this->RegionIds;
     }
 
     /**
@@ -45,8 +45,8 @@ class AdGroupBase
      */
     public function setRegionIds(array $RegionIds = null)
     {
-      $this->RegionIds = $RegionIds;
-      return $this;
+        $this->RegionIds = $RegionIds;
+        return $this;
     }
 
     /**
@@ -54,7 +54,7 @@ class AdGroupBase
      */
     public function getNegativeKeywords()
     {
-      return $this->NegativeKeywords;
+        return $this->NegativeKeywords;
     }
 
     /**
@@ -63,8 +63,12 @@ class AdGroupBase
      */
     public function setNegativeKeywords(ArrayOfString $NegativeKeywords = null)
     {
-      $this->NegativeKeywords = $NegativeKeywords;
-      return $this;
+        if (!$NegativeKeywords) {
+            $NegativeKeywords = new ArrayOfString();
+        }
+        $this->NegativeKeywords = $NegativeKeywords;
+
+        return $this;
     }
 
     /**
@@ -72,7 +76,7 @@ class AdGroupBase
      */
     public function getTrackingParams()
     {
-      return $this->TrackingParams;
+        return $this->TrackingParams;
     }
 
     /**
@@ -81,8 +85,8 @@ class AdGroupBase
      */
     public function setTrackingParams($TrackingParams = null)
     {
-      $this->TrackingParams = $TrackingParams;
-      return $this;
-    }
+        $this->TrackingParams = $TrackingParams;
 
+        return $this;
+    }
 }
