@@ -7,23 +7,23 @@ use JMS\Serializer\Annotation as JMS;
 
 class ClientFieldEnum extends BaseEnum
 {
-    const __DEFAULT = 'ACCOUNT_QUALITY';
+    const __default = 'AccountQuality';
 
-    const ACCOUNT_QUALITY = 'ACCOUNT_QUALITY';
-    const ARCHIVED = 'ARCHIVED';
-    const CLIENT_ID = 'CLIENT_ID';
-    const CLIENT_INFO = 'CLIENT_INFO';
-    const COUNTRY_ID = 'COUNTRY_ID';
-    const CREATED_AT = 'CREATED_AT';
-    const CURRENCY = 'CURRENCY';
-    const GRANTS = 'GRANTS';
-    const LOGIN = 'LOGIN';
-    const NOTIFICATION = 'NOTIFICATION';
-    const OVERDRAFT_SUM_AVAILABLE = 'OVERDRAFT_SUM_AVAILABLE';
-    const PHONE = 'PHONE';
-    const REPRESENTATIVES = 'REPRESENTATIVES';
-    const RESTRICTIONS = 'RESTRICTIONS';
-    const SETTINGS = 'SETTINGS';
-    const TYPE = 'TYPE';
-    const VAT_RATE = 'VAT_RATE';
+    const AccountQuality = 'AccountQuality';
+    const Archived = 'Archived';
+    const ClientId = 'ClientId';
+    const ClientInfo = 'ClientInfo';
+    const CountryId = 'CountryId';
+    const CreatedAt = 'CreatedAt';
+    const Currency = 'Currency';
+    const Grants = 'Grants';
+    const Login = 'Login';
+    const Notification = 'Notification';
+    const OverdraftSumAvailable = 'OverdraftSumAvailable';
+    const Phone = 'Phone';
+    const Representatives = 'Representatives';
+    const Restrictions = 'Restrictions';
+    const Settings = 'Settings';
+    const Type = 'Type';
+    const VatRate = 'VatRate';
 }
