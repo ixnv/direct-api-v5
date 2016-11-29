@@ -7,7 +7,7 @@ use JMS\Serializer\Annotation as JMS;
 
 class ClientFieldEnum extends BaseEnum
 {
-    const __DEFAULT = 'AccountQuality';
+    const __default = 'AccountQuality';
 
     const AccountQuality = 'AccountQuality';
     const Archived = 'Archived';
