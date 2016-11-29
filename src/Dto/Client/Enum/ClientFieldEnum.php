@@ -7,23 +7,23 @@ use JMS\Serializer\Annotation as JMS;
 
 class ClientFieldEnum extends BaseEnum
 {
-    const __DEFAULT = 'ACCOUNT_QUALITY';
+    const __DEFAULT = 'AccountQuality';
 
-    const ACCOUNT_QUALITY = 'ACCOUNT_QUALITY';
-    const ARCHIVED = 'ARCHIVED';
-    const CLIENT_ID = 'CLIENT_ID';
-    const CLIENT_INFO = 'CLIENT_INFO';
-    const COUNTRY_ID = 'COUNTRY_ID';
-    const CREATED_AT = 'CREATED_AT';
-    const CURRENCY = 'CURRENCY';
-    const GRANTS = 'GRANTS';
-    const LOGIN = 'LOGIN';
-    const NOTIFICATION = 'NOTIFICATION';
-    const OVERDRAFT_SUM_AVAILABLE = 'OVERDRAFT_SUM_AVAILABLE';
-    const PHONE = 'PHONE';
-    const REPRESENTATIVES = 'REPRESENTATIVES';
-    const RESTRICTIONS = 'RESTRICTIONS';
-    const SETTINGS = 'SETTINGS';
-    const TYPE = 'TYPE';
-    const VAT_RATE = 'VAT_RATE';
+    const ACCOUNT_QUALITY = 'AccountQuality';
+    const ARCHIVED = 'Archived';
+    const CLIENT_ID = 'ClientId';
+    const CLIENT_INFO = 'ClientInfo';
+    const COUNTRY_ID = 'CountryId';
+    const CREATED_AT = 'CreatedAt';
+    const CURRENCY = 'Currency';
+    const GRANTS = 'Grants';
+    const LOGIN = 'Login';
+    const NOTIFICATION = 'Notification';
+    const OVERDRAFT_SUM_AVAILABLE = 'OverdraftSumAvailable';
+    const PHONE = 'Phone';
+    const REPRESENTATIVES = 'Representatives';
+    const RESTRICTIONS = 'Restrictions';
+    const SETTINGS = 'Settings';
+    const TYPE = 'Type';
+    const VAT_RATE = 'VatRate';
 }
