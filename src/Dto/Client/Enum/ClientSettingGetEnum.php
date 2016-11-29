@@ -7,7 +7,7 @@ use JMS\Serializer\Annotation as JMS;
 
 class ClientSettingGetEnum extends BaseEnum
 {
-    const __default = 'CORRECT_TYPOS_AUTOMATICALLY';
+    const __DEFAULT = 'CORRECT_TYPOS_AUTOMATICALLY';
 
     const CORRECT_TYPOS_AUTOMATICALLY = 'CORRECT_TYPOS_AUTOMATICALLY';
     const DISPLAY_STORE_RATING = 'DISPLAY_STORE_RATING';

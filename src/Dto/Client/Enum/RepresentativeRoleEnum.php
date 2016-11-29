@@ -7,7 +7,7 @@ use JMS\Serializer\Annotation as JMS;
 
 class RepresentativeRoleEnum extends BaseEnum
 {
-    const __default = 'CHIEF';
+    const __DEFAULT = 'CHIEF';
 
     const CHIEF = 'CHIEF';
     const DELEGATE = 'DELEGATE';

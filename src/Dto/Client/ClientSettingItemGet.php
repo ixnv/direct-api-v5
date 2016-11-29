@@ -33,8 +33,8 @@ class ClientSettingItemGet
      */
     public function __construct($Option = null, $Value = null)
     {
-      $this->Option = $Option;
-      $this->Value = $Value;
+        $this->Option = $Option;
+        $this->Value = $Value;
     }
 
     /**
@@ -42,7 +42,7 @@ class ClientSettingItemGet
      */
     public function getOption()
     {
-      return $this->Option;
+        return $this->Option;
     }
 
     /**
@@ -51,8 +51,8 @@ class ClientSettingItemGet
      */
     public function setOption($Option)
     {
-      $this->Option = $Option;
-      return $this;
+        $this->Option = $Option;
+        return $this;
     }
 
     /**
@@ -60,7 +60,7 @@ class ClientSettingItemGet
      */
     public function getValue()
     {
-      return $this->Value;
+        return $this->Value;
     }
 
     /**
@@ -69,8 +69,7 @@ class ClientSettingItemGet
      */
     public function setValue($Value)
     {
-      $this->Value = $Value;
-      return $this;
+        $this->Value = $Value;
+        return $this;
     }
-
 }

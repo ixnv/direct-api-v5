@@ -7,7 +7,7 @@ use JMS\Serializer\Annotation as JMS;
 
 class PrivilegeEnum extends BaseEnum
 {
-    const __default = 'EDIT_CAMPAIGNS';
+    const __DEFAULT = 'EDIT_CAMPAIGNS';
 
     const EDIT_CAMPAIGNS = 'EDIT_CAMPAIGNS';
     const IMPORT_XLS = 'IMPORT_XLS';

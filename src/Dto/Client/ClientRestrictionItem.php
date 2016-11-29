@@ -32,8 +32,8 @@ class ClientRestrictionItem
      */
     public function __construct($Element = null, $Value = null)
     {
-      $this->Element = $Element;
-      $this->Value = $Value;
+        $this->Element = $Element;
+        $this->Value = $Value;
     }
 
     /**
@@ -41,7 +41,7 @@ class ClientRestrictionItem
      */
     public function getElement()
     {
-      return $this->Element;
+        return $this->Element;
     }
 
     /**
@@ -50,8 +50,8 @@ class ClientRestrictionItem
      */
     public function setElement($Element)
     {
-      $this->Element = $Element;
-      return $this;
+        $this->Element = $Element;
+        return $this;
     }
 
     /**
@@ -59,7 +59,7 @@ class ClientRestrictionItem
      */
     public function getValue()
     {
-      return $this->Value;
+        return $this->Value;
     }
 
     /**
@@ -68,8 +68,7 @@ class ClientRestrictionItem
      */
     public function setValue($Value)
     {
-      $this->Value = $Value;
-      return $this;
+        $this->Value = $Value;
+        return $this;
     }
-
 }

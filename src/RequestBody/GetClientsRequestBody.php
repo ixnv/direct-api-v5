@@ -10,7 +10,8 @@ use eLama\DirectApiV5\Dto\General\LimitOffset;
 
 class GetClientsRequestBody extends GetRequestBody
 {
-    public function __construct() {
+    public function __construct()
+    {
         $this->request = new GetRequest(
             ClientFieldEnum::values()
         );

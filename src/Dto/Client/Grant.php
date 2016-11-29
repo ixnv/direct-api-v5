@@ -40,8 +40,8 @@ class Grant
      */
     public function __construct($Privilege = null, $Value = null)
     {
-      $this->Privilege = $Privilege;
-      $this->Value = $Value;
+        $this->Privilege = $Privilege;
+        $this->Value = $Value;
     }
 
     /**
@@ -49,7 +49,7 @@ class Grant
      */
     public function getAgency()
     {
-      return $this->Agency;
+        return $this->Agency;
     }
 
     /**
@@ -58,8 +58,8 @@ class Grant
      */
     public function setAgency($Agency = null)
     {
-      $this->Agency = $Agency;
-      return $this;
+        $this->Agency = $Agency;
+        return $this;
     }
 
     /**
@@ -68,7 +68,7 @@ class Grant
      */
     public function getPrivilege()
     {
-      return $this->Privilege;
+        return $this->Privilege;
     }
 
     /**
@@ -78,8 +78,8 @@ class Grant
      */
     public function setPrivilege($Privilege)
     {
-      $this->Privilege = $Privilege;
-      return $this;
+        $this->Privilege = $Privilege;
+        return $this;
     }
 
     /**
@@ -88,7 +88,7 @@ class Grant
      */
     public function getValue()
     {
-      return $this->Value;
+        return $this->Value;
     }
 
     /**
@@ -98,8 +98,7 @@ class Grant
      */
     public function setValue($Value)
     {
-      $this->Value = $Value;
-      return $this;
+        $this->Value = $Value;
+        return $this;
     }
-
 }

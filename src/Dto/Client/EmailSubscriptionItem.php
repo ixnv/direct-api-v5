@@ -31,8 +31,8 @@ class EmailSubscriptionItem
      */
     public function __construct($Option = null, $Value = null)
     {
-      $this->Option = $Option;
-      $this->Value = $Value;
+        $this->Option = $Option;
+        $this->Value = $Value;
     }
 
     /**
@@ -40,7 +40,7 @@ class EmailSubscriptionItem
      */
     public function getOption()
     {
-      return $this->Option;
+        return $this->Option;
     }
 
     /**
@@ -49,8 +49,8 @@ class EmailSubscriptionItem
      */
     public function setOption($Option)
     {
-      $this->Option = $Option;
-      return $this;
+        $this->Option = $Option;
+        return $this;
     }
 
     /**
@@ -58,7 +58,7 @@ class EmailSubscriptionItem
      */
     public function getValue()
     {
-      return $this->Value;
+        return $this->Value;
     }
 
     /**
@@ -67,8 +67,7 @@ class EmailSubscriptionItem
      */
     public function setValue($Value)
     {
-      $this->Value = $Value;
-      return $this;
+        $this->Value = $Value;
+        return $this;
     }
-
 }

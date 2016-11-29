@@ -47,10 +47,10 @@ class Notification
      */
     public function __construct($Email = null, array $EmailSubscriptions = null, $Lang = null, $SmsPhoneNumber = null)
     {
-      $this->Email = $Email;
-      $this->EmailSubscriptions = $EmailSubscriptions;
-      $this->Lang = $Lang;
-      $this->SmsPhoneNumber = $SmsPhoneNumber;
+        $this->Email = $Email;
+        $this->EmailSubscriptions = $EmailSubscriptions;
+        $this->Lang = $Lang;
+        $this->SmsPhoneNumber = $SmsPhoneNumber;
     }
 
     /**
@@ -58,7 +58,7 @@ class Notification
      */
     public function getEmail()
     {
-      return $this->Email;
+        return $this->Email;
     }
 
     /**
@@ -67,8 +67,8 @@ class Notification
      */
     public function setEmail($Email)
     {
-      $this->Email = $Email;
-      return $this;
+        $this->Email = $Email;
+        return $this;
     }
 
     /**
@@ -76,7 +76,7 @@ class Notification
      */
     public function getEmailSubscriptions()
     {
-      return $this->EmailSubscriptions;
+        return $this->EmailSubscriptions;
     }
 
     /**
@@ -85,8 +85,8 @@ class Notification
      */
     public function setEmailSubscriptions(array $EmailSubscriptions)
     {
-      $this->EmailSubscriptions = $EmailSubscriptions;
-      return $this;
+        $this->EmailSubscriptions = $EmailSubscriptions;
+        return $this;
     }
 
     /**
@@ -94,7 +94,7 @@ class Notification
      */
     public function getLang()
     {
-      return $this->Lang;
+        return $this->Lang;
     }
 
     /**
@@ -103,8 +103,8 @@ class Notification
      */
     public function setLang($Lang)
     {
-      $this->Lang = $Lang;
-      return $this;
+        $this->Lang = $Lang;
+        return $this;
     }
 
     /**
@@ -112,7 +112,7 @@ class Notification
      */
     public function getSmsPhoneNumber()
     {
-      return $this->SmsPhoneNumber;
+        return $this->SmsPhoneNumber;
     }
 
     /**
@@ -121,8 +121,8 @@ class Notification
      */
     public function setSmsPhoneNumber($SmsPhoneNumber)
     {
-      $this->SmsPhoneNumber = $SmsPhoneNumber;
-      return $this;
+        $this->SmsPhoneNumber = $SmsPhoneNumber;
+        return $this;
     }
 
 }

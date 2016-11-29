@@ -24,7 +24,7 @@ class GetRequest extends GetRequestGeneral
      */
     public function __construct($FieldNames = null)
     {
-      $this->FieldNames = $FieldNames;
+        $this->FieldNames = $FieldNames;
     }
 
     /**
@@ -32,7 +32,7 @@ class GetRequest extends GetRequestGeneral
      */
     public function getFieldNames()
     {
-      return $this->FieldNames;
+        return $this->FieldNames;
     }
 
     /**
@@ -41,8 +41,7 @@ class GetRequest extends GetRequestGeneral
      */
     public function setFieldNames($FieldNames)
     {
-      $this->FieldNames = $FieldNames;
-      return $this;
+        $this->FieldNames = $FieldNames;
+        return $this;
     }
-
 }

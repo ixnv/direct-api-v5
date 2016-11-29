@@ -7,7 +7,7 @@ use JMS\Serializer\Annotation as JMS;
 
 class ClientRestrictionEnum extends BaseEnum
 {
-    const __default = 'ADGROUPS_TOTAL_PER_CAMPAIGN';
+    const __DEFAULT = 'ADGROUPS_TOTAL_PER_CAMPAIGN';
 
     const ADGROUPS_TOTAL_PER_CAMPAIGN = 'ADGROUPS_TOTAL_PER_CAMPAIGN';
     const ADS_TOTAL_PER_ADGROUP = 'ADS_TOTAL_PER_ADGROUP';

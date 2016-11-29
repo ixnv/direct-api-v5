@@ -29,7 +29,7 @@ class ClientBaseItem
      */
     public function getClientInfo()
     {
-      return $this->ClientInfo;
+        return $this->ClientInfo;
     }
 
     /**
@@ -38,9 +38,9 @@ class ClientBaseItem
      */
     public function setClientInfo($ClientInfo = null)
     {
-      $this->ClientInfo = $ClientInfo;
+        $this->ClientInfo = $ClientInfo;
 
-      return $this;
+        return $this;
     }
 
     /**
@@ -48,7 +48,7 @@ class ClientBaseItem
      */
     public function getPhone()
     {
-      return $this->Phone;
+        return $this->Phone;
     }
 
     /**
@@ -57,8 +57,7 @@ class ClientBaseItem
      */
     public function setPhone($Phone = null)
     {
-      $this->Phone = $Phone;
-      return $this;
+        $this->Phone = $Phone;
+        return $this;
     }
-
 }

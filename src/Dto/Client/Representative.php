@@ -38,9 +38,9 @@ class Representative
      */
     public function __construct($Email = null, $Login = null, $Role = null)
     {
-      $this->Email = $Email;
-      $this->Login = $Login;
-      $this->Role = $Role;
+        $this->Email = $Email;
+        $this->Login = $Login;
+        $this->Role = $Role;
     }
 
     /**
@@ -48,7 +48,7 @@ class Representative
      */
     public function getEmail()
     {
-      return $this->Email;
+        return $this->Email;
     }
 
     /**
@@ -57,8 +57,8 @@ class Representative
      */
     public function setEmail($Email)
     {
-      $this->Email = $Email;
-      return $this;
+        $this->Email = $Email;
+        return $this;
     }
 
     /**
@@ -66,7 +66,7 @@ class Representative
      */
     public function getLogin()
     {
-      return $this->Login;
+        return $this->Login;
     }
 
     /**
@@ -75,8 +75,8 @@ class Representative
      */
     public function setLogin($Login)
     {
-      $this->Login = $Login;
-      return $this;
+        $this->Login = $Login;
+        return $this;
     }
 
     /**
@@ -85,7 +85,7 @@ class Representative
      */
     public function getRole()
     {
-      return $this->Role;
+        return $this->Role;
     }
 
     /**
@@ -95,8 +95,7 @@ class Representative
      */
     public function setRole($Role)
     {
-      $this->Role = $Role;
-      return $this;
+        $this->Role = $Role;
+        return $this;
     }
-
 }

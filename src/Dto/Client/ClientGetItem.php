@@ -121,7 +121,7 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getAccountQuality()
     {
-      return $this->AccountQuality;
+        return $this->AccountQuality;
     }
 
     /**
@@ -130,8 +130,8 @@ class ClientGetItem extends ClientBaseItem
      */
     public function setAccountQuality($AccountQuality = null)
     {
-      $this->AccountQuality = $AccountQuality;
-      return $this;
+        $this->AccountQuality = $AccountQuality;
+        return $this;
     }
 
     /**
@@ -140,7 +140,7 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getArchived()
     {
-      return $this->Archived;
+        return $this->Archived;
     }
 
     /**
@@ -149,8 +149,8 @@ class ClientGetItem extends ClientBaseItem
      */
     public function setArchived($Archived = null)
     {
-      $this->Archived = $Archived;
-      return $this;
+        $this->Archived = $Archived;
+        return $this;
     }
 
     /**
@@ -158,7 +158,7 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getClientId()
     {
-      return $this->ClientId;
+        return $this->ClientId;
     }
 
     /**
@@ -167,8 +167,8 @@ class ClientGetItem extends ClientBaseItem
      */
     public function setClientId($ClientId = null)
     {
-      $this->ClientId = $ClientId;
-      return $this;
+        $this->ClientId = $ClientId;
+        return $this;
     }
 
     /**
@@ -176,7 +176,7 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getCountryId()
     {
-      return $this->CountryId;
+        return $this->CountryId;
     }
 
     /**
@@ -185,8 +185,8 @@ class ClientGetItem extends ClientBaseItem
      */
     public function setCountryId($CountryId = null)
     {
-      $this->CountryId = $CountryId;
-      return $this;
+        $this->CountryId = $CountryId;
+        return $this;
     }
 
     /**
@@ -194,7 +194,7 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getCreatedAt()
     {
-      return $this->CreatedAt;
+        return $this->CreatedAt;
     }
 
     /**
@@ -203,8 +203,8 @@ class ClientGetItem extends ClientBaseItem
      */
     public function setCreatedAt($CreatedAt = null)
     {
-      $this->CreatedAt = $CreatedAt;
-      return $this;
+        $this->CreatedAt = $CreatedAt;
+        return $this;
     }
 
     /**
@@ -212,7 +212,7 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getCurrency()
     {
-      return $this->Currency;
+        return $this->Currency;
     }
 
     /**
@@ -221,8 +221,8 @@ class ClientGetItem extends ClientBaseItem
      */
     public function setCurrency($Currency = null)
     {
-      $this->Currency = $Currency;
-      return $this;
+        $this->Currency = $Currency;
+        return $this;
     }
 
     /**
@@ -230,7 +230,7 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getGrants()
     {
-      return $this->Grants;
+        return $this->Grants;
     }
 
     /**
@@ -239,8 +239,8 @@ class ClientGetItem extends ClientBaseItem
      */
     public function setGrants(array $Grants = null)
     {
-      $this->Grants = $Grants;
-      return $this;
+        $this->Grants = $Grants;
+        return $this;
     }
 
     /**
@@ -248,7 +248,7 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getLogin()
     {
-      return $this->Login;
+        return $this->Login;
     }
 
     /**
@@ -257,8 +257,8 @@ class ClientGetItem extends ClientBaseItem
      */
     public function setLogin($Login = null)
     {
-      $this->Login = $Login;
-      return $this;
+        $this->Login = $Login;
+        return $this;
     }
 
     /**
@@ -266,7 +266,7 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getNotification()
     {
-      return $this->Notification;
+        return $this->Notification;
     }
 
     /**
@@ -275,8 +275,8 @@ class ClientGetItem extends ClientBaseItem
      */
     public function setNotification(Notification $Notification = null)
     {
-      $this->Notification = $Notification;
-      return $this;
+        $this->Notification = $Notification;
+        return $this;
     }
 
     /**
@@ -284,7 +284,7 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getOverdraftSumAvailable()
     {
-      return $this->OverdraftSumAvailable;
+        return $this->OverdraftSumAvailable;
     }
 
     /**
@@ -293,8 +293,8 @@ class ClientGetItem extends ClientBaseItem
      */
     public function setOverdraftSumAvailable($OverdraftSumAvailable = null)
     {
-      $this->OverdraftSumAvailable = $OverdraftSumAvailable;
-      return $this;
+        $this->OverdraftSumAvailable = $OverdraftSumAvailable;
+        return $this;
     }
 
     /**
@@ -302,7 +302,7 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getRepresentatives()
     {
-      return $this->Representatives;
+        return $this->Representatives;
     }
 
     /**
@@ -311,8 +311,8 @@ class ClientGetItem extends ClientBaseItem
      */
     public function setRepresentatives(array $Representatives = null)
     {
-      $this->Representatives = $Representatives;
-      return $this;
+        $this->Representatives = $Representatives;
+        return $this;
     }
 
     /**
@@ -320,7 +320,7 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getRestrictions()
     {
-      return $this->Restrictions;
+        return $this->Restrictions;
     }
 
     /**
@@ -329,8 +329,8 @@ class ClientGetItem extends ClientBaseItem
      */
     public function setRestrictions(array $Restrictions = null)
     {
-      $this->Restrictions = $Restrictions;
-      return $this;
+        $this->Restrictions = $Restrictions;
+        return $this;
     }
 
     /**
@@ -338,7 +338,7 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getSettings()
     {
-      return $this->Settings;
+        return $this->Settings;
     }
 
     /**
@@ -347,8 +347,8 @@ class ClientGetItem extends ClientBaseItem
      */
     public function setSettings(array $Settings = null)
     {
-      $this->Settings = $Settings;
-      return $this;
+        $this->Settings = $Settings;
+        return $this;
     }
 
     /**
@@ -356,7 +356,7 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getType()
     {
-      return $this->Type;
+        return $this->Type;
     }
 
     /**
@@ -365,8 +365,8 @@ class ClientGetItem extends ClientBaseItem
      */
     public function setType($Type = null)
     {
-      $this->Type = $Type;
-      return $this;
+        $this->Type = $Type;
+        return $this;
     }
 
     /**
@@ -374,7 +374,7 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getVatRate()
     {
-      return $this->VatRate;
+        return $this->VatRate;
     }
 
     /**
@@ -383,8 +383,7 @@ class ClientGetItem extends ClientBaseItem
      */
     public function setVatRate($VatRate = null)
     {
-      $this->VatRate = $VatRate;
-      return $this;
+        $this->VatRate = $VatRate;
+        return $this;
     }
-
 }
