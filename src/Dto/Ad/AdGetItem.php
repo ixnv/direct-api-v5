@@ -2,12 +2,13 @@
 
 namespace eLama\DirectApiV5\Dto\Ad;
 
-use eLama\Advisor\Domain\Direct\Ad\Ad;
-use eLama\Advisor\Domain\Direct\Ad\AdMedia;
-use eLama\DirectApiV5\Dto\General\StateEnum;
-use eLama\DirectApiV5\Dto\General\StatusEnum;
+use eLama\DirectApiV5\Dto\Ad\Enum\AdSubtypeEnum;
+use eLama\DirectApiV5\Dto\Ad\Enum\AdTypeEnum;
+use eLama\DirectApiV5\Dto\Ad\Enum\AgeLabelEnum;
+use eLama\DirectApiV5\Dto\Ad\Enum\ArrayOfAdCategoryEnum;
+use eLama\DirectApiV5\Dto\General\Enum\StateEnum;
+use eLama\DirectApiV5\Dto\General\Enum\StatusEnum;
 use JMS\Serializer\Annotation as JMS;
-use League\Uri\Schemes\Http;
 
 /**
  * @JMS\AccessType("public_method")
@@ -78,6 +79,13 @@ class AdGetItem
     private $Type;
 
     /**
+     * @JMS\Type("string")
+     *
+     * @var AdSubtypeEnum $Subtype
+     */
+    private $Subtype;
+
+    /**
      * @JMS\Type("eLama\DirectApiV5\Dto\Ad\TextAdGet")
      *
      * @var TextAdGet $TextAd
@@ -99,11 +107,25 @@ class AdGetItem
     private $MobileAppAd;
 
     /**
+     * @JMS\Type("eLama\DirectApiV5\Dto\Ad\TextImageAdGet")
+     *
+     * @var TextImageAdGet $TextImageAd
+     */
+    private $TextImageAd;
+
+    /**
+     * @JMS\Type("eLama\DirectApiV5\Dto\Ad\MobileAppImageAdGet")
+     *
+     * @var MobileAppImageAdGet $MobileAppImageAd
+     */
+    private $MobileAppImageAd;
+
+    /**
      * @return int
      */
     public function getId()
     {
-      return $this->Id;
+        return $this->Id;
     }
 
     /**
@@ -112,8 +134,9 @@ class AdGetItem
      */
     public function setId($Id = null)
     {
-      $this->Id = $Id;
-      return $this;
+        $this->Id = $Id;
+
+        return $this;
     }
 
     /**
@@ -121,7 +144,7 @@ class AdGetItem
      */
     public function getCampaignId()
     {
-      return $this->CampaignId;
+        return $this->CampaignId;
     }
 
     /**
@@ -130,8 +153,9 @@ class AdGetItem
      */
     public function setCampaignId($CampaignId = null)
     {
-      $this->CampaignId = $CampaignId;
-      return $this;
+        $this->CampaignId = $CampaignId;
+
+        return $this;
     }
 
     /**
@@ -139,7 +163,7 @@ class AdGetItem
      */
     public function getAdGroupId()
     {
-      return $this->AdGroupId;
+        return $this->AdGroupId;
     }
 
     /**
@@ -148,8 +172,9 @@ class AdGetItem
      */
     public function setAdGroupId($AdGroupId = null)
     {
-      $this->AdGroupId = $AdGroupId;
-      return $this;
+        $this->AdGroupId = $AdGroupId;
+
+        return $this;
     }
 
     /**
@@ -157,7 +182,7 @@ class AdGetItem
      */
     public function getStatus()
     {
-      return $this->Status;
+        return $this->Status;
     }
 
     /**
@@ -166,8 +191,9 @@ class AdGetItem
      */
     public function setStatus($Status = null)
     {
-      $this->Status = $Status;
-      return $this;
+        $this->Status = $Status;
+
+        return $this;
     }
 
     /**
@@ -175,7 +201,7 @@ class AdGetItem
      */
     public function getState()
     {
-      return $this->State;
+        return $this->State;
     }
 
     /**
@@ -184,8 +210,9 @@ class AdGetItem
      */
     public function setState($State = null)
     {
-      $this->State = $State;
-      return $this;
+        $this->State = $State;
+
+        return $this;
     }
 
     /**
@@ -193,7 +220,7 @@ class AdGetItem
      */
     public function getStatusClarification()
     {
-      return $this->StatusClarification;
+        return $this->StatusClarification;
     }
 
     /**
@@ -202,8 +229,9 @@ class AdGetItem
      */
     public function setStatusClarification($StatusClarification = null)
     {
-      $this->StatusClarification = $StatusClarification;
-      return $this;
+        $this->StatusClarification = $StatusClarification;
+
+        return $this;
     }
 
     /**
@@ -211,7 +239,7 @@ class AdGetItem
      */
     public function getAdCategories()
     {
-      return $this->AdCategories;
+        return $this->AdCategories;
     }
 
     /**
@@ -220,8 +248,9 @@ class AdGetItem
      */
     public function setAdCategories($AdCategories = null)
     {
-      $this->AdCategories = $AdCategories;
-      return $this;
+        $this->AdCategories = $AdCategories;
+
+        return $this;
     }
 
     /**
@@ -229,7 +258,7 @@ class AdGetItem
      */
     public function getAgeLabel()
     {
-      return $this->AgeLabel;
+        return $this->AgeLabel;
     }
 
     /**
@@ -238,8 +267,9 @@ class AdGetItem
      */
     public function setAgeLabel($AgeLabel = null)
     {
-      $this->AgeLabel = $AgeLabel;
-      return $this;
+        $this->AgeLabel = $AgeLabel;
+
+        return $this;
     }
 
     /**
@@ -247,7 +277,7 @@ class AdGetItem
      */
     public function getType()
     {
-      return $this->Type;
+        return $this->Type;
     }
 
     /**
@@ -256,8 +286,9 @@ class AdGetItem
      */
     public function setType($Type = null)
     {
-      $this->Type = $Type;
-      return $this;
+        $this->Type = $Type;
+
+        return $this;
     }
 
     /**
@@ -265,7 +296,7 @@ class AdGetItem
      */
     public function getTextAd()
     {
-      return $this->TextAd;
+        return $this->TextAd;
     }
 
     /**
@@ -274,8 +305,9 @@ class AdGetItem
      */
     public function setTextAd(TextAdGet $TextAd = null)
     {
-      $this->TextAd = $TextAd;
-      return $this;
+        $this->TextAd = $TextAd;
+
+        return $this;
     }
 
     /**
@@ -283,7 +315,7 @@ class AdGetItem
      */
     public function getDynamicTextAd()
     {
-      return $this->DynamicTextAd;
+        return $this->DynamicTextAd;
     }
 
     /**
@@ -292,8 +324,9 @@ class AdGetItem
      */
     public function setDynamicTextAd(DynamicTextAdGet $DynamicTextAd = null)
     {
-      $this->DynamicTextAd = $DynamicTextAd;
-      return $this;
+        $this->DynamicTextAd = $DynamicTextAd;
+
+        return $this;
     }
 
     /**
@@ -301,7 +334,7 @@ class AdGetItem
      */
     public function getMobileAppAd()
     {
-      return $this->MobileAppAd;
+        return $this->MobileAppAd;
     }
 
     /**
@@ -310,7 +343,65 @@ class AdGetItem
      */
     public function setMobileAppAd(MobileAppAdGet $MobileAppAd = null)
     {
-      $this->MobileAppAd = $MobileAppAd;
-      return $this;
+        $this->MobileAppAd = $MobileAppAd;
+
+        return $this;
+    }
+
+    /**
+     * @return AdSubtypeEnum
+     */
+    public function getSubtype()
+    {
+        return $this->Subtype;
+    }
+
+    /**
+     * @param AdSubtypeEnum $Subtype
+     * @return AdGetItem
+     */
+    public function setSubtype($Subtype = null)
+    {
+        $this->Subtype = $Subtype;
+
+        return $this;
+    }
+
+    /**
+     * @return TextImageAdGet
+     */
+    public function getTextImageAd()
+    {
+        return $this->TextImageAd;
+    }
+
+    /**
+     * @param TextImageAdGet $TextImageAd
+     * @return AdGetItem
+     */
+    public function setTextImageAd(TextImageAdGet $TextImageAd = null)
+    {
+        $this->TextImageAd = $TextImageAd;
+
+        return $this;
+    }
+
+    /**
+     * @return MobileAppImageAdGet
+     */
+    public function getMobileAppImageAd()
+    {
+        return $this->MobileAppImageAd;
+    }
+
+    /**
+     * @param MobileAppImageAdGet $MobileAppImageAd
+     * @return AdGetItem
+     */
+    public function setMobileAppImageAd(MobileAppImageAdGet $MobileAppImageAd = null)
+    {
+        $this->MobileAppImageAd = $MobileAppImageAd;
+
+        return $this;
     }
 }
