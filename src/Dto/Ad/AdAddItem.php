@@ -4,13 +4,11 @@ namespace eLama\DirectApiV5\Dto\Ad;
 
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
 class AdAddItem extends AdAddItemBase
 {
-
     /**
      * @JMS\Type("eLama\DirectApiV5\Dto\Ad\TextAdAdd")
      *
@@ -26,6 +24,13 @@ class AdAddItem extends AdAddItemBase
     private $DynamicTextAd;
 
     /**
+     * @JMS\Type("eLama\DirectApiV5\Dto\Ad\TextImageAdAdd")
+     *
+     * @var TextImageAdAdd $TextImageAd
+     */
+    private $TextImageAd;
+
+    /**
      * @JMS\Type("eLama\DirectApiV5\Dto\Ad\MobileAppAdAdd")
      *
      * @var MobileAppAdAdd $MobileAppAd
@@ -33,11 +38,18 @@ class AdAddItem extends AdAddItemBase
     private $MobileAppAd;
 
     /**
+     * @JMS\Type("eLama\DirectApiV5\Dto\Ad\MobileAppImageAdAdd")
+     *
+     * @var MobileAppImageAdAdd $MobileAppImageAd
+     */
+    private $MobileAppImageAd;
+
+    /**
      * @param int $AdGroupId
      */
     public function __construct($AdGroupId = null)
     {
-      parent::__construct($AdGroupId);
+        parent::__construct($AdGroupId);
     }
 
     /**
@@ -45,7 +57,7 @@ class AdAddItem extends AdAddItemBase
      */
     public function getTextAd()
     {
-      return $this->TextAd;
+        return $this->TextAd;
     }
 
     /**
@@ -54,8 +66,9 @@ class AdAddItem extends AdAddItemBase
      */
     public function setTextAd(TextAdAdd $TextAd = null)
     {
-      $this->TextAd = $TextAd;
-      return $this;
+        $this->TextAd = $TextAd;
+
+        return $this;
     }
 
     /**
@@ -63,7 +76,7 @@ class AdAddItem extends AdAddItemBase
      */
     public function getDynamicTextAd()
     {
-      return $this->DynamicTextAd;
+        return $this->DynamicTextAd;
     }
 
     /**
@@ -72,8 +85,9 @@ class AdAddItem extends AdAddItemBase
      */
     public function setDynamicTextAd(DynamicTextAdAdd $DynamicTextAd = null)
     {
-      $this->DynamicTextAd = $DynamicTextAd;
-      return $this;
+        $this->DynamicTextAd = $DynamicTextAd;
+
+        return $this;
     }
 
     /**
@@ -81,7 +95,7 @@ class AdAddItem extends AdAddItemBase
      */
     public function getMobileAppAd()
     {
-      return $this->MobileAppAd;
+        return $this->MobileAppAd;
     }
 
     /**
@@ -90,8 +104,46 @@ class AdAddItem extends AdAddItemBase
      */
     public function setMobileAppAd(MobileAppAdAdd $MobileAppAd = null)
     {
-      $this->MobileAppAd = $MobileAppAd;
-      return $this;
+        $this->MobileAppAd = $MobileAppAd;
+
+        return $this;
     }
 
+    /**
+     * @return TextImageAdAdd
+     */
+    public function getTextImageAd()
+    {
+        return $this->TextImageAd;
+    }
+
+    /**
+     * @param TextImageAdAdd $TextImageAd
+     * @return $this
+     */
+    public function setTextImageAd(TextImageAdAdd $TextImageAd = null)
+    {
+        $this->TextImageAd = $TextImageAd;
+
+        return $this;
+    }
+
+    /**
+     * @return MobileAppImageAdAdd
+     */
+    public function getMobileAppImageAd()
+    {
+        return $this->MobileAppImageAd;
+    }
+
+    /**
+     * @param MobileAppImageAdAdd $MobileAppImageAd
+     * @return $this
+     */
+    public function setMobileAppImageAd(MobileAppImageAdAdd $MobileAppImageAd = null)
+    {
+        $this->MobileAppImageAd = $MobileAppImageAd;
+
+        return $this;
+    }
 }

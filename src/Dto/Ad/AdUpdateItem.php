@@ -4,13 +4,11 @@ namespace eLama\DirectApiV5\Dto\Ad;
 
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
 class AdUpdateItem
 {
-
     /**
      * @JMS\Type("integer")
      *
@@ -40,11 +38,25 @@ class AdUpdateItem
     private $MobileAppAd;
 
     /**
+     * @JMS\Type("eLama\DirectApiV5\Dto\Ad\TextImageAdUpdate")
+     *
+     * @var TextImageAdUpdate $TextImageAd
+     */
+    private $TextImageAd;
+
+    /**
+     * @JMS\Type("eLama\DirectApiV5\Dto\Ad\MobileAppImageAdUpdate")
+     *
+     * @var MobileAppImageAdUpdate $MobileAppImageAd
+     */
+    private $MobileAppImageAd;
+
+    /**
      * @param int $Id
      */
     public function __construct($Id = null)
     {
-      $this->Id = $Id;
+        $this->Id = $Id;
     }
 
     /**
@@ -52,7 +64,7 @@ class AdUpdateItem
      */
     public function getId()
     {
-      return $this->Id;
+        return $this->Id;
     }
 
     /**
@@ -61,8 +73,9 @@ class AdUpdateItem
      */
     public function setId($Id)
     {
-      $this->Id = $Id;
-      return $this;
+        $this->Id = $Id;
+
+        return $this;
     }
 
     /**
@@ -70,7 +83,7 @@ class AdUpdateItem
      */
     public function getTextAd()
     {
-      return $this->TextAd;
+        return $this->TextAd;
     }
 
     /**
@@ -79,8 +92,9 @@ class AdUpdateItem
      */
     public function setTextAd(TextAdUpdate $TextAd = null)
     {
-      $this->TextAd = $TextAd;
-      return $this;
+        $this->TextAd = $TextAd;
+
+        return $this;
     }
 
     /**
@@ -88,7 +102,7 @@ class AdUpdateItem
      */
     public function getDynamicTextAd()
     {
-      return $this->DynamicTextAd;
+        return $this->DynamicTextAd;
     }
 
     /**
@@ -97,8 +111,9 @@ class AdUpdateItem
      */
     public function setDynamicTextAd(DynamicTextAdUpdate $DynamicTextAd = null)
     {
-      $this->DynamicTextAd = $DynamicTextAd;
-      return $this;
+        $this->DynamicTextAd = $DynamicTextAd;
+
+        return $this;
     }
 
     /**
@@ -106,7 +121,7 @@ class AdUpdateItem
      */
     public function getMobileAppAd()
     {
-      return $this->MobileAppAd;
+        return $this->MobileAppAd;
     }
 
     /**
@@ -115,8 +130,46 @@ class AdUpdateItem
      */
     public function setMobileAppAd(MobileAppAdUpdate $MobileAppAd = null)
     {
-      $this->MobileAppAd = $MobileAppAd;
-      return $this;
+        $this->MobileAppAd = $MobileAppAd;
+
+        return $this;
     }
 
+    /**
+     * @return TextImageAdUpdate
+     */
+    public function getTextImageAd()
+    {
+        return $this->TextImageAd;
+    }
+
+    /**
+     * @param TextImageAdUpdate $TextImageAd
+     * @return AdUpdateItem
+     */
+    public function setTextImageAd(TextImageAdUpdate $TextImageAd = null)
+    {
+        $this->TextImageAd = $TextImageAd;
+
+        return $this;
+    }
+
+    /**
+     * @return MobileAppImageAdUpdate
+     */
+    public function getMobileAppImageAd()
+    {
+        return $this->MobileAppImageAd;
+    }
+
+    /**
+     * @param MobileAppImageAdUpdate $MobileAppImageAd
+     * @return AdUpdateItem
+     */
+    public function setMobileAppImageAd(MobileAppImageAdUpdate $MobileAppImageAd = null)
+    {
+        $this->MobileAppImageAd = $MobileAppImageAd;
+
+        return $this;
+    }
 }

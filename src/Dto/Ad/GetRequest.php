@@ -47,24 +47,44 @@ class GetRequest extends GetRequestGeneral
     private $DynamicTextAdFieldNames;
 
     /**
+     * @JMS\Type("array<string>")
+     *
+     * @var string[] $TextImageAdFieldNames
+     */
+    private $TextImageAdFieldNames;
+
+    /**
+     * @JMS\Type("array<string>")
+     *
+     * @var string[] $MobileAppImageAdFieldNames
+     */
+    private $MobileAppImageAdFieldNames;
+
+    /**
      * @param AdsSelectionCriteria $SelectionCriteria
      * @param string[] $FieldNames
      * @param string[] $TextAdFieldNames
      * @param string[] $MobileAppAdFieldNames
      * @param string[] $DynamicTextAdFieldNames
+     * @param string[] $TextImageAdFieldNames
+     * @param string[] $MobileAppImageAdFieldNames
      */
     public function __construct(
         AdsSelectionCriteria $SelectionCriteria,
         array $FieldNames,
         array $TextAdFieldNames = null,
         array $MobileAppAdFieldNames = null,
-        array $DynamicTextAdFieldNames = null
+        array $DynamicTextAdFieldNames = null,
+        array $TextImageAdFieldNames = null,
+        array $MobileAppImageAdFieldNames = null
     ) {
-      $this->SelectionCriteria = $SelectionCriteria;
-      $this->FieldNames = $FieldNames;
-      $this->TextAdFieldNames = $TextAdFieldNames;
-      $this->MobileAppAdFieldNames = $MobileAppAdFieldNames;
-      $this->DynamicTextAdFieldNames = $DynamicTextAdFieldNames;
+        $this->SelectionCriteria = $SelectionCriteria;
+        $this->FieldNames = $FieldNames;
+        $this->TextAdFieldNames = $TextAdFieldNames;
+        $this->MobileAppAdFieldNames = $MobileAppAdFieldNames;
+        $this->DynamicTextAdFieldNames = $DynamicTextAdFieldNames;
+        $this->TextImageAdFieldNames = $TextImageAdFieldNames;
+        $this->MobileAppImageAdFieldNames = $MobileAppImageAdFieldNames;
     }
 
     /**
@@ -72,7 +92,7 @@ class GetRequest extends GetRequestGeneral
      */
     public function getSelectionCriteria()
     {
-      return $this->SelectionCriteria;
+        return $this->SelectionCriteria;
     }
 
     /**
@@ -81,9 +101,9 @@ class GetRequest extends GetRequestGeneral
      */
     public function setSelectionCriteria(AdsSelectionCriteria $SelectionCriteria)
     {
-      $this->SelectionCriteria = $SelectionCriteria;
+        $this->SelectionCriteria = $SelectionCriteria;
 
-      return $this;
+        return $this;
     }
 
     /**
@@ -91,7 +111,7 @@ class GetRequest extends GetRequestGeneral
      */
     public function getFieldNames()
     {
-      return $this->FieldNames;
+        return $this->FieldNames;
     }
 
     /**
@@ -100,9 +120,9 @@ class GetRequest extends GetRequestGeneral
      */
     public function setFieldNames(array $FieldNames)
     {
-      $this->FieldNames = $FieldNames;
+        $this->FieldNames = $FieldNames;
 
-      return $this;
+        return $this;
     }
 
     /**
@@ -110,7 +130,7 @@ class GetRequest extends GetRequestGeneral
      */
     public function getTextAdFieldNames()
     {
-      return $this->TextAdFieldNames;
+        return $this->TextAdFieldNames;
     }
 
     /**
@@ -119,9 +139,9 @@ class GetRequest extends GetRequestGeneral
      */
     public function setTextAdFieldNames(array $TextAdFieldNames)
     {
-      $this->TextAdFieldNames = $TextAdFieldNames;
+        $this->TextAdFieldNames = $TextAdFieldNames;
 
-      return $this;
+        return $this;
     }
 
     /**
@@ -129,7 +149,7 @@ class GetRequest extends GetRequestGeneral
      */
     public function getMobileAppAdFieldNames()
     {
-      return $this->MobileAppAdFieldNames;
+        return $this->MobileAppAdFieldNames;
     }
 
     /**
@@ -138,9 +158,9 @@ class GetRequest extends GetRequestGeneral
      */
     public function setMobileAppAdFieldNames(array $MobileAppAdFieldNames)
     {
-      $this->MobileAppAdFieldNames = $MobileAppAdFieldNames;
+        $this->MobileAppAdFieldNames = $MobileAppAdFieldNames;
 
-      return $this;
+        return $this;
     }
 
     /**
@@ -148,7 +168,7 @@ class GetRequest extends GetRequestGeneral
      */
     public function getDynamicTextAdFieldNames()
     {
-      return $this->DynamicTextAdFieldNames;
+        return $this->DynamicTextAdFieldNames;
     }
 
     /**
@@ -157,8 +177,46 @@ class GetRequest extends GetRequestGeneral
      */
     public function setDynamicTextAdFieldNames(array $DynamicTextAdFieldNames)
     {
-      $this->DynamicTextAdFieldNames = $DynamicTextAdFieldNames;
+        $this->DynamicTextAdFieldNames = $DynamicTextAdFieldNames;
 
-      return $this;
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getTextImageAdFieldNames()
+    {
+        return $this->TextImageAdFieldNames;
+    }
+
+    /**
+     * @param string[] $TextImageAdFieldNames
+     * @return GetRequest
+     */
+    public function setTextImageAdFieldNames(array $TextImageAdFieldNames = null)
+    {
+        $this->TextImageAdFieldNames = $TextImageAdFieldNames;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getMobileAppImageAdFieldNames()
+    {
+        return $this->MobileAppImageAdFieldNames;
+    }
+
+    /**
+     * @param string[] $MobileAppImageAdFieldNames
+     * @return GetRequest
+     */
+    public function setMobileAppImageAdFieldNames(array $MobileAppImageAdFieldNames = null)
+    {
+        $this->MobileAppImageAdFieldNames = $MobileAppImageAdFieldNames;
+
+        return $this;
     }
 }

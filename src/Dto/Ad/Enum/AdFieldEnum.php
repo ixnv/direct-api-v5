@@ -4,17 +4,18 @@ namespace eLama\DirectApiV5\Dto\Ad\Enum;
 
 use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
 
-class AdFieldEnum extends BaseEnum
+final class AdFieldEnum extends BaseEnum
 {
-    const __default = 'AdCategories';
+    const __DEFAULT = 'AdCategories';
 
-    const AdCategories = 'AdCategories';
-    const AgeLabel = 'AgeLabel';
-    const AdGroupId = 'AdGroupId';
-    const CampaignId = 'CampaignId';
-    const Id = 'Id';
-    const State = 'State';
-    const Status = 'Status';
-    const StatusClarification = 'StatusClarification';
-    const Type = 'Type';
+    const AD_CATEGORIES = 'AdCategories';
+    const AGE_LABEL = 'AgeLabel';
+    const AD_GROUP_ID = 'AdGroupId';
+    const CAMPAIGN_ID = 'CampaignId';
+    const ID = 'Id';
+    const STATE = 'State';
+    const STATUS = 'Status';
+    const STATUS_CLARIFICATION = 'StatusClarification';
+    const TYPE = 'Type';
+    const SUBTYPE = 'Subtype';
 }
