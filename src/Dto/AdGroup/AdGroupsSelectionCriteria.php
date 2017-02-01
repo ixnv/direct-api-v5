@@ -2,6 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\AdGroup;
 
+use eLama\DirectApiV5\Dto\AdGroup\Enum\AdGroupTypesEnum;
 use eLama\DirectApiV5\Dto\General\SelectionCriteria;
 use eLama\DirectApiV5\Dto\General\Enum\StatusEnum;
 use JMS\Serializer\Annotation as JMS;
@@ -197,7 +198,7 @@ class AdGroupsSelectionCriteria extends SelectionCriteria
     /**
      * @see ServingStatusEnum
      * @param string[] $ServingStatuses
-     * @return \eLama\DirectApiV5\Dto\Adgroup\AdGroupsSelectionCriteria
+     * @return \eLama\DirectApiV5\Dto\AdGroup\AdGroupsSelectionCriteria
      */
     public function setServingStatuses(array $ServingStatuses = null)
     {
