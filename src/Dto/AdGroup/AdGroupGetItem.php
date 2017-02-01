@@ -2,7 +2,9 @@
 
 namespace eLama\DirectApiV5\Dto\AdGroup;
 
-use eLama\DirectApiV5\Dto\General\StatusEnum;
+use eLama\DirectApiV5\Dto\AdGroup\Enum\AdGroupTypesEnum;
+use eLama\DirectApiV5\Dto\General\Enum\StatusEnum;
+use eLama\DirectApiV5\Dto\AdGroup\Enum\ServingStatusEnum;
 use JMS\Serializer\Annotation as JMS;
 
 
@@ -60,6 +62,13 @@ class AdGroupGetItem extends AdGroupBase
      * @var DynamicTextAdGroupGet $DynamicTextAdGroup
      */
     private $DynamicTextAdGroup;
+
+    /**
+     * @JMS\Type("string")
+     *
+     * @var ServingStatusEnum $ServingStatus
+     */
+    private $ServingStatus;
 
     /**
      * @return int
@@ -191,4 +200,23 @@ class AdGroupGetItem extends AdGroupBase
       return $this;
     }
 
+    /**
+     * @see ServingStatusEnum
+     * @return string
+     */
+    public function getServingStatus()
+    {
+      return $this->ServingStatus;
+    }
+
+    /**
+     * @see ServingStatusEnum
+     * @param string|null $ServingStatus
+     * @return \eLama\DirectApiV5\Dto\AdGroup\AdGroupGetItem
+     */
+    public function setServingStatus($ServingStatus = null)
+    {
+      $this->ServingStatus = $ServingStatus;
+      return $this;
+    }
 }
