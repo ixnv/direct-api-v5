@@ -2,8 +2,10 @@
 
 namespace eLama\DirectApiV5\Dto\Changes;
 
+use eLama\DirectApiV5\Dto\Changes\Enum\CheckFieldEnum;
 use JMS\Serializer\Annotation as JMS;
 use eLama\DirectApiV5\Dto\Changes\Enum\CheckFieldEnum as CheckFieldEnumNew;
+
 /**
  * @JMS\AccessType("public_method")
  */

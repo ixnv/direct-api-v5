@@ -2,6 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\Ad;
 
+use eLama\DirectApiV5\Dto\Ad\Enum\AgeLabelEnum;
 use JMS\Serializer\Annotation as JMS;
 
 

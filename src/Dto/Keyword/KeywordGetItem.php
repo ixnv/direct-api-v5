@@ -2,8 +2,9 @@
 
 namespace eLama\DirectApiV5\Dto\Keyword;
 
-use eLama\DirectApiV5\Dto\General\StateEnum;
-use eLama\DirectApiV5\Dto\General\StatusEnum;
+use eLama\DirectApiV5\Dto\General\Enum\PriorityEnum;
+use eLama\DirectApiV5\Dto\General\Enum\StateEnum;
+use eLama\DirectApiV5\Dto\General\Enum\StatusEnum;
 use JMS\Serializer\Annotation as JMS;
 
 

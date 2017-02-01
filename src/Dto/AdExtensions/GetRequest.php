@@ -2,6 +2,8 @@
 
 namespace eLama\DirectApiV5\Dto\AdExtensions;
 
+use eLama\DirectApiV5\Dto\AdExtensions\Enum\AdExtensionFieldEnum;
+use eLama\DirectApiV5\Dto\AdExtensions\Enum\CalloutFieldEnum;
 use JMS\Serializer\Annotation as JMS;
 
 

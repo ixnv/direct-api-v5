@@ -2,10 +2,10 @@
 
 namespace eLama\DirectApiV5\Dto\Vcard;
 
+use eLama\DirectApiV5\Dto\Vcard\Enum\VCardFieldEnum;
 use JMS\Serializer\Annotation as JMS;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use eLama\DirectApiV5\Dto\General\GetRequestGeneral;
-
 
 /**
  * @JMS\AccessType("public_method")

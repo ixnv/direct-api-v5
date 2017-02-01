@@ -4,6 +4,7 @@
 namespace eLama\DirectApiV5\Dto\Campaign;
 
 use eLama\DirectApiV5\Dto\General\ArrayOfString;
+use eLama\DirectApiV5\Dto\General\Enum\YesNoEnum;
 use JMS\Serializer\Annotation as JMS;
 
 /**

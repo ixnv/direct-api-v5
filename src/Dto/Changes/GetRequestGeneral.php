@@ -2,6 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\Changes;
 
+use eLama\DirectApiV5\Dto\General\LimitOffset;
 use JMS\Serializer\Annotation as JMS;
 
 

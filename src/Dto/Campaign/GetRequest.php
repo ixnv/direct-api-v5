@@ -2,6 +2,10 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
+use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignFieldEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\DynamicTextCampaignFieldEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\MobileAppCampaignFieldEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\TextCampaignFieldEnum;
 use eLama\DirectApiV5\Dto\General\GetRequestGeneral;
 use JMS\Serializer\Annotation as JMS;
 
@@ -81,7 +85,7 @@ class GetRequest extends GetRequestGeneral
 
     /**
      * @param CampaignsSelectionCriteria $SelectionCriteria
-     * @return \eLama\DirectApiV5\Dto\Campaign\GetRequestGeneral
+     * @return GetRequestGeneral
      */
     public function setSelectionCriteria(CampaignsSelectionCriteria $SelectionCriteria)
     {
@@ -99,7 +103,7 @@ class GetRequest extends GetRequestGeneral
 
     /**
      * @param CampaignFieldEnum $FieldNames
-     * @return \eLama\DirectApiV5\Dto\Campaign\GetRequestGeneral
+     * @return GetRequestGeneral
      */
     public function setFieldNames($FieldNames)
     {
@@ -117,7 +121,7 @@ class GetRequest extends GetRequestGeneral
 
     /**
      * @param TextCampaignFieldEnum $TextCampaignFieldNames
-     * @return \eLama\DirectApiV5\Dto\Campaign\GetRequestGeneral
+     * @return GetRequestGeneral
      */
     public function setTextCampaignFieldNames($TextCampaignFieldNames)
     {
@@ -135,7 +139,7 @@ class GetRequest extends GetRequestGeneral
 
     /**
      * @param MobileAppCampaignFieldEnum $MobileAppCampaignFieldNames
-     * @return \eLama\DirectApiV5\Dto\Campaign\GetRequestGeneral
+     * @return GetRequestGeneral
      */
     public function setMobileAppCampaignFieldNames($MobileAppCampaignFieldNames)
     {
@@ -153,7 +157,7 @@ class GetRequest extends GetRequestGeneral
 
     /**
      * @param DynamicTextCampaignFieldEnum $DynamicTextCampaignFieldNames
-     * @return \eLama\DirectApiV5\Dto\Campaign\GetRequestGeneral
+     * @return GetRequestGeneral
      */
     public function setDynamicTextCampaignFieldNames($DynamicTextCampaignFieldNames)
     {

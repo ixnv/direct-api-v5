@@ -3,7 +3,12 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
+use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignStateGetEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignStatusGetEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignStatusPaymentEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignTypeGetEnum;
 use eLama\DirectApiV5\Dto\General\ArrayOfString;
+use eLama\DirectApiV5\Dto\General\Enum\CurrencyEnum;
 use JMS\Serializer\Annotation as JMS;
 
 /**
