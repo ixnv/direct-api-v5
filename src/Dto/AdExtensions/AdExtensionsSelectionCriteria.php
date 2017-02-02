@@ -2,8 +2,10 @@
 
 namespace eLama\DirectApiV5\Dto\AdExtensions;
 
+use eLama\DirectApiV5\Dto\General\Enum\AdExtensionStateSelectionEnum;
+use eLama\DirectApiV5\Dto\General\Enum\AdExtensionTypeEnum;
+use eLama\DirectApiV5\Dto\General\Enum\ExtensionStatusSelectionEnum;
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")

@@ -7,6 +7,7 @@ use eLama\DirectApiV5\Dto\General\SelectionCriteria;
 use eLama\DirectApiV5\Dto\General\Enum\StatusEnum;
 use JMS\Serializer\Annotation as JMS;
 
+
 /**
  * @JMS\AccessType("public_method")
  */
@@ -65,19 +66,11 @@ class AdGroupsSelectionCriteria extends SelectionCriteria
     private $AppIconStatuses;
 
     /**
-     * @JMS\Type("array<string>")
-     *
-     * @var string[]
-     * @see ServingStatusEnum
-     */
-    private $ServingStatuses;
-
-    /**
      * @return int[]
      */
     public function getIds()
     {
-        return $this->Ids;
+      return $this->Ids;
     }
 
     /**
@@ -86,9 +79,8 @@ class AdGroupsSelectionCriteria extends SelectionCriteria
      */
     public function setIds(array $Ids = null)
     {
-        $this->Ids = $Ids;
-
-        return $this;
+      $this->Ids = $Ids;
+      return $this;
     }
 
     /**
@@ -97,7 +89,7 @@ class AdGroupsSelectionCriteria extends SelectionCriteria
      */
     public function getTypes()
     {
-        return $this->Types;
+      return $this->Types;
     }
 
     /**
@@ -106,9 +98,8 @@ class AdGroupsSelectionCriteria extends SelectionCriteria
      */
     public function setTypes(array $Types = null)
     {
-        $this->Types = $Types;
-
-        return $this;
+      $this->Types = $Types;
+      return $this;
     }
 
     /**
@@ -117,7 +108,7 @@ class AdGroupsSelectionCriteria extends SelectionCriteria
      */
     public function getStatuses()
     {
-        return $this->Statuses;
+      return $this->Statuses;
     }
 
     /**
@@ -128,7 +119,6 @@ class AdGroupsSelectionCriteria extends SelectionCriteria
     public function setStatuses(array $Statuses = null)
     {
         $this->Statuses = $Statuses;
-
         return $this;
     }
 
@@ -137,7 +127,7 @@ class AdGroupsSelectionCriteria extends SelectionCriteria
      */
     public function getTagIds()
     {
-        return $this->TagIds;
+      return $this->TagIds;
     }
 
     /**
@@ -146,9 +136,8 @@ class AdGroupsSelectionCriteria extends SelectionCriteria
      */
     public function setTagIds(array $TagIds = null)
     {
-        $this->TagIds = $TagIds;
-
-        return $this;
+      $this->TagIds = $TagIds;
+      return $this;
     }
 
     /**
@@ -156,7 +145,7 @@ class AdGroupsSelectionCriteria extends SelectionCriteria
      */
     public function getTags()
     {
-        return $this->Tags;
+      return $this->Tags;
     }
 
     /**
@@ -165,9 +154,8 @@ class AdGroupsSelectionCriteria extends SelectionCriteria
      */
     public function setTags(array $Tags = null)
     {
-        $this->Tags = $Tags;
-
-        return $this;
+      $this->Tags = $Tags;
+      return $this;
     }
 
     /**
@@ -176,7 +164,7 @@ class AdGroupsSelectionCriteria extends SelectionCriteria
      */
     public function getAppIconStatuses()
     {
-        return $this->AppIconStatuses;
+      return $this->AppIconStatuses;
     }
 
     /**
@@ -186,29 +174,8 @@ class AdGroupsSelectionCriteria extends SelectionCriteria
      */
     public function setAppIconStatuses(array $AppIconStatuses = null)
     {
-        $this->AppIconStatuses = $AppIconStatuses;
-
-        return $this;
+      $this->AppIconStatuses = $AppIconStatuses;
+      return $this;
     }
 
-    /**
-     * @see ServingStatusEnum
-     * @return string[]
-     */
-    public function getServingStatuses()
-    {
-        return $this->ServingStatuses;
-    }
-
-    /**
-     * @see ServingStatusEnum
-     * @param string[] $ServingStatuses
-     * @return \eLama\DirectApiV5\Dto\AdGroup\AdGroupsSelectionCriteria
-     */
-    public function setServingStatuses(array $ServingStatuses = null)
-    {
-        $this->ServingStatuses = $ServingStatuses;
-
-        return $this;
-    }
 }

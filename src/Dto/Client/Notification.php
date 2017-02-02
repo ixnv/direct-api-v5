@@ -2,6 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\Client;
 
+use eLama\DirectApiV5\Dto\General\Enum\LangEnum;
 use JMS\Serializer\Annotation as JMS;
 
 

@@ -3,7 +3,12 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
+use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignStateGetEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignStatusGetEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignStatusPaymentEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignTypeGetEnum;
 use eLama\DirectApiV5\Dto\General\ArrayOfString;
+use eLama\DirectApiV5\Dto\General\Enum\CurrencyEnum;
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -348,7 +353,8 @@ class CampaignGetItem extends CampaignBase
     }
 
     /**
-     * @return CurrencyEnum
+     * @see CurrencyEnum
+     * @return string
      */
     public function getCurrency()
     {
@@ -356,7 +362,8 @@ class CampaignGetItem extends CampaignBase
     }
 
     /**
-     * @param CurrencyEnum $Currency
+     * @see CurrencyEnum
+     * @param string $Currency
      * @return \eLama\DirectApiV5\Dto\Campaign\CampaignGetItem
      */
     public function setCurrency($Currency = null)

@@ -2,6 +2,8 @@
 
 namespace eLama\DirectApiV5\Dto\Ad;
 
+use eLama\DirectApiV5\Dto\Ad\Enum\MobAppAgeLabelEnum;
+use eLama\DirectApiV5\Dto\General\Enum\MobileAppAdActionEnum;
 use JMS\Serializer\Annotation as JMS;
 
 

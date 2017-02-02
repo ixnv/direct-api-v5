@@ -2,6 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\Keyword;
 
+use eLama\DirectApiV5\Dto\General\ActionResult;
 use JMS\Serializer\Annotation as JMS;
 
 

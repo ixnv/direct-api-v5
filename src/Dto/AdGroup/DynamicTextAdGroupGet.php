@@ -2,6 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\AdGroup;
 
+use eLama\DirectApiV5\Dto\AdGroup\Enum\DomainUrlProcessingStatusEnum;
 use JMS\Serializer\Annotation as JMS;
 
 

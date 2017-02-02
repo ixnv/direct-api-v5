@@ -2,6 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
+use eLama\DirectApiV5\Dto\Campaign\Enum\DynamicTextCampaignSearchStrategyTypeEnum;
 use JMS\Serializer\Annotation as JMS;
 
 /**

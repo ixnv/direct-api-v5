@@ -2,7 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\AdExtensions;
 
-use eLama\DirectApiV5\Dto\General\YesNoEnum;
+use eLama\DirectApiV5\Dto\General\Enum\YesNoEnum;
 use JMS\Serializer\Annotation as JMS;
 
 
