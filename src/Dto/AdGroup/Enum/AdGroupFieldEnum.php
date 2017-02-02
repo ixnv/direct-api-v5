@@ -16,4 +16,5 @@ class AdGroupFieldEnum extends BaseEnum
     const NegativeKeywords = 'NegativeKeywords';
     const Type = 'Type';
     const TrackingParams = 'TrackingParams';
+    const ServingStatus = 'ServingStatus';
 }

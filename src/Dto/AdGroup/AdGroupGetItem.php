@@ -2,7 +2,9 @@
 
 namespace eLama\DirectApiV5\Dto\AdGroup;
 
-use eLama\DirectApiV5\Dto\General\StatusEnum;
+use eLama\DirectApiV5\Dto\AdGroup\Enum\AdGroupTypesEnum;
+use eLama\DirectApiV5\Dto\General\Enum\StatusEnum;
+use eLama\DirectApiV5\Dto\AdGroup\Enum\ServingStatusEnum;
 use JMS\Serializer\Annotation as JMS;
 
 
@@ -62,11 +64,18 @@ class AdGroupGetItem extends AdGroupBase
     private $DynamicTextAdGroup;
 
     /**
+     * @JMS\Type("string")
+     *
+     * @var ServingStatusEnum $ServingStatus
+     */
+    private $ServingStatus;
+
+    /**
      * @return int
      */
     public function getId()
     {
-      return $this->Id;
+        return $this->Id;
     }
 
     /**
@@ -75,8 +84,9 @@ class AdGroupGetItem extends AdGroupBase
      */
     public function setId($Id = null)
     {
-      $this->Id = $Id;
-      return $this;
+        $this->Id = $Id;
+
+        return $this;
     }
 
     /**
@@ -84,7 +94,7 @@ class AdGroupGetItem extends AdGroupBase
      */
     public function getName()
     {
-      return $this->Name;
+        return $this->Name;
     }
 
     /**
@@ -93,8 +103,9 @@ class AdGroupGetItem extends AdGroupBase
      */
     public function setName($Name = null)
     {
-      $this->Name = $Name;
-      return $this;
+        $this->Name = $Name;
+
+        return $this;
     }
 
     /**
@@ -102,7 +113,7 @@ class AdGroupGetItem extends AdGroupBase
      */
     public function getCampaignId()
     {
-      return $this->CampaignId;
+        return $this->CampaignId;
     }
 
     /**
@@ -111,8 +122,9 @@ class AdGroupGetItem extends AdGroupBase
      */
     public function setCampaignId($CampaignId = null)
     {
-      $this->CampaignId = $CampaignId;
-      return $this;
+        $this->CampaignId = $CampaignId;
+
+        return $this;
     }
 
     /**
@@ -121,7 +133,7 @@ class AdGroupGetItem extends AdGroupBase
      */
     public function getStatus()
     {
-      return $this->Status;
+        return $this->Status;
     }
 
     /**
@@ -131,8 +143,9 @@ class AdGroupGetItem extends AdGroupBase
      */
     public function setStatus($Status = null)
     {
-      $this->Status = $Status;
-      return $this;
+        $this->Status = $Status;
+
+        return $this;
     }
 
     /**
@@ -141,7 +154,7 @@ class AdGroupGetItem extends AdGroupBase
      */
     public function getType()
     {
-      return $this->Type;
+        return $this->Type;
     }
 
     /**
@@ -151,8 +164,9 @@ class AdGroupGetItem extends AdGroupBase
      */
     public function setType($Type = null)
     {
-      $this->Type = $Type;
-      return $this;
+        $this->Type = $Type;
+
+        return $this;
     }
 
     /**
@@ -160,7 +174,7 @@ class AdGroupGetItem extends AdGroupBase
      */
     public function getMobileAppAdGroup()
     {
-      return $this->MobileAppAdGroup;
+        return $this->MobileAppAdGroup;
     }
 
     /**
@@ -169,8 +183,9 @@ class AdGroupGetItem extends AdGroupBase
      */
     public function setMobileAppAdGroup(MobileAppAdGroupGet $MobileAppAdGroup = null)
     {
-      $this->MobileAppAdGroup = $MobileAppAdGroup;
-      return $this;
+        $this->MobileAppAdGroup = $MobileAppAdGroup;
+
+        return $this;
     }
 
     /**
@@ -178,7 +193,7 @@ class AdGroupGetItem extends AdGroupBase
      */
     public function getDynamicTextAdGroup()
     {
-      return $this->DynamicTextAdGroup;
+        return $this->DynamicTextAdGroup;
     }
 
     /**
@@ -187,8 +202,29 @@ class AdGroupGetItem extends AdGroupBase
      */
     public function setDynamicTextAdGroup(DynamicTextAdGroupGet $DynamicTextAdGroup = null)
     {
-      $this->DynamicTextAdGroup = $DynamicTextAdGroup;
-      return $this;
+        $this->DynamicTextAdGroup = $DynamicTextAdGroup;
+
+        return $this;
     }
 
+    /**
+     * @see ServingStatusEnum
+     * @return string
+     */
+    public function getServingStatus()
+    {
+        return $this->ServingStatus;
+    }
+
+    /**
+     * @see ServingStatusEnum
+     * @param string|null $ServingStatus
+     * @return \eLama\DirectApiV5\Dto\AdGroup\AdGroupGetItem
+     */
+    public function setServingStatus($ServingStatus = null)
+    {
+        $this->ServingStatus = $ServingStatus;
+
+        return $this;
+    }
 }
