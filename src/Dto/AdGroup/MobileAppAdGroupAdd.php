@@ -2,6 +2,8 @@
 
 namespace eLama\DirectApiV5\Dto\AdGroup;
 
+use eLama\DirectApiV5\Dto\AdGroup\Enum\TargetCarrierEnum;
+use eLama\DirectApiV5\Dto\AdGroup\Enum\TargetDeviceTypeEnum;
 use JMS\Serializer\Annotation as JMS;
 
 

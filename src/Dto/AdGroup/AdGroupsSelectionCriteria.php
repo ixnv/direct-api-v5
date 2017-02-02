@@ -2,8 +2,8 @@
 
 namespace eLama\DirectApiV5\Dto\AdGroup;
 
+use eLama\DirectApiV5\Dto\AdGroup\Enum\AdGroupTypesEnum;
 use eLama\DirectApiV5\Dto\General\SelectionCriteria;
-use eLama\DirectApiV5\Dto\General\StatusEnum;
 use JMS\Serializer\Annotation as JMS;
 
 
@@ -176,5 +176,4 @@ class AdGroupsSelectionCriteria extends SelectionCriteria
       $this->AppIconStatuses = $AppIconStatuses;
       return $this;
     }
-
 }

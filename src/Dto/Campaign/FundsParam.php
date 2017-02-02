@@ -2,6 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\Campaign;
 
+use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignFundsEnum;
 use JMS\Serializer\Annotation as JMS;
 
 /**

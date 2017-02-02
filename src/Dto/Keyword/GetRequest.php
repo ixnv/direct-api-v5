@@ -4,6 +4,7 @@ namespace eLama\DirectApiV5\Dto\Keyword;
 
 use eLama\DirectApiV5\Dto\General\GetRequestGeneral;
 use eLama\DirectApiV5\Dto\General\LimitOffset;
+use eLama\DirectApiV5\Dto\Keyword\Enum\KeywordFieldEnum;
 use JMS\Serializer\Annotation as JMS;
 
 /**

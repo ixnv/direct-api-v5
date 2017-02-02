@@ -36,7 +36,7 @@ class ArrayOfAdCategoryEnum implements \ArrayAccess, \Iterator, \Countable
 
     /**
      * @param AdCategoryEnum[] $Items
-     * @return \eLama\DirectApiV5\Dto\Ad\ArrayOfAdCategoryEnum
+     * @return ArrayOfAdCategoryEnum
      */
     public function setItems(array $Items)
     {

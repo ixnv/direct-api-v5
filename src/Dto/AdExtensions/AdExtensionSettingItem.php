@@ -2,6 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\AdExtensions;
 
+use eLama\DirectApiV5\Dto\General\Enum\OperationEnum;
 use JMS\Serializer\Annotation as JMS;
 
 

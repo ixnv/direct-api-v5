@@ -2,6 +2,8 @@
 
 namespace eLama\DirectApiV5\Dto\Client;
 
+use eLama\DirectApiV5\Dto\Client\Enum\EmailSubscriptionEnum;
+use eLama\DirectApiV5\Dto\General\Enum\YesNoEnum;
 use JMS\Serializer\Annotation as JMS;
 
 

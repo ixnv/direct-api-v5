@@ -2,6 +2,8 @@
 
 namespace eLama\DirectApiV5\Dto\Ad;
 
+use eLama\DirectApiV5\Dto\Ad\Enum\MobileAppFeatureEnum;
+use eLama\DirectApiV5\Dto\General\Enum\YesNoEnum;
 use JMS\Serializer\Annotation as JMS;
 
 

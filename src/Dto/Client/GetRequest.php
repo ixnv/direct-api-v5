@@ -2,6 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\Client;
 
+use eLama\DirectApiV5\Dto\Client\Enum\ClientFieldEnum;
 use eLama\DirectApiV5\Dto\General\GetRequestGeneral;
 use JMS\Serializer\Annotation as JMS;
 

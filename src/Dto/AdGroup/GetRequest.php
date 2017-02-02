@@ -2,6 +2,9 @@
 
 namespace eLama\DirectApiV5\Dto\AdGroup;
 
+use eLama\DirectApiV5\Dto\AdGroup\Enum\AdGroupFieldEnum;
+use eLama\DirectApiV5\Dto\AdGroup\Enum\DynamicTextAdGroupFieldEnum;
+use eLama\DirectApiV5\Dto\AdGroup\Enum\MobileAppAdGroupFieldEnum;
 use JMS\Serializer\Annotation as JMS;
 use eLama\DirectApiV5\Dto\General\GetRequestGeneral;
 

@@ -36,7 +36,7 @@ class DeleteResponse
 
     /**
      * @param ActionResult $DeleteResults
-     * @return \eLama\DirectApiV5\Dto\AdExtensions\DeleteResponse
+     * @return DeleteResponse
      */
     public function setDeleteResults(ActionResult $DeleteResults)
     {

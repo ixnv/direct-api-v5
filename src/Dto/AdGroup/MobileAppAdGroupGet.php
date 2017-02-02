@@ -2,6 +2,10 @@
 
 namespace eLama\DirectApiV5\Dto\AdGroup;
 
+use eLama\DirectApiV5\Dto\AdGroup\Enum\AppAvailabilityStatusEnum;
+use eLama\DirectApiV5\Dto\AdGroup\Enum\TargetCarrierEnum;
+use eLama\DirectApiV5\Dto\AdGroup\Enum\TargetDeviceTypeEnum;
+use eLama\DirectApiV5\Dto\General\Enum\MobileOperatingSystemTypeEnum;
 use JMS\Serializer\Annotation as JMS;
 
 
