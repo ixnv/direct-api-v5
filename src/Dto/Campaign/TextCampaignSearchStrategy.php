@@ -18,7 +18,8 @@ class TextCampaignSearchStrategy extends TextCampaignStrategyBase
     private $BiddingStrategyType;
 
     /**
-     * @param TextCampaignSearchStrategyTypeEnum $BiddingStrategyType
+     * @param string $BiddingStrategyType
+     * @see TextCampaignSearchStrategyTypeEnum $BiddingStrategyType
      */
     public function __construct($BiddingStrategyType = null)
     {
@@ -26,7 +27,8 @@ class TextCampaignSearchStrategy extends TextCampaignStrategyBase
     }
 
     /**
-     * @return TextCampaignSearchStrategyTypeEnum
+     * @see TextCampaignSearchStrategyTypeEnum
+     * @return string
      */
     public function getBiddingStrategyType()
     {
@@ -34,7 +36,8 @@ class TextCampaignSearchStrategy extends TextCampaignStrategyBase
     }
 
     /**
-     * @param TextCampaignSearchStrategyTypeEnum $BiddingStrategyType
+     * @see TextCampaignSearchStrategyTypeEnum
+     * @param string $BiddingStrategyType
      * @return \eLama\DirectApiV5\Dto\Campaign\TextCampaignSearchStrategy
      */
     public function setBiddingStrategyType($BiddingStrategyType)
