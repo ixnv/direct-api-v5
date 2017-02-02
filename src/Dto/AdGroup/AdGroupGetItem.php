@@ -85,6 +85,7 @@ class AdGroupGetItem extends AdGroupBase
     public function setId($Id = null)
     {
         $this->Id = $Id;
+
         return $this;
     }
 
@@ -103,6 +104,7 @@ class AdGroupGetItem extends AdGroupBase
     public function setName($Name = null)
     {
         $this->Name = $Name;
+
         return $this;
     }
 
@@ -121,6 +123,7 @@ class AdGroupGetItem extends AdGroupBase
     public function setCampaignId($CampaignId = null)
     {
         $this->CampaignId = $CampaignId;
+
         return $this;
     }
 
@@ -141,6 +144,7 @@ class AdGroupGetItem extends AdGroupBase
     public function setStatus($Status = null)
     {
         $this->Status = $Status;
+
         return $this;
     }
 
@@ -161,6 +165,7 @@ class AdGroupGetItem extends AdGroupBase
     public function setType($Type = null)
     {
         $this->Type = $Type;
+
         return $this;
     }
 
@@ -179,6 +184,7 @@ class AdGroupGetItem extends AdGroupBase
     public function setMobileAppAdGroup(MobileAppAdGroupGet $MobileAppAdGroup = null)
     {
         $this->MobileAppAdGroup = $MobileAppAdGroup;
+
         return $this;
     }
 
@@ -197,6 +203,7 @@ class AdGroupGetItem extends AdGroupBase
     public function setDynamicTextAdGroup(DynamicTextAdGroupGet $DynamicTextAdGroup = null)
     {
         $this->DynamicTextAdGroup = $DynamicTextAdGroup;
+
         return $this;
     }
 
@@ -217,6 +224,7 @@ class AdGroupGetItem extends AdGroupBase
     public function setServingStatus($ServingStatus = null)
     {
         $this->ServingStatus = $ServingStatus;
+
         return $this;
     }
 }
