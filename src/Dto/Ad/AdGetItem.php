@@ -58,7 +58,7 @@ class AdGetItem
     private $StatusClarification;
 
     /**
-     * @JMS\Type("string")
+     * @JMS\Type("eLama\DirectApiV5\Dto\Ad\Enum\ArrayOfAdCategoryEnum")
      *
      * @var ArrayOfAdCategoryEnum $AdCategories
      */
