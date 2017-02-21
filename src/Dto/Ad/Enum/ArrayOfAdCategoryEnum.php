@@ -14,12 +14,12 @@ class ArrayOfAdCategoryEnum implements \ArrayAccess, \Iterator, \Countable
     /**
      * @JMS\Type("array<string>")
      *
-     * @var AdCategoryEnum[] $Items
+     * @var string[] $Items
      */
     private $Items;
 
     /**
-     * @param AdCategoryEnum[] $Items
+     * @param string[] $Items
      */
     public function __construct(array $Items = null)
     {
@@ -27,7 +27,7 @@ class ArrayOfAdCategoryEnum implements \ArrayAccess, \Iterator, \Countable
     }
 
     /**
-     * @return AdCategoryEnum[]
+     * @return string[]
      */
     public function getItems()
     {
@@ -35,7 +35,7 @@ class ArrayOfAdCategoryEnum implements \ArrayAccess, \Iterator, \Countable
     }
 
     /**
-     * @param AdCategoryEnum[] $Items
+     * @param string[] $Items
      * @return ArrayOfAdCategoryEnum
      */
     public function setItems(array $Items)
@@ -59,7 +59,7 @@ class ArrayOfAdCategoryEnum implements \ArrayAccess, \Iterator, \Countable
      * ArrayAccess implementation
      *
      * @param mixed $offset The offset to retrieve
-     * @return AdCategoryEnum
+     * @return string
      */
     public function offsetGet($offset)
     {
@@ -70,7 +70,7 @@ class ArrayOfAdCategoryEnum implements \ArrayAccess, \Iterator, \Countable
      * ArrayAccess implementation
      *
      * @param mixed $offset The offset to assign the value to
-     * @param AdCategoryEnum $value The value to set
+     * @param string $value The value to set
      * @return void
      */
     public function offsetSet($offset, $value)
@@ -96,7 +96,7 @@ class ArrayOfAdCategoryEnum implements \ArrayAccess, \Iterator, \Countable
     /**
      * Iterator implementation
      *
-     * @return AdCategoryEnum Return the current element
+     * @return string Return the current element
      */
     public function current()
     {
@@ -148,7 +148,7 @@ class ArrayOfAdCategoryEnum implements \ArrayAccess, \Iterator, \Countable
     /**
      * Countable implementation
      *
-     * @return AdCategoryEnum Return count of elements
+     * @return int Return count of elements
      */
     public function count()
     {
