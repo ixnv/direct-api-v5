@@ -7,10 +7,6 @@ use ReflectionClass;
 
 class BaseEnum
 {
-    /**
-     * Метод возвращает все константы Enum'ов, кроме тех,
-     * что начинаются с двойного подчеркивания.
-     */
     public static function values()
     {
         $reflection = new ReflectionClass(get_called_class());
