@@ -14,7 +14,7 @@ class BaseEnum
 
         $filteredConstants = [];
         foreach ($constants as $name => $value) {
-            if (strpos($name, '__') === false) {
+            if (strpos($name, '__') !== 0 ) {
                 $filteredConstants[] = $value;
             }
         }
