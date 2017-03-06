@@ -7,20 +7,19 @@ use ReflectionClass;
 
 class BaseEnum
 {
-    /**
-     * Метод возвращает все константы Enum'ов, кроме тех,
-     * что начинаются с двойного подчеркивания.
-     */
     public static function values()
     {
         $reflection = new ReflectionClass(get_called_class());
         $constants = $reflection->getConstants();
 
-        $constants = array_filter($constants, function ($constantName) {
-            return strpos($constantName, '__') === false;
-        });
+        $filteredConstants = [];
+        foreach ($constants as $name => $value) {
+            if (strpos($name, '__') !== 0 ) {
+                $filteredConstants[] = $value;
+            }
+        }
 
-        return array_values($constants);
+        return $filteredConstants;
     }
 
     public static function inEnum($value)
