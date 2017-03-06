@@ -19,7 +19,7 @@ class BaseEnum
             }
         }
 
-        return array_values($filteredConstants);
+        return $filteredConstants;
     }
 
     public static function inEnum($value)
