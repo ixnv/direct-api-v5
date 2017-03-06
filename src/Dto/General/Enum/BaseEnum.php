@@ -12,11 +12,14 @@ class BaseEnum
         $reflection = new ReflectionClass(get_called_class());
         $constants = $reflection->getConstants();
 
-        $constants = array_filter(array_keys($constants), function ($constantName) {
-            return strtolower($constantName) !== '__default';
-        });
+        $filteredConstants = [];
+        foreach ($constants as $name => $value) {
+            if (strpos($name, '__') === false) {
+                $filteredConstants[] = $value;
+            }
+        }
 
-        return array_values($constants);
+        return array_values($filteredConstants);
     }
 
     public static function inEnum($value)
