@@ -1,6 +1,5 @@
 <?php
 
-
 namespace eLama\DirectApiV5\Dto\AudienceTarget;
 
 use eLama\DirectApiV5\Dto\General\ResponseBody;

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace eLama\DirectApiV5\RequestBody;
 
 use eLama\DirectApiV5\Dto\AudienceTarget\AudienceTargetSelectionCriteria;
