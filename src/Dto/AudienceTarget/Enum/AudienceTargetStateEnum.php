@@ -6,7 +6,7 @@ use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
 
 class AudienceTargetStateEnum extends BaseEnum
 {
-    const __default = 'ON';
+    const __DEFAULT = 'ON';
 
     const ON = 'ON';
     const SUSPENDED = 'SUSPENDED';

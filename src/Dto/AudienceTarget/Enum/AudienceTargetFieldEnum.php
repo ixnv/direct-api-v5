@@ -6,7 +6,7 @@ use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
 
 class AudienceTargetFieldEnum extends BaseEnum
 {
-    const __default = 'Id';
+    const __DEFAULT = 'Id';
 
     const ID = 'Id';
     const AD_GROUP_ID = 'AdGroupId';
