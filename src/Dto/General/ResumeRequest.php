@@ -23,7 +23,7 @@ class ResumeRequest
      */
     public function __construct(IdsCriteria $SelectionCriteria = null)
     {
-      $this->SelectionCriteria = $SelectionCriteria;
+        $this->SelectionCriteria = $SelectionCriteria;
     }
 
     /**
@@ -31,7 +31,7 @@ class ResumeRequest
      */
     public function getSelectionCriteria()
     {
-      return $this->SelectionCriteria;
+        return $this->SelectionCriteria;
     }
 
     /**
@@ -40,9 +40,9 @@ class ResumeRequest
      */
     public function setSelectionCriteria(IdsCriteria $SelectionCriteria)
     {
-      $this->SelectionCriteria = $SelectionCriteria;
+        $this->SelectionCriteria = $SelectionCriteria;
 
-      return $this;
+        return $this;
     }
 
 }
