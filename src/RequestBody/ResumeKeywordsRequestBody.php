@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace eLama\DirectApiV5\RequestBody;
 
 use eLama\DirectApiV5\Dto\General\ResumeResponseBody;
-use eLama\DirectApiV5\Dto\Keyword\ResumeRequest;
+use eLama\DirectApiV5\Dto\General\ResumeRequest;
 
 final class ResumeKeywordsRequestBody extends RequestBody
 {
