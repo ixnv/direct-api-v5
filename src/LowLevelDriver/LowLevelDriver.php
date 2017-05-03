@@ -164,7 +164,7 @@ class LowLevelDriver implements LowLevelDriverInterface
             $headers[self::HEADER_CLIENT_LOGIN] = $request->getClientLogin();
         }
 
-        if($request->usesAgencyUnits()) {
+        if ($request->usesAgencyUnits()) {
             $headers[self::HEADER_AGENCY_UNITS] = 'true';
         }
 
