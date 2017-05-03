@@ -181,7 +181,7 @@ class LowLevelDriver implements LowLevelDriverInterface
     {
         $request = $request->withSanitizedToken();
 
-        $context = [
+        return [
             'callUniqId' => $uniqId,
             'clientLogin' => $request->getClientLogin(),
             'method' => $request->getMethod(),
@@ -190,8 +190,6 @@ class LowLevelDriver implements LowLevelDriverInterface
             'token' => $request->getToken(),
             'agencyUnitsUsed' => $request->usesAgencyUnits() ? 'true' : 'false'
         ];
-
-        return $context;
     }
 
     /**
