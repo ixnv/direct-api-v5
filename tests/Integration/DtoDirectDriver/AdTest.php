@@ -84,6 +84,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
     public function getAd($adId)
     {
         $ad = $this->getAdInCampaignWithId(self::$campaignId, $adId);
+        assertThat($ad->isTextAd(), is(equalTo(true)));
         assertThat($ad->getTextAd()->getTitle(), is(equalTo(self::TITLE)));
         assertThat($ad->getTextAd()->getText(), is(equalTo(self::TEXT)));
         assertThat($ad->getTextAd()->getHref(), is(equalTo(self::HREF)));
