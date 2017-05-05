@@ -602,7 +602,10 @@ class CampaignGetItem extends CampaignBase
      */
     public function isShownOnSearch()
     {
-        return $this->getTextCampaign()->getBiddingStrategy()->getSearch()->getBiddingStrategyType() !== TextCampaignSearchStrategyTypeEnum::SERVING_OFF;
+        return $this->getTextCampaign()
+                ->getBiddingStrategy()
+                ->getSearch()
+                ->getBiddingStrategyType() !== TextCampaignSearchStrategyTypeEnum::SERVING_OFF;
     }
 
     /**
@@ -610,6 +613,9 @@ class CampaignGetItem extends CampaignBase
      */
     public function isShownOnNetwork()
     {
-        return $this->getTextCampaign()->getBiddingStrategy()->getNetwork()->getBiddingStrategyType() !== TextCampaignNetworkStrategyTypeEnum::SERVING_OFF;
+        return $this->getTextCampaign()
+                ->getBiddingStrategy()
+                ->getNetwork()
+                ->getBiddingStrategyType() !== TextCampaignNetworkStrategyTypeEnum::SERVING_OFF;
     }
 }
