@@ -8,6 +8,9 @@ use eLama\DirectApiV5\Dto\Campaign\CampaignsSelectionCriteria;
 use eLama\DirectApiV5\Dto\Campaign\CampaignUpdateItem;
 use eLama\DirectApiV5\Dto\Campaign\GetResponseBody;
 use eLama\DirectApiV5\Dto\Campaign\ResumeRequest;
+use eLama\DirectApiV5\Dto\Campaign\TextCampaignNetworkStrategy;
+use eLama\DirectApiV5\Dto\Campaign\TextCampaignSearchStrategy;
+use eLama\DirectApiV5\Dto\Campaign\TextCampaignStrategy;
 use eLama\DirectApiV5\Dto\General\ArchiveResponseBody;
 use eLama\DirectApiV5\Dto\General\SuspendRequest;
 use eLama\DirectApiV5\Dto\Campaign\TextCampaignAddItem;
@@ -185,8 +188,12 @@ class CampaignTest extends DirectApiV5TestCase
         );
         /** @var GetResponseBody $responseBody */
         $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
-        $name = $responseBody->getResult()->getCampaigns()[0]->getName();
-        assertThat($name, is(equalTo(self::NAME)));
+        /** @var Campaign\CampaignGetItem $campaign */
+        $campaign = $responseBody->getResult()->getCampaigns()[0];
+
+        assertThat($campaign->getName(), is(equalTo(self::NAME)));
+        assertThat($campaign->isShownOnSearch(), is(equalTo(true)));
+        assertThat($campaign->isShownOnNetwork(), is(equalTo(true)));
 
         return $id;
     }
@@ -197,9 +204,20 @@ class CampaignTest extends DirectApiV5TestCase
      */
     public function modifyCampaign($id)
     {
-        $request = new UpdateCampaignRequestBody(new UpdateRequest(
-            [(new CampaignUpdateItem($id))->setName(self::CHANGED_NAME)]
-        ));
+        $textCampaign = new Campaign\TextCampaignUpdateItem();
+        $textCampaign->setBiddingStrategy(
+            (new TextCampaignStrategy())
+                ->setSearch(new TextCampaignSearchStrategy(TextCampaignSearchStrategyTypeEnum::SERVING_OFF))
+                ->setNetwork(new TextCampaignNetworkStrategy(TextCampaignNetworkStrategyTypeEnum::MAXIMUM_COVERAGE))
+        );
+
+        $campaign = new CampaignUpdateItem($id);
+        $campaign->setName(self::CHANGED_NAME);
+        $campaign->setTextCampaign($textCampaign);
+
+        $request = new UpdateCampaignRequestBody(new UpdateRequest([
+            $campaign
+        ]));
         /** @var UpdateResponseBody $responseBody */
         $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
         $changedId = $responseBody->getResult()->getUpdateResults()[0]->getId();
@@ -219,8 +237,10 @@ class CampaignTest extends DirectApiV5TestCase
         );
         /** @var GetResponseBody $responseBody */
         $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
-        $name = $responseBody->getResult()->getCampaigns()[0]->getName();
-        assertThat($name, is(equalTo(self::CHANGED_NAME)));
+        $campaign = $responseBody->getResult()->getCampaigns()[0];
+        assertThat($campaign->getName(), is(equalTo(self::CHANGED_NAME)));
+        assertThat($campaign->isShownOnSearch(), is(equalTo(false)));
+        assertThat($campaign->isShownOnNetwork(), is(equalTo(true)));
 
         return $id;
     }
@@ -329,6 +349,13 @@ class CampaignTest extends DirectApiV5TestCase
         assertThat($responseBody->getResult()->getCampaigns(), emptyArray());
     }
 
+    /**
+     * @see TextCampaignSearchStrategyTypeEnum
+     * @see TextCampaignNetworkStrategyTypeEnum
+     * @param string $textCampaignSearchStrategyEnum
+     * @param string $textCampaignNetworkStrategyEnum
+     * @return int
+     */
     private function createTextCampaignWithCertainStrategies(
         $textCampaignSearchStrategyEnum,
         $textCampaignNetworkStrategyEnum
@@ -350,9 +377,7 @@ class CampaignTest extends DirectApiV5TestCase
         /** @var AddResponseBody $responseBody */
         $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
 
-        $id = $responseBody->getResult()->getAddResults()[0]->getId();
-
-        return $id;
+        return $responseBody->getResult()->getAddResults()[0]->getId();
     }
 
     private function instanceTimeTargetingAdd()
@@ -407,14 +432,12 @@ class CampaignTest extends DirectApiV5TestCase
      */
     private function instanceTextCampaignAddItem()
     {
-        $textCampaignAddItem = new TextCampaignAddItem(
+        return new TextCampaignAddItem(
             new TextCampaignStrategyAdd(
                 new TextCampaignSearchStrategyAdd(TextCampaignSearchStrategyTypeEnum::HIGHEST_POSITION),
                 new TextCampaignNetworkStrategyAdd(TextCampaignNetworkStrategyTypeEnum::MAXIMUM_COVERAGE)
             )
         );
-
-        return $textCampaignAddItem;
     }
 
     /**
@@ -426,14 +449,12 @@ class CampaignTest extends DirectApiV5TestCase
         $textCampaignSearchStrategyEnum,
         $textCampaignNetworkStrategyEnum
     ) {
-        $textCampaignAddItem = new TextCampaignAddItem(
+        return new TextCampaignAddItem(
             new TextCampaignStrategyAdd(
                 $this->instanceSearchStrategyByEnum($textCampaignSearchStrategyEnum),
                 $this->instanceNetworkStrategyByEnum($textCampaignNetworkStrategyEnum)
             )
         );
-
-        return $textCampaignAddItem;
     }
 
     /**
@@ -484,8 +505,8 @@ class CampaignTest extends DirectApiV5TestCase
                 $strategyWeeklyClickPackageAdd = new Campaign\StrategyWeeklyClickPackageAdd();
                 $strategyWeeklyClickPackageAdd->setBidCeiling(2000000);
                 $strategyWeeklyClickPackageAdd->setClicksPerWeek(100);
-                $textCampaignSearchStrategyAdd->setWeeklyClickPackage($strategyWeeklyClickPackageAdd);
 
+                $textCampaignSearchStrategyAdd->setWeeklyClickPackage($strategyWeeklyClickPackageAdd);
                 break;
         }
 

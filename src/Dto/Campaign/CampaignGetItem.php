@@ -7,6 +7,8 @@ use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignStateGetEnum;
 use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignStatusGetEnum;
 use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignStatusPaymentEnum;
 use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignTypeGetEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\TextCampaignNetworkStrategyTypeEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\TextCampaignSearchStrategyTypeEnum;
 use eLama\DirectApiV5\Dto\General\ArrayOfString;
 use eLama\DirectApiV5\Dto\General\Enum\CurrencyEnum;
 use JMS\Serializer\Annotation as JMS;
@@ -571,5 +573,21 @@ class CampaignGetItem extends CampaignBase
     {
       $this->TimeTargeting = $TimeTargeting;
       return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isShownOnSearch()
+    {
+        return $this->getTextCampaign()->getBiddingStrategy()->getSearch()->getBiddingStrategyType() !== TextCampaignSearchStrategyTypeEnum::SERVING_OFF;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isShownOnNetwork()
+    {
+        return $this->getTextCampaign()->getBiddingStrategy()->getNetwork()->getBiddingStrategyType() !== TextCampaignNetworkStrategyTypeEnum::SERVING_OFF;
     }
 }
