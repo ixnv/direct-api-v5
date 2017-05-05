@@ -192,8 +192,8 @@ class CampaignTest extends DirectApiV5TestCase
         $campaign = $responseBody->getResult()->getCampaigns()[0];
 
         assertThat($campaign->getName(), is(equalTo(self::NAME)));
-        assertThat($campaign->isShownOnSearch(), is(equalTo(true)));
-        assertThat($campaign->isShownOnNetwork(), is(equalTo(true)));
+        assertTrue($campaign->isShownOnSearch());
+        assertTrue($campaign->isShownOnNetwork());
 
         return $id;
     }
@@ -239,8 +239,8 @@ class CampaignTest extends DirectApiV5TestCase
         $responseBody = $this->driver->call($request)->wait()->getUnserializedBody();
         $campaign = $responseBody->getResult()->getCampaigns()[0];
         assertThat($campaign->getName(), is(equalTo(self::CHANGED_NAME)));
-        assertThat($campaign->isShownOnSearch(), is(equalTo(false)));
-        assertThat($campaign->isShownOnNetwork(), is(equalTo(true)));
+        assertFalse($campaign->isShownOnSearch());
+        assertTrue($campaign->isShownOnNetwork());
 
         return $id;
     }

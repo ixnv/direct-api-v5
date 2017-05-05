@@ -602,7 +602,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function isShownOnSearch()
     {
-        return $this->getTextCampaign()
+        return $this->TextCampaign
                 ->getBiddingStrategy()
                 ->getSearch()
                 ->getBiddingStrategyType() !== TextCampaignSearchStrategyTypeEnum::SERVING_OFF;
@@ -613,7 +613,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function isShownOnNetwork()
     {
-        return $this->getTextCampaign()
+        return $this->TextCampaign
                 ->getBiddingStrategy()
                 ->getNetwork()
                 ->getBiddingStrategyType() !== TextCampaignNetworkStrategyTypeEnum::SERVING_OFF;
