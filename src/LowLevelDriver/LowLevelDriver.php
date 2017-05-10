@@ -24,8 +24,11 @@ class LowLevelDriver implements LowLevelDriverInterface
     /** @var LoggerInterface */
     private $logger;
 
-    public static function createAdapterForClient(Client $client, LoggerInterface $logger, $baseUrl = self::URL_PRODUCTION)
-    {
+    public static function createAdapterForClient(
+        Client $client,
+        LoggerInterface $logger,
+        $baseUrl = self::URL_PRODUCTION
+    ) {
         if (version_compare($client::VERSION, '6', 'ge')) {
             return new static(new Guzzle6Adapter($client), $logger, $baseUrl);
         } else {
@@ -164,7 +167,7 @@ class LowLevelDriver implements LowLevelDriverInterface
             $headers[self::HEADER_CLIENT_LOGIN] = $request->getClientLogin();
         }
 
-        if($request->usesAgencyUnits()) {
+        if ($request->usesAgencyUnits()) {
             $headers[self::HEADER_AGENCY_UNITS] = 'true';
         }
 
@@ -181,7 +184,7 @@ class LowLevelDriver implements LowLevelDriverInterface
     {
         $request = $request->withSanitizedToken();
 
-        $context = [
+        return [
             'callUniqId' => $uniqId,
             'clientLogin' => $request->getClientLogin(),
             'method' => $request->getMethod(),
@@ -190,8 +193,6 @@ class LowLevelDriver implements LowLevelDriverInterface
             'token' => $request->getToken(),
             'agencyUnitsUsed' => $request->usesAgencyUnits() ? 'true' : 'false'
         ];
-
-        return $context;
     }
 
     /**

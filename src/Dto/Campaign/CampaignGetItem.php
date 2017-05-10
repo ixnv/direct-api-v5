@@ -7,6 +7,8 @@ use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignStateGetEnum;
 use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignStatusGetEnum;
 use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignStatusPaymentEnum;
 use eLama\DirectApiV5\Dto\Campaign\Enum\CampaignTypeGetEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\TextCampaignNetworkStrategyTypeEnum;
+use eLama\DirectApiV5\Dto\Campaign\Enum\TextCampaignSearchStrategyTypeEnum;
 use eLama\DirectApiV5\Dto\General\ArrayOfString;
 use eLama\DirectApiV5\Dto\General\Enum\CurrencyEnum;
 use JMS\Serializer\Annotation as JMS;
@@ -176,7 +178,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getId()
     {
-      return $this->Id;
+        return $this->Id;
     }
 
     /**
@@ -185,8 +187,9 @@ class CampaignGetItem extends CampaignBase
      */
     public function setId($Id = null)
     {
-      $this->Id = $Id;
-      return $this;
+        $this->Id = $Id;
+
+        return $this;
     }
 
     /**
@@ -194,7 +197,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getName()
     {
-      return $this->Name;
+        return $this->Name;
     }
 
     /**
@@ -203,8 +206,9 @@ class CampaignGetItem extends CampaignBase
      */
     public function setName($Name = null)
     {
-      $this->Name = $Name;
-      return $this;
+        $this->Name = $Name;
+
+        return $this;
     }
 
     /**
@@ -212,7 +216,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getStartDate()
     {
-      return $this->StartDate;
+        return $this->StartDate;
     }
 
     /**
@@ -221,8 +225,9 @@ class CampaignGetItem extends CampaignBase
      */
     public function setStartDate($StartDate = null)
     {
-      $this->StartDate = $StartDate;
-      return $this;
+        $this->StartDate = $StartDate;
+
+        return $this;
     }
 
     /**
@@ -230,7 +235,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getType()
     {
-      return $this->Type;
+        return $this->Type;
     }
 
     /**
@@ -239,8 +244,9 @@ class CampaignGetItem extends CampaignBase
      */
     public function setType($Type = null)
     {
-      $this->Type = $Type;
-      return $this;
+        $this->Type = $Type;
+
+        return $this;
     }
 
     /**
@@ -249,7 +255,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getStatus()
     {
-      return $this->Status;
+        return $this->Status;
     }
 
     /**
@@ -258,8 +264,9 @@ class CampaignGetItem extends CampaignBase
      */
     public function setStatus($Status = null)
     {
-      $this->Status = $Status;
-      return $this;
+        $this->Status = $Status;
+
+        return $this;
     }
 
     /**
@@ -267,7 +274,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getState()
     {
-      return $this->State;
+        return $this->State;
     }
 
     /**
@@ -276,8 +283,9 @@ class CampaignGetItem extends CampaignBase
      */
     public function setState($State = null)
     {
-      $this->State = $State;
-      return $this;
+        $this->State = $State;
+
+        return $this;
     }
 
     /**
@@ -285,7 +293,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getStatusPayment()
     {
-      return $this->StatusPayment;
+        return $this->StatusPayment;
     }
 
     /**
@@ -294,8 +302,9 @@ class CampaignGetItem extends CampaignBase
      */
     public function setStatusPayment($StatusPayment = null)
     {
-      $this->StatusPayment = $StatusPayment;
-      return $this;
+        $this->StatusPayment = $StatusPayment;
+
+        return $this;
     }
 
     /**
@@ -303,7 +312,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getStatusClarification()
     {
-      return $this->StatusClarification;
+        return $this->StatusClarification;
     }
 
     /**
@@ -312,8 +321,9 @@ class CampaignGetItem extends CampaignBase
      */
     public function setStatusClarification($StatusClarification = null)
     {
-      $this->StatusClarification = $StatusClarification;
-      return $this;
+        $this->StatusClarification = $StatusClarification;
+
+        return $this;
     }
 
     /**
@@ -321,7 +331,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getSourceId()
     {
-      return $this->SourceId;
+        return $this->SourceId;
     }
 
     /**
@@ -330,8 +340,9 @@ class CampaignGetItem extends CampaignBase
      */
     public function setSourceId($SourceId = null)
     {
-      $this->SourceId = $SourceId;
-      return $this;
+        $this->SourceId = $SourceId;
+
+        return $this;
     }
 
     /**
@@ -339,7 +350,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getStatistics()
     {
-      return $this->Statistics;
+        return $this->Statistics;
     }
 
     /**
@@ -348,8 +359,9 @@ class CampaignGetItem extends CampaignBase
      */
     public function setStatistics(Statistics $Statistics = null)
     {
-      $this->Statistics = $Statistics;
-      return $this;
+        $this->Statistics = $Statistics;
+
+        return $this;
     }
 
     /**
@@ -358,7 +370,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getCurrency()
     {
-      return $this->Currency;
+        return $this->Currency;
     }
 
     /**
@@ -368,8 +380,9 @@ class CampaignGetItem extends CampaignBase
      */
     public function setCurrency($Currency = null)
     {
-      $this->Currency = $Currency;
-      return $this;
+        $this->Currency = $Currency;
+
+        return $this;
     }
 
     /**
@@ -377,7 +390,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getFunds()
     {
-      return $this->Funds;
+        return $this->Funds;
     }
 
     /**
@@ -386,8 +399,9 @@ class CampaignGetItem extends CampaignBase
      */
     public function setFunds(FundsParam $Funds = null)
     {
-      $this->Funds = $Funds;
-      return $this;
+        $this->Funds = $Funds;
+
+        return $this;
     }
 
     /**
@@ -395,7 +409,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getRepresentedBy()
     {
-      return $this->RepresentedBy;
+        return $this->RepresentedBy;
     }
 
     /**
@@ -404,8 +418,9 @@ class CampaignGetItem extends CampaignBase
      */
     public function setRepresentedBy(CampaignAssistant $RepresentedBy = null)
     {
-      $this->RepresentedBy = $RepresentedBy;
-      return $this;
+        $this->RepresentedBy = $RepresentedBy;
+
+        return $this;
     }
 
     /**
@@ -413,7 +428,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getDailyBudget()
     {
-      return $this->DailyBudget;
+        return $this->DailyBudget;
     }
 
     /**
@@ -422,8 +437,9 @@ class CampaignGetItem extends CampaignBase
      */
     public function setDailyBudget(DailyBudget $DailyBudget = null)
     {
-      $this->DailyBudget = $DailyBudget;
-      return $this;
+        $this->DailyBudget = $DailyBudget;
+
+        return $this;
     }
 
     /**
@@ -431,7 +447,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getEndDate()
     {
-      return $this->EndDate;
+        return $this->EndDate;
     }
 
     /**
@@ -440,8 +456,9 @@ class CampaignGetItem extends CampaignBase
      */
     public function setEndDate($EndDate = null)
     {
-      $this->EndDate = $EndDate;
-      return $this;
+        $this->EndDate = $EndDate;
+
+        return $this;
     }
 
     /**
@@ -449,7 +466,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getNegativeKeywords()
     {
-      return $this->NegativeKeywords;
+        return $this->NegativeKeywords;
     }
 
     /**
@@ -462,6 +479,7 @@ class CampaignGetItem extends CampaignBase
             $NegativeKeywords = new ArrayOfString();
         }
         $this->NegativeKeywords = $NegativeKeywords;
+
         return $this;
     }
 
@@ -470,7 +488,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getBlockedIps()
     {
-      return $this->BlockedIps;
+        return $this->BlockedIps;
     }
 
     /**
@@ -479,8 +497,9 @@ class CampaignGetItem extends CampaignBase
      */
     public function setBlockedIps(ArrayOfString $BlockedIps = null)
     {
-      $this->BlockedIps = $BlockedIps;
-      return $this;
+        $this->BlockedIps = $BlockedIps;
+
+        return $this;
     }
 
     /**
@@ -488,7 +507,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getExcludedSites()
     {
-      return $this->ExcludedSites;
+        return $this->ExcludedSites;
     }
 
     /**
@@ -497,8 +516,9 @@ class CampaignGetItem extends CampaignBase
      */
     public function setExcludedSites(ArrayOfString $ExcludedSites = null)
     {
-      $this->ExcludedSites = $ExcludedSites;
-      return $this;
+        $this->ExcludedSites = $ExcludedSites;
+
+        return $this;
     }
 
     /**
@@ -506,7 +526,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getTextCampaign()
     {
-      return $this->TextCampaign;
+        return $this->TextCampaign;
     }
 
     /**
@@ -515,8 +535,9 @@ class CampaignGetItem extends CampaignBase
      */
     public function setTextCampaign(TextCampaignGetItem $TextCampaign = null)
     {
-      $this->TextCampaign = $TextCampaign;
-      return $this;
+        $this->TextCampaign = $TextCampaign;
+
+        return $this;
     }
 
     /**
@@ -524,7 +545,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getMobileAppCampaign()
     {
-      return $this->MobileAppCampaign;
+        return $this->MobileAppCampaign;
     }
 
     /**
@@ -533,8 +554,9 @@ class CampaignGetItem extends CampaignBase
      */
     public function setMobileAppCampaign(MobileAppCampaignGetItem $MobileAppCampaign = null)
     {
-      $this->MobileAppCampaign = $MobileAppCampaign;
-      return $this;
+        $this->MobileAppCampaign = $MobileAppCampaign;
+
+        return $this;
     }
 
     /**
@@ -542,7 +564,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getDynamicTextCampaign()
     {
-      return $this->DynamicTextCampaign;
+        return $this->DynamicTextCampaign;
     }
 
     /**
@@ -551,8 +573,9 @@ class CampaignGetItem extends CampaignBase
      */
     public function setDynamicTextCampaign(DynamicTextCampaignGetItem $DynamicTextCampaign = null)
     {
-      $this->DynamicTextCampaign = $DynamicTextCampaign;
-      return $this;
+        $this->DynamicTextCampaign = $DynamicTextCampaign;
+
+        return $this;
     }
 
     /**
@@ -560,7 +583,7 @@ class CampaignGetItem extends CampaignBase
      */
     public function getTimeTargeting()
     {
-      return $this->TimeTargeting;
+        return $this->TimeTargeting;
     }
 
     /**
@@ -569,7 +592,30 @@ class CampaignGetItem extends CampaignBase
      */
     public function setTimeTargeting(TimeTargeting $TimeTargeting = null)
     {
-      $this->TimeTargeting = $TimeTargeting;
-      return $this;
+        $this->TimeTargeting = $TimeTargeting;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isShownOnSearch()
+    {
+        return $this->TextCampaign
+                ->getBiddingStrategy()
+                ->getSearch()
+                ->getBiddingStrategyType() !== TextCampaignSearchStrategyTypeEnum::SERVING_OFF;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isShownOnNetwork()
+    {
+        return $this->TextCampaign
+                ->getBiddingStrategy()
+                ->getNetwork()
+                ->getBiddingStrategyType() !== TextCampaignNetworkStrategyTypeEnum::SERVING_OFF;
     }
 }
