@@ -324,6 +324,54 @@ class AdGetItem
     }
 
     /**
+     * @return bool
+     */
+    public function isTextAd()
+    {
+        return $this->Type === AdTypeEnum::TEXT_AD;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isMobileAppAd()
+    {
+        return $this->Type === AdTypeEnum::MOBILE_APP_AD;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDynamicTextAd()
+    {
+        return $this->Type === AdTypeEnum::DYNAMIC_TEXT_AD;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isImageAd()
+    {
+        return $this->Type === AdTypeEnum::IMAGE_AD;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTextImageAd()
+    {
+        return $this->Subtype === AdSubtypeEnum::TEXT_IMAGE_AD;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isMobileAppImageAd()
+    {
+        return $this->Subtype === AdSubtypeEnum::MOBILE_APP_IMAGE_AD;
+    }
+
+    /**
      * @return TextAdGet
      */
     public function getTextAd()
