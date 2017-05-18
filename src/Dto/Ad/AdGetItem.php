@@ -324,6 +324,22 @@ class AdGetItem
     }
 
     /**
+     * @return bool
+     */
+    public function isTextImageAd()
+    {
+        return $this->Subtype === AdSubtypeEnum::TEXT_IMAGE_AD;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isMobileAppImageAd()
+    {
+        return $this->Subtype === AdSubtypeEnum::MOBILE_APP_IMAGE_AD;
+    }
+
+    /**
      * @return TextAdGet
      */
     public function getTextAd()
