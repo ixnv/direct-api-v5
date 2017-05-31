@@ -39,11 +39,14 @@
     </target>
 
     <target name="run-tests">
-        <exec executable="bin/phpunit" dir="${project.dir}" passthru="true" returnProperty="phpunit_return">
-            <arg line="-c tests/phpunit.xml
-            --log-junit build/phpunit/phpunit.xml" />
+        <exec executable="${project.php_executable}" dir="${project.dir}" passthru="true"  checkreturn="true" returnProperty="phpunit_return">
+            <arg line="
+            -d zend_extension=/usr/lib/php5/20121212/xdebug.so
+            -d xdebug.coverage_enable=1
+            bin/phpunit -c tests/phpunit.xml
+            --log-junit build/phpunit/phpunit.xml
+            --coverage-clover build/phpunit/coverage/clover.xml" />
         </exec>
-
         <if>
             <not>
                 <equals arg1="${phpunit_return}" arg2="0"/>
