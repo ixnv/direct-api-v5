@@ -24,9 +24,9 @@
         "phpoption/phpoption": ">=1.1.0"
     },
     "require-dev": {
+        "elama/php-codesniffer-rules": "^1.0",
         "phpunit/phpunit": "4.*",
         "squizlabs/php_codesniffer": "2.7.0",
-        "phing/phing": "2.15.*",
         "hamcrest/hamcrest-php": "~2.0.0",
         "phake/phake": "~2.2.1"
     },
@@ -37,5 +37,12 @@
 
     "suggest": {
         "elama/common-api": "Не то что бы советую ставить, но есть адаптер для получения токенов используя ExternalSystemAccount"
-    }
+    },
+
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@github.com:eLama/php-codesniffer-rules.git"
+        }
+    ]
 }

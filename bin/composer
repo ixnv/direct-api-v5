@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+if [ -t 1 ] ; then
+    docker run -it --env SYMFONY_ENV="$SYMFONY_ENV" --env SSH_AUTH_SOCK=/tmp/agent.sock \
+      --volume "$SSH_AUTH_SOCK":/tmp/agent.sock \
+      --rm -v "$(pwd)":/app composer/composer "$@"
+else
+    docker run -i --env SYMFONY_ENV="$SYMFONY_ENV" \
+      --volume ~/.ssh:/root/.ssh \
+      --rm -v "$(pwd)":/app composer/composer "$@"
+fi
