@@ -39,7 +39,7 @@
     </target>
 
     <target name="run-tests">
-        <exec executable="php" dir="${project.dir}" passthru="true"  checkreturn="true" returnProperty="phpunit_return">
+        <exec executable="php" dir="${project.dir}" passthru="true"  checkreturn="true">
             <arg line="
             -d zend_extension=/usr/lib/php5/20121212/xdebug.so
             -d xdebug.coverage_enable=1
@@ -48,14 +48,6 @@
             --coverage-clover build/phpunit/coverage/clover.xml
             --coverage-html build/phpunit/coverage/html" />
         </exec>
-        <if>
-            <not>
-                <equals arg1="${phpunit_return}" arg2="0"/>
-            </not>
-            <then>
-                <fail msg="Tests failed!"/>
-            </then>
-        </if>
     </target>
 
     <target name="code-style" depends="init, composer-update, php-code-sniffer">
