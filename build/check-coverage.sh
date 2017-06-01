@@ -7,7 +7,7 @@ function fail {
 }
 
 function echo_coverage {
-    echo "${INCREASED:0:4}% (было - ${MASTER_COVERAGE:0:4}%)"
+    echo "${DELTA:0:4}% (было - ${MASTER_COVERAGE:0:4}%)"
 }
 
 CURRENT_FILE="$1"
@@ -30,10 +30,10 @@ MASTER_COVERAGE=`bc -l <<< \
 (test -z ${MASTER_COVERAGE} || test -z ${CURRENT_COVERAGE}) \
     && fail "Files should contain coverage in clover format"
 
-INCREASED=`bc -l <<< "${CURRENT_COVERAGE} - ${MASTER_COVERAGE}"`
+DELTA=`bc -l <<< "${CURRENT_COVERAGE} - ${MASTER_COVERAGE}"`
 
-test $(bc -l <<< "${INCREASED} < 0") -eq 1 \
-    && INCREASED=`bc -l <<< "${INCREASED} * -1"` \
+test $(bc -l <<< "${DELTA} < 0") -eq 1 \
+    && DELTA=`bc -l <<< "${DELTA} * -1"` \
     && fail "Покрытие кода упало на $(echo_coverage)"
 
 echo "Покрытие кода возросло на $(echo_coverage)"
