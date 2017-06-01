@@ -3,4 +3,4 @@
 docker build --tag=elama/direct-api-v5:latest ./build
 
 docker run --rm -v "`pwd`":/srv -v ${HOME}/.ssh:/root/.ssh elama/direct-api-v5:latest \
-            sh ./bin/run-codesniffer.sh '*/tests/*,*/vendor/*,*/build/*,*/bin/*'
+            bash ./bin/run-codesniffer.sh '*/tests/*,*/vendor/*,*/build/*,*/bin/*'
