@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+docker build --tag=elama/direct-api-v5:latest ./build
+
+docker run --rm -v "`pwd`":/srv elama/direct-api-v5:latest \
+            php ./bin/phpunit -c tests/phpunit.xml \
+            --log-junit build/phpunit/phpunit.xml \
+            --coverage-clover build/phpunit/coverage/clover.xml \
+            --coverage-html build/phpunit/coverage/html
