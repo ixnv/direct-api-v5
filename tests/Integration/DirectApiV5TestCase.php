@@ -13,7 +13,7 @@ use eLama\DirectApiV5\LowLevelDriver\LowLevelDriver;
 use eLama\DirectApiV5\RequestBody\DeleteCampaignRequestBody;
 use eLama\DirectApiV5\RequestBody\GetCampaignsRequestBody;
 use GuzzleHttp\Client;
-use Monolog\Logger;
+use Psr\Log\NullLogger;
 
 class DirectApiV5TestCase extends \PHPUnit_Framework_TestCase
 {
@@ -32,7 +32,7 @@ class DirectApiV5TestCase extends \PHPUnit_Framework_TestCase
     protected static function createDtoDirectDriver($token = self::TOKEN)
     {
         $serializer = JmsFactory::create()->serializer();
-        $lo = LowLevelDriver::createAdapterForClient(new Client(), new Logger('Test'), LowLevelDriver::URL_SANDBOX);
+        $lo = LowLevelDriver::createAdapterForClient(new Client(), new NullLogger(), LowLevelDriver::URL_SANDBOX);
 
         return new DtoDirectDriver($serializer, $lo, $token, self::LOGIN);
     }
