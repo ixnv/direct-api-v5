@@ -13,11 +13,11 @@
     </php>
 
     <testsuites>
-        <testsuite name="Integration tests">
-            <directory>../tests/Integration</directory>
-        </testsuite>
-        <testsuite name="Unit tests">
+        <testsuite name="unit">
             <directory>../tests/Unit</directory>
+        </testsuite>
+        <testsuite name="integration">
+            <directory>../tests/Integration</directory>
         </testsuite>
     </testsuites>
     <filter>
