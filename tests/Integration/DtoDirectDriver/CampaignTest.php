@@ -615,6 +615,10 @@ class CampaignTest extends DirectApiV5TestCase
      */
     private function deleteCampaignById($id)
     {
+        if ($id === null) {
+            return -1;
+        }
+
         $request = new DeleteCampaignRequestBody(new DeleteRequest(
             new IdsCriteria([$id])
         ));
