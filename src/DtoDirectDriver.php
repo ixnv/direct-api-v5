@@ -39,13 +39,13 @@ class DtoDirectDriver
         $login = null
     ) {
         $this->serializer = $jmsSerializer;
-        $this->login = $login;
-        $this->token = $token;
         $this->driver = $driver;
+        $this->token = $token;
+        $this->login = $login;
     }
 
     /**
-     * @return string
+     * @return string | null
      */
     public function getLogin()
     {
@@ -100,7 +100,7 @@ class DtoDirectDriver
                     }
                 }
 
-                if($params->getLimit() == 1) {
+                if ($params->getLimit() == 1) {
                     $return = isset($return[0]) ? $return[0] : null;
                 }
 
@@ -132,6 +132,4 @@ class DtoDirectDriver
                 }
             });
     }
-
-
 }

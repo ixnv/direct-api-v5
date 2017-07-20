@@ -122,10 +122,10 @@ class DriverFactory
      * @param array|null $methodsUsingAgencyUnits array like ['service' => ['method']], null for default
      * @return DtoDirectDriver
      */
-    public function create($token, $login, array $methodsUsingAgencyUnits = null)
+    public function create($token, $login = null, array $methodsUsingAgencyUnits = null)
     {
-        if (empty($token) || empty($login)) {
-            throw new \RuntimeException('Login and token must be specified');
+        if (empty($token)) {
+            throw new \RuntimeException('Token must be specified');
         }
 
         return new DtoDirectDriver($this->serializer, $this->createDriver($methodsUsingAgencyUnits), $token, $login);
