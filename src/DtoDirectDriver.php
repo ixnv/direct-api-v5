@@ -100,7 +100,7 @@ class DtoDirectDriver
                     }
                 }
 
-                if($params->getLimit() == 1) {
+                if ($params->getLimit() == 1) {
                     $return = isset($return[0]) ? $return[0] : null;
                 }
 
@@ -132,6 +132,4 @@ class DtoDirectDriver
                 }
             });
     }
-
-
 }
