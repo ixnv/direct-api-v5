@@ -13,6 +13,7 @@ class PositionEnum extends BaseEnum
     const P11 = 'P11';
     const P12 = 'P12';
     const P13 = 'P13';
+    const P14 = 'P14';
     const P21 = 'P21';
     const P22 = 'P22';
     const P23 = 'P23';
