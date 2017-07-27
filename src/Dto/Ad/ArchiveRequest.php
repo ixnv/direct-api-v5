@@ -5,16 +5,13 @@ namespace eLama\DirectApiV5\Dto\Ad;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
 class ArchiveRequest
 {
-
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Ad\IdsCriteria")
-     *
+     * @JMS\Type("eLama\DirectApiV5\Dto\General\IdsCriteria")
      * @var IdsCriteria $SelectionCriteria
      */
     private $SelectionCriteria;
@@ -24,7 +21,7 @@ class ArchiveRequest
      */
     public function __construct(IdsCriteria $SelectionCriteria = null)
     {
-      $this->SelectionCriteria = $SelectionCriteria;
+        $this->SelectionCriteria = $SelectionCriteria;
     }
 
     /**
@@ -32,7 +29,7 @@ class ArchiveRequest
      */
     public function getSelectionCriteria()
     {
-      return $this->SelectionCriteria;
+        return $this->SelectionCriteria;
     }
 
     /**
@@ -41,8 +38,8 @@ class ArchiveRequest
      */
     public function setSelectionCriteria(IdsCriteria $SelectionCriteria)
     {
-      $this->SelectionCriteria = $SelectionCriteria;
-      return $this;
-    }
+        $this->SelectionCriteria = $SelectionCriteria;
 
+        return $this;
+    }
 }
