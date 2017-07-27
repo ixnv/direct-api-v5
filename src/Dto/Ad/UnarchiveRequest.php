@@ -5,7 +5,6 @@ namespace eLama\DirectApiV5\Dto\Ad;
 use eLama\DirectApiV5\Dto\General\IdsCriteria;
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
@@ -13,8 +12,7 @@ class UnarchiveRequest
 {
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Ad\IdsCriteria")
-     *
+     * @JMS\Type("eLama\DirectApiV5\Dto\General\IdsCriteria")
      * @var IdsCriteria $SelectionCriteria
      */
     private $SelectionCriteria;
@@ -24,7 +22,7 @@ class UnarchiveRequest
      */
     public function __construct(IdsCriteria $SelectionCriteria = null)
     {
-      $this->SelectionCriteria = $SelectionCriteria;
+        $this->SelectionCriteria = $SelectionCriteria;
     }
 
     /**
@@ -32,17 +30,17 @@ class UnarchiveRequest
      */
     public function getSelectionCriteria()
     {
-      return $this->SelectionCriteria;
+        return $this->SelectionCriteria;
     }
 
     /**
      * @param IdsCriteria $SelectionCriteria
-     * @return \eLama\DirectApiV5\Dto\Ad\UnarchiveRequest
+     * @return UnarchiveRequest
      */
     public function setSelectionCriteria(IdsCriteria $SelectionCriteria)
     {
-      $this->SelectionCriteria = $SelectionCriteria;
-      return $this;
-    }
+        $this->SelectionCriteria = $SelectionCriteria;
 
+        return $this;
+    }
 }
