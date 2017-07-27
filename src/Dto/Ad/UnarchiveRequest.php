@@ -35,11 +35,12 @@ class UnarchiveRequest
 
     /**
      * @param IdsCriteria $SelectionCriteria
-     * @return \eLama\DirectApiV5\Dto\General\IdsCriteria
+     * @return UnarchiveRequest
      */
     public function setSelectionCriteria(IdsCriteria $SelectionCriteria)
     {
         $this->SelectionCriteria = $SelectionCriteria;
+
         return $this;
     }
 }

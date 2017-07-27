@@ -37,7 +37,7 @@ class UnarchiveAdsRequestBody extends RequestBody
     }
 
     /**
-     * @return \eLama\DirectApiV5\Dto\Ad\UnarchiveRequest
+     * @return UnarchiveRequest
      */
     public function params()
     {

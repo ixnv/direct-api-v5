@@ -37,7 +37,7 @@ class ArchiveAdsRequestBody extends RequestBody
     }
 
     /**
-     * @return \eLama\DirectApiV5\Dto\Ad\ArchiveRequest
+     * @return ArchiveRequest
      */
     public function params()
     {
