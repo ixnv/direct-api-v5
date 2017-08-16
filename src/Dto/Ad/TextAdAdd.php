@@ -191,7 +191,7 @@ class TextAdAdd extends TextAdAddBase
      * @param string $Title2
      * @return \eLama\DirectApiV5\Dto\Ad\TextAdAdd
      */
-    public function setTitle2($Title2 = null)
+    public function setTitle2($Title2)
     {
         $this->Title2 = $Title2;
 
