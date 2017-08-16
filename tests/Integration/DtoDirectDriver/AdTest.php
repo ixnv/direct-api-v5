@@ -32,6 +32,7 @@ use eLama\DirectApiV5\Dto\Ad\AdUpdateItem;
 class AdTest extends AdGroupExistenceDependantTestCase
 {
     const TITLE = 'некий заголовок';
+    const TITLE2 = 'дополнительный заголовок';
     const TEXT = 'Некоторый текст';
     const HREF = 'http://example.com';
     const ADS_QUANTITY = 4;
@@ -61,6 +62,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
         $adAddItem = new Ad\AdAddItem(self::$adGroupId);
         $textAd = new Ad\TextAdAdd(self::TEXT, self::TITLE, YesNoEnum::NO);
         $textAd->setSitelinkSetId($sitelinkSetId);
+        $textAd->setTitle2(self::TITLE2);
 
         $this->addAdditionalParamsToTextAdAdd($textAd);
 
@@ -86,6 +88,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
         $ad = $this->getAdInCampaignWithId(self::$campaignId, $adId);
         $this->assertTrue($ad->isTextAd());
         assertThat($ad->getTextAd()->getTitle(), is(equalTo(self::TITLE)));
+        assertThat($ad->getTextAd()->getTitle2(), is(equalTo(self::TITLE2)));
         assertThat($ad->getTextAd()->getText(), is(equalTo(self::TEXT)));
         assertThat($ad->getTextAd()->getHref(), is(equalTo(self::HREF)));
         assertThat($ad->getTextAd()->getSitelinkSetId(), is(integerValue()));
