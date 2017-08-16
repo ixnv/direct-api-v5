@@ -29,6 +29,13 @@ class TextAdAdd extends TextAdAddBase
     /**
      * @JMS\Type("string")
      *
+     * @var string $Title2
+     */
+    private $Title2;
+
+    /**
+     * @JMS\Type("string")
+     *
      * @var string $Href
      */
     private $Href;
@@ -170,5 +177,24 @@ class TextAdAdd extends TextAdAddBase
     public function setAdExtensionIds(array $AdExtensionIds)
     {
         $this->AdExtensionIds = $AdExtensionIds;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTitle2()
+    {
+        return $this->Title2;
+    }
+
+    /**
+     * @param string $Title2
+     * @return \eLama\DirectApiV5\Dto\Ad\TextAdAdd
+     */
+    public function setTitle2($Title2)
+    {
+        $this->Title2 = $Title2;
+
+        return $this;
     }
 }
