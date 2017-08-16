@@ -99,7 +99,7 @@ class TextAdGet extends TextAdGetBase
      * @param string $Title2
      * @return \eLama\DirectApiV5\Dto\Ad\TextAdGet
      */
-    public function setTitle2($Title2 = null)
+    public function setTitle2($Title2)
     {
         $this->Title2 = $Title2;
 
