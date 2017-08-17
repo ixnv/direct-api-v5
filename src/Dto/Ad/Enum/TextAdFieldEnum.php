@@ -15,6 +15,7 @@ class TextAdFieldEnum extends BaseEnum
     const SitelinkSetId = 'SitelinkSetId';
     const Text = 'Text';
     const Title = 'Title';
+    const Title2 = 'Title2';
     const Mobile = 'Mobile';
     const VCardId = 'VCardId';
     const AdImageModeration = 'AdImageModeration';
