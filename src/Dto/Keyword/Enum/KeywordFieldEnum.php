@@ -12,6 +12,7 @@ class KeywordFieldEnum extends BaseEnum
     const Keyword = 'Keyword';
     const State = 'State';
     const Status = 'Status';
+    const ServingStatus = 'ServingStatus';
     const AdGroupId = 'AdGroupId';
     const CampaignId = 'CampaignId';
     const Bid = 'Bid';

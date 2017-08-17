@@ -2,6 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\Keyword;
 
+use eLama\DirectApiV5\Dto\AdGroup\Enum\ServingStatusEnum;
 use eLama\DirectApiV5\Dto\General\Enum\PriorityEnum;
 use eLama\DirectApiV5\Dto\General\Enum\StateEnum;
 use eLama\DirectApiV5\Dto\General\Enum\StatusEnum;
@@ -76,6 +77,13 @@ class KeywordGetItem
      * @var StatusEnum $Status
      */
     private $Status;
+
+    /**
+     * @JMS\Type("string")
+     *
+     * @var ServingStatusEnum $ServingStatus
+     */
+    private $ServingStatus;
 
     /**
      * @JMS\Type("string")
@@ -262,6 +270,24 @@ class KeywordGetItem
     public function getStatus()
     {
       return $this->Status;
+    }
+
+    /**
+     * @param ServingStatusEnum $ServingStatus
+     * @return \eLama\DirectApiV5\Dto\Keyword\KeywordGetItem
+     */
+    public function setServingStatus($ServingStatus)
+    {
+      $this->ServingStatus = $ServingStatus;
+      return $this;
+    }
+
+    /**
+     * @return ServingStatusEnum
+     */
+    public function getServingStatus()
+    {
+      return $this->ServingStatus;
     }
 
     /**
