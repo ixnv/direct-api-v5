@@ -2,6 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\Keyword;
 
+use eLama\DirectApiV5\Dto\AdGroup\Enum\ServingStatusEnum;
 use eLama\DirectApiV5\Dto\General\Enum\PriorityEnum;
 use eLama\DirectApiV5\Dto\General\Enum\StateEnum;
 use eLama\DirectApiV5\Dto\General\Enum\StatusEnum;
@@ -80,6 +81,13 @@ class KeywordGetItem
     /**
      * @JMS\Type("string")
      *
+     * @var ServingStatusEnum $ServingStatus
+     */
+    private $ServingStatus;
+
+    /**
+     * @JMS\Type("string")
+     *
      * @var string $UserParam1
      */
     private $UserParam1;
@@ -117,7 +125,7 @@ class KeywordGetItem
      */
     public function getId()
     {
-      return $this->Id;
+        return $this->Id;
     }
 
     /**
@@ -126,8 +134,8 @@ class KeywordGetItem
      */
     public function setId($Id = null)
     {
-      $this->Id = $Id;
-      return $this;
+        $this->Id = $Id;
+        return $this;
     }
 
     /**
@@ -135,7 +143,7 @@ class KeywordGetItem
      */
     public function getKeyword()
     {
-      return $this->Keyword;
+        return $this->Keyword;
     }
 
     /**
@@ -144,8 +152,8 @@ class KeywordGetItem
      */
     public function setKeyword($Keyword = null)
     {
-      $this->Keyword = $Keyword;
-      return $this;
+        $this->Keyword = $Keyword;
+        return $this;
     }
 
     /**
@@ -153,7 +161,7 @@ class KeywordGetItem
      */
     public function getAdGroupId()
     {
-      return $this->AdGroupId;
+        return $this->AdGroupId;
     }
 
     /**
@@ -162,8 +170,8 @@ class KeywordGetItem
      */
     public function setAdGroupId($AdGroupId = null)
     {
-      $this->AdGroupId = $AdGroupId;
-      return $this;
+        $this->AdGroupId = $AdGroupId;
+        return $this;
     }
 
     /**
@@ -171,7 +179,7 @@ class KeywordGetItem
      */
     public function getCampaignId()
     {
-      return $this->CampaignId;
+        return $this->CampaignId;
     }
 
     /**
@@ -180,8 +188,8 @@ class KeywordGetItem
      */
     public function setCampaignId($CampaignId = null)
     {
-      $this->CampaignId = $CampaignId;
-      return $this;
+        $this->CampaignId = $CampaignId;
+        return $this;
     }
 
     /**
@@ -189,7 +197,7 @@ class KeywordGetItem
      */
     public function getBid()
     {
-      return $this->Bid;
+        return $this->Bid;
     }
 
     /**
@@ -198,8 +206,8 @@ class KeywordGetItem
      */
     public function setBid($Bid = null)
     {
-      $this->Bid = $Bid;
-      return $this;
+        $this->Bid = $Bid;
+        return $this;
     }
 
     /**
@@ -207,7 +215,7 @@ class KeywordGetItem
      */
     public function getContextBid()
     {
-      return $this->ContextBid;
+        return $this->ContextBid;
     }
 
     /**
@@ -216,8 +224,8 @@ class KeywordGetItem
      */
     public function setContextBid($ContextBid = null)
     {
-      $this->ContextBid = $ContextBid;
-      return $this;
+        $this->ContextBid = $ContextBid;
+        return $this;
     }
 
     /**
@@ -225,7 +233,7 @@ class KeywordGetItem
      */
     public function getStrategyPriority()
     {
-      return $this->StrategyPriority;
+        return $this->StrategyPriority;
     }
 
     /**
@@ -234,8 +242,8 @@ class KeywordGetItem
      */
     public function setStrategyPriority($StrategyPriority = null)
     {
-      $this->StrategyPriority = $StrategyPriority;
-      return $this;
+        $this->StrategyPriority = $StrategyPriority;
+        return $this;
     }
 
     /**
@@ -243,7 +251,7 @@ class KeywordGetItem
      */
     public function getState()
     {
-      return $this->State;
+        return $this->State;
     }
 
     /**
@@ -252,8 +260,8 @@ class KeywordGetItem
      */
     public function setState($State = null)
     {
-      $this->State = $State;
-      return $this;
+        $this->State = $State;
+        return $this;
     }
 
     /**
@@ -261,7 +269,26 @@ class KeywordGetItem
      */
     public function getStatus()
     {
-      return $this->Status;
+        return $this->Status;
+    }
+
+    /**
+     * @param ServingStatusEnum $ServingStatus
+     * @return \eLama\DirectApiV5\Dto\Keyword\KeywordGetItem
+     */
+    public function setServingStatus($ServingStatus)
+    {
+        $this->ServingStatus = $ServingStatus;
+
+        return $this;
+    }
+
+    /**
+     * @return ServingStatusEnum
+     */
+    public function getServingStatus()
+    {
+        return $this->ServingStatus;
     }
 
     /**
@@ -270,8 +297,8 @@ class KeywordGetItem
      */
     public function setStatus($Status = null)
     {
-      $this->Status = $Status;
-      return $this;
+        $this->Status = $Status;
+        return $this;
     }
 
     /**
@@ -279,7 +306,7 @@ class KeywordGetItem
      */
     public function getUserParam1()
     {
-      return $this->UserParam1;
+        return $this->UserParam1;
     }
 
     /**
@@ -288,8 +315,8 @@ class KeywordGetItem
      */
     public function setUserParam1($UserParam1 = null)
     {
-      $this->UserParam1 = $UserParam1;
-      return $this;
+        $this->UserParam1 = $UserParam1;
+        return $this;
     }
 
     /**
@@ -297,7 +324,7 @@ class KeywordGetItem
      */
     public function getUserParam2()
     {
-      return $this->UserParam2;
+        return $this->UserParam2;
     }
 
     /**
@@ -306,8 +333,8 @@ class KeywordGetItem
      */
     public function setUserParam2($UserParam2 = null)
     {
-      $this->UserParam2 = $UserParam2;
-      return $this;
+        $this->UserParam2 = $UserParam2;
+        return $this;
     }
 
     /**
@@ -315,7 +342,7 @@ class KeywordGetItem
      */
     public function getProductivity()
     {
-      return $this->Productivity;
+        return $this->Productivity;
     }
 
     /**
@@ -324,8 +351,8 @@ class KeywordGetItem
      */
     public function setProductivity(KeywordProductivity $Productivity = null)
     {
-      $this->Productivity = $Productivity;
-      return $this;
+        $this->Productivity = $Productivity;
+        return $this;
     }
 
     /**
@@ -333,7 +360,7 @@ class KeywordGetItem
      */
     public function getStatisticsSearch()
     {
-      return $this->StatisticsSearch;
+        return $this->StatisticsSearch;
     }
 
     /**
@@ -342,8 +369,8 @@ class KeywordGetItem
      */
     public function setStatisticsSearch(Statistics $StatisticsSearch = null)
     {
-      $this->StatisticsSearch = $StatisticsSearch;
-      return $this;
+        $this->StatisticsSearch = $StatisticsSearch;
+        return $this;
     }
 
     /**
@@ -351,7 +378,7 @@ class KeywordGetItem
      */
     public function getStatisticsNetwork()
     {
-      return $this->StatisticsNetwork;
+        return $this->StatisticsNetwork;
     }
 
     /**
@@ -360,8 +387,8 @@ class KeywordGetItem
      */
     public function setStatisticsNetwork(Statistics $StatisticsNetwork = null)
     {
-      $this->StatisticsNetwork = $StatisticsNetwork;
-      return $this;
+        $this->StatisticsNetwork = $StatisticsNetwork;
+        return $this;
     }
 
 }
