@@ -15,9 +15,8 @@ class ProxyDriverWithFallback implements ProxyDriverInterface
 
     /** @var LowLevelDriverInterface */
     private $fallbackDriver;
-    /**
-     * @var Blocker
-     */
+
+    /** @var Blocker */
     private $blocker;
 
     public function __construct(
