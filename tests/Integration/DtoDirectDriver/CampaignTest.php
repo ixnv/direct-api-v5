@@ -98,9 +98,6 @@ class CampaignTest extends DirectApiV5TestCase
             'average_cpc' => [TextCampaignSearchStrategyTypeEnum::AVERAGE_CPC],
             'highest_position' => [TextCampaignSearchStrategyTypeEnum::HIGHEST_POSITION],
             'impressions_below_search' => [TextCampaignSearchStrategyTypeEnum::IMPRESSIONS_BELOW_SEARCH],
-            'lowest_cost' => [TextCampaignSearchStrategyTypeEnum::LOWEST_COST],
-            'lowest_cost_guarantee' => [TextCampaignSearchStrategyTypeEnum::LOWEST_COST_GUARANTEE],
-            'lowest_cost_premium' => [TextCampaignSearchStrategyTypeEnum::LOWEST_COST_PREMIUM],
             'wb_maximum_clicks' => [TextCampaignSearchStrategyTypeEnum::WB_MAXIMUM_CLICKS],
             'weekly_click_package' => [TextCampaignSearchStrategyTypeEnum::WEEKLY_CLICK_PACKAGE],
         ];
@@ -157,8 +154,8 @@ class CampaignTest extends DirectApiV5TestCase
     public function createTextCampaignWithServingOffSearchStrategy()
     {
         $id = $this->createTextCampaignWithCertainStrategies(
-            TextCampaignSearchStrategyTypeEnum::LOWEST_COST,
-            TextCampaignNetworkStrategyTypeEnum::SERVING_OFF
+            TextCampaignSearchStrategyTypeEnum::SERVING_OFF,
+            TextCampaignNetworkStrategyTypeEnum::MAXIMUM_COVERAGE
         );
 
         $this->deleteCampaign($id);
@@ -170,8 +167,8 @@ class CampaignTest extends DirectApiV5TestCase
     public function createTextCampaignWithServingOffNetworkStrategy()
     {
         $id = $this->createTextCampaignWithCertainStrategies(
-            TextCampaignSearchStrategyTypeEnum::SERVING_OFF,
-            TextCampaignNetworkStrategyTypeEnum::MAXIMUM_COVERAGE
+            TextCampaignSearchStrategyTypeEnum::HIGHEST_POSITION,
+            TextCampaignNetworkStrategyTypeEnum::SERVING_OFF
         );
 
         $this->deleteCampaign($id);
