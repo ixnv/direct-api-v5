@@ -8,25 +8,6 @@ class TextCampaignSearchStrategyTypeEnum extends BaseEnum
 {
     const __default = 'AVERAGE_CPC';
 
-    /**
-     * @deprecated
-     * Удалены из Директ АПИ 28 июня 2017 г.
-     * @link https://tech.yandex.ru/direct/doc/changelog/index-docpage/
-     */
-    const LOWEST_COST = 'LOWEST_COST';
-    /**
-     * @deprecated
-     * Удалены из Директ АПИ 28 июня 2017 г.
-     * @link https://tech.yandex.ru/direct/doc/changelog/index-docpage/
-     */
-    const LOWEST_COST_GUARANTEE = 'LOWEST_COST_GUARANTEE';
-    /**
-     * @deprecated
-     * Удалены из Директ АПИ 28 июня 2017 г.
-     * @link https://tech.yandex.ru/direct/doc/changelog/index-docpage/
-     */
-    const LOWEST_COST_PREMIUM = 'LOWEST_COST_PREMIUM';
-
     const AVERAGE_CPC = 'AVERAGE_CPC';
     const AVERAGE_CPA = 'AVERAGE_CPA';
     const WB_MAXIMUM_CONVERSION_RATE = 'WB_MAXIMUM_CONVERSION_RATE';
