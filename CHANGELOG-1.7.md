@@ -6,3 +6,5 @@ CHANGELOG for 1.7.x
  * позиция P14 переехала из ```General\Enum\PositionEnum``` в ```Bids\Enum\PositionEnum```, где ей и место
  * удалили задублировавшийся ```General\Enum\PositionEnum```,  используйте ```Bids\Enum\PositionEnum```
  * устаревшие стратегии LOWEST_COST* были удалены
+ * Title2 в TextAd nillable
+ * правки phpdoc'и
