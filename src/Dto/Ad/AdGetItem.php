@@ -178,7 +178,8 @@ class AdGetItem
     }
 
     /**
-     * @return StatusEnum
+     * @see StatusEnum
+     * @return string
      */
     public function getStatus()
     {
@@ -197,7 +198,8 @@ class AdGetItem
     }
 
     /**
-     * @return StateEnum
+     * @see StateEnum
+     * @return string
      */
     public function getState()
     {
