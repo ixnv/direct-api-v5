@@ -17,8 +17,10 @@ use Psr\Log\NullLogger;
 
 class DirectApiV5TestCase extends \PHPUnit_Framework_TestCase
 {
-    const LOGIN = 'ra-trinet-add-dev-01';
-    const TOKEN = '3fe13d8bd818458c89624f678f365051';
+//    const LOGIN = 'ra-trinet-add-dev-01';
+    const LOGIN = 'ra-trinet-add-dev-agency-01';
+//    const TOKEN = '3fe13d8bd818458c89624f678f365051';
+    const TOKEN = 'AQAAAAAhGb9wAASXCUI6UC5uOUqmii5Kj29EtEE';
 
     public static function setUpBeforeClass(DtoDirectDriver $dtoDirectDriver = null)
     {
