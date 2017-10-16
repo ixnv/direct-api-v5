@@ -11,8 +11,9 @@ use eLama\DirectApiV5\Dto\General\Enum\LangEnum;
 use eLama\DirectApiV5\Dto\General\Enum\YesNoEnum;
 use eLama\DirectApiV5\DtoDirectDriver;
 use eLama\DirectApiV5\RequestBody\AddAgencyClientRequestBody;
+use eLama\DirectApiV5\Test\Integration\DirectApiV5TestCase;
 
-class AgencyClientTest extends AdGroupExistenceDependantTestCase
+class AgencyClientTest extends DirectApiV5TestCase
 {
     /**
      * @var DtoDirectDriver

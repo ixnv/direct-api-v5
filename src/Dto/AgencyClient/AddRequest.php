@@ -9,37 +9,37 @@ class AddRequest
     /**
      * @var string $login
      */
-    private $login;
+    private $Login;
 
     /**
      * @var string $firstName
      */
-    private $firstName;
+    private $FirstName;
 
     /**
      * @var string $lastName
      */
-    private $lastName;
+    private $LastName;
 
     /**
      * @var CurrencyEnum $currency
      */
-    private $currency;
+    private $Currency;
 
     /**
      * @var NotificationAdd $notification
      */
-    private $notification;
+    private $Notification;
 
     /**
      * @var eLama\DirectApiV5\GeneralclientsClientSettingAddItem[] $settings
      */
-    private $settings;
+    private $Settings;
 
     /**
      * @var eLama\DirectApiV5\GeneralclientsGrantItem[] $grants
      */
-    private $grants;
+    private $Grants;
 
     /**
      * @param string $login
@@ -50,11 +50,11 @@ class AddRequest
      */
     public function __construct($login, $firstName, $lastName, CurrencyEnum $currency, NotificationAdd $notification)
     {
-        $this->login = $login;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->currency = $currency;
-        $this->notification = $notification;
+        $this->Login = $login;
+        $this->FirstName = $firstName;
+        $this->LastName = $lastName;
+        $this->Currency = $currency;
+        $this->Notification = $notification;
     }
 
     /**
@@ -62,7 +62,7 @@ class AddRequest
      */
     public function getLogin()
     {
-        return $this->login;
+        return $this->Login;
     }
 
     /**
@@ -71,7 +71,7 @@ class AddRequest
      */
     public function setLogin($login)
     {
-        $this->login = $login;
+        $this->Login = $login;
     
         return $this;
     }
@@ -81,7 +81,7 @@ class AddRequest
      */
     public function getFirstName()
     {
-        return $this->firstName;
+        return $this->FirstName;
     }
 
     /**
@@ -90,7 +90,7 @@ class AddRequest
      */
     public function setFirstName($firstName)
     {
-        $this->firstName = $firstName;
+        $this->FirstName = $firstName;
     
         return $this;
     }
@@ -100,7 +100,7 @@ class AddRequest
      */
     public function getLastName()
     {
-        return $this->lastName;
+        return $this->LastName;
     }
 
     /**
@@ -109,7 +109,7 @@ class AddRequest
      */
     public function setLastName($lastName)
     {
-        $this->lastName = $lastName;
+        $this->LastName = $lastName;
     
         return $this;
     }
@@ -119,7 +119,7 @@ class AddRequest
      */
     public function getCurrency()
     {
-        return $this->currency;
+        return $this->Currency;
     }
 
     /**
@@ -128,7 +128,7 @@ class AddRequest
      */
     public function setCurrency(CurrencyEnum $currency)
     {
-        $this->currency = $currency;
+        $this->Currency = $currency;
     
         return $this;
     }
@@ -138,7 +138,7 @@ class AddRequest
      */
     public function getNotification()
     {
-        return $this->notification;
+        return $this->Notification;
     }
 
     /**
@@ -147,7 +147,7 @@ class AddRequest
      */
     public function setNotification($notification)
     {
-        $this->notification = $notification;
+        $this->Notification = $notification;
     
         return $this;
     }
@@ -157,7 +157,7 @@ class AddRequest
      */
     public function getSettings()
     {
-        return $this->settings;
+        return $this->Settings;
     }
 
     /**
@@ -166,7 +166,7 @@ class AddRequest
      */
     public function setSettings(array $settings = null)
     {
-        $this->settings = $settings;
+        $this->Settings = $settings;
     
         return $this;
     }
@@ -176,7 +176,7 @@ class AddRequest
      */
     public function getGrants()
     {
-        return $this->grants;
+        return $this->Grants;
     }
 
     /**
@@ -185,7 +185,7 @@ class AddRequest
      */
     public function setGrants(array $grants = null)
     {
-        $this->grants = $grants;
+        $this->Grants = $grants;
     
         return $this;
     }
