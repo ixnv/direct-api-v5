@@ -1,122 +1,150 @@
 <?php
 
-namespace eLama\DirectApiV5;
+namespace eLama\DirectApiV5\Dto\AgencyClient;
 
-use eLama\DirectApiV5\Dto\AgencyClient\ClientBaseItem;
-use eLama\DirectApiV5\Dto\General\Enum\CurrencyEnum;
-use eLama\DirectApiV5\Dto\General\Enum\YesNoEnum;
+use JMS\Serializer\Annotation as JMS;
 
 class ClientGetItem extends ClientBaseItem
 {
     /**
-     * @var float $accountQuality
+     * @JMS\Type("double")
+     *
+     * @var float $AccountQuality
      */
-    protected $accountQuality;
+    protected $AccountQuality;
 
     /**
-     * @var YesNoEnum $archived
+     * @JMS\Type("string")
+     *
+     * @var string $Archived
      */
-    protected $archived;
+    protected $Archived;
 
     /**
-     * @var int $clientId
+     * @JMS\Type("integer")
+     *
+     * @var int $ClientId
      */
-    protected $clientId;
+    protected $ClientId;
 
     /**
-     * @var int $countryId
+     * @JMS\Type("integer")
+     *
+     * @var int $CountryId
      */
-    protected $countryId;
+    protected $CountryId;
 
     /**
-     * @var string $createdAt
+     * @JMS\Type("string")
+     *
+     * @var string $CreatedAt
      */
-    protected $createdAt;
+    protected $CreatedAt;
 
     /**
-     * @var CurrencyEnum $currency
+     * @JMS\Type("string")
+     *
+     * @var string $Currency
      */
-    protected $currency;
+    protected $Currency;
 
     /**
-     * @var eLama\DirectApiV5\GeneralclientsGrantGetItem[] $grants
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\AgencyClient\GrantGetItem>")
+     *
+     * @var GrantGetItem[] $Grants
      */
-    protected $grants;
+    protected $Grants;
 
     /**
-     * @var string $login
+     * @JMS\Type("string")
+     *
+     * @var string $Login
      */
-    protected $login;
+    protected $Login;
 
     /**
-     * @var eLama\DirectApiV5\GeneralclientsNotificationGet $notification
+     * @JMS\Type("eLama\DirectApiV5\Dto\AgencyClient\NotificationGet")
+     *
+     * @var NotificationGet $Notification
      */
-    protected $notification;
+    protected $Notification;
 
     /**
-     * @var int $overdraftSumAvailable
+     * @JMS\Type("integer")
+     *
+     * @var int $OverdraftSumAvailable
      */
-    protected $overdraftSumAvailable;
+    protected $OverdraftSumAvailable;
 
     /**
-     * @var eLama\DirectApiV5\GeneralclientsRepresentative[] $representatives
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\AgencyClient\Representative>")
+     *
+     * @var Representative[] $Representatives
      */
-    protected $representatives;
+    protected $Representatives;
 
     /**
-     * @var eLama\DirectApiV5\GeneralclientsClientRestrictionItem[] $restrictions
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\AgencyClient\ClientRestrictionItem>")
+     *
+     * @var ClientRestrictionItem[] $Restrictions
      */
-    protected $restrictions;
+    protected $Restrictions;
 
     /**
-     * @var eLama\DirectApiV5\GeneralclientsClientSettingGetItem[] $settings
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\AgencyClient\ClientSettingGetItem>")
+     *
+     * @var ClientSettingGetItem[] $Settings
      */
-    protected $settings;
+    protected $Settings;
 
     /**
-     * @var string $type
+     * @JMS\Type("string")
+     *
+     * @var string $Type
      */
-    protected $type;
+    protected $Type;
 
     /**
-     * @var float $vatRate
+     * @JMS\Type("double")
+     *
+     * @var float $VatRate
      */
-    protected $vatRate;
+    protected $VatRate;
 
     /**
      * @return float
      */
     public function getAccountQuality()
     {
-        return $this->accountQuality;
+        return $this->AccountQuality;
     }
 
     /**
-     * @param float $accountQuality
+     * @param float $AccountQuality
      * @return self
      */
-    public function setAccountQuality($accountQuality)
+    public function setAccountQuality($AccountQuality)
     {
-        $this->accountQuality = $accountQuality;
+        $this->AccountQuality = $AccountQuality;
     
         return $this;
     }
 
     /**
-     * @return eLama\DirectApiV5\General\YesNoEnum
+     * @return string
      */
     public function getArchived()
     {
-        return $this->archived;
+        return $this->Archived;
     }
 
     /**
-     * @param eLama\DirectApiV5\General\YesNoEnum $archived
+     * @param string $Archived
      * @return self
      */
-    public function setArchived(YesNoEnum $archived = null)
+    public function setArchived($Archived = null)
     {
-        $this->archived = $archived;
+        $this->Archived = $Archived;
     
         return $this;
     }
@@ -126,16 +154,16 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getClientId()
     {
-        return $this->clientId;
+        return $this->ClientId;
     }
 
     /**
-     * @param int $clientId
+     * @param int $ClientId
      * @return self
      */
-    public function setClientId($clientId)
+    public function setClientId($ClientId)
     {
-        $this->clientId = $clientId;
+        $this->ClientId = $ClientId;
     
         return $this;
     }
@@ -145,16 +173,16 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getCountryId()
     {
-        return $this->countryId;
+        return $this->CountryId;
     }
 
     /**
-     * @param int $countryId
+     * @param int $CountryId
      * @return self
      */
-    public function setCountryId($countryId)
+    public function setCountryId($CountryId)
     {
-        $this->countryId = $countryId;
+        $this->CountryId = $CountryId;
     
         return $this;
     }
@@ -164,54 +192,54 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getCreatedAt()
     {
-        return $this->createdAt;
+        return $this->CreatedAt;
     }
 
     /**
-     * @param string $createdAt
+     * @param string $CreatedAt
      * @return self
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt($CreatedAt)
     {
-        $this->createdAt = $createdAt;
+        $this->CreatedAt = $CreatedAt;
     
         return $this;
     }
 
     /**
-     * @return eLama\DirectApiV5\General\CurrencyEnum
+     * @return string
      */
     public function getCurrency()
     {
-        return $this->currency;
+        return $this->Currency;
     }
 
     /**
-     * @param eLama\DirectApiV5\General\CurrencyEnum $currency
+     * @param string $Currency
      * @return self
      */
-    public function setCurrency(CurrencyEnum $currency = null)
+    public function setCurrency($Currency = null)
     {
-        $this->currency = $currency;
+        $this->Currency = $Currency;
     
         return $this;
     }
 
     /**
-     * @return eLama\DirectApiV5\GeneralclientsGrantGetItem[]
+     * @return GrantGetItem[]
      */
     public function getGrants()
     {
-        return $this->grants;
+        return $this->Grants;
     }
 
     /**
-     * @param eLama\DirectApiV5\GeneralclientsGrantGetItem[] $grants
+     * @param GrantGetItem[] $Grants
      * @return self
      */
-    public function setGrants(array $grants = null)
+    public function setGrants(array $Grants = null)
     {
-        $this->grants = $grants;
+        $this->Grants = $Grants;
     
         return $this;
     }
@@ -221,35 +249,35 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getLogin()
     {
-        return $this->login;
+        return $this->Login;
     }
 
     /**
-     * @param string $login
+     * @param string $Login
      * @return self
      */
-    public function setLogin($login)
+    public function setLogin($Login)
     {
-        $this->login = $login;
+        $this->Login = $Login;
     
         return $this;
     }
 
     /**
-     * @return eLama\DirectApiV5\GeneralclientsNotificationGet
+     * @return NotificationGet
      */
     public function getNotification()
     {
-        return $this->notification;
+        return $this->Notification;
     }
 
     /**
-     * @param eLama\DirectApiV5\GeneralclientsNotificationGet $notification
+     * @param NotificationGet $Notification
      * @return self
      */
-    public function setNotification($notification)
+    public function setNotification($Notification)
     {
-        $this->notification = $notification;
+        $this->Notification = $Notification;
     
         return $this;
     }
@@ -259,73 +287,73 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getOverdraftSumAvailable()
     {
-        return $this->overdraftSumAvailable;
+        return $this->OverdraftSumAvailable;
     }
 
     /**
-     * @param int $overdraftSumAvailable
+     * @param int $OverdraftSumAvailable
      * @return self
      */
-    public function setOverdraftSumAvailable($overdraftSumAvailable)
+    public function setOverdraftSumAvailable($OverdraftSumAvailable)
     {
-        $this->overdraftSumAvailable = $overdraftSumAvailable;
+        $this->OverdraftSumAvailable = $OverdraftSumAvailable;
     
         return $this;
     }
 
     /**
-     * @return eLama\DirectApiV5\GeneralclientsRepresentative[]
+     * @return Representative[]
      */
     public function getRepresentatives()
     {
-        return $this->representatives;
+        return $this->Representatives;
     }
 
     /**
-     * @param eLama\DirectApiV5\GeneralclientsRepresentative[] $representatives
+     * @param Representative[] $Representatives
      * @return self
      */
-    public function setRepresentatives(array $representatives = null)
+    public function setRepresentatives(array $Representatives = null)
     {
-        $this->representatives = $representatives;
+        $this->Representatives = $Representatives;
     
         return $this;
     }
 
     /**
-     * @return eLama\DirectApiV5\GeneralclientsClientRestrictionItem[]
+     * @return ClientRestrictionItem[]
      */
     public function getRestrictions()
     {
-        return $this->restrictions;
+        return $this->Restrictions;
     }
 
     /**
-     * @param eLama\DirectApiV5\GeneralclientsClientRestrictionItem[] $restrictions
+     * @param ClientRestrictionItem[] $Restrictions
      * @return self
      */
-    public function setRestrictions(array $restrictions = null)
+    public function setRestrictions(array $Restrictions = null)
     {
-        $this->restrictions = $restrictions;
+        $this->Restrictions = $Restrictions;
     
         return $this;
     }
 
     /**
-     * @return eLama\DirectApiV5\GeneralclientsClientSettingGetItem[]
+     * @return ClientSettingGetItem[]
      */
     public function getSettings()
     {
-        return $this->settings;
+        return $this->Settings;
     }
 
     /**
-     * @param eLama\DirectApiV5\GeneralclientsClientSettingGetItem[] $settings
+     * @param ClientSettingGetItem[] $Settings
      * @return self
      */
-    public function setSettings(array $settings = null)
+    public function setSettings(array $Settings = null)
     {
-        $this->settings = $settings;
+        $this->Settings = $Settings;
     
         return $this;
     }
@@ -335,16 +363,16 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getType()
     {
-        return $this->type;
+        return $this->Type;
     }
 
     /**
-     * @param string $type
+     * @param string $Type
      * @return self
      */
-    public function setType($type)
+    public function setType($Type)
     {
-        $this->type = $type;
+        $this->Type = $Type;
     
         return $this;
     }
@@ -354,16 +382,16 @@ class ClientGetItem extends ClientBaseItem
      */
     public function getVatRate()
     {
-        return $this->vatRate;
+        return $this->VatRate;
     }
 
     /**
-     * @param float $vatRate
+     * @param float $VatRate
      * @return self
      */
-    public function setVatRate($vatRate)
+    public function setVatRate($VatRate)
     {
-        $this->vatRate = $vatRate;
+        $this->VatRate = $VatRate;
     
         return $this;
     }

@@ -2,17 +2,17 @@
 
 namespace eLama\DirectApiV5\Dto\AgencyClient;
 
-class EmailSubscriptionItem
+class ClientSettingGetItem
 {
     /**
      * @var string $Option
      */
-    private $Option;
+    protected $Option;
 
     /**
      * @var string $Value
      */
-    private $Value;
+    protected $Value;
 
     /**
      * @param string $option

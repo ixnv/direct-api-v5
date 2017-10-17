@@ -1,8 +1,10 @@
 <?php
 
-namespace eLama\DirectApiV5\AgencyClient;
+namespace eLama\DirectApiV5\Dto\AgencyClient\Enum;
 
-class AgencyClientFieldEnum extends \MyCLabs\Enum\Enum
+use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
+
+class AgencyClientFieldEnum extends BaseEnum
 {
     const __default = 'AccountQuality';
 

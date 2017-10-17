@@ -1,31 +1,36 @@
 <?php
 
-
 namespace eLama\DirectApiV5\RequestBody;
 
-use eLama\DirectApiV5\Dto\Ad\AdsSelectionCriteria;
-use eLama\DirectApiV5\Dto\Ad\Enum\AdFieldEnum;
-use eLama\DirectApiV5\Dto\Ad\Enum\DynamicTextAdFieldEnum;
-use eLama\DirectApiV5\Dto\Ad\Enum\MobileAppAdFieldEnum;
-use eLama\DirectApiV5\Dto\Ad\Enum\MobileAppImageAdFieldEnum;
-use eLama\DirectApiV5\Dto\Ad\Enum\TextAdFieldEnum;
-use eLama\DirectApiV5\Dto\Ad\Enum\TextImageAdFieldEnum;
-use eLama\DirectApiV5\Dto\Ad\GetResponseBody;
-use eLama\DirectApiV5\Dto\Ad\GetRequest;
+use eLama\DirectApiV5\Dto\AgencyClient\AgencyClientsSelectionCriteria;
+use eLama\DirectApiV5\Dto\AgencyClient\GetRequest;
+use eLama\DirectApiV5\Dto\AgencyClient\GetResponseBody;
 
 class GetAgencyClientsRequestBody extends GetRequestBody
 {
-
-    public function __construct(AdsSelectionCriteria $selectionCriteria)
+    public function __construct(AgencyClientsSelectionCriteria $selectionCriteria)
     {
         $this->request = new GetRequest(
             $selectionCriteria,
-            AdFieldEnum::values(),
-            TextAdFieldEnum::values(),
-            MobileAppAdFieldEnum::values(),
-            DynamicTextAdFieldEnum::values(),
-            TextImageAdFieldEnum::values(),
-            MobileAppImageAdFieldEnum::values()
+            [
+                "AccountQuality",
+                "Archived",
+                "ClientId",
+                "ClientInfo",
+                "CountryId",
+                "CreatedAt",
+                "Currency",
+                "Grants",
+                "Login",
+                "Notification",
+                "OverdraftSumAvailable",
+                "Phone",
+                "Representatives",
+                "Restrictions",
+                "Settings",
+                "Type",
+                "VatRate"
+            ]
         );
     }
 

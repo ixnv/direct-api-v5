@@ -2,33 +2,41 @@
 
 namespace eLama\DirectApiV5\Dto\AgencyClient;
 
+use JMS\Serializer\Annotation as JMS;
+
 class ClientBaseItem
 {
     /**
-     * @var string $clientInfo
+     * @JMS\Type("string")
+     *
+     * @var string $ClientInfo
      */
-    protected $clientInfo;
+    protected $ClientInfo;
 
     /**
-     * @var string $phone
+     * @JMS\Type("string")
+     *
+     * @var string $Phone
      */
-    protected $phone;
+    protected $Phone;
 
     /**
+     * @JMS\Type("string")
+     *
      * @return string
      */
     public function getClientInfo()
     {
-        return $this->clientInfo;
+        return $this->ClientInfo;
     }
 
     /**
-     * @param string $clientInfo
+     * @param string $ClientInfo
      * @return self
      */
-    public function setClientInfo($clientInfo)
+    public function setClientInfo($ClientInfo)
     {
-        $this->clientInfo = $clientInfo;
+        $this->ClientInfo = $ClientInfo;
     
         return $this;
     }
@@ -38,16 +46,16 @@ class ClientBaseItem
      */
     public function getPhone()
     {
-        return $this->phone;
+        return $this->Phone;
     }
 
     /**
-     * @param string $phone
+     * @param string $Phone
      * @return self
      */
-    public function setPhone($phone)
+    public function setPhone($Phone)
     {
-        $this->phone = $phone;
+        $this->Phone = $Phone;
     
         return $this;
     }

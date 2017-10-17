@@ -1,37 +1,40 @@
 <?php
 
-namespace eLama\DirectApiV5\AgencyClient;
+namespace eLama\DirectApiV5\Dto\AgencyClient;
 
 use eLama\DirectApiV5\Dto\General\GetResultGeneral;
+use JMS\Serializer\Annotation as JMS;
 
 class GetResult extends GetResultGeneral
 {
     /**
-     * @var eLama\DirectApiV5\GeneralclientsClientGetItem[] $clients
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\AgencyClient\ClientGetItem>")
+     *
+     * @var ClientGetItem[] $Clients
      */
-    protected $clients;
+    protected $Clients;
 
     /**
-     * @return eLama\DirectApiV5\GeneralclientsClientGetItem[]
+     * @return ClientGetItem[]
      */
     public function getClients()
     {
-        return $this->clients;
+        return $this->Clients;
     }
 
     /**
-     * @param eLama\DirectApiV5\GeneralclientsClientGetItem[] $clients
+     * @param ClientGetItem[] $Clients
      * @return self
      */
-    public function setClients(array $clients = null)
+    public function setClients(array $Clients = null)
     {
-        $this->clients = $clients;
+        $this->Clients = $Clients;
     
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return ClientGetItem[]
      */
     public function getItems()
     {

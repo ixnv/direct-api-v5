@@ -7,30 +7,30 @@ use eLama\DirectApiV5\Dto\General\Enum\LangEnum;
 class Notification
 {
     /**
-     * @var string $email
+     * @var string $Email
      */
-    protected $email;
+    protected $Email;
 
     /**
-     * @var EmailSubscriptionItem $emailSubscriptions
+     * @var EmailSubscriptionItem $EmailSubscriptions
      */
-    protected $emailSubscriptions;
+    protected $EmailSubscriptions;
 
     /**
-     * @var LangEnum $lang
+     * @var LangEnum $Lang
      */
-    protected $lang;
+    protected $Lang;
 
     /**
-     * @param string $email
-     * @param EmailSubscriptionItem $emailSubscriptions
-     * @param LangEnum $lang
+     * @param string $Email
+     * @param EmailSubscriptionItem[] $EmailSubscriptions
+     * @param string $Lang
      */
-    public function __construct($email, $emailSubscriptions, LangEnum $lang)
+    public function __construct($Email, array $EmailSubscriptions, $Lang)
     {
-        $this->email = $email;
-        $this->emailSubscriptions = $emailSubscriptions;
-        $this->lang = $lang;
+        $this->Email = $Email;
+        $this->EmailSubscriptions = $EmailSubscriptions;
+        $this->Lang = $Lang;
     }
 
     /**
@@ -38,35 +38,35 @@ class Notification
      */
     public function getEmail()
     {
-        return $this->email;
+        return $this->Email;
     }
 
     /**
-     * @param string $email
+     * @param string $Email
      * @return self
      */
-    public function setEmail($email)
+    public function setEmail($Email)
     {
-        $this->email = $email;
+        $this->Email = $Email;
     
         return $this;
     }
 
     /**
-     * @return EmailSubscriptionItem
+     * @return EmailSubscriptionItem[]
      */
     public function getEmailSubscriptions()
     {
-        return $this->emailSubscriptions;
+        return $this->EmailSubscriptions;
     }
 
     /**
-     * @param EmailSubscriptionItem $emailSubscriptions
+     * @param EmailSubscriptionItem[] $EmailSubscriptions
      * @return self
      */
-    public function setEmailSubscriptions($emailSubscriptions)
+    public function setEmailSubscriptions($EmailSubscriptions)
     {
-        $this->emailSubscriptions = $emailSubscriptions;
+        $this->EmailSubscriptions = $EmailSubscriptions;
     
         return $this;
     }
@@ -76,16 +76,16 @@ class Notification
      */
     public function getLang()
     {
-        return $this->lang;
+        return $this->Lang;
     }
 
     /**
-     * @param LangEnum $lang
+     * @param LangEnum $Lang
      * @return self
      */
-    public function setLang(LangEnum $lang)
+    public function setLang(LangEnum $Lang)
     {
-        $this->lang = $lang;
+        $this->Lang = $Lang;
     
         return $this;
     }

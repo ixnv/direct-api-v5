@@ -1,55 +1,53 @@
 <?php
 
-namespace eLama\DirectApiV5\AgencyClient;
-
-use eLama\DirectApiV5\Dto\General\Enum\YesNoEnum;
+namespace eLama\DirectApiV5\Dto\AgencyClient;
 
 class AgencyClientsSelectionCriteria
 {
     /**
-     * @var string[] $logins
+     * @var string[] $Logins
      */
-    private $logins;
+    private $Logins;
 
     /**
-     * @var YesNoEnum $archived
+     * @var string $Archived
      */
-    private $archived;
+    private $Archived;
 
     /**
      * @return string[]
      */
     public function getLogins()
     {
-        return $this->logins;
+        return $this->Logins;
     }
 
     /**
-     * @param string[] $logins
+     * @param string[] $Logins
      * @return self
      */
-    public function setLogins(array $logins = null)
+    public function setLogins(array $Logins = null)
     {
-        $this->logins = $logins;
+        $this->Logins = $Logins;
     
         return $this;
     }
 
     /**
-     * @return YesNoEnum
+     * @return string
      */
     public function getArchived()
     {
-        return $this->archived;
+        return $this->Archived;
     }
 
     /**
-     * @param YesNoEnum $archived
+     * @param string $Archived
      * @return self
      */
-    public function setArchived(YesNoEnum $archived = null)
+    public function setArchived($Archived = null)
     {
-        $this->archived = $archived;
+        $this->Archived = $Archived;
     
         return $this;
     }

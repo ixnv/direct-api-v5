@@ -1,64 +1,65 @@
 <?php
 
-namespace eLama\DirectApiV5\AgencyClient;
+namespace eLama\DirectApiV5\Dto\AgencyClient;
 
-class GetRequest extends \eLama\DirectApiV5\General\GetRequestGeneral
+use eLama\DirectApiV5\Dto\General\GetRequestGeneral;
+
+class GetRequest extends GetRequestGeneral
 {
     /**
-     * @var eLama\DirectApiV5\AgencyClient\AgencyClientsSelectionCriteria $selectionCriteria
+     * @var AgencyClientsSelectionCriteria $SelectionCriteria
      */
-    protected $selectionCriteria;
+    protected $SelectionCriteria;
 
     /**
-     * @var eLama\DirectApiV5\AgencyClient\AgencyClientFieldEnum[] $fieldNames
+     * @var string[] $FieldNames
      */
-    protected $fieldNames;
+    protected $FieldNames;
 
     /**
-     * @param eLama\DirectApiV5\AgencyClient\AgencyClientsSelectionCriteria $selectionCriteria
-     * @param eLama\DirectApiV5\AgencyClient\AgencyClientFieldEnum[] $fieldNames
+     * @param AgencyClientsSelectionCriteria $selectionCriteria
+     * @param string[] $fieldNames
      */
     public function __construct($selectionCriteria, array $fieldNames)
     {
-        parent::__construct();
-        $this->selectionCriteria = $selectionCriteria;
-        $this->fieldNames = $fieldNames;
+        $this->SelectionCriteria = $selectionCriteria;
+        $this->FieldNames = $fieldNames;
     }
 
     /**
-     * @return eLama\DirectApiV5\AgencyClient\AgencyClientsSelectionCriteria
+     * @return AgencyClientsSelectionCriteria
      */
     public function getSelectionCriteria()
     {
-        return $this->selectionCriteria;
+        return $this->SelectionCriteria;
     }
 
     /**
-     * @param eLama\DirectApiV5\AgencyClient\AgencyClientsSelectionCriteria $selectionCriteria
+     * @param AgencyClientsSelectionCriteria $SelectionCriteria
      * @return self
      */
-    public function setSelectionCriteria($selectionCriteria)
+    public function setSelectionCriteria($SelectionCriteria)
     {
-        $this->selectionCriteria = $selectionCriteria;
+        $this->SelectionCriteria = $SelectionCriteria;
     
         return $this;
     }
 
     /**
-     * @return eLama\DirectApiV5\AgencyClient\AgencyClientFieldEnum[]
+     * @return string[]
      */
     public function getFieldNames()
     {
-        return $this->fieldNames;
+        return $this->FieldNames;
     }
 
     /**
-     * @param eLama\DirectApiV5\AgencyClient\AgencyClientFieldEnum[] $fieldNames
+     * @param string[] $FieldNames
      * @return self
      */
-    public function setFieldNames(array $fieldNames)
+    public function setFieldNames(array $FieldNames)
     {
-        $this->fieldNames = $fieldNames;
+        $this->FieldNames = $FieldNames;
     
         return $this;
     }

@@ -45,10 +45,10 @@ class AddRequest
      * @param string $login
      * @param string $firstName
      * @param string $lastName
-     * @param CurrencyEnum $currency
+     * @param string $currency
      * @param NotificationAdd $notification
      */
-    public function __construct($login, $firstName, $lastName, CurrencyEnum $currency, NotificationAdd $notification)
+    public function __construct($login, $firstName, $lastName, $currency, NotificationAdd $notification)
     {
         $this->Login = $login;
         $this->FirstName = $firstName;

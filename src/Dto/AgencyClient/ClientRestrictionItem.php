@@ -2,49 +2,49 @@
 
 namespace eLama\DirectApiV5\Dto\AgencyClient;
 
-class EmailSubscriptionItem
+class ClientRestrictionItem
 {
     /**
-     * @var string $Option
+     * @var string $Element
      */
-    private $Option;
+    protected $Element;
 
     /**
-     * @var string $Value
+     * @var int $Value
      */
-    private $Value;
+    protected $Value;
 
     /**
-     * @param string $option
-     * @param string $value
+     * @param string $element
+     * @param int $value
      */
-    public function __construct($option, $value)
+    public function __construct($element, $value)
     {
-        $this->Option = $option;
+        $this->Element = $element;
         $this->Value = $value;
     }
 
     /**
      * @return string
      */
-    public function getOption()
+    public function getElement()
     {
-        return $this->Option;
+        return $this->Element;
     }
 
     /**
-     * @param string $Option
+     * @param string $Element
      * @return self
      */
-    public function setOption($Option)
+    public function setElement($Element)
     {
-        $this->Option = $Option;
+        $this->Element = $Element;
     
         return $this;
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getValue()
     {
@@ -52,7 +52,7 @@ class EmailSubscriptionItem
     }
 
     /**
-     * @param string $Value
+     * @param int $Value
      * @return self
      */
     public function setValue($Value)

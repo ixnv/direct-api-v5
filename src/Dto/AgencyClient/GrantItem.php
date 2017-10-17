@@ -2,43 +2,43 @@
 
 namespace eLama\DirectApiV5\Dto\AgencyClient;
 
-class EmailSubscriptionItem
+class GrantItem
 {
     /**
-     * @var string $Option
+     * @var string $Privilege
      */
-    private $Option;
+    protected $Privilege;
 
     /**
      * @var string $Value
      */
-    private $Value;
+    protected $Value;
 
     /**
-     * @param string $option
+     * @param string $privilege
      * @param string $value
      */
-    public function __construct($option, $value)
+    public function __construct($privilege, $value)
     {
-        $this->Option = $option;
+        $this->Privilege = $privilege;
         $this->Value = $value;
     }
 
     /**
      * @return string
      */
-    public function getOption()
+    public function getPrivilege()
     {
-        return $this->Option;
+        return $this->Privilege;
     }
 
     /**
-     * @param string $Option
+     * @param string $Privilege
      * @return self
      */
-    public function setOption($Option)
+    public function setPrivilege($Privilege)
     {
-        $this->Option = $Option;
+        $this->Privilege = $Privilege;
     
         return $this;
     }

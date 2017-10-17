@@ -1,6 +1,5 @@
 <?php
 
-
 namespace eLama\DirectApiV5\Dto\AgencyClient;
 
 use eLama\DirectApiV5\Dto\General\ResponseBody;
@@ -13,7 +12,7 @@ use JMS\Serializer\Annotation as JMS;
 class GetResponseBody extends ResponseBody
 {
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Client\GetResult")
+     * @JMS\Type("eLama\DirectApiV5\Dto\AgencyClient\GetResult")
      *
      * @var GetResult
      */

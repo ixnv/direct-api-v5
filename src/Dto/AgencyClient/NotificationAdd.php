@@ -2,17 +2,15 @@
 
 namespace eLama\DirectApiV5\Dto\AgencyClient;
 
-use eLama\DirectApiV5\Dto\General\Enum\LangEnum;
-
 class NotificationAdd extends Notification
 {
     /**
-     * @param string $email
-     * @param EmailSubscriptionItem $emailSubscriptions
-     * @param LangEnum $lang
+     * @param string $Email
+     * @param EmailSubscriptionItem[] $EmailSubscriptions
+     * @param string $Lang
      */
-    public function __construct($email, $emailSubscriptions, LangEnum $lang)
+    public function __construct($Email, array $EmailSubscriptions, $Lang)
     {
-        parent::__construct($email, $emailSubscriptions, $lang);
+        parent::__construct($Email, $EmailSubscriptions, $Lang);
     }
 }

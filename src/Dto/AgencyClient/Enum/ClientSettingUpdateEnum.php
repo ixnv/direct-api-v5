@@ -1,6 +1,6 @@
 <?php
 
-namespace eLama\DirectApiV5;
+namespace eLama\DirectApiV5\Dto\AgencyClient\Enum;
 
 use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
 
