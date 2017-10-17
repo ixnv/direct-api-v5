@@ -2,14 +2,20 @@
 
 namespace eLama\DirectApiV5\Dto\AgencyClient;
 
+use JMS\Serializer\Annotation as JMS;
+
 class ClientRestrictionItem
 {
     /**
+     * @JMS\Type("string")
+     *
      * @var string $Element
      */
     protected $Element;
 
     /**
+     * @JMS\Type("integer")
+     *
      * @var int $Value
      */
     protected $Value;

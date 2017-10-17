@@ -1,26 +1,25 @@
 <?php
 
-namespace eLama\DirectApiV5\AgencyClient;
+namespace eLama\DirectApiV5\Dto\AgencyClient;
 
-class AgencyClientUpdateItem extends \eLama\DirectApiV5\GeneralclientsClientUpdateItem
+class AgencyClientUpdateItem extends ClientUpdateItem
 {
     /**
-     * @var int $clientId
+     * @var int $ClientId
      */
-    protected $clientId;
+    protected $ClientId;
 
     /**
-     * @var eLama\DirectApiV5\GeneralclientsGrantItem[] $grants
+     * @var GrantItem[] $Grants
      */
-    protected $grants;
+    protected $Grants;
 
     /**
      * @param int $clientId
      */
     public function __construct($clientId)
     {
-        parent::__construct();
-        $this->clientId = $clientId;
+        $this->ClientId = $clientId;
     }
 
     /**
@@ -28,35 +27,35 @@ class AgencyClientUpdateItem extends \eLama\DirectApiV5\GeneralclientsClientUpda
      */
     public function getClientId()
     {
-        return $this->clientId;
+        return $this->ClientId;
     }
 
     /**
-     * @param int $clientId
+     * @param int $ClientId
      * @return self
      */
-    public function setClientId($clientId)
+    public function setClientId($ClientId)
     {
-        $this->clientId = $clientId;
+        $this->ClientId = $ClientId;
     
         return $this;
     }
 
     /**
-     * @return eLama\DirectApiV5\GeneralclientsGrantItem[]
+     * @return GrantItem[]
      */
     public function getGrants()
     {
-        return $this->grants;
+        return $this->Grants;
     }
 
     /**
-     * @param eLama\DirectApiV5\GeneralclientsGrantItem[] $grants
+     * @param GrantItem[] $Grants
      * @return self
      */
-    public function setGrants(array $grants = null)
+    public function setGrants(array $Grants = null)
     {
-        $this->grants = $grants;
+        $this->Grants = $Grants;
     
         return $this;
     }

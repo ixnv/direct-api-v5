@@ -2,22 +2,30 @@
 
 namespace eLama\DirectApiV5\Dto\AgencyClient;
 
+use JMS\Serializer\Annotation as JMS;
+
 class Representative
 {
     /**
+     * @JMS\Type("string")
+     *
      * @var string $Email
      */
-    protected $Email;
+    private $Email;
 
     /**
+     * @JMS\Type("string")
+     *
      * @var string $Login
      */
-    protected $Login;
+    private $Login;
 
     /**
+     * @JMS\Type("string")
+     *
      * @var string $Role
      */
-    protected $Role;
+    private $Role;
 
     /**
      * @param string $email

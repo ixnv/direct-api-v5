@@ -1,37 +1,37 @@
 <?php
 
-namespace eLama\DirectApiV5\AgencyClient;
+namespace eLama\DirectApiV5\Dto\AgencyClient;
 
 class UpdateRequest
 {
     /**
-     * @var eLama\DirectApiV5\AgencyClient\AgencyClientUpdateItem[] $clients
+     * @var AgencyClientUpdateItem[] $Clients
      */
-    protected $clients;
+    private $Clients;
 
     /**
-     * @param eLama\DirectApiV5\AgencyClient\AgencyClientUpdateItem[] $clients
+     * @param AgencyClientUpdateItem[] $clients
      */
     public function __construct(array $clients)
     {
-        $this->clients = $clients;
+        $this->Clients = $clients;
     }
 
     /**
-     * @return eLama\DirectApiV5\AgencyClient\AgencyClientUpdateItem[]
+     * @return AgencyClientUpdateItem[]
      */
     public function getClients()
     {
-        return $this->clients;
+        return $this->Clients;
     }
 
     /**
-     * @param eLama\DirectApiV5\AgencyClient\AgencyClientUpdateItem[] $clients
+     * @param AgencyClientUpdateItem[] $Clients
      * @return self
      */
-    public function setClients(array $clients)
+    public function setClients(array $Clients)
     {
-        $this->clients = $clients;
+        $this->Clients = $Clients;
     
         return $this;
     }

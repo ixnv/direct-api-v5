@@ -2,17 +2,23 @@
 
 namespace eLama\DirectApiV5\Dto\AgencyClient;
 
+use JMS\Serializer\Annotation as JMS;
+
 class ClientSettingGetItem
 {
     /**
+     * @JMS\Type("string")
+     *
      * @var string $Option
      */
-    protected $Option;
+    private $Option;
 
     /**
+     * @JMS\Type("string")
+     *
      * @var string $Value
      */
-    protected $Value;
+    private $Value;
 
     /**
      * @param string $option

@@ -2,43 +2,22 @@
 
 namespace eLama\DirectApiV5\Dto\AgencyClient;
 
-use JMS\Serializer\Annotation as JMS;
-use eLama\DirectApiV5\Dto\General\Enum\LangEnum;
-
-class Notification
+class NotificationUpdate
 {
     /**
-     * @JMS\Type("string")
-     *
      * @var string $Email
      */
-    protected $Email;
+    private $Email;
 
     /**
-     * @JMS\Type("array<eLama\DirectApiV5\Dto\AgencyClient\EmailSubscriptionItem>")
-     *
      * @var EmailSubscriptionItem[] $EmailSubscriptions
      */
-    protected $EmailSubscriptions;
+    private $EmailSubscriptions;
 
     /**
-     * @JMS\Type("string")
-     *
-     * @var LangEnum $Lang
+     * @var string $Lang
      */
-    protected $Lang;
-
-    /**
-     * @param string $Email
-     * @param EmailSubscriptionItem[] $EmailSubscriptions
-     * @param string $Lang
-     */
-    public function __construct($Email, array $EmailSubscriptions, $Lang)
-    {
-        $this->Email = $Email;
-        $this->EmailSubscriptions = $EmailSubscriptions;
-        $this->Lang = $Lang;
-    }
+    private $Lang;
 
     /**
      * @return string
@@ -71,7 +50,7 @@ class Notification
      * @param EmailSubscriptionItem[] $EmailSubscriptions
      * @return self
      */
-    public function setEmailSubscriptions(array $EmailSubscriptions)
+    public function setEmailSubscriptions(array $EmailSubscriptions = null)
     {
         $this->EmailSubscriptions = $EmailSubscriptions;
     
@@ -90,7 +69,7 @@ class Notification
      * @param string $Lang
      * @return self
      */
-    public function setLang($Lang)
+    public function setLang($Lang = null)
     {
         $this->Lang = $Lang;
     

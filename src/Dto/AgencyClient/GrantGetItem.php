@@ -2,9 +2,13 @@
 
 namespace eLama\DirectApiV5\Dto\AgencyClient;
 
+use JMS\Serializer\Annotation as JMS;
+
 class GrantGetItem extends GrantItem
 {
     /**
+     * @JMS\Type("string")
+     *
      * @var string $Agency
      */
     protected $Agency;

@@ -2,9 +2,13 @@
 
 namespace eLama\DirectApiV5\Dto\AgencyClient;
 
+use JMS\Serializer\Annotation as JMS;
+
 class NotificationGet extends Notification
 {
     /**
+     * @JMS\Type("string")
+     *
      * @var string $SmsPhoneNumber
      */
     protected $SmsPhoneNumber;

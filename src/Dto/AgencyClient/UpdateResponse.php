@@ -1,16 +1,20 @@
 <?php
 
-namespace eLama\DirectApiV5\AgencyClient;
+namespace eLama\DirectApiV5\Dto\AgencyClient;
+
+use JMS\Serializer\Annotation as JMS;
 
 class UpdateResponse
 {
     /**
-     * @var eLama\DirectApiV5\General\ClientsActionResult[] $updateResults
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\AgencyClient\ClientsActionResult>")
+     *
+     * @var ClientsActionResult[] $updateResults
      */
-    protected $updateResults;
+    private $updateResults;
 
     /**
-     * @param eLama\DirectApiV5\General\ClientsActionResult[] $updateResults
+     * @param ClientsActionResult[] $updateResults
      */
     public function __construct(array $updateResults)
     {
@@ -18,7 +22,7 @@ class UpdateResponse
     }
 
     /**
-     * @return eLama\DirectApiV5\General\ClientsActionResult[]
+     * @return ClientsActionResult[]
      */
     public function getUpdateResults()
     {
@@ -26,7 +30,7 @@ class UpdateResponse
     }
 
     /**
-     * @param eLama\DirectApiV5\General\ClientsActionResult[] $updateResults
+     * @param ClientsActionResult[] $updateResults
      * @return self
      */
     public function setUpdateResults(array $updateResults)

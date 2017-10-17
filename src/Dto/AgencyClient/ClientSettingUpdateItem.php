@@ -2,20 +2,14 @@
 
 namespace eLama\DirectApiV5\Dto\AgencyClient;
 
-use JMS\Serializer\Annotation as JMS;
-
-class EmailSubscriptionItem
+class ClientSettingUpdateItem
 {
     /**
-     * @JMS\Type("string")
-     *
      * @var string $Option
      */
     private $Option;
 
     /**
-     * @JMS\Type("string")
-     *
      * @var string $Value
      */
     private $Value;
