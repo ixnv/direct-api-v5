@@ -2,43 +2,45 @@
 
 namespace eLama\DirectApiV5\AgencyClient;
 
-class AddResponse extends \eLama\DirectApiV5\General\ActionResultBase
+use eLama\DirectApiV5\Dto\General\ActionResultBase;
+
+class AddResponse extends ActionResultBase
 {
     /**
-     * @var string $login
+     * @var string $Login
      */
-    protected $login;
+    protected $Login;
 
     /**
-     * @var string $password
+     * @var string $Password
      */
-    protected $password;
+    protected $Password;
 
     /**
-     * @var string $email
+     * @var string $Email
      */
-    protected $email;
+    protected $Email;
 
     /**
-     * @var int $clientId
+     * @var int $ClientId
      */
-    protected $clientId;
+    protected $ClientId;
 
     /**
      * @return string
      */
     public function getLogin()
     {
-        return $this->login;
+        return $this->Login;
     }
 
     /**
-     * @param string $login
+     * @param string $Login
      * @return self
      */
-    public function setLogin($login)
+    public function setLogin($Login)
     {
-        $this->login = $login;
+        $this->Login = $Login;
     
         return $this;
     }
@@ -48,16 +50,16 @@ class AddResponse extends \eLama\DirectApiV5\General\ActionResultBase
      */
     public function getPassword()
     {
-        return $this->password;
+        return $this->Password;
     }
 
     /**
-     * @param string $password
+     * @param string $Password
      * @return self
      */
-    public function setPassword($password)
+    public function setPassword($Password)
     {
-        $this->password = $password;
+        $this->Password = $Password;
     
         return $this;
     }
@@ -67,16 +69,16 @@ class AddResponse extends \eLama\DirectApiV5\General\ActionResultBase
      */
     public function getEmail()
     {
-        return $this->email;
+        return $this->Email;
     }
 
     /**
-     * @param string $email
+     * @param string $Email
      * @return self
      */
-    public function setEmail($email)
+    public function setEmail($Email)
     {
-        $this->email = $email;
+        $this->Email = $Email;
     
         return $this;
     }
@@ -86,16 +88,16 @@ class AddResponse extends \eLama\DirectApiV5\General\ActionResultBase
      */
     public function getClientId()
     {
-        return $this->clientId;
+        return $this->ClientId;
     }
 
     /**
-     * @param int $clientId
+     * @param int $ClientId
      * @return self
      */
-    public function setClientId($clientId)
+    public function setClientId($ClientId)
     {
-        $this->clientId = $clientId;
+        $this->ClientId = $ClientId;
     
         return $this;
     }
