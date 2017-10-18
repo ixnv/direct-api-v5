@@ -32,12 +32,12 @@ class AddRequest
     private $Notification;
 
     /**
-     * @var eLama\DirectApiV5\GeneralclientsClientSettingAddItem[] $settings
+     * @var ClientSettingAddItem[] $settings
      */
     private $Settings;
 
     /**
-     * @var eLama\DirectApiV5\GeneralclientsGrantItem[] $grants
+     * @var GrantItem[] $grants
      */
     private $Grants;
 
@@ -123,10 +123,10 @@ class AddRequest
     }
 
     /**
-     * @param CurrencyEnum $currency
+     * @param string $currency
      * @return self
      */
-    public function setCurrency(CurrencyEnum $currency)
+    public function setCurrency($currency)
     {
         $this->Currency = $currency;
     
@@ -153,7 +153,7 @@ class AddRequest
     }
 
     /**
-     * @return eLama\DirectApiV5\GeneralclientsClientSettingAddItem[]
+     * @return ClientSettingAddItem[]
      */
     public function getSettings()
     {
@@ -161,7 +161,7 @@ class AddRequest
     }
 
     /**
-     * @param eLama\DirectApiV5\GeneralclientsClientSettingAddItem[] $settings
+     * @param ClientSettingAddItem[] $settings
      * @return self
      */
     public function setSettings(array $settings = null)
@@ -172,7 +172,7 @@ class AddRequest
     }
 
     /**
-     * @return eLama\DirectApiV5\GeneralclientsGrantItem[]
+     * @return GrantItem[]
      */
     public function getGrants()
     {
@@ -180,7 +180,7 @@ class AddRequest
     }
 
     /**
-     * @param eLama\DirectApiV5\GeneralclientsGrantItem[] $grants
+     * @param GrantItem[] $grants
      * @return self
      */
     public function setGrants(array $grants = null)

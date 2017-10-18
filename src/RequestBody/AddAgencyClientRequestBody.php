@@ -12,6 +12,9 @@ class AddAgencyClientRequestBody extends RequestBody
      */
     private $request;
 
+    /**
+     * @param AddRequest $request
+     */
     public function __construct(AddRequest $request)
     {
         $this->request = $request;
