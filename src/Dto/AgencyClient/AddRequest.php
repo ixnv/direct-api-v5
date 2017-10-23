@@ -48,7 +48,7 @@ class AddRequest
      * @param string $currency
      * @param NotificationAdd $notification
      */
-    public function __construct($login, $firstName, $lastName, $currency, NotificationAdd $notification)
+    public function __construct($login, $firstName, $lastName, $currency, NotificationAdd $notification = null)
     {
         $this->Login = $login;
         $this->FirstName = $firstName;
