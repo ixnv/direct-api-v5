@@ -3,7 +3,7 @@
 namespace eLama\DirectApiV5\RequestBody;
 
 use eLama\DirectApiV5\Dto\AgencyClient\AddRequest;
-use eLama\DirectApiV5\Dto\General\AddResponseBody;
+use eLama\DirectApiV5\Dto\AgencyClient\AddResponseBody;
 
 class AddAgencyClientRequestBody extends RequestBody
 {
