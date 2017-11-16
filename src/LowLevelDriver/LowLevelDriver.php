@@ -184,13 +184,13 @@ class LowLevelDriver implements LowLevelDriverInterface
         $request = $request->withSanitizedToken();
 
         return [
-            'callUniqId' => $uniqId,
-            'clientLogin' => $request->getClientLogin(),
-            'method' => $request->getMethod(),
             'service' => $request->getService(),
+            'method' => $request->getMethod(),
+            'client_login' => $request->getClientLogin(),
+            'call_uniq_id' => $uniqId,
             'request_body' => $requestBodyInJson,
-            'agencyUnitsUsed' => $request->usesAgencyUnits() ? 'true' : 'false',
-            'headers' => $this->createHeaders($request),
+            'request_headers' => $this->createHeaders($request),
+            'agency_units_used' => $request->usesAgencyUnits() ? 'true' : 'false',
         ];
     }
 
