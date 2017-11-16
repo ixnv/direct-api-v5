@@ -108,7 +108,7 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
 
         Phake::verify($logger)->info(
             containsStringIgnoringCase('request'),
-            hasKeyValuePair('agencyUnitsUsed', equalTo(true))
+            hasKeyValuePair('agency_units_used', equalTo(true))
         );
         Phake::verify($logger)->warning(
             containsStringIgnoringCase('response'),
