@@ -189,7 +189,6 @@ class LowLevelDriver implements LowLevelDriverInterface
             'method' => $request->getMethod(),
             'service' => $request->getService(),
             'request_body' => $requestBodyInJson,
-            'token' => $request->getToken(),
             'agencyUnitsUsed' => $request->usesAgencyUnits() ? 'true' : 'false',
             'headers' => $this->createHeaders($request),
         ];
