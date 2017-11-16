@@ -152,7 +152,6 @@ class LowLevelDriver implements LowLevelDriverInterface
 
     /**
      * @param Request $request
-     * @param bool $sanitizeToken
      * @return array
      */
     private function createHeaders(Request $request)
