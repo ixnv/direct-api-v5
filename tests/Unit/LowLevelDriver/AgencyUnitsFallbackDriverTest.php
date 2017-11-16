@@ -64,10 +64,10 @@ class AgencyUnitsFallbackDriverTest extends \PHPUnit_Framework_TestCase
             hasKeyValuePair('response_units_left', equalTo(2))
         ));
         Phake::verify($this->logger)->info(containsStringIgnoringCase('request'), allOf(
-            hasKeyValuePair('agencyUnitsUsed', equalTo('false'))
+            hasKeyValuePair('agency_units_used', equalTo('false'))
         ));
         Phake::verify($this->logger, Phake::never())->info(containsStringIgnoringCase('request'), allOf(
-            hasKeyValuePair('agencyUnitsUsed', equalTo('true'))
+            hasKeyValuePair('agency_units_used', equalTo('true'))
         ));
     }
 
@@ -83,10 +83,10 @@ class AgencyUnitsFallbackDriverTest extends \PHPUnit_Framework_TestCase
         )->wait();
 
         Phake::verify($this->logger)->info(containsStringIgnoringCase('request'), allOf(
-            hasKeyValuePair('agencyUnitsUsed', equalTo('false'))
+            hasKeyValuePair('agency_units_used', equalTo('false'))
         ));
         Phake::verify($this->logger)->info(containsStringIgnoringCase('request'), allOf(
-            hasKeyValuePair('agencyUnitsUsed', equalTo('true'))
+            hasKeyValuePair('agency_units_used', equalTo('true'))
         ));
     }
 
@@ -102,10 +102,10 @@ class AgencyUnitsFallbackDriverTest extends \PHPUnit_Framework_TestCase
         )->wait();
 
         Phake::verify($this->logger)->info(containsStringIgnoringCase('request'), allOf(
-            hasKeyValuePair('agencyUnitsUsed', equalTo('false'))
+            hasKeyValuePair('agency_units_used', equalTo('false'))
         ));
         Phake::verify($this->logger, Phake::never())->info(containsStringIgnoringCase('request'), allOf(
-            hasKeyValuePair('agencyUnitsUsed', equalTo('true'))
+            hasKeyValuePair('agency_units_used', equalTo('true'))
         ));
     }
 

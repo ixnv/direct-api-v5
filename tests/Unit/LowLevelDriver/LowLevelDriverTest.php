@@ -48,10 +48,10 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
         )->wait();
 
         Phake::verify($this->logger)->info(containsStringIgnoringCase('request'), allOf(
-            hasKeyValuePair('callUniqId', nonEmptyString()),
-            hasKeyValuePair('clientLogin', $request->getClientLogin()),
             hasKeyValuePair('service', $request->getService()),
             hasKeyValuePair('method', $request->getMethod()),
+            hasKeyValuePair('client_login', $request->getClientLogin()),
+            hasKeyValuePair('call_uniq_id', nonEmptyString()),
             hasKeyValuePair('request_body', containsString(json_encode($request->getParams())))
         ));
     }
@@ -68,7 +68,10 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
 
         Phake::verify($this->logger)->info(
             containsStringIgnoringCase('request'),
-            hasKeyValuePair('token', '1234...7890')
+            hasKeyValuePair(
+                'request_headers',
+                hasKeyValuePair('Authorization', 'Bearer 1234...7890')
+            )
         );
     }
 
@@ -138,7 +141,7 @@ class LowLevelDriverTest extends PHPUnit_Framework_TestCase
         )->wait();
 
         Phake::verify($this->logger)->info(containsStringIgnoringCase('request'), allOf(
-            hasKeyValuePair('agencyUnitsUsed', equalTo(true))
+            hasKeyValuePair('agency_units_used', equalTo(true))
         ));
     }
 
