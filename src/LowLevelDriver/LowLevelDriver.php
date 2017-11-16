@@ -15,7 +15,6 @@ class LowLevelDriver implements LowLevelDriverInterface
     const URL_PRODUCTION = 'https://api.direct.yandex.com/json/v5';
     const HEADER_CLIENT_LOGIN = 'Client-Login';
     const HEADER_AGENCY_UNITS = 'Use-Operator-Units';
-    const HEADER_AUTHORIZATION = 'Authorization';
 
     /** @var  GuzzleAdapter; */
     protected $client;
@@ -61,7 +60,7 @@ class LowLevelDriver implements LowLevelDriverInterface
         $this->logger->info("Going to send request", $this->createLogContext($uniqId, $request, $requestBodyInJson));
 
         $url = $this->baseUrl . '/' . $request->getService();
-        $headers = $this->createHeaders($request, false);
+        $headers = $this->createHeaders($request);
 
         $startTime = microtime(true);
 
@@ -156,18 +155,13 @@ class LowLevelDriver implements LowLevelDriverInterface
      * @param bool $sanitizeToken
      * @return array
      */
-    private function createHeaders(Request $request, $sanitizeToken)
+    private function createHeaders(Request $request)
     {
         $headers = [
             'Accept-Language' => 'ru',
             'Content-Type' => 'application/json; charset=utf-8',
+            'Authorization' => 'Bearer ' . $request->getToken(),
         ];
-
-        if ($sanitizeToken) {
-            $headers[self::HEADER_AUTHORIZATION] = 'Bearer ' . $request->getSanitizedToken();
-        } else {
-            $headers[self::HEADER_AUTHORIZATION] = 'Bearer ' . $request->getToken();
-        }
 
         if ($request->getClientLogin()) {
             $headers[self::HEADER_CLIENT_LOGIN] = $request->getClientLogin();
@@ -198,7 +192,7 @@ class LowLevelDriver implements LowLevelDriverInterface
             'request_body' => $requestBodyInJson,
             'token' => $request->getToken(),
             'agencyUnitsUsed' => $request->usesAgencyUnits() ? 'true' : 'false',
-            'headers' => $this->createHeaders($request, true),
+            'headers' => $this->createHeaders($request),
         ];
     }
 
