@@ -29,6 +29,13 @@ class TextAdUpdate extends TextAdUpdateBase
     /**
      * @JMS\Type("string")
      *
+     * @var string $Title2
+     */
+    private $Title2;
+
+    /**
+     * @JMS\Type("string")
+     *
      * @var string $Href
      */
     private $Href;
@@ -39,6 +46,13 @@ class TextAdUpdate extends TextAdUpdateBase
      * @var AgeLabelEnum $AgeLabel
      */
     private $AgeLabel;
+
+    /**
+     * @JMS\Type("string")
+     *
+     * @var string $DisplayUrlPath
+     */
+    private $DisplayUrlPath;
 
     /**
      * @return string
@@ -79,6 +93,23 @@ class TextAdUpdate extends TextAdUpdateBase
     /**
      * @return string
      */
+    public function getTitle2()
+    {
+        return $this->Title2;
+    }
+
+    /**
+     * @param string $Title2
+     * @return \eLama\DirectApiV5\Dto\Ad\TextAdUpdate
+     */
+    public function setTitle2($Title2 = null)
+    {
+        $this->Title2 = $Title2;
+        return $this;
+    }
+    /**
+     * @return string
+     */
     public function getHref()
     {
       return $this->Href;
@@ -114,4 +145,21 @@ class TextAdUpdate extends TextAdUpdateBase
       return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getDisplayUrlPath()
+    {
+        return $this->DisplayUrlPath;
+    }
+
+    /**
+     * @param string $DisplayUrlPath
+     * @return \eLama\DirectApiV5\Dto\Ad\TextAdUpdate
+     */
+    public function setDisplayUrlPath($DisplayUrlPath)
+    {
+        $this->DisplayUrlPath = $DisplayUrlPath;
+        return $this;
+    }
 }
