@@ -18,7 +18,7 @@ class VideoExtensionGetItem
     private $CreativeId;
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Ad\Enum\VideoExtensionTypeEnum")
+     * @JMS\Type("string")
      *
      * @var string $Status
      */

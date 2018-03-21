@@ -101,7 +101,7 @@ class AdExtensionTest extends AdGroupExistenceDependantTestCase
         $responseBody = $this->driver->call($requestBody)->wait()->getUnserializedBody();
 
         $id = $responseBody->getResult()->getAddResults()[0]->getId();
-        assertThat($id, is(typeOf('integer')));
+        assertThat($id, is(integerValue()));
 
         return $id;
     }
