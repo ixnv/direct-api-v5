@@ -55,7 +55,7 @@ class VideoExtensionGetItem
     /**
      * @return int
      */
-    public function getCreativeId(): int
+    public function getCreativeId()
     {
         return $this->CreativeId;
     }
@@ -63,7 +63,7 @@ class VideoExtensionGetItem
     /**
      * @param int $CreativeId
      */
-    public function setCreativeId(int $CreativeId): void
+    public function setCreativeId($CreativeId)
     {
         $this->CreativeId = $CreativeId;
     }
@@ -71,7 +71,7 @@ class VideoExtensionGetItem
     /**
      * @return string
      */
-    public function getStatus(): string
+    public function getStatus()
     {
         return $this->Status;
     }
@@ -79,7 +79,7 @@ class VideoExtensionGetItem
     /**
      * @param string $Status
      */
-    public function setStatus(string $Status): void
+    public function setStatus($Status)
     {
         $this->Status = $Status;
     }
@@ -87,7 +87,7 @@ class VideoExtensionGetItem
     /**
      * @return string
      */
-    public function getThumbnailUrl(): string
+    public function getThumbnailUrl()
     {
         return $this->ThumbnailUrl;
     }
@@ -95,7 +95,7 @@ class VideoExtensionGetItem
     /**
      * @param string $ThumbnailUrl
      */
-    public function setThumbnailUrl(string $ThumbnailUrl): void
+    public function setThumbnailUrl($ThumbnailUrl)
     {
         $this->ThumbnailUrl = $ThumbnailUrl;
     }
@@ -103,7 +103,7 @@ class VideoExtensionGetItem
     /**
      * @return string
      */
-    public function getPreviewUrl(): string
+    public function getPreviewUrl()
     {
         return $this->PreviewUrl;
     }
@@ -111,7 +111,7 @@ class VideoExtensionGetItem
     /**
      * @param string $PreviewUrl
      */
-    public function setPreviewUrl(string $PreviewUrl): void
+    public function setPreviewUrl($PreviewUrl)
     {
         $this->PreviewUrl = $PreviewUrl;
     }
