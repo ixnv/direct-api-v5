@@ -94,6 +94,7 @@ class AdTest extends AdGroupExistenceDependantTestCase
         assertThat($ad->getTextAd()->getSitelinkSetId(), is(integerValue()));
         assertThat($ad->getTextAd()->getDisplayUrlPath(), is(equalTo(self::DISPLAY_URL_PATH)));
         assertThat($ad->getStatus(), is(equalTo("DRAFT")));
+        assertThat($ad->getTextAd()->getVideoExtension(), is(equalTo(NULL)));
 
         return $adId;
     }
