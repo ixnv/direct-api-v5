@@ -39,6 +39,9 @@ class VideoExtensionGetItem
     private $PreviewUrl;
 
     /**
+     * @param int $CreativeId
+     * @param string $Status
+     * @param string $ThumbnailUrl
      * @param string $PreviewUrl
      */
     public function __construct($CreativeId, $Status, $ThumbnailUrl, $PreviewUrl)
