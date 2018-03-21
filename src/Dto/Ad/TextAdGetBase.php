@@ -60,6 +60,13 @@ class TextAdGetBase
     private $AdExtensions;
 
     /**
+     * @JMS\Type("eLama\DirectApiV5\Dto\Ad\VideoExtensionGetItem")
+     *
+     * @var VideoExtensionGetItem $VideoExtension
+     */
+    private $VideoExtension;
+
+    /**
      * @return int
      */
     public function getVCardId()
@@ -183,5 +190,22 @@ class TextAdGetBase
     {
         $this->AdExtensions = $AdExtensions;
         return $this;
+    }
+
+    /**
+     * @return VideoExtensionGetItem
+     */
+    public function getVideoExtension()
+    {
+        return $this->VideoExtension;
+    }
+
+    /**
+     * @param VideoExtensionGetItem $VideoExtension
+     * @return \eLama\DirectApiV5\Dto\Ad\VideoExtensionGetItem
+     */
+    public function setVideoExtension(VideoExtensionGetItem $VideoExtension = null)
+    {
+        $this->VideoExtension = $VideoExtension;
     }
 }
