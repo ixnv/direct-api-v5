@@ -5,7 +5,6 @@ namespace eLama\DirectApiV5\Dto\Ad;
 use eLama\DirectApiV5\Dto\General\Enum\AdExtensionTypeEnum;
 use JMS\Serializer\Annotation as JMS;
 
-
 /**
  * @JMS\AccessType("public_method")
  */
