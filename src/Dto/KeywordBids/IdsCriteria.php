@@ -1,25 +1,23 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keywordbids;
+namespace eLama\DirectApiV5\Dto\KeywordBids;
 
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
  */
 class IdsCriteria
 {
-
     /**
      * @JMS\Type("array<integer>")
      *
-     * @var long[] $Ids
+     * @var int[] $Ids
      */
     private $Ids;
 
     /**
-     * @param long[] $Ids
+     * @param int[] $Ids
      */
     public function __construct(array $Ids = null)
     {
@@ -27,7 +25,7 @@ class IdsCriteria
     }
 
     /**
-     * @return long[]
+     * @return int[]
      */
     public function getIds()
     {
@@ -35,13 +33,13 @@ class IdsCriteria
     }
 
     /**
-     * @param long[] $Ids
+     * @param int[] $Ids
      * @return \eLama\DirectApiV5\Dto\Keywordbids\IdsCriteria
      */
     public function setIds(array $Ids)
     {
       $this->Ids = $Ids;
+
       return $this;
     }
-
 }

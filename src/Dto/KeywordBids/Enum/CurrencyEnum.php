@@ -1,12 +1,13 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keywordbids;
+namespace eLama\DirectApiV5\Dto\KeywordBids\Enum;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
 
-class CurrencyEnum
+class CurrencyEnum extends BaseEnum
 {
     const __default = 'YND_FIXED';
+
     const YND_FIXED = 'YND_FIXED';
     const RUB = 'RUB';
     const CHF = 'CHF';
@@ -16,6 +17,4 @@ class CurrencyEnum
     const UAH = 'UAH';
     const USD = 'USD';
     const BYN = 'BYN';
-
-
 }

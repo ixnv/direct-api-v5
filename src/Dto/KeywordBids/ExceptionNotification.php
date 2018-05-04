@@ -1,16 +1,14 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keywordbids;
+namespace eLama\DirectApiV5\Dto\KeywordBids;
 
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
  */
 class ExceptionNotification
 {
-
     /**
      * @JMS\Type("integer")
      *
@@ -36,7 +34,7 @@ class ExceptionNotification
      * @param int $Code
      * @param string $Message
      */
-    public function __construct(int $Code = null, string $Message = null)
+    public function __construct($Code = null, $Message = null)
     {
       $this->Code = $Code;
       $this->Message = $Message;
@@ -54,9 +52,10 @@ class ExceptionNotification
      * @param int $Code
      * @return \eLama\DirectApiV5\Dto\Keywordbids\ExceptionNotification
      */
-    public function setCode(int $Code)
+    public function setCode($Code)
     {
       $this->Code = $Code;
+
       return $this;
     }
 
@@ -72,9 +71,10 @@ class ExceptionNotification
      * @param string $Message
      * @return \eLama\DirectApiV5\Dto\Keywordbids\ExceptionNotification
      */
-    public function setMessage(string $Message)
+    public function setMessage($Message)
     {
       $this->Message = $Message;
+
       return $this;
     }
 
@@ -90,10 +90,10 @@ class ExceptionNotification
      * @param string $Details
      * @return \eLama\DirectApiV5\Dto\Keywordbids\ExceptionNotification
      */
-    public function setDetails(string $Details = null)
+    public function setDetails($Details = null)
     {
       $this->Details = $Details;
+
       return $this;
     }
-
 }

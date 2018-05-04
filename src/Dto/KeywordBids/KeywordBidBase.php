@@ -1,16 +1,14 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keywordbids;
+namespace eLama\DirectApiV5\Dto\KeywordBids;
 
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
  */
 class KeywordBidBase
 {
-
     /**
      * @JMS\Type("integer")
      *
@@ -44,9 +42,10 @@ class KeywordBidBase
      * @param int $CampaignId
      * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidBase
      */
-    public function setCampaignId(int $CampaignId = null)
+    public function setCampaignId($CampaignId = null)
     {
       $this->CampaignId = $CampaignId;
+
       return $this;
     }
 
@@ -62,9 +61,10 @@ class KeywordBidBase
      * @param int $AdGroupId
      * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidBase
      */
-    public function setAdGroupId(int $AdGroupId = null)
+    public function setAdGroupId($AdGroupId = null)
     {
       $this->AdGroupId = $AdGroupId;
+
       return $this;
     }
 
@@ -80,10 +80,10 @@ class KeywordBidBase
      * @param int $KeywordId
      * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidBase
      */
-    public function setKeywordId(int $KeywordId = null)
+    public function setKeywordId($KeywordId = null)
     {
       $this->KeywordId = $KeywordId;
+
       return $this;
     }
-
 }

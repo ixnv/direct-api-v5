@@ -40,12 +40,12 @@ class GetResult extends GetResultGeneral
     }
 
     /**
-     * @param BidGetItem[] $Campaigns
+     * @param BidGetItem[] $Bids
      * @return GetResponseGeneral
      */
-    public function setBids(array $Campaigns)
+    public function setBids(array $Bids)
     {
-        $this->Bids = $Campaigns;
+        $this->Bids = $Bids;
 
         return $this;
     }

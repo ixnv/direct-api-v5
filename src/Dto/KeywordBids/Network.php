@@ -1,16 +1,14 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keywordbids;
+namespace eLama\DirectApiV5\Dto\KeywordBids;
 
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
  */
 class Network
 {
-
     /**
      * @JMS\Type("integer")
      *
@@ -37,9 +35,10 @@ class Network
      * @param int $Bid
      * @return \eLama\DirectApiV5\Dto\Keywordbids\Network
      */
-    public function setBid(int $Bid = null)
+    public function setBid($Bid = null)
     {
       $this->Bid = $Bid;
+
       return $this;
     }
 
@@ -58,7 +57,7 @@ class Network
     public function setCoverage(Coverage $Coverage = null)
     {
       $this->Coverage = $Coverage;
+
       return $this;
     }
-
 }

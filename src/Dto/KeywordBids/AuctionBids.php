@@ -1,18 +1,16 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keywordbids;
+namespace eLama\DirectApiV5\Dto\KeywordBids;
 
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
  */
 class AuctionBids
 {
-
     /**
-     * @JMS\Type("array<eLama\DirectApiV5\Dto\Keywordbids\AuctionBidItem>")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\KeywordBids\AuctionBidItem>")
      *
      * @var AuctionBidItem[] $AuctionBidItems
      */
@@ -33,7 +31,7 @@ class AuctionBids
     public function setAuctionBidItems(array $AuctionBidItems = null)
     {
       $this->AuctionBidItems = $AuctionBidItems;
+
       return $this;
     }
-
 }

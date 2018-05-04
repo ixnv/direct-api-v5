@@ -1,16 +1,14 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keywordbids;
+namespace eLama\DirectApiV5\Dto\KeywordBids;
 
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
  */
 class Statistics
 {
-
     /**
      * @JMS\Type("integer")
      *
@@ -29,7 +27,7 @@ class Statistics
      * @param int $Clicks
      * @param int $Impressions
      */
-    public function __construct(int $Clicks = null, int $Impressions = null)
+    public function __construct($Clicks = null, $Impressions = null)
     {
       $this->Clicks = $Clicks;
       $this->Impressions = $Impressions;
@@ -47,9 +45,10 @@ class Statistics
      * @param int $Clicks
      * @return \eLama\DirectApiV5\Dto\Keywordbids\Statistics
      */
-    public function setClicks(int $Clicks)
+    public function setClicks($Clicks)
     {
       $this->Clicks = $Clicks;
+
       return $this;
     }
 
@@ -65,10 +64,10 @@ class Statistics
      * @param int $Impressions
      * @return \eLama\DirectApiV5\Dto\Keywordbids\Statistics
      */
-    public function setImpressions(int $Impressions)
+    public function setImpressions($Impressions)
     {
       $this->Impressions = $Impressions;
+
       return $this;
     }
-
 }

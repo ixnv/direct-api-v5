@@ -1,16 +1,14 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keywordbids;
+namespace eLama\DirectApiV5\Dto\KeywordBids;
 
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
  */
 class KeywordBidActionResult extends KeywordBidBase
 {
-
     /**
      * @JMS\Type("array<eLama\DirectApiV5\Dto\Keywordbids\ExceptionNotification>")
      *
@@ -40,6 +38,7 @@ class KeywordBidActionResult extends KeywordBidBase
     public function setWarnings(array $Warnings = null)
     {
       $this->Warnings = $Warnings;
+
       return $this;
     }
 
@@ -58,7 +57,7 @@ class KeywordBidActionResult extends KeywordBidBase
     public function setErrors(array $Errors = null)
     {
       $this->Errors = $Errors;
+
       return $this;
     }
-
 }

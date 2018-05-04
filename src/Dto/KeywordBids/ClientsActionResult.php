@@ -1,16 +1,15 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keywordbids;
+namespace eLama\DirectApiV5\Dto\KeywordBids;
 
+use eLama\DirectApiV5\Dto\General\ActionResultBase;
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
  */
 class ClientsActionResult extends ActionResultBase
 {
-
     /**
      * @JMS\Type("integer")
      *
@@ -28,12 +27,12 @@ class ClientsActionResult extends ActionResultBase
 
     /**
      * @param int $ClientId
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\ClientsActionResult
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\ClientsActionResult
      */
-    public function setClientId(int $ClientId = null)
+    public function setClientId($ClientId = null)
     {
       $this->ClientId = $ClientId;
+
       return $this;
     }
-
 }

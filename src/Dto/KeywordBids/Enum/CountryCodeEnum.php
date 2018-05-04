@@ -1,18 +1,17 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keywordbids;
+namespace eLama\DirectApiV5\Dto\KeywordBids\Enum;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
 
-class CountryCodeEnum
+class CountryCodeEnum extends BaseEnum
 {
     const __default = 'RU';
+
     const RU = 'RU';
     const TR = 'TR';
     const UA = 'UA';
     const KZ = 'KZ';
     const BY = 'BY';
     const US = 'US';
-
-
 }

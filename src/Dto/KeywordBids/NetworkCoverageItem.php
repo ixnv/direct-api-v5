@@ -1,16 +1,14 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keywordbids;
+namespace eLama\DirectApiV5\Dto\KeywordBids;
 
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
  */
 class NetworkCoverageItem
 {
-
     /**
      * @JMS\Type("double")
      *
@@ -29,7 +27,7 @@ class NetworkCoverageItem
      * @param float $Probability
      * @param int $Bid
      */
-    public function __construct(float $Probability = null, int $Bid = null)
+    public function __construct($Probability = null, $Bid = null)
     {
       $this->Probability = $Probability;
       $this->Bid = $Bid;
@@ -47,9 +45,10 @@ class NetworkCoverageItem
      * @param float $Probability
      * @return \eLama\DirectApiV5\Dto\Keywordbids\NetworkCoverageItem
      */
-    public function setProbability(float $Probability)
+    public function setProbability($Probability)
     {
       $this->Probability = $Probability;
+
       return $this;
     }
 
@@ -65,10 +64,10 @@ class NetworkCoverageItem
      * @param int $Bid
      * @return \eLama\DirectApiV5\Dto\Keywordbids\NetworkCoverageItem
      */
-    public function setBid(int $Bid)
+    public function setBid($Bid)
     {
       $this->Bid = $Bid;
+
       return $this;
     }
-
 }

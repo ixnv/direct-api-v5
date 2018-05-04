@@ -1,16 +1,14 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keywordbids;
+namespace eLama\DirectApiV5\Dto\KeywordBids;
 
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
  */
 class SetResponse
 {
-
     /**
      * @JMS\Type("eLama\DirectApiV5\Dto\Keywordbids\KeywordBidActionResult")
      *
@@ -41,7 +39,7 @@ class SetResponse
     public function setSetResults(KeywordBidActionResult $SetResults)
     {
       $this->SetResults = $SetResults;
+
       return $this;
     }
-
 }

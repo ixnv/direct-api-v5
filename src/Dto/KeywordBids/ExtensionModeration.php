@@ -1,16 +1,15 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keywordbids;
+namespace eLama\DirectApiV5\Dto\KeywordBids;
 
+use eLama\DirectApiV5\Dto\General\Enum\StatusEnum;
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
  */
 class ExtensionModeration
 {
-
     /**
      * @JMS\Type("string")
      *
@@ -28,7 +27,7 @@ class ExtensionModeration
     /**
      * @param StatusEnum $Status
      */
-    public function __construct(string $Status = null)
+    public function __construct($Status = null)
     {
       $this->Status = $Status;
     }
@@ -45,9 +44,10 @@ class ExtensionModeration
      * @param StatusEnum $Status
      * @return \eLama\DirectApiV5\Dto\Keywordbids\ExtensionModeration
      */
-    public function setStatus(string $Status)
+    public function setStatus($Status)
     {
       $this->Status = $Status;
+
       return $this;
     }
 
@@ -63,10 +63,10 @@ class ExtensionModeration
      * @param string $StatusClarification
      * @return \eLama\DirectApiV5\Dto\Keywordbids\ExtensionModeration
      */
-    public function setStatusClarification(string $StatusClarification = null)
+    public function setStatusClarification($StatusClarification = null)
     {
       $this->StatusClarification = $StatusClarification;
+
       return $this;
     }
-
 }

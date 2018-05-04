@@ -1,16 +1,14 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keywordbids;
+namespace eLama\DirectApiV5\Dto\KeywordBids;
 
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
  */
 class LimitOffset
 {
-
     /**
      * @JMS\Type("integer")
      *
@@ -37,9 +35,10 @@ class LimitOffset
      * @param int $Limit
      * @return \eLama\DirectApiV5\Dto\Keywordbids\LimitOffset
      */
-    public function setLimit(int $Limit = null)
+    public function setLimit($Limit = null)
     {
       $this->Limit = $Limit;
+      
       return $this;
     }
 
@@ -55,10 +54,10 @@ class LimitOffset
      * @param int $Offset
      * @return \eLama\DirectApiV5\Dto\Keywordbids\LimitOffset
      */
-    public function setOffset(int $Offset = null)
+    public function setOffset($Offset = null)
     {
       $this->Offset = $Offset;
+      
       return $this;
     }
-
 }

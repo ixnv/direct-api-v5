@@ -1,16 +1,14 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keywordbids;
+namespace eLama\DirectApiV5\Dto\KeywordBids;
 
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
  */
 class Coverage
 {
-
     /**
      * @JMS\Type("array<eLama\DirectApiV5\Dto\Keywordbids\NetworkCoverageItem>")
      *
@@ -33,7 +31,7 @@ class Coverage
     public function setCoverageItems(array $CoverageItems = null)
     {
       $this->CoverageItems = $CoverageItems;
+
       return $this;
     }
-
 }

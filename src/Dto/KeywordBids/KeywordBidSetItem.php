@@ -1,16 +1,15 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keywordbids;
+namespace eLama\DirectApiV5\Dto\KeywordBids;
 
+use eLama\DirectApiV5\Dto\Keywordbids\Enum\PriorityEnum;
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
  */
 class KeywordBidSetItem
 {
-
     /**
      * @JMS\Type("integer")
      *
@@ -65,9 +64,10 @@ class KeywordBidSetItem
      * @param int $CampaignId
      * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidSetItem
      */
-    public function setCampaignId(int $CampaignId = null)
+    public function setCampaignId($CampaignId = null)
     {
       $this->CampaignId = $CampaignId;
+
       return $this;
     }
 
@@ -83,9 +83,10 @@ class KeywordBidSetItem
      * @param int $AdGroupId
      * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidSetItem
      */
-    public function setAdGroupId(int $AdGroupId = null)
+    public function setAdGroupId($AdGroupId = null)
     {
       $this->AdGroupId = $AdGroupId;
+
       return $this;
     }
 
@@ -101,9 +102,10 @@ class KeywordBidSetItem
      * @param int $KeywordId
      * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidSetItem
      */
-    public function setKeywordId(int $KeywordId = null)
+    public function setKeywordId($KeywordId = null)
     {
       $this->KeywordId = $KeywordId;
+
       return $this;
     }
 
@@ -119,9 +121,10 @@ class KeywordBidSetItem
      * @param int $SearchBid
      * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidSetItem
      */
-    public function setSearchBid(int $SearchBid = null)
+    public function setSearchBid($SearchBid = null)
     {
       $this->SearchBid = $SearchBid;
+
       return $this;
     }
 
@@ -137,9 +140,10 @@ class KeywordBidSetItem
      * @param int $NetworkBid
      * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidSetItem
      */
-    public function setNetworkBid(int $NetworkBid = null)
+    public function setNetworkBid($NetworkBid = null)
     {
       $this->NetworkBid = $NetworkBid;
+
       return $this;
     }
 
@@ -155,10 +159,10 @@ class KeywordBidSetItem
      * @param PriorityEnum $StrategyPriority
      * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidSetItem
      */
-    public function setStrategyPriority(string $StrategyPriority = null)
+    public function setStrategyPriority($StrategyPriority = null)
     {
       $this->StrategyPriority = $StrategyPriority;
+
       return $this;
     }
-
 }

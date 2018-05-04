@@ -1,6 +1,6 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keywordbids;
+namespace eLama\DirectApiV5\Dto\KeywordBids;
 
 use JMS\Serializer\Annotation as JMS;
 
@@ -9,7 +9,6 @@ use JMS\Serializer\Annotation as JMS;
  */
 class AuctionBidItem
 {
-
     /**
      * @JMS\Type("integer")
      *
@@ -58,6 +57,7 @@ class AuctionBidItem
     public function setTrafficVolume($TrafficVolume)
     {
       $this->TrafficVolume = $TrafficVolume;
+
       return $this;
     }
 
@@ -76,6 +76,7 @@ class AuctionBidItem
     public function setBid($Bid)
     {
       $this->Bid = $Bid;
+
       return $this;
     }
 
@@ -94,7 +95,7 @@ class AuctionBidItem
     public function setPrice($Price)
     {
       $this->Price = $Price;
+
       return $this;
     }
-
 }

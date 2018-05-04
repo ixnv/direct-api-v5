@@ -1,16 +1,17 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keywordbids;
+namespace eLama\DirectApiV5\Dto\KeywordBids;
 
+use eLama\DirectApiV5\Dto\General\GetRequestGeneral;
+use eLama\DirectApiV5\Dto\Keywordbids\Enum\KeywordBidFieldEnum;
+use eLama\DirectApiV5\Dto\Keywordbids\Enum\KeywordBidNetworkFieldEnum;
+use eLama\DirectApiV5\Dto\Keywordbids\Enum\KeywordBidSearchFieldEnum;
 use JMS\Serializer\Annotation as JMS;
-
-
 /**
  * @JMS\AccessType("public_method")
  */
-class GetRequest
+class GetRequest extends GetRequestGeneral
 {
-
     /**
      * @JMS\Type("eLama\DirectApiV5\Dto\Keywordbids\KeywordBidsSelectionCriteria")
      *
@@ -19,23 +20,23 @@ class GetRequest
     private $SelectionCriteria;
 
     /**
-     * @JMS\Type("string")
+     * @JMS\Type("array")
      *
-     * @var KeywordBidFieldEnum $FieldNames
+     * @var string[] $FieldNames
      */
     private $FieldNames;
 
     /**
-     * @JMS\Type("string")
+     * @JMS\Type("array")
      *
-     * @var KeywordBidSearchFieldEnum $SearchFieldNames
+     * @var string[] $SearchFieldNames
      */
     private $SearchFieldNames;
 
     /**
-     * @JMS\Type("string")
+     * @JMS\Type("array")
      *
-     * @var KeywordBidNetworkFieldEnum $NetworkFieldNames
+     * @var string[] $NetworkFieldNames
      */
     private $NetworkFieldNames;
 
@@ -45,8 +46,12 @@ class GetRequest
      * @param KeywordBidSearchFieldEnum $SearchFieldNames
      * @param KeywordBidNetworkFieldEnum $NetworkFieldNames
      */
-    public function __construct(KeywordBidsSelectionCriteria $SelectionCriteria = null, string $FieldNames = null, string $SearchFieldNames = null, string $NetworkFieldNames = null)
-    {
+    public function __construct(
+        KeywordBidsSelectionCriteria $SelectionCriteria = null,
+        $FieldNames = null,
+        $SearchFieldNames = null,
+        $NetworkFieldNames = null
+    ) {
       $this->SelectionCriteria = $SelectionCriteria;
       $this->FieldNames = $FieldNames;
       $this->SearchFieldNames = $SearchFieldNames;
@@ -68,6 +73,7 @@ class GetRequest
     public function setSelectionCriteria(KeywordBidsSelectionCriteria $SelectionCriteria)
     {
       $this->SelectionCriteria = $SelectionCriteria;
+
       return $this;
     }
 
@@ -83,9 +89,10 @@ class GetRequest
      * @param KeywordBidFieldEnum $FieldNames
      * @return \eLama\DirectApiV5\Dto\Keywordbids\GetRequest
      */
-    public function setFieldNames(string $FieldNames)
+    public function setFieldNames($FieldNames)
     {
       $this->FieldNames = $FieldNames;
+
       return $this;
     }
 
@@ -101,9 +108,10 @@ class GetRequest
      * @param KeywordBidSearchFieldEnum $SearchFieldNames
      * @return \eLama\DirectApiV5\Dto\Keywordbids\GetRequest
      */
-    public function setSearchFieldNames(string $SearchFieldNames)
+    public function setSearchFieldNames($SearchFieldNames)
     {
       $this->SearchFieldNames = $SearchFieldNames;
+
       return $this;
     }
 
@@ -119,10 +127,10 @@ class GetRequest
      * @param KeywordBidNetworkFieldEnum $NetworkFieldNames
      * @return \eLama\DirectApiV5\Dto\Keywordbids\GetRequest
      */
-    public function setNetworkFieldNames(string $NetworkFieldNames)
+    public function setNetworkFieldNames($NetworkFieldNames)
     {
       $this->NetworkFieldNames = $NetworkFieldNames;
+
       return $this;
     }
-
 }

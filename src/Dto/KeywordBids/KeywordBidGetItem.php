@@ -1,16 +1,16 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keywordbids;
+namespace eLama\DirectApiV5\Dto\KeywordBids;
 
+use eLama\DirectApiV5\Dto\Keywordbids\Enum\PriorityEnum;
+use eLama\DirectApiV5\Dto\Keywordbids\Enum\ServingStatusEnum;
 use JMS\Serializer\Annotation as JMS;
-
 
 /**
  * @JMS\AccessType("public_method")
  */
 class KeywordBidGetItem extends KeywordBidBase
 {
-
     /**
      * @JMS\Type("string")
      *
@@ -51,9 +51,10 @@ class KeywordBidGetItem extends KeywordBidBase
      * @param ServingStatusEnum $ServingStatus
      * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidGetItem
      */
-    public function setServingStatus(string $ServingStatus = null)
+    public function setServingStatus($ServingStatus = null)
     {
       $this->ServingStatus = $ServingStatus;
+
       return $this;
     }
 
@@ -69,9 +70,10 @@ class KeywordBidGetItem extends KeywordBidBase
      * @param PriorityEnum $StrategyPriority
      * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidGetItem
      */
-    public function setStrategyPriority(string $StrategyPriority = null)
+    public function setStrategyPriority($StrategyPriority = null)
     {
       $this->StrategyPriority = $StrategyPriority;
+
       return $this;
     }
 
@@ -90,6 +92,7 @@ class KeywordBidGetItem extends KeywordBidBase
     public function setSearch(Search $Search = null)
     {
       $this->Search = $Search;
+
       return $this;
     }
 
@@ -108,7 +111,7 @@ class KeywordBidGetItem extends KeywordBidBase
     public function setNetwork(Network $Network = null)
     {
       $this->Network = $Network;
+
       return $this;
     }
-
 }

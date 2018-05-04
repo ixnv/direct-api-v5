@@ -1,12 +1,13 @@
 <?php
 
-namespace eLama\DirectApiV5\Dto\Keywordbids;
+namespace eLama\DirectApiV5\Dto\KeywordBids\Enum;
 
-use JMS\Serializer\Annotation as JMS;
+use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
 
-class MobileAppAdActionEnum
+class MobileAppAdActionEnum extends BaseEnum
 {
     const __default = 'DOWNLOAD';
+
     const DOWNLOAD = 'DOWNLOAD';
     const GET = 'GET';
     const INSTALL = 'INSTALL';
@@ -15,6 +16,4 @@ class MobileAppAdActionEnum
     const UPDATE = 'UPDATE';
     const PLAY = 'PLAY';
     const BUY_AUTODETECT = 'BUY_AUTODETECT';
-
-
 }
