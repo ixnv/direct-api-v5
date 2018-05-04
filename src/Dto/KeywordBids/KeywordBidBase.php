@@ -40,7 +40,7 @@ class KeywordBidBase
 
     /**
      * @param int $CampaignId
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidBase
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\KeywordBidBase
      */
     public function setCampaignId($CampaignId = null)
     {
@@ -59,7 +59,7 @@ class KeywordBidBase
 
     /**
      * @param int $AdGroupId
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidBase
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\KeywordBidBase
      */
     public function setAdGroupId($AdGroupId = null)
     {
@@ -78,7 +78,7 @@ class KeywordBidBase
 
     /**
      * @param int $KeywordId
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidBase
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\KeywordBidBase
      */
     public function setKeywordId($KeywordId = null)
     {

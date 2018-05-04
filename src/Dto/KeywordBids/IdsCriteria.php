@@ -34,7 +34,7 @@ class IdsCriteria
 
     /**
      * @param int[] $Ids
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\IdsCriteria
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\IdsCriteria
      */
     public function setIds(array $Ids)
     {

@@ -10,14 +10,14 @@ use JMS\Serializer\Annotation as JMS;
 class KeywordBidActionResult extends KeywordBidBase
 {
     /**
-     * @JMS\Type("array<eLama\DirectApiV5\Dto\Keywordbids\ExceptionNotification>")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\KeywordBids\ExceptionNotification>")
      *
      * @var ExceptionNotification[] $Warnings
      */
     private $Warnings;
 
     /**
-     * @JMS\Type("array<eLama\DirectApiV5\Dto\Keywordbids\ExceptionNotification>")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\KeywordBids\ExceptionNotification>")
      *
      * @var ExceptionNotification[] $Errors
      */
@@ -33,7 +33,7 @@ class KeywordBidActionResult extends KeywordBidBase
 
     /**
      * @param ExceptionNotification[] $Warnings
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidActionResult
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\KeywordBidActionResult
      */
     public function setWarnings(array $Warnings = null)
     {
@@ -52,7 +52,7 @@ class KeywordBidActionResult extends KeywordBidBase
 
     /**
      * @param ExceptionNotification[] $Errors
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidActionResult
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\KeywordBidActionResult
      */
     public function setErrors(array $Errors = null)
     {

@@ -3,9 +3,9 @@
 namespace eLama\DirectApiV5\Dto\KeywordBids;
 
 use eLama\DirectApiV5\Dto\General\GetRequestGeneral;
-use eLama\DirectApiV5\Dto\Keywordbids\Enum\KeywordBidFieldEnum;
-use eLama\DirectApiV5\Dto\Keywordbids\Enum\KeywordBidNetworkFieldEnum;
-use eLama\DirectApiV5\Dto\Keywordbids\Enum\KeywordBidSearchFieldEnum;
+use eLama\DirectApiV5\Dto\KeywordBids\Enum\KeywordBidFieldEnum;
+use eLama\DirectApiV5\Dto\KeywordBids\Enum\KeywordBidNetworkFieldEnum;
+use eLama\DirectApiV5\Dto\KeywordBids\Enum\KeywordBidSearchFieldEnum;
 use JMS\Serializer\Annotation as JMS;
 /**
  * @JMS\AccessType("public_method")
@@ -13,7 +13,7 @@ use JMS\Serializer\Annotation as JMS;
 class GetRequest extends GetRequestGeneral
 {
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Keywordbids\KeywordBidsSelectionCriteria")
+     * @JMS\Type("eLama\DirectApiV5\Dto\KeywordBids\KeywordBidsSelectionCriteria")
      *
      * @var KeywordBidsSelectionCriteria $SelectionCriteria
      */
@@ -68,7 +68,7 @@ class GetRequest extends GetRequestGeneral
 
     /**
      * @param KeywordBidsSelectionCriteria $SelectionCriteria
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\GetRequest
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\GetRequest
      */
     public function setSelectionCriteria(KeywordBidsSelectionCriteria $SelectionCriteria)
     {
@@ -87,7 +87,7 @@ class GetRequest extends GetRequestGeneral
 
     /**
      * @param KeywordBidFieldEnum $FieldNames
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\GetRequest
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\GetRequest
      */
     public function setFieldNames($FieldNames)
     {
@@ -106,7 +106,7 @@ class GetRequest extends GetRequestGeneral
 
     /**
      * @param KeywordBidSearchFieldEnum $SearchFieldNames
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\GetRequest
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\GetRequest
      */
     public function setSearchFieldNames($SearchFieldNames)
     {
@@ -125,7 +125,7 @@ class GetRequest extends GetRequestGeneral
 
     /**
      * @param KeywordBidNetworkFieldEnum $NetworkFieldNames
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\GetRequest
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\GetRequest
      */
     public function setNetworkFieldNames($NetworkFieldNames)
     {

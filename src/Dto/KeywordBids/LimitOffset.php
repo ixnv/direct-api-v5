@@ -33,7 +33,7 @@ class LimitOffset
 
     /**
      * @param int $Limit
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\LimitOffset
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\LimitOffset
      */
     public function setLimit($Limit = null)
     {
@@ -52,7 +52,7 @@ class LimitOffset
 
     /**
      * @param int $Offset
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\LimitOffset
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\LimitOffset
      */
     public function setOffset($Offset = null)
     {

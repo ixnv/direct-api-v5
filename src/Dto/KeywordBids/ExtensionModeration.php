@@ -42,7 +42,7 @@ class ExtensionModeration
 
     /**
      * @param StatusEnum $Status
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\ExtensionModeration
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\ExtensionModeration
      */
     public function setStatus($Status)
     {
@@ -61,7 +61,7 @@ class ExtensionModeration
 
     /**
      * @param string $StatusClarification
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\ExtensionModeration
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\ExtensionModeration
      */
     public function setStatusClarification($StatusClarification = null)
     {

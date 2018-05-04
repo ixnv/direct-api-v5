@@ -10,7 +10,7 @@ use JMS\Serializer\Annotation as JMS;
 class Coverage
 {
     /**
-     * @JMS\Type("array<eLama\DirectApiV5\Dto\Keywordbids\NetworkCoverageItem>")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\KeywordBids\NetworkCoverageItem>")
      *
      * @var NetworkCoverageItem[] $CoverageItems
      */
@@ -26,7 +26,7 @@ class Coverage
 
     /**
      * @param NetworkCoverageItem[] $CoverageItems
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\Coverage
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\Coverage
      */
     public function setCoverageItems(array $CoverageItems = null)
     {

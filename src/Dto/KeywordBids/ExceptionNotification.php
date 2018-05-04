@@ -50,7 +50,7 @@ class ExceptionNotification
 
     /**
      * @param int $Code
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\ExceptionNotification
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\ExceptionNotification
      */
     public function setCode($Code)
     {
@@ -69,7 +69,7 @@ class ExceptionNotification
 
     /**
      * @param string $Message
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\ExceptionNotification
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\ExceptionNotification
      */
     public function setMessage($Message)
     {
@@ -88,7 +88,7 @@ class ExceptionNotification
 
     /**
      * @param string $Details
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\ExceptionNotification
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\ExceptionNotification
      */
     public function setDetails($Details = null)
     {

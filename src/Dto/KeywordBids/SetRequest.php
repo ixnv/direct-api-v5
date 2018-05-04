@@ -10,7 +10,7 @@ use JMS\Serializer\Annotation as JMS;
 class SetRequest
 {
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Keywordbids\KeywordBidSetItem")
+     * @JMS\Type("eLama\DirectApiV5\Dto\KeywordBids\KeywordBidSetItem")
      *
      * @var KeywordBidSetItem $KeywordBids
      */
@@ -34,7 +34,7 @@ class SetRequest
 
     /**
      * @param KeywordBidSetItem $KeywordBids
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\SetRequest
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\SetRequest
      */
     public function setKeywordBids(KeywordBidSetItem $KeywordBids)
     {

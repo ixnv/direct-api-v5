@@ -2,8 +2,8 @@
 
 namespace eLama\DirectApiV5\Dto\KeywordBids;
 
-use eLama\DirectApiV5\Dto\Keywordbids\Enum\PriorityEnum;
-use eLama\DirectApiV5\Dto\Keywordbids\Enum\ServingStatusEnum;
+use eLama\DirectApiV5\Dto\KeywordBids\Enum\PriorityEnum;
+use eLama\DirectApiV5\Dto\KeywordBids\Enum\ServingStatusEnum;
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -26,14 +26,14 @@ class KeywordBidGetItem extends KeywordBidBase
     private $StrategyPriority;
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Keywordbids\Search")
+     * @JMS\Type("eLama\DirectApiV5\Dto\KeywordBids\Search")
      *
      * @var Search $Search
      */
     private $Search;
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Keywordbids\Network")
+     * @JMS\Type("eLama\DirectApiV5\Dto\KeywordBids\Network")
      *
      * @var Network $Network
      */
@@ -49,7 +49,7 @@ class KeywordBidGetItem extends KeywordBidBase
 
     /**
      * @param ServingStatusEnum $ServingStatus
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidGetItem
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\KeywordBidGetItem
      */
     public function setServingStatus($ServingStatus = null)
     {
@@ -68,7 +68,7 @@ class KeywordBidGetItem extends KeywordBidBase
 
     /**
      * @param PriorityEnum $StrategyPriority
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidGetItem
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\KeywordBidGetItem
      */
     public function setStrategyPriority($StrategyPriority = null)
     {
@@ -87,7 +87,7 @@ class KeywordBidGetItem extends KeywordBidBase
 
     /**
      * @param Search $Search
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidGetItem
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\KeywordBidGetItem
      */
     public function setSearch(Search $Search = null)
     {
@@ -106,7 +106,7 @@ class KeywordBidGetItem extends KeywordBidBase
 
     /**
      * @param Network $Network
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidGetItem
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\KeywordBidGetItem
      */
     public function setNetwork(Network $Network = null)
     {

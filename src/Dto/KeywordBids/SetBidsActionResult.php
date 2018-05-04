@@ -34,7 +34,7 @@ class SetBidsActionResult extends ActionResult
 
     /**
      * @param int $CampaignId
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\SetBidsActionResult
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\SetBidsActionResult
      */
     public function setCampaignId($CampaignId = null)
     {
@@ -53,7 +53,7 @@ class SetBidsActionResult extends ActionResult
 
     /**
      * @param int $AdGroupId
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\SetBidsActionResult
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\SetBidsActionResult
      */
     public function setAdGroupId($AdGroupId = null)
     {
