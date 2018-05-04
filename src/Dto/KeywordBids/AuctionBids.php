@@ -26,7 +26,7 @@ class AuctionBids
 
     /**
      * @param AuctionBidItem[] $AuctionBidItems
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\AuctionBids
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\AuctionBids
      */
     public function setAuctionBidItems(array $AuctionBidItems = null)
     {

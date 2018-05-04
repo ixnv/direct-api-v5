@@ -43,7 +43,7 @@ class NetworkCoverageItem
 
     /**
      * @param float $Probability
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\NetworkCoverageItem
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\NetworkCoverageItem
      */
     public function setProbability($Probability)
     {
@@ -62,7 +62,7 @@ class NetworkCoverageItem
 
     /**
      * @param int $Bid
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\NetworkCoverageItem
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\NetworkCoverageItem
      */
     public function setBid($Bid)
     {

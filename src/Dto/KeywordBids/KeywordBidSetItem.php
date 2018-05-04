@@ -2,7 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\KeywordBids;
 
-use eLama\DirectApiV5\Dto\Keywordbids\Enum\PriorityEnum;
+use eLama\DirectApiV5\Dto\KeywordBids\Enum\PriorityEnum;
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -62,7 +62,7 @@ class KeywordBidSetItem
 
     /**
      * @param int $CampaignId
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidSetItem
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\KeywordBidSetItem
      */
     public function setCampaignId($CampaignId = null)
     {
@@ -81,7 +81,7 @@ class KeywordBidSetItem
 
     /**
      * @param int $AdGroupId
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidSetItem
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\KeywordBidSetItem
      */
     public function setAdGroupId($AdGroupId = null)
     {
@@ -100,7 +100,7 @@ class KeywordBidSetItem
 
     /**
      * @param int $KeywordId
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidSetItem
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\KeywordBidSetItem
      */
     public function setKeywordId($KeywordId = null)
     {
@@ -119,7 +119,7 @@ class KeywordBidSetItem
 
     /**
      * @param int $SearchBid
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidSetItem
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\KeywordBidSetItem
      */
     public function setSearchBid($SearchBid = null)
     {
@@ -138,7 +138,7 @@ class KeywordBidSetItem
 
     /**
      * @param int $NetworkBid
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidSetItem
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\KeywordBidSetItem
      */
     public function setNetworkBid($NetworkBid = null)
     {
@@ -157,7 +157,7 @@ class KeywordBidSetItem
 
     /**
      * @param PriorityEnum $StrategyPriority
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidSetItem
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\KeywordBidSetItem
      */
     public function setStrategyPriority($StrategyPriority = null)
     {

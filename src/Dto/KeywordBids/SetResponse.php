@@ -10,7 +10,7 @@ use JMS\Serializer\Annotation as JMS;
 class SetResponse
 {
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Keywordbids\KeywordBidActionResult")
+     * @JMS\Type("eLama\DirectApiV5\Dto\KeywordBids\KeywordBidActionResult")
      *
      * @var KeywordBidActionResult $SetResults
      */
@@ -34,7 +34,7 @@ class SetResponse
 
     /**
      * @param KeywordBidActionResult $SetResults
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\SetResponse
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\SetResponse
      */
     public function setSetResults(KeywordBidActionResult $SetResults)
     {

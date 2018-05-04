@@ -17,7 +17,7 @@ class Network
     private $Bid;
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Keywordbids\Coverage")
+     * @JMS\Type("eLama\DirectApiV5\Dto\KeywordBids\Coverage")
      *
      * @var Coverage $Coverage
      */
@@ -33,7 +33,7 @@ class Network
 
     /**
      * @param int $Bid
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\Network
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\Network
      */
     public function setBid($Bid = null)
     {
@@ -52,7 +52,7 @@ class Network
 
     /**
      * @param Coverage $Coverage
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\Network
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\Network
      */
     public function setCoverage(Coverage $Coverage = null)
     {

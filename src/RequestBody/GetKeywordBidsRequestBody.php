@@ -3,6 +3,8 @@
 namespace eLama\DirectApiV5\RequestBody;
 
 use eLama\DirectApiV5\Dto\KeywordBids\Enum\KeywordBidFieldEnum;
+use eLama\DirectApiV5\Dto\KeywordBids\Enum\KeywordBidNetworkFieldEnum;
+use eLama\DirectApiV5\Dto\KeywordBids\Enum\KeywordBidSearchFieldEnum;
 use eLama\DirectApiV5\Dto\KeywordBids\KeywordBidsSelectionCriteria;
 use eLama\DirectApiV5\Dto\KeywordBids\GetRequest;
 use eLama\DirectApiV5\Dto\KeywordBids\GetResponseBody;
@@ -16,7 +18,9 @@ class GetKeywordBidsRequestBody extends GetRequestBody
     {
         $this->request = new GetRequest(
             $selectionCriteria,
-            KeywordBidFieldEnum::values()
+            KeywordBidFieldEnum::values(),
+            KeywordBidSearchFieldEnum::values(),
+            KeywordBidNetworkFieldEnum::values()
         );
     }
 

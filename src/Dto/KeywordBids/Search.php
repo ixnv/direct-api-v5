@@ -17,7 +17,7 @@ class Search
     private $Bid;
 
     /**
-     * @JMS\Type("eLama\DirectApiV5\Dto\Keywordbids\AuctionBids")
+     * @JMS\Type("eLama\DirectApiV5\Dto\KeywordBids\AuctionBids")
      *
      * @var AuctionBids $AuctionBids
      */
@@ -33,7 +33,7 @@ class Search
 
     /**
      * @param int $Bid
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\Search
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\Search
      */
     public function setBid($Bid = null)
     {
@@ -52,7 +52,7 @@ class Search
 
     /**
      * @param AuctionBids $AuctionBids
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\Search
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\Search
      */
     public function setAuctionBids(AuctionBids $AuctionBids = null)
     {

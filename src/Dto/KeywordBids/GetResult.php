@@ -12,7 +12,7 @@ use JMS\Serializer\Annotation as JMS;
 class GetResult extends GetResultGeneral
 {
     /**
-     * @JMS\Type("array<eLama\DirectApiV5\Dto\Keywordbids\KeywordBidGetItem>")
+     * @JMS\Type("array<eLama\DirectApiV5\Dto\KeywordBids\KeywordBidGetItem>")
      *
      * @var KeywordBidGetItem[]
      */

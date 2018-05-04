@@ -43,7 +43,7 @@ class Statistics
 
     /**
      * @param int $Clicks
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\Statistics
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\Statistics
      */
     public function setClicks($Clicks)
     {
@@ -62,7 +62,7 @@ class Statistics
 
     /**
      * @param int $Impressions
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\Statistics
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\Statistics
      */
     public function setImpressions($Impressions)
     {

@@ -27,7 +27,7 @@ class MultiIdsActionResult extends ActionResultBase
 
     /**
      * @param int[] $Ids
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\MultiIdsActionResult
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\MultiIdsActionResult
      */
     public function setIds(array $Ids = null)
     {

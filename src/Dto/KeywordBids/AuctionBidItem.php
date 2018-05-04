@@ -52,7 +52,7 @@ class AuctionBidItem
 
     /**
      * @param int $TrafficVolume
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\AuctionBidItem
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\AuctionBidItem
      */
     public function setTrafficVolume($TrafficVolume)
     {
@@ -71,7 +71,7 @@ class AuctionBidItem
 
     /**
      * @param int $Bid
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\AuctionBidItem
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\AuctionBidItem
      */
     public function setBid($Bid)
     {
@@ -90,7 +90,7 @@ class AuctionBidItem
 
     /**
      * @param int $Price
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\AuctionBidItem
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\AuctionBidItem
      */
     public function setPrice($Price)
     {

@@ -2,7 +2,7 @@
 
 namespace eLama\DirectApiV5\Dto\KeywordBids;
 
-use eLama\DirectApiV5\Dto\Keywordbids\Enum\ServingStatusEnum;
+use eLama\DirectApiV5\Dto\KeywordBids\Enum\ServingStatusEnum;
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -48,7 +48,7 @@ class KeywordBidsSelectionCriteria
 
     /**
      * @param int[] $CampaignIds
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidsSelectionCriteria
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\KeywordBidsSelectionCriteria
      */
     public function setCampaignIds(array $CampaignIds = null)
     {
@@ -67,7 +67,7 @@ class KeywordBidsSelectionCriteria
 
     /**
      * @param int[] $AdGroupIds
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidsSelectionCriteria
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\KeywordBidsSelectionCriteria
      */
     public function setAdGroupIds(array $AdGroupIds = null)
     {
@@ -86,7 +86,7 @@ class KeywordBidsSelectionCriteria
 
     /**
      * @param int[] $KeywordIds
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidsSelectionCriteria
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\KeywordBidsSelectionCriteria
      */
     public function setKeywordIds(array $KeywordIds = null)
     {
@@ -105,7 +105,7 @@ class KeywordBidsSelectionCriteria
 
     /**
      * @param ServingStatusEnum[] $ServingStatuses
-     * @return \eLama\DirectApiV5\Dto\Keywordbids\KeywordBidsSelectionCriteria
+     * @return \eLama\DirectApiV5\Dto\KeywordBids\KeywordBidsSelectionCriteria
      */
     public function setServingStatuses(array $ServingStatuses = null)
     {
