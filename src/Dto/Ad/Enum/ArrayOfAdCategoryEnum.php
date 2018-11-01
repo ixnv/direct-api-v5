@@ -152,7 +152,7 @@ class ArrayOfAdCategoryEnum implements \ArrayAccess, \Iterator, \Countable
      */
     public function count()
     {
-      return count($this->Items);
+      return $this->Items ? count($this->Items) : 0;
     }
 
 }

@@ -9,6 +9,6 @@ class GeneralArray
 
     public function count()
     {
-        return count($this->Items);
+        return $this->Items ? count($this->Items) : 0;
     }
 }

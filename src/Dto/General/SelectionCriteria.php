@@ -21,7 +21,7 @@ class SelectionCriteria
 
     public function addCampaignId($campaignId)
     {
-        if (count($this->CampaignIds) >= static::MAX_CAMPAIGN_IDS) {
+        if ($this->CampaignIds && count($this->CampaignIds) >= static::MAX_CAMPAIGN_IDS) {
             $this->throwCampaignsCountLimitException();
         }
 
@@ -36,7 +36,7 @@ class SelectionCriteria
      */
     public function setCampaignIds(array $campaignIds = null)
     {
-        if (count($campaignIds) > static::MAX_CAMPAIGN_IDS) {
+        if ($campaignIds && count($campaignIds) > static::MAX_CAMPAIGN_IDS) {
             $this->throwCampaignsCountLimitException();
         }
 
