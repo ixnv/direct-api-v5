@@ -13,14 +13,13 @@
         ]
     },
     "require": {
-        "php": ">=5.5",
+        "php": "^7.2",
         "guzzlehttp/guzzle": ">=5.2",
         "guzzlehttp/promises": "1.*",
         "psr/log": "*",
         "beberlei/assert": "2.*",
-        "jms/serializer": "1.*",
+        "jms/serializer": "~3.0",
         "monolog/monolog": ">=1.12",
-
         "phpoption/phpoption": ">=1.1.0"
     },
     "require-dev": {
