@@ -7,6 +7,7 @@
 Идем на страницу https://direct.yandex.ru/registered/main.pl?cmd=apiSandboxSettings и жмем "Очистить Песочницу".
 
 **Зависимости**
+
 Вероятно зависит от "doctrine/annotations": "^1.8", иначе падают ошибки типа "[Semantical Error] The annotation @JMS\Serializer\Annotation\AccessType in class eLama\DirectApiV5\Dto\General\GetRequestGeneral does not exist, or could not be auto-loaded." и никакие регистрации автолоадов не помогают.
 
 **CHANGELOG**
