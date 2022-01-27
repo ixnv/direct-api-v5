@@ -6,9 +6,8 @@ use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
 
 class MobileAppCampaignNetworkStrategyTypeEnum extends BaseEnum
 {
-    const __default = 'NETWORK_DEFAULT';
+    const __DEFAULT = self::AVERAGE_CPC;
 
-    const NETWORK_DEFAULT = 'NETWORK_DEFAULT';
     const MAXIMUM_COVERAGE = 'MAXIMUM_COVERAGE';
     const AVERAGE_CPC = 'AVERAGE_CPC';
     const AVERAGE_CPI = 'AVERAGE_CPI';
