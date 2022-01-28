@@ -6,13 +6,12 @@ use eLama\DirectApiV5\Dto\General\Enum\BaseEnum;
 
 class TextCampaignNetworkStrategyTypeEnum extends BaseEnum
 {
-    const __DEFAULT = 'AVERAGE_CPC';
+    const __DEFAULT = self::AVERAGE_CPC;
 
     const AVERAGE_CPC = 'AVERAGE_CPC';
     const AVERAGE_CPA = 'AVERAGE_CPA';
     const WB_MAXIMUM_CONVERSION_RATE = 'WB_MAXIMUM_CONVERSION_RATE';
     const MAXIMUM_COVERAGE = 'MAXIMUM_COVERAGE';
-    const NETWORK_DEFAULT = 'NETWORK_DEFAULT';
     const HIGHEST_POSITION = 'HIGHEST_POSITION';
     const IMPRESSIONS_BELOW_SEARCH = 'IMPRESSIONS_BELOW_SEARCH';
     const SERVING_OFF = 'SERVING_OFF';

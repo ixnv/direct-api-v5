@@ -111,7 +111,7 @@ class CampaignTest extends DirectApiV5TestCase
     {
         $id = $this->createTextCampaignWithCertainStrategies(
             $textCampaignSearchStrategyEnum,
-            TextCampaignNetworkStrategyTypeEnum::NETWORK_DEFAULT
+            TextCampaignNetworkStrategyTypeEnum::__DEFAULT
         );
 
         $this->deleteCampaignById($id);
@@ -519,13 +519,6 @@ class CampaignTest extends DirectApiV5TestCase
         $textCampaignNetworkStrategyAdd = new TextCampaignNetworkStrategyAdd($enum);
 
         switch ($enum) {
-            case TextCampaignNetworkStrategyTypeEnum::NETWORK_DEFAULT:
-                $strategyNetworkDefaultAdd = new Campaign\StrategyNetworkDefaultAdd();
-                $strategyNetworkDefaultAdd->setBidPercent(20);
-                $strategyNetworkDefaultAdd->setLimitPercent(100);
-
-                $textCampaignNetworkStrategyAdd->setNetworkDefault($strategyNetworkDefaultAdd);
-                break;
             case TextCampaignNetworkStrategyTypeEnum::AVERAGE_CPA:
                 $strategyAverageCpaAdd = new Campaign\StrategyAverageCpaAdd(2000000, 0);
                 $strategyAverageCpaAdd->setWeeklySpendLimit(self::WEEKLY_SPEND_LIMIT);
