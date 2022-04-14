@@ -1,5 +1,5 @@
 {
-    "name": "elama/direct-api-v5",
+    "name": "elama-dev/direct-api-v5",
     "description": "Elama Yandex Direct APIv5 Wrapper",
     "autoload": {
         "psr-4": { "eLama\\DirectApiV5\\": "src/" }
