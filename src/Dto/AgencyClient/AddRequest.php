@@ -42,19 +42,33 @@ class AddRequest
     private $Grants;
 
     /**
+     * @var TinInfoAdd $tinInfo
+     */
+    private $TinInfo;
+
+
+    /**
      * @param string $login
      * @param string $firstName
      * @param string $lastName
      * @param string $currency
      * @param NotificationAdd $notification
+     * @param TinInfoAdd $tinInfo
      */
-    public function __construct($login, $firstName, $lastName, $currency, NotificationAdd $notification = null)
-    {
+    public function __construct(
+        $login,
+        $firstName,
+        $lastName,
+        $currency,
+        NotificationAdd $notification = null,
+        TinInfoAdd $tinInfo = null
+    ) {
         $this->Login = $login;
         $this->FirstName = $firstName;
         $this->LastName = $lastName;
         $this->Currency = $currency;
         $this->Notification = $notification;
+        $this->TinInfo = $tinInfo;
     }
 
     /**
@@ -149,6 +163,25 @@ class AddRequest
     {
         $this->Notification = $notification;
     
+        return $this;
+    }
+
+    /**
+     * @return TinInfoAdd
+     */
+    public function getTinInfo()
+    {
+        return $this->TinInfo;
+    }
+
+    /**
+     * @param TinInfoAdd $tinInfo
+     * @return self
+     */
+    public function setTinInfo($tinInfo)
+    {
+        $this->TinInfo = $tinInfo;
+
         return $this;
     }
 
