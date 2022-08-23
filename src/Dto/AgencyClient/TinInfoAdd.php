@@ -17,7 +17,7 @@ class TinInfoAdd
     private $Tin;
 
     /**
-     * @param TinTypeEnum $tinType
+     * @param string $tinType
      * @param string $tin
      */
     public function __construct($tinType, $tin)
@@ -35,10 +35,10 @@ class TinInfoAdd
     }
 
     /**
-     * @param TinTypeEnum $tinType
+     * @param string $tinType
      * @return self
      */
-    public function setTinType(TinTypeEnum $tinType)
+    public function setTinType(string $tinType)
     {
         $this->TinType = $tinType;
 
